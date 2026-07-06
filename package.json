@@ -14,7 +14,9 @@
   "scripts": {
     "prepare": "husky",
     "dev:web": "pnpm --filter @suhyeju/web dev",
+    "build": "pnpm build:web",
     "build:web": "pnpm --filter @suhyeju/web build",
+    "vercel-build": "pnpm build:web",
     "start:web": "pnpm --filter @suhyeju/web start",
     "lint:web": "pnpm --filter @suhyeju/web lint",
     "typecheck:web": "pnpm --filter @suhyeju/web typecheck",
@@ -30,6 +32,9 @@
     "*.{json,md,mdx,css,scss,html,yml,yaml}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "next": "16.2.10"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
