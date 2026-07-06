@@ -2,11 +2,23 @@
   "name": "suhyeju-com",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@9.6.0",
+  "engines": {
+    "node": ">=20.9.0",
+    "pnpm": ">=9.6.0"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
   "description": "테오AI스프린트6팀 수혜주닷컴",
   "scripts": {
     "prepare": "husky",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "dev:web": "pnpm --filter @suhyeju/web dev",
+    "build:web": "pnpm --filter @suhyeju/web build",
+    "start:web": "pnpm --filter @suhyeju/web start",
+    "lint:web": "pnpm --filter @suhyeju/web lint",
+    "typecheck:web": "pnpm --filter @suhyeju/web typecheck",
+    "lint": "eslint eslint.config.mjs commitlint.config.mjs && pnpm run lint:web",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
