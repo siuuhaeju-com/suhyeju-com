@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { fmtPct, pctToneClass } from '@/lib/format';
+import { formatPct, getPctToneClass } from '@/lib/format';
 import type { AnalysisResult } from '@/lib/types';
 
 /** AI 요약 섹션 (F-05) — 요약 카드 + 핵심 키워드·관련 섹터 패널 */
@@ -56,8 +56,8 @@ export function SummarySection({ result }: { result: AnalysisResult }) {
             {result.relatedSectors.map((sector) => (
               <Badge key={sector.name} tone={sector.changePct >= 0 ? 'red' : 'green'}>
                 {sector.name}
-                <span className={`font-bold ${pctToneClass(sector.changePct)}`}>
-                  {fmtPct(sector.changePct)}
+                <span className={`font-bold ${getPctToneClass(sector.changePct)}`}>
+                  {formatPct(sector.changePct)}
                 </span>
               </Badge>
             ))}

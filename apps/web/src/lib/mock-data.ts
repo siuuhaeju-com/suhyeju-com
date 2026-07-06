@@ -11,7 +11,7 @@ import type {
   NewsItem,
   RecentAnalysis,
   SectorChange,
-} from './types';
+} from '@/lib/types';
 
 /* ── 메인: 인기 뉴스 (F-03a) ─────────────────────────────── */
 export const popularNews: NewsItem[] = [

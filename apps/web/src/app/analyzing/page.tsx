@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { NetworkSphere } from '@/components/loading/network-sphere';
+import { NetworkSphere } from '@/components/loading/NetworkSphere';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';

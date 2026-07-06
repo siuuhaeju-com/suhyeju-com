@@ -104,31 +104,29 @@ export function KnowledgeGraph({
   const [hovered, setHovered] = useState<string | null>(null);
   const [rotation, setRotation] = useState({ yaw: -0.5, pitch: 0.18 });
   const [zoom, setZoom] = useState(1);
-  const dragState = useRef<{ dragging: boolean; lastX: number; lastY: number }>({
-    dragging: false,
+  const dragState = useRef<{ isDragging: boolean; lastX: number; lastY: number }>({
+    isDragging: false,
     lastX: 0,
     lastY: 0,
   });
-  const hoveredRef = useRef<string | null>(null);
-  hoveredRef.current = hovered;
-
   // 유휴 상태에서 가로 방향으로 천천히 자동 회전 — 드래그·hover 중엔 정지,
   // prefers-reduced-motion이면 비활성 (DESIGN.md 모션 규칙)
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (hovered != null) return; // hover 중엔 회전 정지 (해제되면 effect 재실행으로 재개)
     let frame = 0;
     let last = performance.now();
     const tick = (now: number) => {
       const dt = (now - last) / 1000;
       last = now;
-      if (!dragState.current.dragging && hoveredRef.current == null) {
+      if (!dragState.current.isDragging) {
         setRotation((prev) => ({ ...prev, yaw: prev.yaw + IDLE_SPIN_SPEED * dt }));
       }
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [hovered]);
 
   const cloud = useMemo(() => buildCloud(nodes), [nodes]);
   const projected = Object.fromEntries(
@@ -146,11 +144,11 @@ export function KnowledgeGraph({
   );
 
   function handlePointerDown(event: React.PointerEvent<SVGSVGElement>) {
-    dragState.current = { dragging: true, lastX: event.clientX, lastY: event.clientY };
+    dragState.current = { isDragging: true, lastX: event.clientX, lastY: event.clientY };
     event.currentTarget.setPointerCapture(event.pointerId);
   }
   function handlePointerMove(event: React.PointerEvent<SVGSVGElement>) {
-    if (!dragState.current.dragging) return;
+    if (!dragState.current.isDragging) return;
     const dx = event.clientX - dragState.current.lastX;
     const dy = event.clientY - dragState.current.lastY;
     dragState.current.lastX = event.clientX;
@@ -162,7 +160,7 @@ export function KnowledgeGraph({
     }));
   }
   function handlePointerUp() {
-    dragState.current.dragging = false;
+    dragState.current.isDragging = false;
   }
 
   return (
@@ -226,7 +224,7 @@ export function KnowledgeGraph({
           {edges.map((edge) => {
             const from = projected[edge.from];
             const to = projected[edge.to];
-            const active = hovered != null && (edge.from === hovered || edge.to === hovered);
+            const isActive = hovered != null && (edge.from === hovered || edge.to === hovered);
             const depthFade = Math.max(0.05, 0.3 - (from.depth + to.depth) * 0.12);
             return (
               <line
@@ -235,8 +233,10 @@ export function KnowledgeGraph({
                 y1={from.y}
                 x2={to.x}
                 y2={to.y}
-                stroke={active ? 'var(--blue-bright)' : `rgba(255,255,255,${depthFade.toFixed(3)})`}
-                strokeWidth={(active ? 0.4 : 0.16) * from.scale}
+                stroke={
+                  isActive ? 'var(--blue-bright)' : `rgba(255,255,255,${depthFade.toFixed(3)})`
+                }
+                strokeWidth={(isActive ? 0.4 : 0.16) * from.scale}
               />
             );
           })}
@@ -246,13 +246,13 @@ export function KnowledgeGraph({
             const style = GROUP_STYLE[node.group];
             const p = projected[node.id];
             const isHovered = hovered === node.id;
-            const active = isHovered || connected.has(node.id);
-            const dimmed = hovered != null && !active;
+            const isActive = isHovered || connected.has(node.id);
+            const isDimmed = hovered != null && !isActive;
             // 깊이 기반 표현: 앞(scale↑)일수록 크고 선명
             const r = style.r * p.scale * (isHovered ? 1.35 : 1);
-            const nodeOpacity = dimmed ? 0.25 : Math.min(1, 0.35 + p.scale * 0.6);
-            const showLabel =
-              node.group === 'center' || node.group === 'tier1' || p.scale > 0.92 || active;
+            const nodeOpacity = isDimmed ? 0.25 : Math.min(1, 0.35 + p.scale * 0.6);
+            const shouldShowLabel =
+              node.group === 'center' || node.group === 'tier1' || p.scale > 0.92 || isActive;
             return (
               <g
                 key={node.id}
@@ -265,7 +265,7 @@ export function KnowledgeGraph({
                   <circle cx={p.x} cy={p.y} r={r * 2.1} fill="var(--primary)" opacity={0.16} />
                 )}
                 <circle cx={p.x} cy={p.y} r={r} fill={style.fill} />
-                {showLabel && (
+                {shouldShowLabel && (
                   <text
                     x={p.x}
                     y={p.y - r - 1.1}

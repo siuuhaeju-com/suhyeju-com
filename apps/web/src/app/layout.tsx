@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Providers } from './providers';
-import { SiteHeader } from '@/components/site-header';
+import { Providers } from '@/app/providers';
+import { SiteHeader } from '@/components/SiteHeader';
 
 export const metadata: Metadata = {
   title: '수혜주.com — 뉴스 영향력 분석',

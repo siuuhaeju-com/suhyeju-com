@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 
-import { StockTooltip } from '@/components/analysis/stock-tooltip';
+import { StockTooltip } from '@/components/analysis/StockTooltip';
 import { Card } from '@/components/ui/card';
-import { fmtPct } from '@/lib/format';
+import { formatPct } from '@/lib/format';
 import type { HeatmapCell, TopStock } from '@/lib/types';
 
 /**
@@ -34,7 +34,7 @@ const LAYOUT: Array<{ height: number; cells: Array<{ area: string; width: number
   },
 ];
 
-function cellBackground(cell: HeatmapCell): string {
+function getCellBackground(cell: HeatmapCell): string {
   const base = cell.changePct >= 0 ? 'var(--positive)' : 'var(--negative)';
   const strength = Math.round(16 + cell.weight * 58);
   return `color-mix(in oklab, ${base} ${strength}%, var(--card))`;
@@ -49,21 +49,21 @@ function HeatCell({
   stocks?: TopStock[];
   className?: string;
 }) {
-  const [hovered, setHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <button
       type="button"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocus={() => setHovered(true)}
-      onBlur={() => setHovered(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
       className={`relative flex h-full w-full cursor-default flex-col justify-between overflow-visible rounded-md p-4 text-left transition-opacity outline-none hover:opacity-90 focus-visible:ring-3 focus-visible:ring-ring/60 ${className ?? ''}`}
-      style={{ background: cellBackground(cell) }}
-      aria-label={`${cell.sector} ${fmtPct(cell.changePct)} — Top5 종목 보기`}
+      style={{ background: getCellBackground(cell) }}
+      aria-label={`${cell.sector} ${formatPct(cell.changePct)} — Top5 종목 보기`}
     >
       <span className="text-[15px] leading-tight font-bold text-white">{cell.sector}</span>
-      <span className="text-[15px] font-extrabold text-white">{fmtPct(cell.changePct)}</span>
-      {hovered && stocks && (
+      <span className="text-[15px] font-extrabold text-white">{formatPct(cell.changePct)}</span>
+      {isHovered && stocks && (
         <span className="pointer-events-none absolute top-2 left-2 z-10">
           <StockTooltip sector={cell.sector} stocks={stocks} />
         </span>

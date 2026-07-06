@@ -65,14 +65,14 @@ flowchart TB
   end
 
   subgraph comps["src/components — 화면 조각들"]
-    form["main/analyze-form.tsx<br/>링크 입력·제출"]
-    sphere["loading/network-sphere.tsx<br/>구체 연출 (장식)"]
-    summary["analysis/summary-section.tsx<br/>AI 요약·키워드"]
-    signal["analysis/signal-section.tsx<br/>전망 분석 72:28"]
-    spread["analysis/spread-graph.tsx<br/>확산 그래프"]
-    heatmap["analysis/impact-heatmap.tsx<br/>영향도 히트맵"]
-    kg["analysis/knowledge-graph.tsx<br/>3D 지식그래프"]
-    tooltip["analysis/stock-tooltip.tsx<br/>Top5 종목 툴팁 (공용)"]
+    form["main/AnalyzeForm.tsx<br/>링크 입력·제출"]
+    sphere["loading/NetworkSphere.tsx<br/>구체 연출 (장식)"]
+    summary["analysis/SummarySection.tsx<br/>AI 요약·키워드"]
+    signal["analysis/SignalSection.tsx<br/>전망 분석 72:28"]
+    spread["analysis/SpreadGraph.tsx<br/>확산 그래프"]
+    heatmap["analysis/ImpactHeatmap.tsx<br/>영향도 히트맵"]
+    kg["analysis/KnowledgeGraph.tsx<br/>3D 지식그래프"]
+    tooltip["analysis/StockTooltip.tsx<br/>Top5 종목 툴팁 (공용)"]
   end
 
   subgraph lib["src/lib — 데이터 층"]
@@ -162,7 +162,7 @@ flowchart TB
 
 현재 로딩 화면은 `STEP_INTERVAL_MS` 타이머로 5단계를 흉내 내고 있습니다. 이 부분을 실제 상태로 바꾸면 됩니다.
 
-1. 폼 제출 시: `analyze-form.tsx`에서 `POST /api/analysis`(URL 제출) → 응답의 `id`를 받아 `/analyzing?id=...`로 이동
+1. 폼 제출 시: `AnalyzeForm.tsx`에서 `POST /api/analysis`(URL 제출) → 응답의 `id`를 받아 `/analyzing?id=...`로 이동
 2. 로딩 화면: `useAnalysisStatus(id)`를 `refetchInterval: 1500` 정도로 폴링 → 응답의 단계 인덱스를 기존 `done` state에 넣어 주면 **렌더 로직은 수정 없이** 그대로 살아납니다
 3. status가 `complete`이면 `/analysis/[id]`로 이동하고, `failed`이면 §4-5의 에러 UI로 보냅니다.
 
@@ -201,14 +201,14 @@ npx impeccable detect apps/web/src   # 현재 0건 — 이 상태를 유지해 �
 
 작업 중 마주칠 수 있는 의도된 프로토타입 특성입니다.
 
-| 증상                                         | 이유                                                                                                                              |
-| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| 어떤 링크를 넣어도 같은 분석 결과가 나와요   | `getAnalysis(id)`가 id를 무시하고 같은 mock을 반환합니다. 연동하면 해결됩니다                                                     |
-| 최근 분석 3건이 전부 같은 페이지로 가요      | 같은 이유입니다. 현재 mock id가 `hbm4` 하나뿐입니다                                                                               |
-| 로딩 화면 뉴스 제목이 항상 같아요            | `analysisResult.title`이 고정값입니다. 제출한 뉴스 제목으로 바꿔 주세요                                                           |
-| 지식그래프에 three.js가 없네요?              | 순수 SVG + 원근 투영으로 구현했습니다. 노드가 크게 늘기 전까지는 충분합니다                                                       |
-| 히트맵 배치가 하드코딩이에요                 | 목업 비율 고정 레이아웃(`LAYOUT` 상수)입니다. 섹터 구성이 동적이면 weight 기반 treemap으로 교체하세요                             |
-| Tailwind로 애니메이션 duration이 안 바뀌어요 | `globals.css`의 `.animate-*`가 무레이어 CSS라 Tailwind 유틸리티보다 우선합니다. 인라인 style을 쓰세요 (`network-sphere.tsx` 참고) |
+| 증상                                         | 이유                                                                                                                             |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| 어떤 링크를 넣어도 같은 분석 결과가 나와요   | `getAnalysis(id)`가 id를 무시하고 같은 mock을 반환합니다. 연동하면 해결됩니다                                                    |
+| 최근 분석 3건이 전부 같은 페이지로 가요      | 같은 이유입니다. 현재 mock id가 `hbm4` 하나뿐입니다                                                                              |
+| 로딩 화면 뉴스 제목이 항상 같아요            | `analysisResult.title`이 고정값입니다. 제출한 뉴스 제목으로 바꿔 주세요                                                          |
+| 지식그래프에 three.js가 없네요?              | 순수 SVG + 원근 투영으로 구현했습니다. 노드가 크게 늘기 전까지는 충분합니다                                                      |
+| 히트맵 배치가 하드코딩이에요                 | 목업 비율 고정 레이아웃(`LAYOUT` 상수)입니다. 섹터 구성이 동적이면 weight 기반 treemap으로 교체하세요                            |
+| Tailwind로 애니메이션 duration이 안 바뀌어요 | `globals.css`의 `.animate-*`가 무레이어 CSS라 Tailwind 유틸리티보다 우선합니다. 인라인 style을 쓰세요 (`NetworkSphere.tsx` 참고) |
 
 ---
 

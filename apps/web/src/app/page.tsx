@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
-import { AnalyzeForm } from '@/components/main/analyze-form';
-import { ParticleField } from '@/components/particle-field';
+import { AnalyzeForm } from '@/components/main/AnalyzeForm';
+import { ParticleField } from '@/components/ParticleField';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { fmtPct, pctArrow, pctToneClass } from '@/lib/format';
+import { formatPct, getPctArrow, getPctToneClass } from '@/lib/format';
 import { popularNews, recentAnalyses, sectorOverview } from '@/lib/mock-data';
 
 /**
@@ -78,9 +78,9 @@ export default function HomePage() {
                   <div className="flex items-start justify-between gap-2">
                     <span className="text-sm font-bold">{sector.name}</span>
                     <span
-                      className={`text-[13px] font-bold whitespace-nowrap ${pctToneClass(sector.changePct)}`}
+                      className={`text-[13px] font-bold whitespace-nowrap ${getPctToneClass(sector.changePct)}`}
                     >
-                      {pctArrow(sector.changePct)} {fmtPct(sector.changePct)}
+                      {getPctArrow(sector.changePct)} {formatPct(sector.changePct)}
                     </span>
                   </div>
                   <p className="mt-2 text-xs leading-5 text-muted-foreground">

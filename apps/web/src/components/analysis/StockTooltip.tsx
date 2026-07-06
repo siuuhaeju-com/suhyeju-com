@@ -1,4 +1,4 @@
-import { fmtPct, pctToneClass } from '@/lib/format';
+import { formatPct, getPctToneClass } from '@/lib/format';
 import type { TopStock } from '@/lib/types';
 
 /**
@@ -16,8 +16,8 @@ export function StockTooltip({ sector, stocks }: { sector: string; stocks: TopSt
         {stocks.map((stock) => (
           <li key={stock.name} className="flex items-center justify-between gap-3 text-xs">
             <span className="truncate text-ink-sub">{stock.name}</span>
-            <span className={`font-bold ${pctToneClass(stock.changePct)}`}>
-              {fmtPct(stock.changePct)}
+            <span className={`font-bold ${getPctToneClass(stock.changePct)}`}>
+              {formatPct(stock.changePct)}
             </span>
           </li>
         ))}

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
-import { ImpactHeatmap } from '@/components/analysis/impact-heatmap';
-import { KnowledgeGraph } from '@/components/analysis/knowledge-graph';
-import { SignalSection } from '@/components/analysis/signal-section';
-import { SpreadGraph } from '@/components/analysis/spread-graph';
-import { SummarySection } from '@/components/analysis/summary-section';
+import { ImpactHeatmap } from '@/components/analysis/ImpactHeatmap';
+import { KnowledgeGraph } from '@/components/analysis/KnowledgeGraph';
+import { SignalSection } from '@/components/analysis/SignalSection';
+import { SpreadGraph } from '@/components/analysis/SpreadGraph';
+import { SummarySection } from '@/components/analysis/SummarySection';
 import { getAnalysis } from '@/lib/mock-data';
 
 type AnalysisPageProps = {

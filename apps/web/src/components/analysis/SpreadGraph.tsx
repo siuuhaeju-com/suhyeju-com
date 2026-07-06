@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 
-import { StockTooltip } from '@/components/analysis/stock-tooltip';
+import { StockTooltip } from '@/components/analysis/StockTooltip';
 import { Card } from '@/components/ui/card';
-import { fmtPct } from '@/lib/format';
+import { formatPct } from '@/lib/format';
 import { cn } from '@/lib/utils';
 import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
 
@@ -26,7 +26,7 @@ const COLUMN_LABELS: Array<{ tier: 0 | 1 | 2 | 3; label: string }> = [
   { tier: 3, label: '3차 파급' },
 ];
 
-function nodePos(node: SpreadNode) {
+function getNodePos(node: SpreadNode) {
   return { x: TIER_X[node.tier], y: 90 + node.row * (VIEW_H - 150) };
 }
 
@@ -87,19 +87,19 @@ export function SpreadGraph({
         {/* 연결선 */}
         <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} className="absolute inset-0 h-full w-full">
           {edges.map((edge, index) => {
-            const from = nodePos(byId[edge.from]);
-            const to = nodePos(byId[edge.to]);
+            const from = getNodePos(byId[edge.from]);
+            const to = getNodePos(byId[edge.to]);
             const midX = from.x + (to.x - from.x) / 2;
             const d = `M ${from.x} ${from.y} C ${midX} ${from.y}, ${midX} ${to.y}, ${to.x} ${to.y}`;
-            const active = hoveredEdge === index;
+            const isActive = hoveredEdge === index;
             return (
               <g key={`${edge.from}-${edge.to}`}>
                 <path
                   d={d}
                   fill="none"
-                  stroke={active ? 'var(--blue-bright)' : 'rgba(110,160,255,0.3)'}
-                  strokeWidth={active ? 2.5 : 1.5}
-                  className={active ? 'animate-dashmove' : undefined}
+                  stroke={isActive ? 'var(--blue-bright)' : 'rgba(110,160,255,0.3)'}
+                  strokeWidth={isActive ? 2.5 : 1.5}
+                  className={isActive ? 'animate-dashmove' : undefined}
                 />
                 {/* 넓은 히트 영역 — hover 판정용 */}
                 <path
@@ -118,7 +118,7 @@ export function SpreadGraph({
 
         {/* 노드 */}
         {nodes.map((node) => {
-          const { x, y } = nodePos(node);
+          const { x, y } = getNodePos(node);
           const isOrigin = node.tier === 0;
           return (
             <button
@@ -134,7 +134,7 @@ export function SpreadGraph({
                 isOrigin && 'border-primary/60 bg-primary/10',
               )}
               style={{ left: `${(x / VIEW_W) * 100}%`, top: `${(y / VIEW_H) * 100}%` }}
-              aria-label={`${node.name}${node.changePct != null ? ` ${fmtPct(node.changePct)}` : ''} — Top5 종목 보기`}
+              aria-label={`${node.name}${node.changePct != null ? ` ${formatPct(node.changePct)}` : ''} — Top5 종목 보기`}
             >
               <span className="flex items-center gap-1.5 text-[12.5px] font-bold whitespace-nowrap">
                 <span
@@ -150,7 +150,7 @@ export function SpreadGraph({
                 </span>
               ) : (
                 <span className="mt-0.5 block text-[13px] font-extrabold text-positive">
-                  {node.changePct != null ? fmtPct(node.changePct) : ''}
+                  {node.changePct != null ? formatPct(node.changePct) : ''}
                 </span>
               )}
             </button>
@@ -161,8 +161,8 @@ export function SpreadGraph({
         {hoveredEdge != null &&
           (() => {
             const edge = edges[hoveredEdge];
-            const from = nodePos(byId[edge.from]);
-            const to = nodePos(byId[edge.to]);
+            const from = getNodePos(byId[edge.from]);
+            const to = getNodePos(byId[edge.to]);
             const cx = ((from.x + to.x) / 2 / VIEW_W) * 100;
             const cy = ((from.y + to.y) / 2 / VIEW_H) * 100;
             return (
@@ -189,15 +189,15 @@ export function SpreadGraph({
           topStocks[byId[hoveredNode].name] &&
           (() => {
             const node = byId[hoveredNode];
-            const { x, y } = nodePos(node);
-            const flip = node.tier === 3;
+            const { x, y } = getNodePos(node);
+            const shouldFlip = node.tier === 3;
             return (
               <div
                 className="pointer-events-none absolute z-10"
                 style={{
-                  left: `${((x + (flip ? -80 : 80)) / VIEW_W) * 100}%`,
+                  left: `${((x + (shouldFlip ? -80 : 80)) / VIEW_W) * 100}%`,
                   top: `${(y / VIEW_H) * 100}%`,
-                  transform: `translateY(-50%)${flip ? ' translateX(-100%)' : ''}`,
+                  transform: `translateY(-50%)${shouldFlip ? ' translateX(-100%)' : ''}`,
                 }}
               >
                 <StockTooltip sector={node.name} stocks={topStocks[node.name]} />

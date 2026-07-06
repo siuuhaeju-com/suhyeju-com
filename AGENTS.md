@@ -11,6 +11,38 @@
   - `분석 페이지` — 요약 카드, 1·2·3차 파급 그래프, 섹터 영향도 히트맵, 호재/우려 여론 비교
 - **⚠️ 색상 규칙(코드 작업 시 주의):** **긍정 = 레드(핑크 계열), 부정 = 그린** 으로 통일한다. 서구 관례와 **반대**이므로 범례를 반드시 병기한다. (섹터 등락·신호 카드·히트맵 공통)
 
+## 디자인 작업
+
+UI 컴포넌트·페이지·스타일을 만들거나 수정하는 **모든 디자인 관련 작업**은 아래를 따른다.
+
+- **작업 전:** **`apps/web/DESIGN.md`** (디자인 시스템 정본)와 `apps/web/PRODUCT.md`(전략 컨텍스트)를 먼저 읽는다. DESIGN.md의 **frontmatter 토큰이 규범**이고, 본문은 적용 맥락이다. 시각 원본이 더 필요하면 `docs/design/mockup/`을 참고한다.
+- **작업 중:** 색·radius·타이포는 토큰/shadcn CSS 변수로만 쓴다(hex 하드코딩 금지). 특히 의미색(긍정=레드/부정=그린)·파급 단계색·`ink-dim` 텍스트 금지 등 **Colors·Do's and Don'ts 섹션을 위반하지 않는다.**
+- **작업 후:** DESIGN.md의 **Do's and Don'ts와 대조**하고, `npx impeccable detect <변경한 파일·디렉터리>`를 실행해 안티패턴·대비 위반이 없는지 확인한다. 발견 항목은 머지 전에 해소한다.
+- **문서 동기화:** 작업 중 새 토큰·컴포넌트 규칙이 확정되면 DESIGN.md에 반영한다. 코드와 문서가 어긋난 채로 두지 않는다.
+
+> 디자인 품질 작업(크래프트·크리틱·폴리시 등)에는 `/impeccable` 스킬을 활용한다 — 자동으로 PRODUCT.md·DESIGN.md를 읽고 시작한다.
+
+## 프론트엔드 코드 컨벤션 (apps/web)
+
+Next.js 코드 작성 시 아래 네이밍 규칙을 따른다.
+
+| 대상                | 규칙                                                                                                                            | 예                                        |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| 컴포넌트 파일(.tsx) | **PascalCase** — 예외: Next 예약 파일(`page.tsx`·`layout.tsx`·`error.tsx`)과 shadcn CLI 생성물(`components/ui/*`)은 소문자 유지 | `SpreadGraph.tsx`, `SiteHeader.tsx`       |
+| 일반 모듈(.ts)·폴더 | **kebab-case**                                                                                                                  | `mock-data.ts`, `components/analysis/`    |
+| 컴포넌트            | **PascalCase**, named export (파일명과 일치)                                                                                    | `SpreadGraph`, `SiteHeader`               |
+| 훅                  | `use` + PascalCase                                                                                                              | `useAnalysis`, `useSectorOverview`        |
+| 함수                | camelCase 동사 시작                                                                                                             | `buildCloud()`, `getAnalysis()`           |
+| 이벤트 핸들러       | 내부 정의 `handle*` / props 전달 `on*`                                                                                          | `handleSubmit`, `onSelect`                |
+| boolean             | `is/has/can/should` 접두                                                                                                        | `isLoading`, `hasError`                   |
+| 상수                | **UPPER_SNAKE_CASE** (모듈 상단)                                                                                                | `STEP_INTERVAL_MS`, `TIER_COLOR`          |
+| 타입·인터페이스     | PascalCase, 접두사 `I`/`T` 금지                                                                                                 | `AnalysisResult`, `SpreadNode`            |
+| 쿼리 키             | 배열 리터럴 `[도메인, 식별자]`                                                                                                  | `['analysis', id]`, `['news', 'popular']` |
+| 환경변수            | `NEXT_PUBLIC_` (클라이언트 노출 시) + UPPER_SNAKE                                                                               | `NEXT_PUBLIC_API_URL`                     |
+
+- import 경로는 상대경로 대신 **`@/` alias**를 쓴다 (`@/components/ui/button`).
+- 클래스는 지양하고 함수형으로 작성한다 — 도메인 로직은 `src/lib/`에 순수 함수로.
+
 ## 이슈 생성
 
 "이런 이슈 만들어줘" 같은 요청을 받으면:
@@ -38,5 +70,3 @@
 - 작업은 반드시 **`feat/#이슈번호-기능명`** 브랜치에서 한다. (예: `feat/#12-login-form`)
 - 기능 완료 시 **`dev`** 에 병합해 통합 상태를 확인한 뒤, **`prd`** 로 올려 운영에 반영한다.
 - `prd`·`dev`에 **직접 커밋하지 않는다**. 브랜치명의 `#이슈번호`는 관련 GitHub Issue 번호와 일치시킨다.
-
-## PR 자동화 전략
