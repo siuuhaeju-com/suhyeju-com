@@ -1,0 +1,2371 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        />
+        <style>
+          html,
+          body {
+            margin: 0;
+            padding: 0;
+            background: #0b0d12;
+          }
+          * {
+            box-sizing: border-box;
+          }
+          input::placeholder {
+            color: #525b6d;
+          }
+          input {
+            outline: none;
+          }
+          @keyframes ripple {
+            0% {
+              transform: scale(0.35);
+              opacity: 0.9;
+            }
+            100% {
+              transform: scale(1.9);
+              opacity: 0;
+            }
+          }
+          @keyframes spin {
+            to {
+              transform: rotate(360deg);
+            }
+          }
+          @keyframes pulse {
+            0%,
+            100% {
+              opacity: 1;
+            }
+            50% {
+              opacity: 0.3;
+            }
+          }
+          @keyframes fadeUp {
+            from {
+              opacity: 0;
+              transform: translateY(12px);
+            }
+            to {
+              opacity: 1;
+              transform: none;
+            }
+          }
+          @keyframes dashmove {
+            to {
+              stroke-dashoffset: -24;
+            }
+          }
+          @keyframes floatY {
+            0%,
+            100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-13px);
+            }
+          }
+          @keyframes glowPulse {
+            0%,
+            100% {
+              box-shadow: 0 0 14px rgba(61, 107, 255, 0.2);
+            }
+            50% {
+              box-shadow: 0 0 32px rgba(61, 107, 255, 0.5);
+            }
+          }
+        </style>
+      </helmet>
+      <div
+        style="
+          min-height: 100vh;
+          background: #0b0d12;
+          color: #e9edf4;
+          font-family:
+            'Pretendard Variable',
+            Pretendard,
+            -apple-system,
+            'Segoe UI',
+            sans-serif;
+          -webkit-font-smoothing: antialiased;
+        "
+      >
+        <!-- ============ HEADER ============ -->
+        <header
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(11, 13, 18, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+          "
+        >
+          <div
+            style="display: flex; align-items: center; gap: 10px; cursor: pointer"
+            onClick="{{ goHome }}"
+          >
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <circle cx="13" cy="13" r="3.2" fill="#3d6bff"></circle>
+              <circle
+                cx="13"
+                cy="13"
+                r="7.5"
+                stroke="#3d6bff"
+                stroke-opacity="0.5"
+                stroke-width="1.5"
+              ></circle>
+              <circle
+                cx="13"
+                cy="13"
+                r="12"
+                stroke="#3d6bff"
+                stroke-opacity="0.22"
+                stroke-width="1.5"
+              ></circle>
+            </svg>
+            <div style="font-size: 16px; font-weight: 800; letter-spacing: -0.3px">
+              수혜주<span style="color: #3d6bff">.com</span>
+            </div>
+          </div>
+          <div
+            style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #8a93a6"
+          >
+            <span
+              style="
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: #2fbf71;
+                animation: pulse 2s infinite;
+              "
+            ></span>
+            실시간 뉴스 영향력 분석
+          </div>
+        </header>
+
+        <!-- ============ HOME ============ -->
+        <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+          <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none">
+            <canvas
+              ref="{{ homeBgRef }}"
+              style="width: 100%; height: 100%; display: block"
+            ></canvas>
+            <div
+              style="
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(
+                  ellipse 64% 56% at 50% 34%,
+                  rgba(11, 13, 18, 0.9) 0%,
+                  rgba(11, 13, 18, 0.5) 55%,
+                  rgba(11, 13, 18, 0) 100%
+                );
+              "
+            ></div>
+          </div>
+          <main
+            data-screen-label="메인"
+            style="
+              position: relative;
+              z-index: 1;
+              max-width: 860px;
+              margin: 0 auto;
+              padding: 72px 24px 80px;
+              animation: fadeUp 0.4s ease;
+            "
+          >
+            <div style="text-align: center; margin-bottom: 36px">
+              <div
+                style="
+                  font-size: 12px;
+                  font-weight: 700;
+                  letter-spacing: 2.5px;
+                  color: #3d6bff;
+                  margin-bottom: 14px;
+                "
+              >
+                AI NEWS IMPACT ANALYSIS
+              </div>
+              <h1
+                style="
+                  margin: 0 0 14px;
+                  font-size: 40px;
+                  font-weight: 800;
+                  letter-spacing: -1.2px;
+                  line-height: 1.25;
+                "
+              >
+                뉴스 한 건이 시장에 만드는<br />파장을 추적하세요
+              </h1>
+              <p style="margin: 0; font-size: 15px; color: #8a93a6; line-height: 1.6">
+                링크를 입력하면 AI가 핵심 키워드와 관련 산업을 추출하고,<br />섹터별 영향도 히트맵과
+                1·2·3차 파급 경로를 그려드립니다.
+              </p>
+            </div>
+
+            <!-- link input -->
+            <div
+              style="
+                background: #12151d;
+                border: 1px solid rgba(255, 255, 255, 0.09);
+                border-radius: 16px;
+                padding: 18px;
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+              "
+            >
+              <div style="display: flex; gap: 10px; align-items: center">
+                <div
+                  style="
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    background: #0d1017;
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 10px;
+                    padding: 0 14px;
+                    height: 50px;
+                  "
+                >
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#5b6474"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  >
+                    <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path>
+                    <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path>
+                  </svg>
+                  <input
+                    value="{{ inputVal }}"
+                    onChange="{{ onInput }}"
+                    onKeyDown="{{ onKeyDown }}"
+                    placeholder="뉴스·블로그 등 웹 링크를 붙여넣으세요"
+                    style="
+                      flex: 1;
+                      background: transparent;
+                      border: none;
+                      color: #e9edf4;
+                      font-size: 14px;
+                      font-family: inherit;
+                    "
+                  />
+                </div>
+                <button
+                  onClick="{{ analyze }}"
+                  style="
+                    height: 50px;
+                    padding: 0 26px;
+                    background: #3d6bff;
+                    border: none;
+                    border-radius: 10px;
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    font-family: inherit;
+                    white-space: nowrap;
+                    box-shadow: 0 4px 18px rgba(61, 107, 255, 0.35);
+                  "
+                  style-hover="background:#5580ff"
+                >
+                  분석하기
+                </button>
+              </div>
+              <sc-if value="{{ hasLinks }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px">
+                  <sc-for list="{{ links }}" as="lk" hint-placeholder-count="0">
+                    <span
+                      style="
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        background: rgba(61, 107, 255, 0.12);
+                        border: 1px solid rgba(61, 107, 255, 0.3);
+                        color: #9db4ff;
+                        border-radius: 8px;
+                        padding: 6px 10px;
+                        font-size: 12px;
+                        max-width: 340px;
+                      "
+                    >
+                      <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap"
+                        >{{ lk.url }}</span
+                      >
+                      <span
+                        onClick="{{ lk.remove }}"
+                        style="cursor: pointer; color: #5b6474; font-weight: 700"
+                        >✕</span
+                      >
+                    </span>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+
+            <!-- news + market grid -->
+            <div
+              style="
+                margin-top: 52px;
+                display: grid;
+                grid-template-columns: 1.75fr 1fr;
+                gap: 26px;
+                align-items: start;
+              "
+            >
+              <!-- LEFT: news list -->
+              <section>
+                <h2
+                  style="
+                    margin: 0 0 16px;
+                    font-size: 17px;
+                    font-weight: 800;
+                    letter-spacing: -0.4px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                  "
+                >
+                  🔥 인기 뉴스
+                </h2>
+                <div style="display: flex; flex-direction: column; gap: 12px">
+                  <sc-for list="{{ newsList }}" as="n" hint-placeholder-count="4">
+                    <div
+                      onClick="{{ n.go }}"
+                      style="
+                        background: #12151d;
+                        border: 1px solid rgba(255, 255, 255, 0.07);
+                        border-radius: 14px;
+                        padding: 18px 20px;
+                        cursor: pointer;
+                        transition: border-color 0.15s;
+                      "
+                      style-hover="border-color:rgba(110,160,255,0.4)"
+                    >
+                      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 9px">
+                        <span
+                          style="font-size:11px;font-weight:700;color:{{ n.tagColor }};background:{{ n.tagBg }};padding:3px 8px;border-radius:6px"
+                          >{{ n.tag }}</span
+                        >
+                        <span style="font-size: 12px; color: #5b6474">{{ n.meta }}</span>
+                      </div>
+                      <div
+                        style="
+                          font-size: 15.5px;
+                          font-weight: 700;
+                          letter-spacing: -0.3px;
+                          line-height: 1.4;
+                          margin-bottom: 6px;
+                        "
+                      >
+                        {{ n.title }}
+                      </div>
+                      <div
+                        style="
+                          font-size: 12.5px;
+                          color: #8a93a6;
+                          line-height: 1.55;
+                          text-wrap: pretty;
+                        "
+                      >
+                        {{ n.desc }}
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </section>
+
+              <!-- RIGHT: sidebar -->
+              <aside
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 30px;
+                  position: sticky;
+                  top: 84px;
+                "
+              >
+                <!-- market toggle + sectors -->
+                <div>
+                  <h2
+                    style="
+                      margin: 0 0 14px;
+                      font-size: 15px;
+                      font-weight: 800;
+                      letter-spacing: -0.3px;
+                    "
+                  >
+                    주요 섹터 현황
+                  </h2>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
+                    <sc-for list="{{ sectorGrid }}" as="s" hint-placeholder-count="8">
+                      <div
+                        onClick="{{ s.go }}"
+                        style="
+                          background: #12151d;
+                          border: 1px solid rgba(255, 255, 255, 0.07);
+                          border-radius: 12px;
+                          padding: 13px 14px;
+                          cursor: pointer;
+                          transition: border-color 0.15s;
+                        "
+                        style-hover="border-color:rgba(110,160,255,0.4)"
+                      >
+                        <div
+                          style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            gap: 6px;
+                            margin-bottom: 5px;
+                          "
+                        >
+                          <span style="font-size: 13.5px; font-weight: 800; letter-spacing: -0.3px"
+                            >{{ s.name }}</span
+                          >
+                          <span
+                            style="font-size:12px;font-weight:800;color:{{ s.color }};font-variant-numeric:tabular-nums;white-space:nowrap"
+                            >{{ s.arrow }} {{ s.pct }}</span
+                          >
+                        </div>
+                        <div
+                          style="
+                            font-size: 11px;
+                            color: #5b6474;
+                            line-height: 1.45;
+                            text-wrap: pretty;
+                          "
+                        >
+                          {{ s.desc }}
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+
+                <!-- recent analysis -->
+                <div>
+                  <h2
+                    style="
+                      margin: 0 0 12px;
+                      font-size: 15px;
+                      font-weight: 800;
+                      letter-spacing: -0.3px;
+                      display: flex;
+                      align-items: center;
+                      gap: 7px;
+                    "
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#8a93a6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    >
+                      <circle cx="12" cy="12" r="9"></circle>
+                      <path d="M12 7v5l3 2"></path>
+                    </svg>
+                    최근 분석 내역
+                  </h2>
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      background: #12151d;
+                      border: 1px solid rgba(255, 255, 255, 0.07);
+                      border-radius: 12px;
+                      overflow: hidden;
+                    "
+                  >
+                    <sc-for list="{{ recentList }}" as="r" hint-placeholder-count="3">
+                      <div
+                        onClick="{{ r.go }}"
+                        style="
+                          display: flex;
+                          align-items: center;
+                          gap: 12px;
+                          padding: 13px 15px;
+                          cursor: pointer;
+                          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                        "
+                        style-hover="background:rgba(255,255,255,0.03)"
+                      >
+                        <span
+                          style="
+                            flex: 1;
+                            min-width: 0;
+                            font-size: 13px;
+                            font-weight: 600;
+                            letter-spacing: -0.2px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            color: #c6cdda;
+                          "
+                          >{{ r.title }}</span
+                        >
+                        <span style="flex: none; font-size: 11px; color: #5b6474"
+                          >{{ r.when }}</span
+                        >
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </main>
+        </sc-if>
+
+        <!-- ============ LOADING ============ -->
+        <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+          <main
+            data-screen-label="로딩"
+            style="
+              max-width: 1120px;
+              margin: 0 auto;
+              padding: 50px 32px 70px;
+              animation: fadeUp 0.3s ease;
+            "
+          >
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1.15fr 1fr;
+                gap: 44px;
+                align-items: center;
+              "
+            >
+              <!-- glowing node sphere -->
+              <div
+                style="
+                  position: relative;
+                  height: 560px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <div
+                  style="
+                    position: absolute;
+                    width: 380px;
+                    height: 380px;
+                    border-radius: 50%;
+                    background: radial-gradient(circle, rgba(61, 107, 255, 0.24), transparent 62%);
+                    filter: blur(16px);
+                  "
+                ></div>
+                <canvas
+                  ref="{{ sphereRef }}"
+                  width="960"
+                  height="960"
+                  style="width: 480px; height: 480px; max-width: 100%"
+                ></canvas>
+                <sc-for list="{{ floatTags }}" as="ft" hint-placeholder-count="7">
+                  <span style="{{ ft.style }}">{{ ft.label }}</span>
+                </sc-for>
+              </div>
+
+              <!-- progress stepper -->
+              <div>
+                <div
+                  style="
+                    font-size: 11.5px;
+                    font-weight: 700;
+                    letter-spacing: 2.5px;
+                    color: #3d6bff;
+                    margin-bottom: 12px;
+                  "
+                >
+                  AI ANALYSIS ENGINE
+                </div>
+                <h2
+                  style="margin: 0 0 7px; font-size: 27px; font-weight: 800; letter-spacing: -0.7px"
+                >
+                  {{ loadingTitle }}
+                </h2>
+                <div
+                  style="
+                    font-size: 13px;
+                    color: #5b6474;
+                    margin-bottom: 26px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                >
+                  {{ loadingSubject }}
+                </div>
+
+                <div
+                  style="
+                    height: 4px;
+                    background: rgba(255, 255, 255, 0.07);
+                    border-radius: 2px;
+                    overflow: hidden;
+                    margin-bottom: 26px;
+                  "
+                >
+                  <div
+                    style="height:100%;width:{{ progress }}%;background:linear-gradient(90deg,#3d6bff,#6ea0ff);border-radius:2px;transition:width .5s ease"
+                  ></div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 10px">
+                  <sc-for list="{{ steps }}" as="st" hint-placeholder-count="5">
+                    <div style="{{ st.cardStyle }}">
+                      <span style="{{ st.dotStyle }}">{{ st.mark }}</span>
+                      <span
+                        style="flex:1;font-size:14px;font-weight:700;letter-spacing:-0.2px;color:{{ st.color }};transition:color .3s"
+                        >{{ st.label }}</span
+                      >
+                      <span
+                        style="flex:none;font-size:11.5px;font-weight:700;color:{{ st.statusColor }}"
+                        >{{ st.status }}</span
+                      >
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </main>
+        </sc-if>
+
+        <!-- ============ RESULT ============ -->
+        <sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+          <main
+            data-screen-label="분석 결과"
+            style="
+              max-width: 1240px;
+              margin: 0 auto;
+              padding: 28px 32px 90px;
+              animation: fadeUp 0.4s ease;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 22px;
+              "
+            >
+              <button
+                onClick="{{ goHome }}"
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 7px;
+                  background: transparent;
+                  border: none;
+                  color: #8a93a6;
+                  font-size: 13px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  font-family: inherit;
+                  padding: 0;
+                "
+                style-hover="color:#e9edf4"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                >
+                  <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+                새 분석
+              </button>
+              <div style="font-size: 12px; color: #5b6474">
+                분석 완료 · 2026.07.05 14:23 · 수혜주.com AI v2.1
+              </div>
+            </div>
+
+            <!-- article header -->
+            <div style="margin-bottom: 20px">
+              <div style="display: flex; gap: 8px; margin-bottom: 10px">
+                <span
+                  style="
+                    font-size: 11px;
+                    font-weight: 700;
+                    color: #f2907c;
+                    background: rgba(242, 73, 92, 0.12);
+                    padding: 3px 9px;
+                    border-radius: 6px;
+                  "
+                  >반도체</span
+                >
+                <span
+                  style="
+                    font-size: 11px;
+                    font-weight: 700;
+                    color: #8a93a6;
+                    background: rgba(255, 255, 255, 0.06);
+                    padding: 3px 9px;
+                    border-radius: 6px;
+                  "
+                  >호재 분석</span
+                >
+              </div>
+              <h1
+                style="
+                  margin: 0 0 8px;
+                  font-size: 27px;
+                  font-weight: 800;
+                  letter-spacing: -0.8px;
+                  line-height: 1.35;
+                "
+              >
+                SK하이닉스, 엔비디아 'HBM4' 단독 공급 계약 체결… 역대 최대 규모
+              </h1>
+              <div style="font-size: 13px; color: #5b6474">
+                한국경제 · 2026.07.05 12:10 · 산업부
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px">
+              <!-- AI summary -->
+              <section
+                style="
+                  grid-column: span 8;
+                  background: #12151d;
+                  border: 1px solid rgba(255, 255, 255, 0.07);
+                  border-radius: 14px;
+                  padding: 24px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 14px;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 8px;
+                      font-size: 13px;
+                      font-weight: 800;
+                      letter-spacing: 0.5px;
+                      color: #6ea0ff;
+                    "
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    >
+                      <path
+                        d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"
+                      ></path>
+                    </svg>
+                    AI 요약
+                  </div>
+                  <a
+                    href="https://news.example.com/article/2026070512"
+                    target="_blank"
+                    style="
+                      display: inline-flex;
+                      align-items: center;
+                      gap: 6px;
+                      font-size: 12px;
+                      font-weight: 600;
+                      color: #9db4ff;
+                      text-decoration: none;
+                      border: 1px solid rgba(61, 107, 255, 0.35);
+                      border-radius: 8px;
+                      padding: 5px 11px;
+                    "
+                    style-hover="background:rgba(61,107,255,0.12)"
+                    >원문 보기 ↗</a
+                  >
+                </div>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 14.5px;
+                    line-height: 1.85;
+                    color: #c6cdda;
+                    text-wrap: pretty;
+                  "
+                >
+                  SK하이닉스가 엔비디아의 차세대 AI 가속기 '루빈(Rubin)'에 탑재될 6세대
+                  고대역폭메모리 HBM4를 단독 공급하는 계약을 체결했다. 계약 규모는 역대 HBM 공급
+                  계약 중 최대로, 2027년 말까지의 공급 물량이 사실상 확정된 것으로 알려졌다. 이번
+                  수주로 SK하이닉스는 HBM 시장 점유율 1위 지위를 굳히는 동시에 청주 M15X 팹 증설
+                  투자를 당초 계획보다 앞당길 방침이다. 증권가는 TC본더 등 적층 장비, 공정 소재,
+                  테스트 등 후방 밸류체인 전반의 발주 확대가 뒤따를 것으로 전망하며, AI 데이터센터
+                  증설 가속에 따라 전력기기·기판 업종까지 온기가 확산될 것으로 분석했다. 다만
+                  경쟁사가 HBM4 품질 인증에 진입할 경우 공급 단가 인하 압력이 커질 수 있다는 점은
+                  변수로 지목된다.
+                </p>
+              </section>
+
+              <!-- keywords -->
+              <section
+                style="
+                  grid-column: span 4;
+                  background: #12151d;
+                  border: 1px solid rgba(255, 255, 255, 0.07);
+                  border-radius: 14px;
+                  padding: 24px;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 20px;
+                "
+              >
+                <div>
+                  <div
+                    style="font-size: 13px; font-weight: 800; color: #8a93a6; margin-bottom: 12px"
+                  >
+                    핵심 키워드
+                  </div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                    <sc-for list="{{ keywords }}" as="kw" hint-placeholder-count="6">
+                      <span
+                        style="
+                          font-size: 12.5px;
+                          font-weight: 600;
+                          color: #c6cdda;
+                          background: rgba(255, 255, 255, 0.06);
+                          border: 1px solid rgba(255, 255, 255, 0.09);
+                          padding: 6px 12px;
+                          border-radius: 999px;
+                        "
+                        ># {{ kw.name }}</span
+                      >
+                    </sc-for>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    style="font-size: 13px; font-weight: 800; color: #8a93a6; margin-bottom: 12px"
+                  >
+                    관련 섹터
+                  </div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                    <sc-for list="{{ sectorTags }}" as="stg" hint-placeholder-count="4">
+                      <span
+                        style="font-size:12.5px;font-weight:700;color:{{ stg.color }};background:{{ stg.bg }};padding:6px 12px;border-radius:999px"
+                        >{{ stg.name }} {{ stg.imp }}</span
+                      >
+                    </sc-for>
+                  </div>
+                </div>
+              </section>
+
+              <!-- signals -->
+              <section style="grid-column: span 12">
+                <div style="display: flex; align-items: baseline; gap: 12px; margin: 6px 0 16px">
+                  <h3 style="margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.4px">
+                    전망 분석
+                  </h3>
+                  <span style="font-size: 12.5px; color: #8a93a6"
+                    >관련 뉴스·리포트 42건을 AI가 종합했어요</span
+                  >
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
+                  <!-- good -->
+                  <div
+                    style="
+                      background: rgba(242, 73, 92, 0.045);
+                      border: 1px solid rgba(242, 73, 92, 0.28);
+                      border-radius: 16px;
+                      padding: 24px;
+                    "
+                  >
+                    <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 20px">
+                      <div style="position: relative; width: 84px; height: 84px; flex: none">
+                        <svg
+                          width="84"
+                          height="84"
+                          viewBox="0 0 84 84"
+                          style="transform: rotate(-90deg)"
+                        >
+                          <circle
+                            cx="42"
+                            cy="42"
+                            r="34"
+                            fill="none"
+                            stroke="rgba(242,73,92,0.15)"
+                            stroke-width="8"
+                          ></circle>
+                          <circle
+                            cx="42"
+                            cy="42"
+                            r="34"
+                            fill="none"
+                            stroke="#f2495c"
+                            stroke-width="8"
+                            stroke-linecap="round"
+                            stroke-dasharray="153.8 213.6"
+                          ></circle>
+                        </svg>
+                        <div
+                          style="
+                            position: absolute;
+                            inset: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 18px;
+                            font-weight: 800;
+                            font-variant-numeric: tabular-nums;
+                          "
+                        >
+                          72%
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          style="
+                            font-size: 18px;
+                            font-weight: 800;
+                            color: #f2647a;
+                            letter-spacing: -0.3px;
+                            margin-bottom: 5px;
+                          "
+                        >
+                          좋은 신호
+                        </div>
+                        <div style="font-size: 13.5px; color: #aeb6c6; line-height: 1.55">
+                          관련 뉴스와 리포트에서는<br />긍정적인 해석이 더 많아요.
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style="font-size: 12px; font-weight: 800; color: #8a93a6; margin-bottom: 8px"
+                    >
+                      📰 관련 뉴스
+                    </div>
+                    <div
+                      style="display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px"
+                    >
+                      <div
+                        style="
+                          background: rgba(242, 73, 92, 0.07);
+                          border-radius: 9px;
+                          padding: 11px 14px;
+                          font-size: 13.5px;
+                          color: #dbe2ec;
+                        "
+                      >
+                        HBM4 공급 물량 2027년까지 사실상 확정 (한국경제)
+                      </div>
+                      <div
+                        style="
+                          background: rgba(242, 73, 92, 0.07);
+                          border-radius: 9px;
+                          padding: 11px 14px;
+                          font-size: 13.5px;
+                          color: #dbe2ec;
+                        "
+                      >
+                        AI 가속기 수요 전망 일제히 상향 (매경)
+                      </div>
+                    </div>
+                    <div
+                      style="font-size: 12px; font-weight: 800; color: #8a93a6; margin-bottom: 8px"
+                    >
+                      📑 증권사 리포트
+                    </div>
+                    <div
+                      style="display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px"
+                    >
+                      <div
+                        style="
+                          background: rgba(242, 73, 92, 0.07);
+                          border-radius: 9px;
+                          padding: 11px 14px;
+                          font-size: 13.5px;
+                          color: #dbe2ec;
+                        "
+                      >
+                        미래에셋 "AI 사이클 초입, 목표가 상향"
+                      </div>
+                      <div
+                        style="
+                          background: rgba(242, 73, 92, 0.07);
+                          border-radius: 9px;
+                          padding: 11px 14px;
+                          font-size: 13.5px;
+                          color: #dbe2ec;
+                        "
+                      >
+                        KB증권 "설비투자 수혜 뚜렷"
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        background: rgba(242, 73, 92, 0.08);
+                        border: 1px solid rgba(242, 73, 92, 0.3);
+                        border-radius: 12px;
+                        padding: 14px 16px;
+                      "
+                    >
+                      <div
+                        style="
+                          font-size: 12px;
+                          font-weight: 800;
+                          color: #f2a1af;
+                          margin-bottom: 6px;
+                        "
+                      >
+                        👤 김OO 애널리스트 · 미래에셋
+                      </div>
+                      <div style="font-size: 13.5px; color: #dbe2ec; line-height: 1.6">
+                        "AI 인프라 투자는 이제 시작 단계로, 반도체 장비 수요가 구조적으로 늘어날
+                        전망입니다."
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- caution -->
+                  <div
+                    style="
+                      background: rgba(47, 191, 113, 0.045);
+                      border: 1px solid rgba(47, 191, 113, 0.28);
+                      border-radius: 16px;
+                      padding: 24px;
+                    "
+                  >
+                    <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 20px">
+                      <div style="position: relative; width: 84px; height: 84px; flex: none">
+                        <svg
+                          width="84"
+                          height="84"
+                          viewBox="0 0 84 84"
+                          style="transform: rotate(-90deg)"
+                        >
+                          <circle
+                            cx="42"
+                            cy="42"
+                            r="34"
+                            fill="none"
+                            stroke="rgba(47,191,113,0.15)"
+                            stroke-width="8"
+                          ></circle>
+                          <circle
+                            cx="42"
+                            cy="42"
+                            r="34"
+                            fill="none"
+                            stroke="#2fbf71"
+                            stroke-width="8"
+                            stroke-linecap="round"
+                            stroke-dasharray="59.8 213.6"
+                          ></circle>
+                        </svg>
+                        <div
+                          style="
+                            position: absolute;
+                            inset: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 18px;
+                            font-weight: 800;
+                            font-variant-numeric: tabular-nums;
+                          "
+                        >
+                          28%
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          style="
+                            font-size: 18px;
+                            font-weight: 800;
+                            color: #2fbf71;
+                            letter-spacing: -0.3px;
+                            margin-bottom: 5px;
+                          "
+                        >
+                          주의할 신호
+                        </div>
+                        <div style="font-size: 13.5px; color: #aeb6c6; line-height: 1.55">
+                          단기 과열이나 비용 부담을<br />우려하는 시각도 있어요.
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style="font-size: 12px; font-weight: 800; color: #8a93a6; margin-bottom: 8px"
+                    >
+                      📰 관련 뉴스
+                    </div>
+                    <div
+                      style="display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px"
+                    >
+                      <div
+                        style="
+                          background: rgba(47, 191, 113, 0.07);
+                          border-radius: 9px;
+                          padding: 11px 14px;
+                          font-size: 13.5px;
+                          color: #dbe2ec;
+                        "
+                      >
+                        단기 급등 부담 지적 (이데일리)
+                      </div>
+                      <div
+                        style="
+                          background: rgba(47, 191, 113, 0.07);
+                          border-radius: 9px;
+                          padding: 11px 14px;
+                          font-size: 13.5px;
+                          color: #dbe2ec;
+                        "
+                      >
+                        밸류에이션 고평가 논란 (서울경제)
+                      </div>
+                    </div>
+                    <div
+                      style="font-size: 12px; font-weight: 800; color: #8a93a6; margin-bottom: 8px"
+                    >
+                      📑 증권사 리포트
+                    </div>
+                    <div
+                      style="display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px"
+                    >
+                      <div
+                        style="
+                          background: rgba(47, 191, 113, 0.07);
+                          border-radius: 9px;
+                          padding: 11px 14px;
+                          font-size: 13.5px;
+                          color: #dbe2ec;
+                        "
+                      >
+                        하나증권 "단기 과열 구간 유의"
+                      </div>
+                      <div
+                        style="
+                          background: rgba(47, 191, 113, 0.07);
+                          border-radius: 9px;
+                          padding: 11px 14px;
+                          font-size: 13.5px;
+                          color: #dbe2ec;
+                        "
+                      >
+                        신한 "투자비 부담에 마진 압박 가능"
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        background: rgba(47, 191, 113, 0.08);
+                        border: 1px solid rgba(47, 191, 113, 0.3);
+                        border-radius: 12px;
+                        padding: 14px 16px;
+                      "
+                    >
+                      <div
+                        style="
+                          font-size: 12px;
+                          font-weight: 800;
+                          color: #7fd8a8;
+                          margin-bottom: 6px;
+                        "
+                      >
+                        👤 이OO 애널리스트 · 하나증권
+                      </div>
+                      <div style="font-size: 13.5px; color: #dbe2ec; line-height: 1.6">
+                        "기대는 크지만 실적이 뒷받침되지 못하면 변동성이 커질 수 있어 분할 접근이
+                        필요합니다."
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- network graph -->
+              <section
+                style="
+                  grid-column: span 12;
+                  background: #12151d;
+                  border: 1px solid rgba(255, 255, 255, 0.07);
+                  border-radius: 14px;
+                  padding: 24px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 6px;
+                  "
+                >
+                  <div>
+                    <h3
+                      style="
+                        margin: 0 0 4px;
+                        font-size: 16px;
+                        font-weight: 800;
+                        letter-spacing: -0.3px;
+                      "
+                    >
+                      영향력 확산 그래프
+                    </h3>
+                    <div style="font-size: 12px; color: #5b6474">
+                      뉴스에서 시작되는 1·2·3차 파급 경로 · 연결선에 마우스를 올리면 근거를 확인할
+                      수 있습니다
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 14px;
+                      font-size: 12px;
+                      color: #8a93a6;
+                    "
+                  >
+                    <span style="display: flex; align-items: center; gap: 6px"
+                      ><span
+                        style="width: 9px; height: 9px; border-radius: 50%; background: #3d6bff"
+                      ></span
+                      >1차 파급</span
+                    >
+                    <span style="display: flex; align-items: center; gap: 6px"
+                      ><span
+                        style="width: 9px; height: 9px; border-radius: 50%; background: #8b7bff"
+                      ></span
+                      >2차 파급</span
+                    >
+                    <span style="display: flex; align-items: center; gap: 6px"
+                      ><span
+                        style="width: 9px; height: 9px; border-radius: 50%; background: #2fb3c9"
+                      ></span
+                      >3차 파급</span
+                    >
+                  </div>
+                </div>
+                <div
+                  style="
+                    position: relative;
+                    height: 560px;
+                    background: radial-gradient(
+                      ellipse at 8% 50%,
+                      rgba(61, 107, 255, 0.07),
+                      transparent 45%
+                    );
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      left: 0;
+                      top: 8px;
+                      width: 14%;
+                      text-align: center;
+                      font-size: 11px;
+                      font-weight: 700;
+                      letter-spacing: 1px;
+                      color: #5b6474;
+                    "
+                  >
+                    뉴스 원점
+                  </div>
+                  <div
+                    style="
+                      position: absolute;
+                      left: 21%;
+                      top: 8px;
+                      width: 18%;
+                      text-align: center;
+                      font-size: 11px;
+                      font-weight: 700;
+                      letter-spacing: 1px;
+                      color: #4d5f9b;
+                    "
+                  >
+                    1차 파급
+                  </div>
+                  <div
+                    style="
+                      position: absolute;
+                      left: 48%;
+                      top: 8px;
+                      width: 18%;
+                      text-align: center;
+                      font-size: 11px;
+                      font-weight: 700;
+                      letter-spacing: 1px;
+                      color: #6d629e;
+                    "
+                  >
+                    2차 파급
+                  </div>
+                  <div
+                    style="
+                      position: absolute;
+                      left: 76%;
+                      top: 8px;
+                      width: 18%;
+                      text-align: center;
+                      font-size: 11px;
+                      font-weight: 700;
+                      letter-spacing: 1px;
+                      color: #3d7f8f;
+                    "
+                  >
+                    3차 파급
+                  </div>
+
+                  <svg
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                    style="
+                      position: absolute;
+                      inset: 0;
+                      width: 100%;
+                      height: 100%;
+                      overflow: visible;
+                    "
+                  >
+                    <sc-for list="{{ edges }}" as="e" hint-placeholder-count="13">
+                      <g>
+                        <path
+                          d="{{ e.d }}"
+                          fill="none"
+                          stroke="{{ e.stroke }}"
+                          stroke-width="{{ e.sw }}"
+                          vector-effect="non-scaling-stroke"
+                          stroke-dasharray="{{ e.dash }}"
+                          style="{{ e.animStyle }}"
+                        ></path>
+                        <path
+                          d="{{ e.d }}"
+                          fill="none"
+                          stroke="transparent"
+                          stroke-width="16"
+                          vector-effect="non-scaling-stroke"
+                          onMouseEnter="{{ e.enter }}"
+                          onMouseLeave="{{ e.leave }}"
+                          style="cursor: pointer"
+                        ></path>
+                      </g>
+                    </sc-for>
+                  </svg>
+
+                  <sc-for list="{{ nodes }}" as="n" hint-placeholder-count="13">
+                    <div
+                      onMouseEnter="{{ n.enter }}"
+                      onMouseLeave="{{ n.leave }}"
+                      style="position:absolute;left:{{ n.x }}%;top:{{ n.y }}%;transform:translate(-50%,-50%);background:{{ n.cardBg }};border:1px solid {{ n.cardBorder }};border-radius:10px;padding:8px 12px;min-width:96px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.45);z-index:2;cursor:{{ n.cursor }}"
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          gap: 6px;
+                        "
+                      >
+                        <span
+                          style="width:7px;height:7px;border-radius:50%;background:{{ n.tierColor }};flex:none"
+                        ></span>
+                        <span
+                          style="
+                            font-size: 12.5px;
+                            font-weight: 700;
+                            letter-spacing: -0.2px;
+                            white-space: nowrap;
+                          "
+                          >{{ n.name }}</span
+                        >
+                      </div>
+                      <div
+                        style="font-size:11.5px;font-weight:800;color:{{ n.impColor }};margin-top:3px;font-variant-numeric:tabular-nums"
+                      >
+                        {{ n.imp }}
+                      </div>
+                    </div>
+                  </sc-for>
+
+                  <sc-if value="{{ hasTt }}" hint-placeholder-val="{{ false }}">
+                    <div
+                      style="position:absolute;left:{{ ttX }}%;top:{{ ttY }}%;transform:{{ ttTransform }};width:320px;background:#1a1f2c;border:1px solid rgba(110,160,255,0.35);border-radius:12px;padding:14px 16px;box-shadow:0 16px 48px rgba(0,0,0,0.6);z-index:10;pointer-events:none"
+                    >
+                      <div
+                        style="
+                          font-size: 11px;
+                          font-weight: 800;
+                          color: #6ea0ff;
+                          letter-spacing: 0.5px;
+                          margin-bottom: 6px;
+                        "
+                      >
+                        연결 근거 · {{ ttPath }}
+                      </div>
+                      <div
+                        style="
+                          font-size: 13px;
+                          font-weight: 600;
+                          line-height: 1.5;
+                          color: #e9edf4;
+                          margin-bottom: 10px;
+                        "
+                      >
+                        {{ ttRationale }}
+                      </div>
+                      <div
+                        style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 10px"
+                      >
+                        <div
+                          style="
+                            font-size: 10.5px;
+                            font-weight: 700;
+                            color: #5b6474;
+                            letter-spacing: 0.8px;
+                            margin-bottom: 7px;
+                          "
+                        >
+                          근거 뉴스
+                        </div>
+                        <sc-for list="{{ ttSources }}" as="src" hint-placeholder-count="2">
+                          <div style="display: flex; gap: 8px; margin-bottom: 6px">
+                            <span style="color: #3d6bff; font-size: 11px; line-height: 1.6">▪</span>
+                            <div style="min-width: 0">
+                              <div
+                                style="
+                                  font-size: 12px;
+                                  font-weight: 600;
+                                  color: #c6cdda;
+                                  line-height: 1.45;
+                                "
+                              >
+                                {{ src.t }}
+                              </div>
+                              <div style="font-size: 11px; color: #5b6474; margin-top: 1px">
+                                {{ src.m }}
+                              </div>
+                            </div>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ hasNdTt }}" hint-placeholder-val="{{ false }}">
+                    <div
+                      style="position:absolute;left:{{ ndX }}%;top:{{ ndY }}%;transform:{{ ndTransform }};width:260px;background:#1a1f2c;border:1px solid rgba(110,160,255,0.35);border-radius:12px;padding:14px 16px;box-shadow:0 16px 48px rgba(0,0,0,0.6);z-index:11;pointer-events:none"
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          align-items: baseline;
+                          justify-content: space-between;
+                          margin-bottom: 10px;
+                        "
+                      >
+                        <span style="font-size: 13px; font-weight: 800; letter-spacing: -0.2px"
+                          >{{ ndName }}</span
+                        >
+                        <span
+                          style="
+                            font-size: 10.5px;
+                            font-weight: 700;
+                            color: #5b6474;
+                            letter-spacing: 0.6px;
+                          "
+                          >TOP 5 종목 · 전일比</span
+                        >
+                      </div>
+                      <div style="display: flex; flex-direction: column; gap: 6px">
+                        <sc-for list="{{ ndStocks }}" as="ns" hint-placeholder-count="5">
+                          <div style="display: flex; align-items: center; gap: 9px">
+                            <span
+                              style="
+                                flex: none;
+                                width: 14px;
+                                font-size: 11px;
+                                font-weight: 800;
+                                color: #5b6474;
+                                font-variant-numeric: tabular-nums;
+                              "
+                              >{{ ns.rank }}</span
+                            >
+                            <span
+                              style="
+                                flex: 1;
+                                min-width: 0;
+                                font-size: 12.5px;
+                                font-weight: 600;
+                                color: #dbe2ec;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                              "
+                              >{{ ns.name }}</span
+                            >
+                            <span
+                              style="flex:none;font-size:12.5px;font-weight:800;color:{{ ns.color }};font-variant-numeric:tabular-nums"
+                              >{{ ns.chg }}</span
+                            >
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </section>
+
+              <!-- heatmap -->
+              <section
+                style="
+                  grid-column: span 12;
+                  background: #12151d;
+                  border: 1px solid rgba(255, 255, 255, 0.07);
+                  border-radius: 14px;
+                  padding: 24px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 16px;
+                  "
+                >
+                  <div>
+                    <h3
+                      style="
+                        margin: 0 0 4px;
+                        font-size: 16px;
+                        font-weight: 800;
+                        letter-spacing: -0.3px;
+                      "
+                    >
+                      섹터별 영향도 히트맵
+                    </h3>
+                    <div style="font-size: 12px; color: #5b6474">
+                      KRX 섹터 기준 · 면적 = 영향도 크기
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 14px;
+                      font-size: 12px;
+                      color: #8a93a6;
+                    "
+                  >
+                    <span style="display: flex; align-items: center; gap: 6px"
+                      ><span
+                        style="width:10px;height:10px;border-radius:3px;background:{{ posColor }}"
+                      ></span
+                      >긍정적 영향</span
+                    >
+                    <span style="display: flex; align-items: center; gap: 6px"
+                      ><span
+                        style="width:10px;height:10px;border-radius:3px;background:{{ negColor }}"
+                      ></span
+                      >부정적 영향</span
+                    >
+                  </div>
+                </div>
+                <div style="position: relative; height: 360px; border-radius: 10px">
+                  <sc-for list="{{ cells }}" as="c" hint-placeholder-count="8">
+                    <div
+                      onMouseEnter="{{ c.enter }}"
+                      onMouseLeave="{{ c.leave }}"
+                      style="position:absolute;left:{{ c.x }}%;top:{{ c.y }}%;width:{{ c.w }}%;height:{{ c.h }}%;background:{{ c.bg }};border:2px solid #12151d;border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:filter .15s;cursor:pointer"
+                      style-hover="filter:brightness(1.18)"
+                    >
+                      <div
+                        style="font-size:{{ c.fs }}px;font-weight:800;letter-spacing:-0.4px;color:#fff;line-height:1.3"
+                      >
+                        {{ c.name }}
+                      </div>
+                      <div
+                        style="font-size:{{ c.fs2 }}px;font-weight:800;color:rgba(255,255,255,0.92);font-variant-numeric:tabular-nums"
+                      >
+                        {{ c.pct }}
+                      </div>
+                    </div>
+                  </sc-for>
+
+                  <sc-if value="{{ hasHmTt }}" hint-placeholder-val="{{ false }}">
+                    <div
+                      style="position:absolute;left:{{ hmX }}%;top:{{ hmY }}%;transform:{{ hmTransform }};width:260px;background:#1a1f2c;border:1px solid rgba(110,160,255,0.35);border-radius:12px;padding:14px 16px;box-shadow:0 16px 48px rgba(0,0,0,0.6);z-index:10;pointer-events:none"
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          align-items: baseline;
+                          justify-content: space-between;
+                          margin-bottom: 10px;
+                        "
+                      >
+                        <span style="font-size: 13px; font-weight: 800; letter-spacing: -0.2px"
+                          >{{ hmName }}</span
+                        >
+                        <span
+                          style="
+                            font-size: 10.5px;
+                            font-weight: 700;
+                            color: #5b6474;
+                            letter-spacing: 0.6px;
+                          "
+                          >TOP 5 종목 · 전일比</span
+                        >
+                      </div>
+                      <div style="display: flex; flex-direction: column; gap: 6px">
+                        <sc-for list="{{ hmStocks }}" as="hs" hint-placeholder-count="5">
+                          <div style="display: flex; align-items: center; gap: 9px">
+                            <span
+                              style="
+                                flex: none;
+                                width: 14px;
+                                font-size: 11px;
+                                font-weight: 800;
+                                color: #5b6474;
+                                font-variant-numeric: tabular-nums;
+                              "
+                              >{{ hs.rank }}</span
+                            >
+                            <span
+                              style="
+                                flex: 1;
+                                min-width: 0;
+                                font-size: 12.5px;
+                                font-weight: 600;
+                                color: #dbe2ec;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                              "
+                              >{{ hs.name }}</span
+                            >
+                            <span
+                              style="flex:none;font-size:12.5px;font-weight:800;color:{{ hs.color }};font-variant-numeric:tabular-nums"
+                              >{{ hs.chg }}</span
+                            >
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </section>
+
+              <!-- knowledge graph -->
+              <section
+                style="
+                  grid-column: span 12;
+                  background: #12151d;
+                  border: 1px solid rgba(255, 255, 255, 0.07);
+                  border-radius: 14px;
+                  padding: 24px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 6px;
+                  "
+                >
+                  <div>
+                    <h3
+                      style="
+                        margin: 0 0 4px;
+                        font-size: 16px;
+                        font-weight: 800;
+                        letter-spacing: -0.3px;
+                      "
+                    >
+                      산업 연결 지식그래프
+                    </h3>
+                    <div style="font-size: 12px; color: #5b6474">
+                      금융시장 39개 산업 네트워크 · 중심 산업 '반도체' 기준 · 드래그하여 회전할 수
+                      있습니다
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 14px;
+                      font-size: 12px;
+                      color: #8a93a6;
+                    "
+                  >
+                    <span style="display: flex; align-items: center; gap: 6px"
+                      ><span
+                        style="width: 9px; height: 9px; border-radius: 50%; background: #6ea0ff"
+                      ></span
+                      >중심 산업</span
+                    >
+                    <span style="display: flex; align-items: center; gap: 6px"
+                      ><span
+                        style="width: 9px; height: 9px; border-radius: 50%; background: #8b7bff"
+                      ></span
+                      >1차 연관</span
+                    >
+                    <span style="display: flex; align-items: center; gap: 6px"
+                      ><span
+                        style="width: 9px; height: 9px; border-radius: 50%; background: #2fb3c9"
+                      ></span
+                      >2차 연관</span
+                    >
+                    <span style="display: flex; align-items: center; gap: 6px"
+                      ><span
+                        style="width: 9px; height: 9px; border-radius: 50%; background: #55607a"
+                      ></span
+                      >기타 산업</span
+                    >
+                  </div>
+                </div>
+                <div style="position: relative; height: 480px">
+                  <canvas
+                    ref="{{ kgRef }}"
+                    style="width: 100%; height: 100%; display: block; cursor: grab"
+                  ></canvas>
+                </div>
+              </section>
+            </div>
+          </main>
+        </sc-if>
+      </div>
+    </x-dc>
+    <script
+      type="text/x-dc"
+      data-dc-script
+      data-props='{"$preview":{"width":1440,"height":900},"startScreen":{"editor":"enum","options":["home","loading","result"],"default":"home","tsType":"string","section":"프로토타입 화면"},"loadingStepMs":{"editor":"range","min":200,"max":1500,"step":50,"default":650,"unit":"ms","section":"프로토타입 화면"},"colorMode":{"editor":"enum","options":["빨강=긍정 (한국식)","초록=긍정 (글로벌)"],"default":"빨강=긍정 (한국식)","tsType":"string","section":"컬러"}}'
+    >
+      class Component extends DCLogic {
+        state = {
+          screen: this.props.startScreen ?? "home",
+          step: 0, input: "", links: [], edge: null, market: "kr", hmCell: null, ndHover: null,
+          subject: "SK하이닉스, 엔비디아 'HBM4' 단독 공급 계약 체결"
+        };
+
+        componentDidUpdate(prev) {
+          if (prev.startScreen !== this.props.startScreen && this.props.startScreen) {
+            clearInterval(this.timer);
+            this.setState({ screen: this.props.startScreen, step: this.props.startScreen === "result" ? 5 : 0 });
+          }
+        }
+        componentWillUnmount() { clearInterval(this.timer); cancelAnimationFrame(this.raf); cancelAnimationFrame(this.rafBg); cancelAnimationFrame(this.rafKg); }
+
+        sphereRefFn = (el) => this.initSphere(el);
+        homeBgRefFn = (el) => this.initHomeBg(el);
+        kgRefFn = (el) => this.initKg(el);
+
+        initKg(canvas) {
+          if (canvas === this.kgCanvas) return;
+          this.kgCanvas = canvas;
+          cancelAnimationFrame(this.rafKg);
+          if (!canvas) return;
+          const dpr = Math.min(2, window.devicePixelRatio || 1);
+          const W = canvas.clientWidth * dpr, H = canvas.clientHeight * dpr;
+          canvas.width = W; canvas.height = H;
+          const ctx = canvas.getContext("2d");
+          const T1 = ["HBM·메모리", "반도체 장비", "공정 소재", "첨단 패키징", "AI 데이터센터"];
+          const T2 = ["테스트·검사", "특수가스", "IT하드웨어", "클라우드", "전력기기", "전력망·ESS", "변압기·전선", "소프트웨어"];
+          const T3 = ["디스플레이", "통신", "인터넷 플랫폼", "게임", "미디어·엔터", "2차전지", "전기차", "자동차", "자동차부품", "조선", "기계", "방산", "철강", "화학", "정유", "건설", "운송·물류", "은행", "증권", "보험", "제약·바이오", "유통", "음식료", "신재생에너지", "원자력"];
+          const nodes = [{ name: "반도체", tier: 0, x: 0, y: 0, z: 0 }];
+          const place = (arr, tier, R) => arr.forEach((name, i) => {
+            const phi = Math.acos(1 - 2 * (i + 0.5) / arr.length);
+            const th = Math.PI * (1 + Math.sqrt(5)) * i + tier * 1.7;
+            const jr = R * (0.92 + 0.16 * ((i * 7919) % 13) / 13);
+            nodes.push({ name, tier, x: jr * Math.sin(phi) * Math.cos(th), y: jr * Math.cos(phi) * 0.72, z: jr * Math.sin(phi) * Math.sin(th) });
+          });
+          place(T1, 1, 105); place(T2, 2, 160); place(T3, 3, 220);
+          // idx: 0반도체 | 1HBM 2장비 3소재 4패키징 5AIDC | 6테스트 7특수가스 8IT하드웨어 9클라우드 10전력기기 11전력망 12변압기 13SW
+          // 14디스플레이 15통신 16인터넷 17게임 18미디어 19이차전지 20전기차 21자동차 22자부품 23조선 24기계 25방산 26철강 27화학 28정유 29건설 30운송 31은행 32증권 33보험 34제약 35유통 36음식료 37신재생 38원자력
+          const edges = [
+            [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 8], [0, 14],
+            [1, 4], [2, 6], [4, 6], [3, 7], [2, 24], [5, 9], [5, 10], [5, 15], [8, 9], [8, 14],
+            [9, 13], [13, 16], [13, 17], [16, 17], [16, 18], [15, 16], [18, 15],
+            [10, 11], [10, 12], [11, 37], [11, 38], [12, 26], [37, 38], [37, 27],
+            [19, 20], [19, 37], [20, 21], [21, 22], [22, 26], [27, 19], [27, 28], [27, 34],
+            [23, 26], [23, 30], [24, 23], [24, 25], [26, 29], [28, 30], [29, 26],
+            [30, 35], [35, 36], [31, 32], [32, 33], [31, 33], [34, 33]
+          ];
+          const COLORS = ["#6ea0ff", "#8b7bff", "#2fb3c9", "#55607a"];
+          let rotY = 0.4, rotX = -0.22, drag = null;
+          canvas.style.touchAction = "none";
+          canvas.onpointerdown = (e) => { drag = { x: e.clientX, y: e.clientY, ry: rotY, rx: rotX }; canvas.setPointerCapture(e.pointerId); canvas.style.cursor = "grabbing"; };
+          canvas.onpointermove = (e) => { if (!drag) return; rotY = drag.ry + (e.clientX - drag.x) * 0.008; rotX = Math.max(-1.1, Math.min(1.1, drag.rx + (e.clientY - drag.y) * 0.008)); };
+          canvas.onpointerup = () => { drag = null; canvas.style.cursor = "grab"; };
+          const draw = () => {
+            if (!drag) rotY += 0.0028;
+            ctx.clearRect(0, 0, W, H);
+            const cy = Math.cos(rotY), sy = Math.sin(rotY), cx = Math.cos(rotX), sx = Math.sin(rotX);
+            const P = nodes.map(n => {
+              const x = n.x * cy + n.z * sy, z0 = -n.x * sy + n.z * cy;
+              const y = n.y * cx - z0 * sx, z = n.y * sx + z0 * cx;
+              const f = 560 / (560 + z);
+              return { x: W / 2 + x * f * dpr, y: H / 2 + y * f * dpr, f, z, n };
+            });
+            ctx.lineWidth = 1 * dpr;
+            for (const [a, b] of edges) {
+              const A = P[a], B = P[b];
+              ctx.strokeStyle = `rgba(140,165,230,${Math.max(0.07, Math.min(0.3, (A.f + B.f) / 2 - 0.62))})`;
+              ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
+            }
+            [...P].sort((a, b) => b.z - a.z).forEach(p => {
+              const tier = p.n.tier;
+              const r = (tier === 0 ? 12 : tier === 1 ? 7.5 : tier === 2 ? 6 : 4.5) * p.f * dpr;
+              const col = COLORS[tier];
+              ctx.globalAlpha = Math.max(0.3, Math.min(1, p.f * p.f * 0.9));
+              ctx.fillStyle = col;
+              ctx.shadowColor = col; ctx.shadowBlur = 14 * p.f * dpr;
+              ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 7); ctx.fill();
+              ctx.shadowBlur = 0;
+              if (tier === 0) {
+                ctx.strokeStyle = "rgba(110,160,255,0.5)"; ctx.lineWidth = 1.5 * dpr;
+                ctx.beginPath(); ctx.arc(p.x, p.y, r + 6 * dpr, 0, 7); ctx.stroke();
+              }
+              const fs = (tier === 0 ? 15 : tier === 1 ? 12.5 : tier === 2 ? 11 : 10) * p.f * dpr;
+              ctx.font = (tier === 0 ? 800 : 600) + " " + fs + "px 'Pretendard Variable',Pretendard,sans-serif";
+              ctx.textAlign = "center";
+              ctx.fillStyle = tier === 3 ? "#8f99ad" : "#e9edf4";
+              ctx.fillText(p.n.name, p.x, p.y + r + fs + 3 * dpr);
+              ctx.globalAlpha = 1;
+            });
+            this.rafKg = requestAnimationFrame(draw);
+          };
+          draw();
+        }
+
+        initHomeBg(canvas) {
+          if (canvas === this.bgCanvas) return;
+          this.bgCanvas = canvas;
+          cancelAnimationFrame(this.rafBg);
+          if (!canvas) return;
+          const dpr = Math.min(2, window.devicePixelRatio || 1);
+          const W = canvas.clientWidth * dpr, H = canvas.clientHeight * dpr;
+          canvas.width = W; canvas.height = H;
+          const ctx = canvas.getContext("2d");
+          const PALETTE = ["148,183,107", "106,148,201", "201,138,138"];
+          const rnd = (a, b) => a + Math.random() * (b - a);
+          const nodes = [];
+          for (let i = 0; i < 30; i++) {
+            let x, y, tries = 0;
+            do { x = Math.random() * W; y = Math.random() * H; tries++; }
+            while (tries < 8 && x > W * 0.24 && x < W * 0.76 && y > H * 0.12 && y < H * 0.58 && Math.random() < 0.75);
+            nodes.push({ x, y, vx: rnd(-0.1, 0.1) * dpr, vy: rnd(-0.1, 0.1) * dpr, r: rnd(2.4, 6.5) * dpr, c: PALETTE[i % 3] });
+          }
+          const edges = [], seen = new Set();
+          for (let i = 0; i < nodes.length; i++) {
+            const near = nodes.map((n, j) => ({ j, d: (n.x - nodes[i].x) ** 2 + (n.y - nodes[i].y) ** 2 }))
+              .filter(o => o.j !== i).sort((a, b) => a.d - b.d).slice(0, 2);
+            for (const o of near) {
+              const key = Math.min(i, o.j) + "-" + Math.max(i, o.j);
+              if (!seen.has(key) && o.d < (380 * dpr) ** 2) { seen.add(key); edges.push({ a: i, b: o.j, off: Math.random(), sp: rnd(0.5, 1.1) }); }
+            }
+          }
+          let t = 0;
+          const draw = () => {
+            t += 0.0016;
+            ctx.clearRect(0, 0, W, H);
+            for (const n of nodes) {
+              n.x += n.vx; n.y += n.vy;
+              if (n.x < -20) n.x = W + 20; if (n.x > W + 20) n.x = -20;
+              if (n.y < -20) n.y = H + 20; if (n.y > H + 20) n.y = -20;
+            }
+            ctx.lineWidth = 1 * dpr;
+            for (const e of edges) {
+              const a = nodes[e.a], b = nodes[e.b];
+              ctx.strokeStyle = "rgba(190,205,240,0.09)";
+              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+              const p = (t * e.sp * 20 + e.off) % 1;
+              ctx.fillStyle = "rgba(230,238,255,0.5)";
+              ctx.beginPath(); ctx.arc(a.x + (b.x - a.x) * p, a.y + (b.y - a.y) * p, 1.4 * dpr, 0, 7); ctx.fill();
+            }
+            for (const n of nodes) {
+              ctx.fillStyle = `rgba(${n.c},0.5)`;
+              ctx.shadowColor = `rgba(${n.c},0.55)`;
+              ctx.shadowBlur = 9 * dpr;
+              ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 7); ctx.fill();
+            }
+            ctx.shadowBlur = 0;
+            this.rafBg = requestAnimationFrame(draw);
+          };
+          draw();
+        }
+
+        initSphere(canvas) {
+          if (canvas === this.sphereCanvas) return;
+          this.sphereCanvas = canvas;
+          cancelAnimationFrame(this.raf);
+          if (!canvas) return;
+          const ctx = canvas.getContext("2d");
+          const N = 90, pts = [], golden = Math.PI * (3 - Math.sqrt(5));
+          for (let i = 0; i < N; i++) {
+            const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = golden * i;
+            pts.push({ x: Math.cos(th) * r, y, z: Math.sin(th) * r });
+          }
+          const edges = [];
+          for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+            const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, dz = pts[i].z - pts[j].z;
+            if (Math.sqrt(dx * dx + dy * dy + dz * dz) < 0.42) edges.push([i, j]);
+          }
+          const W = canvas.width, H = canvas.height, R = W * 0.3, tilt = 0.35;
+          let t = 0;
+          const draw = () => {
+            t += 0.0045;
+            ctx.clearRect(0, 0, W, H);
+            const rot = pts.map((p, i) => {
+              const x1 = p.x * Math.cos(t) + p.z * Math.sin(t);
+              const z1 = -p.x * Math.sin(t) + p.z * Math.cos(t);
+              const y1 = p.y * Math.cos(tilt) - z1 * Math.sin(tilt);
+              const z2 = p.y * Math.sin(tilt) + z1 * Math.cos(tilt);
+              const s = 1 / (1.9 - z2 * 0.85);
+              return { X: W / 2 + x1 * R * s, Y: H / 2 + y1 * R * s, z: z2, s, i };
+            });
+            ctx.lineWidth = 1.6;
+            for (const [i, j] of edges) {
+              const a = rot[i], b = rot[j];
+              const alpha = 0.05 + ((a.z + b.z) / 2 + 1) / 2 * 0.3;
+              ctx.strokeStyle = `rgba(110,150,255,${alpha.toFixed(3)})`;
+              ctx.beginPath(); ctx.moveTo(a.X, a.Y); ctx.lineTo(b.X, b.Y); ctx.stroke();
+            }
+            for (const p of rot) {
+              const depth = (p.z + 1) / 2;
+              const pulse = 1 + 0.45 * Math.sin(t * 5 + p.i * 1.7);
+              const rad = (2 + p.s * 3.2) * (p.i % 7 === 0 ? pulse : 1);
+              ctx.fillStyle = `rgba(150,185,255,${(0.3 + depth * 0.7).toFixed(3)})`;
+              ctx.shadowColor = "rgba(90,140,255,0.9)";
+              ctx.shadowBlur = p.i % 7 === 0 ? 22 : 10;
+              ctx.beginPath(); ctx.arc(p.X, p.Y, rad, 0, 7); ctx.fill();
+            }
+            ctx.shadowBlur = 0;
+            this.raf = requestAnimationFrame(draw);
+          };
+          draw();
+        }
+
+        start(subject) {
+          clearInterval(this.timer);
+          this.setState({ screen: "loading", step: 0, subject: subject || this.state.subject, edge: null });
+          const ms = this.props.loadingStepMs ?? 650;
+          this.timer = setInterval(() => {
+            this.setState(s => {
+              const n = s.step + 1;
+              if (n >= 5) { clearInterval(this.timer); return { screen: "result", step: 5 }; }
+              return { step: n };
+            });
+          }, ms);
+        }
+
+        SECTORS = [
+          { name: "반도체", imp: 8.4 }, { name: "IT하드웨어", imp: 5.2 },
+          { name: "반도체 소재·부품", imp: 4.6 }, { name: "기계·장비", imp: 3.8 },
+          { name: "전기장비", imp: 3.1 }, { name: "화학", imp: 1.9 },
+          { name: "운송", imp: -1.2 }, { name: "유틸리티", imp: -0.8 }
+        ];
+
+        NODES = [
+          { id: "news", x: 7, y: 52, tier: 0, name: "HBM4 수주 뉴스", imp: "원점" },
+          { id: "hbm", x: 30, y: 24, tier: 1, name: "HBM·메모리", imp: 8.4 },
+          { id: "equip", x: 30, y: 52, tier: 1, name: "반도체 장비", imp: 4.9 },
+          { id: "aidc", x: 30, y: 80, tier: 1, name: "AI 데이터센터", imp: 3.5 },
+          { id: "pkg", x: 57, y: 14, tier: 2, name: "첨단 패키징·후공정", imp: 4.8 },
+          { id: "mat", x: 57, y: 33, tier: 2, name: "반도체 소재", imp: 3.4 },
+          { id: "test", x: 57, y: 52, tier: 2, name: "테스트·계측", imp: 2.6 },
+          { id: "board", x: 57, y: 70, tier: 2, name: "AI 서버·기판", imp: 3.9 },
+          { id: "elec", x: 57, y: 89, tier: 2, name: "전력기기", imp: 3.7 },
+          { id: "gas", x: 85, y: 20, tier: 3, name: "특수가스·케미컬", imp: 1.8 },
+          { id: "cool", x: 85, y: 44, tier: 3, name: "냉각·열관리", imp: 2.2 },
+          { id: "grid", x: 85, y: 66, tier: 3, name: "전력망·ESS", imp: 2.1 },
+          { id: "transfo", x: 85, y: 89, tier: 3, name: "변압기·전선", imp: 2.4 }
+        ];
+
+        EDGES = [
+          { f: "news", t: "hbm", r: "역대 최대 규모 HBM4 공급 계약으로 메모리 산업의 가동률·단가가 동반 상승합니다.", s: [{ t: "HBM 시장 규모, 2027년까지 3배 성장 전망", m: "가트너 · 06.02" }, { t: "엔비디아, 차세대 GPU '루빈' 양산 일정 공개", m: "로이터 · 06.12" }] },
+          { f: "news", t: "equip", r: "팹 증설 투자 조기 집행으로 반도체 장비 발주가 확대됩니다.", s: [{ t: "SK하이닉스, M15X 증설 투자 조기 집행 검토", m: "전자신문 · 05.02" }, { t: "HBM 장비 발주, 하반기 30% 증가 전망", m: "머니투데이 · 06.20" }] },
+          { f: "news", t: "aidc", r: "GPU 공급 확대가 글로벌 데이터센터 증설을 가속합니다.", s: [{ t: "글로벌 빅테크, AI 인프라 투자 가이던스 상향", m: "블룸버그 · 06.28" }, { t: "국내 데이터센터 착공 면적 사상 최대", m: "매일경제 · 06.15" }] },
+          { f: "hbm", t: "pkg", r: "HBM4 16단 적층으로 첨단 패키징·후공정 수요가 급증합니다.", s: [{ t: "HBM4 16단 적층에 본딩 공정 수요 급증", m: "디일렉 · 06.18" }, { t: "어드밴스드 패키징 수요 연 25% 성장 전망", m: "가트너 · 05.20" }] },
+          { f: "hbm", t: "mat", r: "식각액·CMP 슬러리 등 공정 소재 사용량이 증산에 비례해 늘어납니다.", s: [{ t: "HBM 공정 소재 국산화율 상승세", m: "전자신문 · 06.09" }, { t: "반도체 소재 업계, 2분기 실적 개선 뚜렷", m: "이데일리 · 05.28" }] },
+          { f: "equip", t: "test", r: "적층 단수 증가로 테스트 시간이 길어지며 테스트·계측 수요가 확대됩니다.", s: [{ t: "메모리 테스트 시간 증가로 소켓 수요 견조", m: "디일렉 · 05.30" }, { t: "테스트 하우스 가동률 90% 상회", m: "전자신문 · 06.14" }] },
+          { f: "aidc", t: "board", r: "AI 서버 증설로 고다층 기판(MLB)·가속기 보드 수요가 동행합니다.", s: [{ t: "AI 서버 기판 공급 부족 지속", m: "전자신문 · 06.22" }, { t: "고다층 기판 증설 경쟁 본격화", m: "한국경제 · 06.11" }] },
+          { f: "aidc", t: "elec", r: "데이터센터 전력 인프라 투자가 전력기기 수주로 이어집니다.", s: [{ t: "북미 데이터센터향 전력기기 수주 확대", m: "서울경제 · 06.17" }, { t: "데이터센터 전력망 특별법 입법 예고", m: "연합뉴스 · 06.30" }] },
+          { f: "pkg", t: "gas", r: "패키징 공정 확대로 특수가스·본딩 소재 수요가 동반 성장합니다.", s: [{ t: "특수가스 업계, 반도체향 장기계약 확대", m: "이데일리 · 06.02" }, { t: "패키징 소재 증설 경쟁 본격화", m: "머니투데이 · 05.26" }] },
+          { f: "mat", t: "gas", r: "공정 소재 수요 확대가 특수가스·전구체 동반 수요를 만듭니다.", s: [{ t: "전구체 소재 수입 대체 가속", m: "전자신문 · 06.07" }, { t: "반도체용 특수가스 가격 강세 지속", m: "이데일리 · 06.16" }] },
+          { f: "board", t: "cool", r: "AI 서버 발열 급증으로 액침냉각 등 열관리 산업 수요가 커집니다.", s: [{ t: "액침냉각 도입 데이터센터 급증", m: "매일경제 · 06.13" }, { t: "데이터센터 냉각 시장 연 18% 성장 전망", m: "IDC · 05.29" }] },
+          { f: "elec", t: "grid", r: "전력기기 수주 확대가 전력망 증설·ESS 수요로 확산됩니다.", s: [{ t: "한전, 송배전망 투자 계획 상향", m: "연합뉴스 · 06.19" }, { t: "ESS 연계 데이터센터 표준 논의 착수", m: "매일경제 · 06.24" }] },
+          { f: "elec", t: "transfo", r: "북미 변압기 교체 사이클과 결합해 변압기·전선 수출 호조가 이어집니다.", s: [{ t: "변압기 수출액 월간 최대 경신", m: "한국경제 · 06.27" }, { t: "美 전력기기 공급 부족 2027년까지 지속 전망", m: "블룸버그 · 06.10" }] }
+        ];
+
+        TRENDING = [
+          { tag: "반도체", title: "SK하이닉스, 엔비디아 'HBM4' 단독 공급 계약 체결… 역대 최대 규모", meta: "한국경제 · 2시간 전 · 분석 1,204회", imp: "+8.4%", up: true },
+          { tag: "반도체", title: "삼성전자, 美 테일러 파운드리 2공장 가동 앞당긴다", meta: "전자신문 · 4시간 전 · 분석 862회", imp: "+3.2%", up: true },
+          { tag: "거시경제", title: "美 연준, 기준금리 동결… '연내 두 차례 인하' 신호", meta: "로이터 · 5시간 전 · 분석 741회", imp: "+1.1%", up: true },
+          { tag: "2차전지", title: "LG에너지솔루션, 도요타와 46파이 원통형 배터리 공급 논의", meta: "머니투데이 · 7시간 전 · 분석 519회", imp: "+2.7%", up: true },
+          { tag: "정책", title: "정부, 데이터센터 전력망 특별법 입법 예고… 인허가 단축", meta: "연합뉴스 · 9시간 전 · 분석 433회", imp: "+1.8%", up: true },
+          { tag: "자동차", title: "유럽 전기차 보조금 축소 확대… 완성차 수출 부담", meta: "블룸버그 · 11시간 전 · 분석 388회", imp: "-1.5%", up: false }
+        ];
+
+        NEWS = [
+          { tag: "2차전지", meta: "한국경제 · 6시간 전", hot: false, score: 31, title: "전기차 수요 둔화 우려…배터리 소재 업체 실적 하향 조정", desc: "글로벌 완성차 업체의 전기차 생산 계획 축소로 국내 배터리 소재 기업의 하반기 실적 전망이 낮아졌다." },
+          { tag: "반도체", meta: "매일경제 · 8시간 전", hot: true, score: 71, title: "삼성전자, 파운드리 2나노 시험 생산 성공…TSMC 추격 본격화", desc: "삼성전자가 2나노 공정 시험 생산에 성공하며 첨단 파운드리 경쟁에서 반등 발판을 마련했다." },
+          { tag: "바이오", meta: "이데일리 · 10시간 전", hot: false, score: 48, title: "신약 임상 3상 일부 지연…바이오 섹터 변동성 확대", desc: "주요 바이오 기업의 임상 일정 조정 소식에 섹터 전반의 투자 심리가 엇갈리고 있다." },
+          { tag: "에너지", meta: "연합인포맥스 · 12시간 전", hot: false, score: 59, title: "국제유가 급등…정유·태양광 밸류체인 동반 강세", desc: "지정학적 리스크로 국제유가가 급등하며 에너지 관련 종목 전반에 매수세가 유입되고 있다." }
+        ];
+
+        KR_SECTORS = [
+          { name: "반도체", pct: 2.4, desc: "메모리·파운드리·설계 전반의 밸류체인" },
+          { name: "2차전지", pct: -1.1, desc: "양극재·음극재·셀 제조 및 소재" },
+          { name: "바이오", pct: 0.8, desc: "신약 개발·CMO·헬스케어 플랫폼" },
+          { name: "AI·소프트웨어", pct: 3.6, desc: "생성형 AI·클라우드·데이터센터" },
+          { name: "자동차", pct: -0.5, desc: "완성차·전장·자율주행 부품" },
+          { name: "에너지", pct: 1.2, desc: "정유·태양광·원전 및 신재생" },
+          { name: "금융", pct: 0.3, desc: "은행·증권·보험 및 핀테크" },
+          { name: "방산", pct: 1.9, desc: "지상·항공·해양 방위 산업" }
+        ];
+
+        US_SECTORS = [
+          { name: "반도체", pct: 1.8, desc: "엔비디아·AMD·TSMC ADR" },
+          { name: "빅테크", pct: 2.1, desc: "매그니피센트7 중심 성장주" },
+          { name: "AI·소프트웨어", pct: 2.9, desc: "생성형 AI·클라우드 SaaS" },
+          { name: "전기차", pct: -0.9, desc: "테슬라·리비안 EV 완성차" },
+          { name: "헬스케어", pct: 0.4, desc: "제약·바이오·의료기기" },
+          { name: "에너지", pct: -0.3, desc: "원유·천연가스·정유" },
+          { name: "금융", pct: 0.6, desc: "대형은행·카드·핀테크" },
+          { name: "방산", pct: 1.4, desc: "항공우주·방위산업" }
+        ];
+
+        RECENT = [
+          { title: "테슬라 로보택시 공개 임박…자율주행 밸류체인 주목", when: "어제" },
+          { title: "메모리 반도체 가격 3분기 연속 상승", when: "3일 전" },
+          { title: "방산 수출 사상 최대…관련주 재평가 흐름", when: "지난주" }
+        ];
+
+        NODE_STOCKS = {
+          hbm: [["SK하이닉스", 6.8], ["삼성전자", 3.1], ["제주반도체", 2.4], ["심텍", 2.1], ["티엘비", 1.8]],
+          equip: [["한미반도체", 5.4], ["주성엔지니어링", 2.9], ["원익IPS", 2.4], ["유진테크", 1.9], ["피에스케이", 1.3]],
+          aidc: [["케이아이엔엑스", 3.8], ["NAVER", 1.6], ["가비아", 2.0], ["삼성에스디에스", 1.2], ["LG유플러스", 0.8]],
+          pkg: [["하나마이크론", 4.5], ["두산테스나", 3.2], ["SFA반도체", 2.7], ["엘비세미콘", 2.2], ["네패스", 1.9]],
+          mat: [["솔브레인", 3.0], ["동진쎄미켐", 2.6], ["원익QnC", 2.2], ["한솔케미칼", 1.8], ["티씨케이", 1.5]],
+          test: [["리노공업", 2.9], ["ISC", 2.6], ["티에스이", 2.3], ["엑시콘", 2.0], ["마이크로컨텍솔", 1.7]],
+          board: [["이수페타시스", 4.2], ["대덕전자", 3.3], ["심텍", 2.1], ["코리아써키트", 1.8], ["티엘비", 1.5]],
+          elec: [["HD현대일렉트릭", 4.1], ["효성중공업", 3.2], ["LS일렉트릭", 2.7], ["제룡전기", 2.0], ["일진전기", 1.6]],
+          gas: [["원익머트리얼즈", 2.1], ["티이엠씨", 1.8], ["레이크머티리얼즈", 1.6], ["후성", 1.4], ["덕산테코피아", 1.2]],
+          cool: [["GST", 3.4], ["유니셈", 2.8], ["케이엔솔", 2.5], ["지엔씨에너지", 2.2], ["신성이엔지", 1.7]],
+          grid: [["서진시스템", 2.6], ["LS마린솔루션", 2.4], ["세방전지", 1.9], ["삼화콘덴서", 1.5], ["한전KPS", 1.1]],
+          transfo: [["산일전기", 3.6], ["LS에코에너지", 2.2], ["제룡전기", 2.0], ["가온전선", 1.7], ["대한전선", 1.4]]
+        };
+
+        SECTOR_STOCKS = {
+          "반도체": [["SK하이닉스", 6.8], ["한미반도체", 5.4], ["이오테크닉스", 3.6], ["삼성전자", 3.1], ["리노공업", 2.9]],
+          "IT하드웨어": [["이수페타시스", 4.2], ["대덕전자", 3.3], ["삼성전기", 2.8], ["심텍", 2.1], ["LG이노텍", 1.9]],
+          "반도체 소재·부품": [["솔브레인", 3.0], ["동진쎄미켐", 2.6], ["원익QnC", 2.2], ["한솔케미칼", 1.8], ["티씨케이", 1.5]],
+          "기계·장비": [["주성엔지니어링", 2.9], ["원익IPS", 2.4], ["유진테크", 1.9], ["테스", 1.6], ["피에스케이", 1.3]],
+          "전기장비": [["HD현대일렉트릭", 4.1], ["효성중공업", 3.2], ["LS일렉트릭", 2.7], ["제룡전기", 2.0], ["대한전선", 1.4]],
+          "화학": [["LG화학", 1.2], ["효성첨단소재", 1.1], ["롯데케미칼", 0.9], ["금호석유", 0.7], ["코오롱인더", 0.5]],
+          "운송": [["HMM", -1.5], ["팬오션", -1.2], ["현대글로비스", -1.0], ["대한항공", -0.8], ["CJ대한통운", -0.6]],
+          "유틸리티": [["한국전력", -0.9], ["한국가스공사", -0.7], ["E1", -0.6], ["지역난방공사", -0.5], ["SK가스", -0.3]]
+        };
+
+        worstRatio(row, area, side) {
+          const thick = area / side;
+          let worst = 0;
+          for (const r of row) {
+            const len = r.area / thick;
+            const ratio = Math.max(thick / len, len / thick);
+            if (ratio > worst) worst = ratio;
+          }
+          return worst;
+        }
+
+        treemap(data, W, H) {
+          const total = data.reduce((s, d) => s + d.value, 0);
+          const items = data.map(d => ({ ...d, area: d.value / total * W * H }));
+          const rects = [];
+          let x = 0, y = 0, w = W, h = H, i = 0;
+          while (i < items.length) {
+            const row = [];
+            const side = Math.min(w, h);
+            let rowArea = 0, worst = Infinity;
+            while (i < items.length) {
+              const testArea = rowArea + items[i].area;
+              const wr = this.worstRatio(row.concat(items[i]), testArea, side);
+              if (row.length && wr > worst) break;
+              row.push(items[i]); rowArea = testArea; worst = wr; i++;
+            }
+            const thick = rowArea / side;
+            let off = 0;
+            for (const r of row) {
+              const len = r.area / thick;
+              if (w >= h) rects.push({ ...r, x: x, y: y + off, w: thick, h: len });
+              else rects.push({ ...r, x: x + off, y: y, w: len, h: thick });
+              off += len;
+            }
+            if (w >= h) { x += thick; w -= thick; } else { y += thick; h -= thick; }
+          }
+          return rects;
+        }
+
+        renderVals() {
+          const S = this.state;
+          const kr = (this.props.colorMode ?? "빨강=긍정 (한국식)") === "빨강=긍정 (한국식)";
+          const POS = kr ? "#f2495c" : "#2fbf71";
+          const NEG = kr ? "#2fbf71" : "#f2495c";
+          const rgba = (hex, a) => {
+            const n = parseInt(hex.slice(1), 16);
+            return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+          };
+
+          // ---- heatmap cells ----
+          const maxImp = Math.max(...this.SECTORS.map(s => Math.abs(s.imp)));
+          const sorted = [...this.SECTORS].sort((a, b) => Math.abs(b.imp) - Math.abs(a.imp));
+          const rects = this.treemap(sorted.map(s => ({ ...s, value: Math.abs(s.imp) })), 160, 100);
+          const cells = rects.map((r, i) => {
+            const t = Math.abs(r.imp) / maxImp;
+            const fs = Math.max(12, Math.min(23, Math.sqrt((r.w / 1.6) * r.h) * 0.52));
+            return {
+              name: r.name,
+              pct: (r.imp > 0 ? "+" : "") + r.imp.toFixed(1) + "%",
+              x: +(r.x / 1.6).toFixed(2), y: +r.y.toFixed(2),
+              w: +(r.w / 1.6).toFixed(2), h: +r.h.toFixed(2),
+              bg: rgba(r.imp > 0 ? POS : NEG, 0.28 + 0.55 * t),
+              fs: Math.round(fs), fs2: Math.round(fs * 0.85),
+              enter: () => this.setState({ hmCell: i }),
+              leave: () => this.setState({ hmCell: null })
+            };
+          });
+
+          let hasHmTt = false, hmX = 0, hmY = 0, hmTransform = "", hmName = "", hmStocks = [];
+          if (S.hmCell !== null && cells[S.hmCell]) {
+            const c = cells[S.hmCell];
+            hasHmTt = true;
+            hmName = c.name;
+            hmX = Math.max(13, Math.min(87, c.x + c.w / 2));
+            if (c.y + c.h / 2 < 50) { hmY = c.y + c.h; hmTransform = "translate(-50%, 10px)"; }
+            else { hmY = c.y; hmTransform = "translate(-50%, calc(-100% - 10px))"; }
+            hmStocks = (this.SECTOR_STOCKS[c.name] || []).map((s, i) => ({
+              rank: i + 1, name: s[0],
+              chg: (s[1] > 0 ? "+" : "") + s[1].toFixed(1) + "%",
+              color: s[1] > 0 ? POS : NEG
+            }));
+          }
+
+          // ---- network ----
+          const TIER_COLORS = ["#e9edf4", "#3d6bff", "#8b7bff", "#2fb3c9"];
+          const byId = {};
+          this.NODES.forEach(n => { byId[n.id] = n; });
+          const nodes = this.NODES.map(n => ({
+            name: n.name, x: n.x, y: n.y,
+            tierColor: TIER_COLORS[n.tier],
+            imp: typeof n.imp === "number" ? "+" + n.imp.toFixed(1) + "%" : n.imp,
+            impColor: typeof n.imp === "number" ? POS : "#8a93a6",
+            cardBg: n.tier === 0 ? "rgba(61,107,255,0.18)" : "#171c28",
+            cardBorder: n.tier === 0 ? "rgba(110,160,255,0.55)" : "rgba(255,255,255,0.1)",
+            cursor: this.NODE_STOCKS[n.id] ? "pointer" : "default",
+            enter: () => { if (this.NODE_STOCKS[n.id]) this.setState({ ndHover: n.id }); },
+            leave: () => this.setState({ ndHover: null })
+          }));
+
+          let hasNdTt = false, ndX = 0, ndY = 0, ndTransform = "", ndName = "", ndStocks = [];
+          if (S.ndHover && byId[S.ndHover] && this.NODE_STOCKS[S.ndHover]) {
+            const n = byId[S.ndHover];
+            hasNdTt = true;
+            ndName = n.name;
+            ndX = Math.max(13, Math.min(87, n.x));
+            if (n.y < 50) { ndY = n.y; ndTransform = "translate(-50%, 26px)"; }
+            else { ndY = n.y; ndTransform = "translate(-50%, calc(-100% - 26px))"; }
+            ndStocks = this.NODE_STOCKS[S.ndHover].map((s, i) => ({
+              rank: i + 1, name: s[0],
+              chg: (s[1] > 0 ? "+" : "") + s[1].toFixed(1) + "%",
+              color: s[1] > 0 ? POS : NEG
+            }));
+          }
+
+          const edges = this.EDGES.map((e, i) => {
+            const a = byId[e.f], b = byId[e.t];
+            const m = (a.x + b.x) / 2;
+            const active = S.edge === i;
+            return {
+              d: `M ${a.x} ${a.y} C ${m} ${a.y}, ${m} ${b.y}, ${b.x} ${b.y}`,
+              stroke: active ? "#6ea0ff" : "rgba(110,140,255,0.32)",
+              sw: active ? 2.5 : 1.5,
+              dash: active ? "7 5" : "none",
+              animStyle: active ? "animation:dashmove 0.9s linear infinite" : "",
+              enter: () => this.setState({ edge: i }),
+              leave: () => this.setState({ edge: null })
+            };
+          });
+
+          let hasTt = false, ttX = 0, ttY = 0, ttTransform = "", ttPath = "", ttRationale = "", ttSources = [];
+          if (S.edge !== null && this.EDGES[S.edge]) {
+            const e = this.EDGES[S.edge];
+            const a = byId[e.f], b = byId[e.t];
+            hasTt = true;
+            ttX = Math.max(18, Math.min(78, (a.x + b.x) / 2));
+            const midY = (a.y + b.y) / 2;
+            if (midY < 34) { ttY = midY; ttTransform = "translate(-50%, 16px)"; }
+            else { ttY = midY; ttTransform = "translate(-50%, calc(-100% - 14px))"; }
+            ttPath = a.name + " → " + b.name;
+            ttRationale = e.r;
+            ttSources = e.s;
+          }
+
+          // ---- loading ----
+          const STEP_LABELS = ["뉴스 읽는 중", "핵심 이슈 및 키워드 추출 중", "호재/악재 의견 비교 중", "수혜 산업 그래프 생성 중", "산업 영향도 히트맵 생성 중"];
+          const cardBase = "display:flex;align-items:center;gap:13px;padding:14px 16px;border-radius:12px;transition:border-color .3s,background .3s;";
+          const steps = STEP_LABELS.map((label, i) => {
+            const done = i < S.step, active = i === S.step;
+            return {
+              label,
+              mark: done ? "✓" : active ? "" : String(i + 1),
+              color: done ? "#8a93a6" : active ? "#fff" : "#3c4354",
+              status: done ? "완료" : active ? "진행 중" : "대기",
+              statusColor: done ? "#2fbf71" : active ? "#6ea0ff" : "#3c4354",
+              cardStyle: active
+                ? cardBase + "background:rgba(61,107,255,0.1);border:1px solid rgba(110,160,255,0.55);animation:glowPulse 1.8s ease-in-out infinite"
+                : cardBase + "background:#12151d;border:1px solid rgba(255,255,255,0.06)",
+              dotStyle: done
+                ? "flex:none;width:24px;height:24px;border-radius:50%;background:rgba(47,191,113,0.18);color:#2fbf71;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center"
+                : active
+                  ? "flex:none;width:24px;height:24px;border-radius:50%;border:2.5px solid #3d6bff;border-top-color:transparent;animation:spin .8s linear infinite"
+                  : "flex:none;width:24px;height:24px;border-radius:50%;border:2px solid #262c3a;color:#3c4354;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center"
+            };
+          });
+
+          const FLOATS = [
+            { label: "# HBM4", top: 5, left: 20, dur: 5.5, delay: 0 },
+            { label: "# 엔비디아", top: 13, left: 63, dur: 6.5, delay: 0.8 },
+            { label: "반도체", top: 38, left: 80, dur: 5, delay: 0.4, c: ["#f2907c", "rgba(242,73,92,0.16)"] },
+            { label: "# AI 데이터센터", top: 79, left: 62, dur: 6, delay: 1.2 },
+            { label: "IT하드웨어", top: 87, left: 26, dur: 5.4, delay: 0.6, c: ["#9db4ff", "rgba(61,107,255,0.18)"] },
+            { label: "# TC본더", top: 56, left: 2, dur: 6.8, delay: 1.6 },
+            { label: "전기장비", top: 22, left: 3, dur: 5.8, delay: 0.2, c: ["#7fd8c9", "rgba(47,191,178,0.16)"] }
+          ];
+          const floatTags = FLOATS.map(f =>
+            ({ label: f.label, style: `position:absolute;top:${f.top}%;left:${f.left}%;z-index:3;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:999px;backdrop-filter:blur(5px);white-space:nowrap;animation:floatY ${f.dur}s ease-in-out ${f.delay}s infinite;` +
+              (f.c ? `color:${f.c[0]};background:${f.c[1]};border:1px solid ${f.c[0]}55` : "color:#c6cdda;background:rgba(21,26,36,0.85);border:1px solid rgba(255,255,255,0.14)") }));
+
+          // ---- trending ----
+          const TAG_COLORS = { "반도체": ["#f2907c", "rgba(242,73,92,0.12)"], "거시경제": ["#9db4ff", "rgba(61,107,255,0.14)"], "2차전지": ["#7fd8a8", "rgba(47,191,113,0.13)"], "정책": ["#d9b96a", "rgba(217,185,106,0.13)"], "자동차": ["#b8a3e8", "rgba(139,123,255,0.14)"], "바이오": ["#7fd8c9", "rgba(47,191,178,0.14)"], "에너지": ["#e8b06a", "rgba(232,176,106,0.14)"] };
+          const tagPair = (t) => TAG_COLORS[t] || TAG_COLORS["거시경제"];
+
+          // ---- news list ----
+          const newsList = this.NEWS.map(n => ({
+            ...n,
+            tagColor: tagPair(n.tag)[0], tagBg: tagPair(n.tag)[1],
+            barBg: rgba(NEG, 0.5),
+            go: () => this.start(n.title)
+          }));
+
+          // ---- sector reverse-explore grid ----
+          const sectorGrid = (S.market === "us" ? this.US_SECTORS : this.KR_SECTORS).map(s => ({
+            name: s.name, desc: s.desc,
+            pct: (s.pct > 0 ? "+" : "") + s.pct.toFixed(1) + "%",
+            arrow: s.pct > 0 ? "↗" : "↘",
+            color: s.pct > 0 ? POS : NEG,
+            go: () => this.start(s.name + " 섹터 역방향 확산 탐색")
+          }));
+
+          const recentList = this.RECENT.map(r => ({ ...r, go: () => this.start(r.title) }));
+
+          const tabOn = "font-size:12px;font-weight:700;padding:6px 12px;border-radius:7px;cursor:pointer;background:#3d6bff;color:#fff";
+          const tabOff = "font-size:12px;font-weight:600;padding:6px 12px;border-radius:7px;cursor:pointer;background:transparent;color:#8a93a6";
+          const trending = this.TRENDING.map((t, i) => ({
+            ...t,
+            rank: i + 1,
+            rankColor: i < 3 ? "#6ea0ff" : "#3c4354",
+            tagColor: (TAG_COLORS[t.tag] || TAG_COLORS["거시경제"])[0],
+            tagBg: (TAG_COLORS[t.tag] || TAG_COLORS["거시경제"])[1],
+            impColor: t.up ? POS : NEG,
+            go: () => this.start(t.title)
+          }));
+
+          return {
+            isHome: S.screen === "home",
+            homeBgRef: this.homeBgRefFn,
+            isLoading: S.screen === "loading",
+            isResult: S.screen === "result",
+            goHome: () => { clearInterval(this.timer); this.setState({ screen: "home", edge: null }); },
+
+            inputVal: S.input,
+            onInput: (e) => this.setState({ input: e.target.value }),
+            onKeyDown: (e) => { if (e.key === "Enter") { e.preventDefault(); this.addLink(); } },
+            addLink: () => this.addLink(),
+            analyze: () => {
+              const first = S.links[0] || (S.input.trim() ? S.input.trim() : null);
+              this.start(first || undefined);
+            },
+            links: S.links.map((url, i) => ({
+              url,
+              remove: () => this.setState(s => ({ links: s.links.filter((_, j) => j !== i) }))
+            })),
+            hasLinks: S.links.length > 0,
+            newsList, sectorGrid, recentList,
+            setKr: () => this.setState({ market: "kr" }),
+            setUs: () => this.setState({ market: "us" }),
+            krTabStyle: S.market === "kr" ? tabOn : tabOff,
+            usTabStyle: S.market === "us" ? tabOn : tabOff,
+
+            loadingTitle: S.step < 3 ? "분석 중..." : "아티클 생성 중...",
+            loadingSubject: S.subject,
+            progress: Math.min(100, Math.round(S.step / 5 * 100) + 5),
+            steps, floatTags, sphereRef: this.sphereRefFn,
+
+            keywords: [{ name: "HBM4" }, { name: "엔비디아" }, { name: "SK하이닉스" }, { name: "AI 데이터센터" }, { name: "첨단 패키징" }, { name: "TC본더" }],
+            sectorTags: [
+              { name: "반도체", imp: "+8.4%", color: POS, bg: rgba(POS, 0.13) },
+              { name: "IT하드웨어", imp: "+5.2%", color: POS, bg: rgba(POS, 0.13) },
+              { name: "전기장비", imp: "+3.1%", color: POS, bg: rgba(POS, 0.13) },
+              { name: "운송", imp: "-1.2%", color: NEG, bg: rgba(NEG, 0.13) }
+            ],
+            posColor: POS, negColor: NEG,
+            cells, nodes, edges,
+            hasHmTt, hmX, hmY, hmTransform, hmName, hmStocks,
+            hasNdTt, ndX, ndY, ndTransform, ndName, ndStocks,
+            kgRef: this.kgRefFn,
+            hasTt, ttX, ttY, ttTransform, ttPath, ttRationale, ttSources
+          };
+        }
+
+        addLink() {
+          const v = this.state.input.trim();
+          if (!v) return;
+          this.setState(s => ({ links: [...s.links, v], input: "" }));
+        }
+      }
+    </script>
+  </body>
+</html>
