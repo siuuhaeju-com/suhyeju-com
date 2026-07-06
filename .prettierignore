@@ -1,0 +1,19 @@
+# 의존성·가상환경
+node_modules/
+.venv/
+
+# 빌드 산출물
+dist/
+build/
+coverage/
+**/.next/
+**/out/
+**/next-env.d.ts
+
+# 자동 생성 파일
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# 에셋
+docs/assets/
