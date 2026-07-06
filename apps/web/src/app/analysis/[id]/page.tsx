@@ -1,43 +1,52 @@
+import Link from 'next/link';
+
+import { ImpactHeatmap } from '@/components/analysis/impact-heatmap';
+import { KnowledgeGraph } from '@/components/analysis/knowledge-graph';
+import { SignalSection } from '@/components/analysis/signal-section';
+import { SpreadGraph } from '@/components/analysis/spread-graph';
+import { SummarySection } from '@/components/analysis/summary-section';
+import { getAnalysis } from '@/lib/mock-data';
+
 type AnalysisPageProps = {
-  params: Promise<{
-    id: string;
-  }>;
+  params: Promise<{ id: string }>;
 };
 
+/**
+ * 분석 페이지 (PAGE-3 · #32)
+ * AI 요약(F-05) → 전망 분석(F-06) → 영향력 확산 그래프(F-07) →
+ * 섹터별 영향도 히트맵(F-08) → 산업 연결 지식그래프(F-12)
+ * FE 연동 지점: getAnalysis(id) → GET /api/analysis/:id
+ */
 export default async function AnalysisPage({ params }: AnalysisPageProps) {
   const { id } = await params;
+  const result = getAnalysis(id);
 
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col gap-8 px-6 py-16">
-      <section className="flex flex-col gap-3">
-        <p className="text-sm font-medium text-muted-foreground">분석 페이지</p>
-        <h1 className="text-3xl font-semibold tracking-tight text-foreground">분석 결과</h1>
-        <p className="text-base leading-7 text-muted-foreground">
-          분석 ID <span className="font-medium text-foreground">{id}</span>에 대한 결과 화면
-          골격입니다.
+    <main className="mx-auto w-full max-w-[1100px] flex-1 px-6 pt-6 pb-24">
+      {/* 상단 바 — 새 분석으로 돌아가기 + 분석 메타 */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <Link
+          href="/"
+          className="flex items-center gap-1.5 rounded-md text-sm font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+        >
+          <span aria-hidden>←</span> 새 분석
+        </Link>
+        <p className="text-xs text-muted-foreground">
+          분석 완료 · {result.analyzedAt} · {result.engineVersion}
         </p>
-      </section>
+      </div>
 
-      <section className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-md border p-4">
-          <h2 className="text-sm font-semibold">요약 카드</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            뉴스 요약과 호재/악재 판단 영역입니다.
-          </p>
-        </div>
-        <div className="rounded-md border p-4">
-          <h2 className="text-sm font-semibold">파급 경로</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            1차, 2차, 3차 산업 연결 그래프 영역입니다.
-          </p>
-        </div>
-        <div className="rounded-md border p-4">
-          <h2 className="text-sm font-semibold">영향도 히트맵</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            긍정은 레드, 부정은 그린으로 표시할 영역입니다.
-          </p>
-        </div>
-      </section>
+      <div className="mt-6 flex flex-col gap-12">
+        <SummarySection result={result} />
+        <SignalSection result={result} />
+        <SpreadGraph
+          nodes={result.spreadNodes}
+          edges={result.spreadEdges}
+          topStocks={result.topStocks}
+        />
+        <ImpactHeatmap cells={result.heatmap} topStocks={result.topStocks} />
+        <KnowledgeGraph nodes={result.knowledgeNodes} edges={result.knowledgeEdges} />
+      </div>
     </main>
   );
 }
