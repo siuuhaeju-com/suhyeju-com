@@ -1,0 +1,16 @@
+# Node
+node_modules/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# 빌드 산출물
+dist/
+build/
+coverage/
+
+# OS / 에디터
+.DS_Store
+*.log
