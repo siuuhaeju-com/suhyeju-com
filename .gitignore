@@ -16,5 +16,5 @@ coverage/
 *.log
 
 # 로컬 에이전트 설정 (개인 환경 — 공유하지 않음)
-.claude/
-.cursor/
+# 공유 규칙(.claude/CLAUDE.md·commands, .cursor/rules)은 커밋하고, 개인 로컬 설정만 제외
+.claude/settings.local.json
