@@ -14,6 +14,7 @@
   "scripts": {
     "prepare": "husky",
     "dev:web": "pnpm --filter @suhyeju/web dev",
+    "build": "pnpm build:web",
     "build:web": "pnpm --filter @suhyeju/web build",
     "vercel-build": "pnpm build:web",
     "start:web": "pnpm --filter @suhyeju/web start",
@@ -32,6 +33,9 @@
       "prettier --write"
     ]
   },
+  "dependencies": {
+    "next": "16.2.10"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
@@ -41,7 +45,6 @@
     "globals": "^15.14.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.3.0",
-    "next": "16.2.10",
     "prettier": "^3.4.2"
   }
 }
