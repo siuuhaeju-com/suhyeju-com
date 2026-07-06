@@ -15,7 +15,7 @@
 
 "이런 이슈 만들어줘" 같은 요청을 받으면:
 
-1. **컨벤션 정본은 `docs/issue-convention.md`** (제목·ID·본문·라벨 규칙). 이 규칙을 따른다.
+1. 제목·라벨·본문 규칙은 **`scripts/new-issue.sh`와 `.github/ISSUE_TEMPLATE/`가 강제**한다(제목 `[ID] 명사형`, 유형별 템플릿 자동). 팀원 안내는 `docs/issue-open-guide.md`.
 2. 요청에서 **유형·ID·제목·순위·페이지·참고·완료조건·체크리스트**를 뽑아 **`scripts/new-issue.sh`** 로 등록한다. **직접 `gh issue create`를 손으로 구성하지 않는다**(형식이 흔들린다). 카탈로그(`docs/proposal/14`·`docs/issues-list.md`)에 있으면 그 내용을 재사용한다.
 3. 먼저 `--dry-run`으로 조립 결과(제목·라벨·본문)를 사용자에게 보여주고, 확인되면 실제 등록한다.
 4. 등록 후 **생성된 번호·제목·라벨**을 보고한다.

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# 컨벤션(docs/issue-convention.md)에 맞춰 GitHub Issue를 결정적으로 생성한다.
+# 규칙(제목·라벨·템플릿 본문)에 맞춰 GitHub Issue를 결정적으로 생성한다.
 # 에이전트는 자연어 요청에서 필드를 뽑아 이 스크립트를 호출한다.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-TEMPLATE="$REPO_ROOT/.github/issue_template.md"
+TEMPLATE_DIR="$REPO_ROOT/.github/ISSUE_TEMPLATE"
 # shellcheck source=scripts/lib/labels.sh
 . "$SCRIPT_DIR/lib/labels.sh"
 
@@ -17,20 +17,21 @@ usage() {
   --type      feat | setup | prototype | infra | deploy | fix | chore
   --title     간결한 명사형 제목. 예: "산업 파급 경로 연결지도 시각화"
 
+본문(.github/ISSUE_TEMPLATE 템플릿을 front matter만 제거하고 "그대로" 사용):
+  feat·prototype → feature_request.md
+  fix            → bug_report.md
+  chore          → chore.md
+  setup·infra·deploy → (전용 템플릿 없음) 내장 구조화 본문으로 폴백
+
 권장:
   --id        F-06 / F-21a / SETUP-01 / INFRA-01 / PROTO-01 (카탈로그)
               fix·chore는 생략 시 제목 앞에 [FIX]/[CHORE] 자동 부여
   --priority  1|2|3|4     (순위 라벨 — 주로 기능 이슈)
-  --page      "분석 /analysis/[id]" 등 페이지/영역
-  --refs      "docs/proposal/11 · docs/proposal/14" 참고 문서
-  --done      완료 조건 한두 문장
   --seonhaeng 선행 라벨 부여 (플래그)
 
-체크리스트(유형별):
-  feat/prototype        --ui --api --demo
-  fix                   --repro --cause --fix
-  setup/infra/deploy    --setup --verify
-  chore                 --task --verify
+내용 플래그 (setup·infra·deploy 폴백 본문에만 반영 — 템플릿 유형은 무시):
+  --page --refs --done   개요/완료 조건
+  --setup --verify       체크리스트(구성/검증)
 
 기타:
   --assignee  @me 등
@@ -113,29 +114,18 @@ checklist() {
   esac
 }
 
-# 템플릿(.github/issue_template.md)을 읽어 토큰({{ID}} 등)을 채운다.
-# {{CHECKLIST}}는 유형별 체크리스트로 치환한다.
-render_from_template() {
-  local line p r d
-  p="${PAGE:-–}"; r="${REFS:-–}"; d="${DONE:-–}"
-  while IFS= read -r line || [ -n "$line" ]; do
-    case "$line" in
-      *'{{CHECKLIST}}'*) checklist ;;
-      *)
-        line="${line//'{{ID}}'/$PREFIX}"
-        line="${line//'{{TYPE}}'/$TYPE}"
-        line="${line//'{{PAGE}}'/$p}"
-        line="${line//'{{REFS}}'/$r}"
-        line="${line//'{{DONE}}'/$d}"
-        printf '%s\n' "$line"
-        ;;
-    esac
-  done < "$TEMPLATE"
-}
+# --- 유형 → .github/ISSUE_TEMPLATE 파일 매핑 ---
+case "$TYPE" in
+  feat|prototype) TEMPLATE="$TEMPLATE_DIR/feature_request.md";;
+  fix)            TEMPLATE="$TEMPLATE_DIR/bug_report.md";;
+  chore)          TEMPLATE="$TEMPLATE_DIR/chore.md";;
+  *)              TEMPLATE="";;
+esac
 
-# --- 본문 조립: .github/issue_template.md 기준 (없으면 내장 폴백) ---
-if [ -f "$TEMPLATE" ]; then
-  BODY="$(render_from_template)"
+# --- 본문: 템플릿이 있으면 YAML front matter(맨 앞 --- ~ ---)만 제거하고 "그대로",
+#     템플릿 없는 유형(setup/infra/deploy)은 내장 구조화 본문으로 폴백 ---
+if [ -n "$TEMPLATE" ] && [ -f "$TEMPLATE" ]; then
+  BODY="$(awk 'fm<2 && /^---[[:space:]]*$/ {fm++; next} fm>=2 {print}' "$TEMPLATE")"
 else
   BODY="$(cat <<EOF
 ## 개요

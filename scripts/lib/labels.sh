@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 라벨 정의 SSOT — docs/issue-convention.md 와 동기화해서 관리한다.
+# 라벨 정의 SSOT — 라벨 이름·색의 기준.
 # init-labels.sh / new-issue.sh 가 이 파일을 source 한다.
 # (bash 3.2 호환: 연관배열 대신 case 사용)
 # 순위 라벨은 한국어, 유형/부가 라벨은 영어.
