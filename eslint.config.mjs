@@ -16,6 +16,7 @@ export default [
       '**/.next/**',
       '**/out/**',
       '**/next-env.d.ts',
+      'docs/design/mockup/**', // Claude Design이 생성한 목업 산출물 — 린트 제외
     ],
   },
   // 권장 규칙
