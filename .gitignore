@@ -14,3 +14,7 @@ coverage/
 # OS / 에디터
 .DS_Store
 *.log
+
+# 로컬 에이전트 설정 (개인 환경 — 공유하지 않음)
+.claude/
+.cursor/
