@@ -7,7 +7,16 @@ import prettier from 'eslint-config-prettier';
 export default [
   // 검사 제외 경로
   {
-    ignores: ['node_modules/', '.venv/', 'dist/', 'build/', 'coverage/'],
+    ignores: [
+      'node_modules/',
+      '.venv/',
+      'dist/',
+      'build/',
+      'coverage/',
+      '**/.next/**',
+      '**/out/**',
+      '**/next-env.d.ts',
+    ],
   },
   // 권장 규칙
   js.configs.recommended,

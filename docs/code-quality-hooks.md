@@ -14,10 +14,10 @@
 ## 설치 (팀원이 저장소를 처음 clone 한 뒤 1회)
 
 ```bash
-npm install
+pnpm install
 ```
 
-- `package.json`의 `prepare` 스크립트가 `npm install` 시 자동 실행되어 **Husky 훅이 활성화**된다.
+- `package.json`의 `prepare` 스크립트가 `pnpm install` 시 자동 실행되어 **Husky 훅이 활성화**된다.
 - 별도의 `husky install` 명령을 손으로 칠 필요 없다.
 - 이후에는 평소처럼 `git commit` 하면 훅이 자동으로 돈다.
 
@@ -70,7 +70,7 @@ feat: 회원가입 기능 추가
 
 ## 코드 스타일 규칙
 
-- **ESLint** — JS/TS 코드의 문법·품질 검사 (`eslint.config.mjs`). 팀이 프레임워크(React/Vue 등)를 도입하면 이 파일에 플러그인을 추가한다.
+- **ESLint** — 코드 문법·품질 검사. 루트 `eslint.config.mjs`는 저장소 설정 파일을 검사하고, `apps/web/eslint.config.mjs`는 Next.js 프론트엔드 코드를 검사한다.
 - **Prettier** — 코드 포맷 통일 (`.prettierrc.json`). JS/TS 외에 `json·md·css·yaml` 등도 포맷.
 - 두 도구는 `eslint-config-prettier`로 규칙 충돌을 제거해 함께 쓴다.
 
@@ -86,16 +86,16 @@ feat: 회원가입 기능 추가
 ## 수동 실행 (커밋 없이 전체 검사하고 싶을 때)
 
 ```bash
-npm run lint          # ESLint 검사
-npm run lint:fix      # ESLint 자동 수정
-npm run format        # Prettier로 전체 포맷 적용
-npm run format:check  # 포맷 어긋난 파일만 확인 (수정 X)
+pnpm run lint          # 루트 설정 파일 + 웹 앱 ESLint 검사
+pnpm run lint:web      # 웹 앱 ESLint만 검사
+pnpm run format        # Prettier로 전체 포맷 적용
+pnpm run format:check  # 포맷 어긋난 파일만 확인 (수정 X)
 ```
 
 ## 자주 겪는 상황
 
 - **커밋이 막혔어요** → 터미널의 실패 메시지(어떤 규칙/파일인지)를 읽고 수정 후 다시 `git commit`. 대부분 pre-commit이 자동 수정까지 해두므로 `git add` 후 재커밋하면 된다.
-- **훅이 아예 안 돌아요** → `npm install`을 실행했는지 확인. (`.husky/_` 디렉터리와 `git config core.hooksPath`가 `.husky/_`인지 확인)
+- **훅이 아예 안 돌아요** → `pnpm install`을 실행했는지 확인. (`.husky/_` 디렉터리와 `git config core.hooksPath`가 `.husky/_`인지 확인)
 - **긴급 상황에 훅을 건너뛰어야 해요** → `git commit --no-verify` (권장하지 않음. 정말 필요할 때만).
 
 ## 관련 파일
@@ -103,8 +103,8 @@ npm run format:check  # 포맷 어긋난 파일만 확인 (수정 X)
 | 파일                                   | 역할                                             |
 | -------------------------------------- | ------------------------------------------------ |
 | `package.json`                         | 의존성 · `prepare` 스크립트 · `lint-staged` 설정 |
-| `.husky/pre-commit`                    | 커밋 전 `npx lint-staged` 실행                   |
-| `.husky/commit-msg`                    | 커밋 메시지 `npx commitlint` 검증                |
+| `.husky/pre-commit`                    | 커밋 전 `pnpm exec lint-staged` 실행             |
+| `.husky/commit-msg`                    | 커밋 메시지 `pnpm exec commitlint` 검증          |
 | `commitlint.config.mjs`                | Conventional Commits 규칙                        |
 | `eslint.config.mjs`                    | ESLint 규칙                                      |
 | `.prettierrc.json` / `.prettierignore` | Prettier 규칙 / 제외 경로                        |
@@ -114,5 +114,5 @@ npm run format:check  # 포맷 어긋난 파일만 확인 (수정 X)
 **요약**
 
 - `pre-commit`은 **lint-staged로 변경 파일만** ESLint·Prettier 실행, `commit-msg`는 **commitlint로 Conventional Commits** 검증 → 실패 시 커밋 차단.
-- 팀원은 clone 후 **`npm install` 한 번**이면 훅이 자동 활성화된다.
+- 팀원은 clone 후 **`pnpm install` 한 번**이면 훅이 자동 활성화된다.
 - 커밋 메시지는 `feat: ...`, `fix: ...`처럼 **`type: 제목`** 형식에 더해, **빈 줄 뒤 한 줄 이상의 본문(body)**을 반드시 작성해야 한다.
