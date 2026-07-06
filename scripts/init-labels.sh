@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 이슈 라벨(11종)을 GitHub 저장소에 일괄 생성/갱신한다. 최초 1회 실행.
-# 컨벤션 정본: docs/issue-convention.md
+# 라벨 정의: scripts/lib/labels.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

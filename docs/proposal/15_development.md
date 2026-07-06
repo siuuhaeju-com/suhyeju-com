@@ -9,7 +9,7 @@
 
 > `docs/proposal/14`의 **모든 기능(F-xx)** 마다 Issue 1개. 우선순위는 **GitHub 라벨**로 붙인다.
 
-> **자동화(권장):** 이슈 컨벤션은 `docs/issue-convention.md`(정본)로 표준화되어 있고, 등록은 **`scripts/new-issue.sh`**, 라벨(11종) 부트스트랩은 **`scripts/init-labels.sh`** 로 한다. 아래 수동 `gh` 예시 대신 스크립트를 쓰면 제목·본문·라벨이 컨벤션에 맞게 자동 조립된다. (Claude `/new-issue`, Cursor 룰도 동일 스크립트를 호출)
+> **자동화(권장):** 이슈 등록 방법은 `docs/issue-open-guide.md`에 안내되어 있고, 등록은 **`scripts/new-issue.sh`**, 라벨(11종) 부트스트랩은 **`scripts/init-labels.sh`** 로 한다. 아래 수동 `gh` 예시 대신 스크립트를 쓰면 제목·본문·라벨이 규칙에 맞게 자동 조립된다. (Claude `/new-issue`, Cursor 룰도 동일 스크립트를 호출)
 
 **Agent 프롬프트 예시**
 
