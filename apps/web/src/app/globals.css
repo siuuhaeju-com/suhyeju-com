@@ -2,127 +2,122 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
-@custom-variant dark (&:is(.dark *));
+/*
+ * 수혜주.com 디자인 토큰 — 정본: apps/web/DESIGN.md (frontmatter)
+ * 다크 단일 테마: :root에 다크 값을 직접 정의한다. (.dark variant 불필요)
+ * 색은 hex 소스 오브 트루스(목업 실측값)를 그대로 쓴다. hex 하드코딩 대신 아래 변수를 사용할 것.
+ */
 
 :root {
-  --muted-foreground: oklch(0.556 0 0);
-  --app-font-sans: Arial, Helvetica, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  /* neutral ramp */
+  --background: #0b0d12;
+  --foreground: #e9edf4;
+  --card: #12151d;
+  --card-foreground: #e9edf4;
+  --popover: #1a1f2c;
+  --popover-foreground: #e9edf4;
+  --surface-raised: #1a1f2c;
+  --ink-sub: #c6cdda;
+  --muted: #1a1f2c;
+  --muted-foreground: #8a93a6;
+  /* ink-dim(#5b6474)은 텍스트 금지(AA 실패) — 장식 선·비활성 아이콘 전용 */
+  --ink-dim: #5b6474;
+
+  /* brand */
+  --primary: #3d6bff;
+  --primary-foreground: #ffffff;
+  --blue-bright: #6ea0ff;
+  --secondary: #1a1f2c;
+  --secondary-foreground: #c6cdda;
+  --accent: #1a1f2c;
+  --accent-foreground: #e9edf4;
+
+  /* 의미색 — 한국 시장 관례(서구와 반대): 긍정=레드, 부정=그린. 범례 필수 병기 */
+  --positive: #f2495c;
+  --negative: #2fbf71;
+  --destructive: #2fbf71;
+
+  /* 파급 단계색 */
+  --tier1: #6ea0ff;
+  --tier2: #8b7bff;
+  --tier3: #2fb3c9;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #3d6bff;
+
+  --chart-1: #6ea0ff;
+  --chart-2: #8b7bff;
+  --chart-3: #2fb3c9;
+  --chart-4: #f2495c;
+  --chart-5: #2fbf71;
+
+  --radius: 0.75rem; /* 12px — 카드는 radius-lg(16px) */
+
+  --app-font-sans:
+    'Pretendard Variable', Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   --app-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  --sidebar: #12151d;
+  --sidebar-foreground: #e9edf4;
+  --sidebar-primary: #3d6bff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1a1f2c;
+  --sidebar-accent-foreground: #e9edf4;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #3d6bff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-surface-raised: var(--surface-raised);
+  --color-ink-sub: var(--ink-sub);
+  --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-blue-bright: var(--blue-bright);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --color-destructive: var(--destructive);
+  --color-tier1: var(--tier1);
+  --color-tier2: var(--tier2);
+  --color-tier3: var(--tier3);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: var(--app-font-sans);
   --font-mono: var(--app-font-mono);
   --font-heading: var(--app-font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --muted-foreground: #a1a1aa;
-  }
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --radius-sm: calc(var(--radius) * 0.75); /* 9px */
+  --radius-md: var(--radius); /* 12px */
+  --radius-lg: calc(var(--radius) * 1.334); /* 16px */
+  --radius-xl: calc(var(--radius) * 1.667);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 2.4);
+  --radius-4xl: calc(var(--radius) * 2.8);
 }
 
 @layer base {
@@ -134,5 +129,103 @@
   }
   html {
     @apply font-sans;
+    color-scheme: dark;
+  }
+}
+
+/* ── 모션 어휘 (DESIGN.md Overview) ─────────────────────────────
+ * fadeUp(등장) · ripple(파급 원점) · dashmove(연결선 흐름)
+ * glowPulse(라이브 상태) · floatY(부유)
+ * transform/opacity만 애니메이트. 레이아웃 속성 transition 금지. */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes dashmove {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spinSlow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-ripple {
+  animation: ripple 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+.animate-dashmove {
+  stroke-dasharray: 6 6;
+  animation: dashmove 1.6s linear infinite;
+}
+.animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+.animate-float-y {
+  animation: floatY 5s ease-in-out infinite;
+}
+.animate-spin-slow {
+  animation: spinSlow 1.2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-ripple,
+  .animate-dashmove,
+  .animate-glow-pulse,
+  .animate-float-y,
+  .animate-spin-slow {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
