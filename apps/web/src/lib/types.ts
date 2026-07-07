@@ -149,3 +149,28 @@ export interface AnalysisResult {
   /** 섹터명 → Top5 종목 현황 (F-10 툴팁) */
   topStocks: Record<string, TopStock[]>;
 }
+
+/** ─ 시장 히트맵 (Finviz식 트리맵) — 분석용 HeatmapCell과 무관 ─ */
+export interface MarketHeatmapStock {
+  name: string;
+  code: string;
+  /** 시가총액 → 트리맵 사각형 크기 */
+  marketCap: number;
+  /** 등락률 → 색상 */
+  changePct: number;
+}
+
+export interface MarketHeatmapSector {
+  name: string;
+  changePct: number;
+  stocks: MarketHeatmapStock[];
+}
+
+export interface MarketHeatmap {
+  market: 'KR' | 'US';
+  /** 기준 시각 (ISO) */
+  asOf: string;
+  /** 장 상태 */
+  status: 'OPEN' | 'CLOSE';
+  sectors: MarketHeatmapSector[];
+}
