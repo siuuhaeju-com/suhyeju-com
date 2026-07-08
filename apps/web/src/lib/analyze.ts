@@ -157,7 +157,7 @@ function assemble(
     warnSignal: draft.warnSignal,
     spreadNodes: deriveRows(draft.spreadNodes),
     spreadEdges: draft.spreadEdges,
-    heatmap: deriveHeatmap(draft.heatmap),
+    heatmap: deriveHeatmap(draft.spreadNodes),
     knowledgeNodes: draft.knowledgeNodes.map((n) => ({ ...n, x: 0, y: 0 })), // 좌표는 KnowledgeGraph가 group 기반으로 자체 계산
     knowledgeEdges: draft.knowledgeEdges,
     topStocks,
@@ -182,12 +182,19 @@ function deriveRows(nodes: Omit<SpreadNode, 'row'>[]): SpreadNode[] {
   return result;
 }
 
-/** area(슬롯 키)·weight(색 농도)를 파생한다. */
-function deriveHeatmap(cells: Omit<HeatmapCell, 'area' | 'weight'>[]): HeatmapCell[] {
-  const max = Math.max(...cells.map((c) => Math.abs(c.changePct)), 1);
-  return cells.map((cell, i) => ({
-    ...cell,
+/**
+ * 히트맵 셀을 spreadNodes(tier≥1)에서 파생한다.
+ * sector를 spreadNodes.name(= topStocks 키)과 일치시켜, hover 툴팁(topStocks[sector])과
+ * 시세 join(섹터 평균)이 항상 맞물리게 한다. 원점(tier0 뉴스)은 섹터가 아니라 제외.
+ * (GPT가 주는 별도 heatmap 필드는 topStocks와 이름이 어긋나 미사용 — 이 파생으로 대체)
+ */
+function deriveHeatmap(nodes: Omit<SpreadNode, 'row'>[]): HeatmapCell[] {
+  const cells = nodes.filter((n) => n.tier >= 1);
+  const max = Math.max(...cells.map((c) => Math.abs(c.changePct ?? 0)), 1);
+  return cells.map((n, i) => ({
+    sector: n.name,
+    changePct: n.changePct ?? 0,
     area: `area${i}`,
-    weight: Math.min(1, Math.abs(cell.changePct) / max),
+    weight: Math.min(1, Math.abs(n.changePct ?? 0) / max),
   }));
 }
