@@ -55,11 +55,14 @@ type Particle = { x: number; y: number; r: number; o: number; color: string };
 type Edge = { a: number; b: number };
 type AvoidRect = { left: number; right: number; top: number; bottom: number };
 
-/** hex 색을 흰색과 섞어 파스텔 톤으로 순화(토큰 원본 hex는 건드리지 않고 그릴 때만 변환) */
-function toPastel(hex: string, mix: number) {
+function hexToRgb(hex: string): [number, number, number] {
   const m = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(hex.trim());
-  if (!m) return hex;
-  const [r, g, b] = [m[1], m[2], m[3]].map((c) => parseInt(c, 16));
+  if (!m) return [110, 160, 255];
+  return [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)];
+}
+
+/** rgb를 흰색과 섞어 파스텔 톤으로 순화(토큰 원본 hex는 건드리지 않고 그릴 때만 변환) */
+function toPastel([r, g, b]: [number, number, number], mix: number) {
   const blend = (c: number) => Math.round(c + (255 - c) * mix);
   return `rgb(${blend(r)},${blend(g)},${blend(b)})`;
 }
@@ -94,11 +97,13 @@ export function ParticleField() {
     if (!canvas || !ctx) return;
 
     const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const colors = COLOR_TOKENS.map((token) => {
-      const hex =
-        getComputedStyle(document.documentElement).getPropertyValue(token).trim() || '#6ea0ff';
-      return toPastel(hex, PASTEL_MIX);
-    });
+    const readToken = (token: string, fallback: string) =>
+      getComputedStyle(document.documentElement).getPropertyValue(token).trim() || fallback;
+    const colors = COLOR_TOKENS.map((token) =>
+      toPastel(hexToRgb(readToken(token, '#6ea0ff')), PASTEL_MIX),
+    );
+    const [lineR, lineG, lineB] = hexToRgb(readToken('--tier1', '#6ea0ff'));
+    const [sparkR, sparkG, sparkB] = hexToRgb(readToken('--ink', '#e9edf4'));
     const rand = mulberry32(20260707);
 
     let width = 0;
@@ -225,7 +230,7 @@ export function ParticleField() {
       nodeAppearAt = spawnDelays.map((delay, i) => (i === 0 ? delay : delay + LINE_DRAW_MS));
     }
 
-    function drawFrame(elapsed: number, withPulse: boolean) {
+    function drawFrame(elapsed: number, shouldPulse: boolean) {
       ctx!.clearRect(0, 0, width, height);
 
       edges.forEach((e, i) => {
@@ -237,14 +242,14 @@ export function ParticleField() {
         const tipX = a.x + (b.x - a.x) * drawT;
         const tipY = a.y + (b.y - a.y) * drawT;
 
-        ctx!.strokeStyle = 'rgba(110,160,255,0.18)';
+        ctx!.strokeStyle = `rgba(${lineR},${lineG},${lineB},0.18)`;
         ctx!.lineWidth = 0.7;
         ctx!.beginPath();
         ctx!.moveTo(a.x, a.y);
         ctx!.lineTo(tipX, tipY);
         ctx!.stroke();
 
-        if (withPulse && drawT >= 1) {
+        if (shouldPulse && drawT >= 1) {
           // 다 이어진 선 위를 흐르는 별빛 — 엣지마다 위상을 다르게 둬서 반짝임이 서로 어긋나게
           const sinceComplete = elapsed - (start + LINE_DRAW_MS);
           const phase = (i * 0.6180339887) % 1;
@@ -253,7 +258,7 @@ export function ParticleField() {
           const px = a.x + (b.x - a.x) * travel;
           const py = a.y + (b.y - a.y) * travel;
           ctx!.beginPath();
-          ctx!.fillStyle = `rgba(210,225,255,${0.75 * glow})`;
+          ctx!.fillStyle = `rgba(${sparkR},${sparkG},${sparkB},${0.75 * glow})`;
           ctx!.arc(px, py, 1.5, 0, Math.PI * 2);
           ctx!.fill();
         }
