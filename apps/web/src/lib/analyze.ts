@@ -16,9 +16,22 @@ export interface AnalyzeInput {
   text?: string;
 }
 
-/** 뉴스(URL 또는 본문)를 분석해 완성된 AnalysisResult를 반환한다. */
-export async function runAnalysis(input: AnalyzeInput): Promise<AnalysisResult> {
+/** 분석 진행 단계 이벤트 (SSE — 로딩 화면 단계 표시용) */
+export type ProgressStep = {
+  step: 'extract' | 'analyze' | 'quote';
+  label: string;
+};
+
+/**
+ * 뉴스(URL 또는 본문)를 분석해 완성된 AnalysisResult를 반환한다.
+ * onProgress가 있으면 각 단계 시작 시 진행 이벤트를 흘린다(SSE용).
+ */
+export async function runAnalysis(
+  input: AnalyzeInput,
+  onProgress?: (progress: ProgressStep) => void,
+): Promise<AnalysisResult> {
   // 1) 본문 확보 — 붙여넣기(text) 우선, 없으면 URL 스크래핑
+  onProgress?.({ step: 'extract', label: '뉴스 본문 읽는 중' });
   let text = input.text?.trim();
   let title = '';
   let source = '';
@@ -36,12 +49,14 @@ export async function runAnalysis(input: AnalyzeInput): Promise<AnalysisResult> 
   if (!text) throw new Error('분석할 뉴스 본문이 없습니다');
 
   // 2) GPT 분석 (구조 생성)
+  onProgress?.({ step: 'analyze', label: '이슈·파급 분석 중' });
   const tGpt = performance.now();
   const draft = await analyzeNews(text);
   const tJoin = performance.now();
 
   // 3) 시세 join — topStocks 종목에 네이버 실시세를 붙이고,
   //    섹터(spreadNodes/heatmap/relatedSectors)는 그 섹터 종목들의 실시세 평균으로 파생.
+  onProgress?.({ step: 'quote', label: '실시간 시세 확인 중' });
   await joinQuotes(draft);
   console.log(
     `[analyze] GPT ${Math.round(tJoin - tGpt)}ms · join ${Math.round(performance.now() - tJoin)}ms`,
