@@ -4,7 +4,8 @@
 
 ## 🔗 연관 이슈 (Associated Issues)
 
-<!-- GitHub 키워드(close, resolve, fix)를 사용하면 PR 머지 시 이슈가 자동 종료됩니다. -->
+<!-- 이 PR로 이슈의 작업 체크리스트가 전부 끝나면 "Closes #"를 쓴다 — 머지 시 이슈가 자동으로 닫힌다.
+     아직 남은 작업이 있거나 일부만 다룬다면 "Related to #"만 남기고 "Closes #" 줄은 지운다. -->
 
 - Closes #
 - Related to #
