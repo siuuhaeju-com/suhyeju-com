@@ -1,68 +1,10 @@
 /**
  * 화면 프로토타입용 mock 데이터 — 시각 정본(docs/design/mockup)과 동일한 내용.
  * FE 연동 시 이 모듈의 export를 API 호출(react-query)로 교체한다.
- *   - 메인:   GET /api/news/popular, /api/sectors, /api/analysis/recent
+ *   - 메인:   GET /api/news (✅완료), GET /api/market/kr/major-sectors (✅완료), /api/analysis/recent
  *   - 분석:   GET /api/analysis/:id  →  AnalysisResult
  */
-import type { AnalysisResult, FloatingChip, NewsItem, RecentAnalysis } from '@/lib/types';
-
-/* ── 메인: 인기 뉴스 (F-03a) ─────────────────────────────── */
-// GET /api/news 응답 형태와 동일 — 네이버 증권 '많이 본 뉴스'(ranknews, #53) 기준.
-// ranknews는 종목/섹터 분류가 없어 sector='증시'·tone='teal' 고정, url은 네이버 기사 링크.
-// (url의 기사 id는 예시값 — 실제 API는 실시간 랭킹을 반환)
-export const popularNews: NewsItem[] = [
-  {
-    id: 'news-0',
-    sector: '증시',
-    sectorTone: 'teal',
-    source: '매일경제',
-    publishedAt: '2시간 전',
-    title: '“아 아침에 그냥 팔 걸”…변동성 극에 달한 국장, 개미는 못 버틴다',
-    summary: '코스피가 장중 2%대 급락하며 개인 투자자 이탈이 이어지고 있다.',
-    url: 'https://n.news.naver.com/article/009/0005704830',
-  },
-  {
-    id: 'news-1',
-    sector: '증시',
-    sectorTone: 'teal',
-    source: '한국경제',
-    publishedAt: '3시간 전',
-    title: '삼전닉스 빼곤 대부분 고점서 물려…개미 손실 확대',
-    summary: '반도체 대형주를 제외한 상당수 종목이 고점 대비 크게 하락한 것으로 나타났다.',
-    url: 'https://n.news.naver.com/article/009/0005704795',
-  },
-  {
-    id: 'news-2',
-    sector: '증시',
-    sectorTone: 'teal',
-    source: '서울경제',
-    publishedAt: '5시간 전',
-    title: '“수익률 -50%, 내가 이걸 왜 했을까” 레버리지 ETF 또 폭락',
-    summary: '고배율 레버리지 상품에 투자한 개인들의 손실이 커지며 주의가 요구된다.',
-    url: 'https://n.news.naver.com/article/011/0004639646',
-  },
-  {
-    id: 'news-3',
-    sector: '증시',
-    sectorTone: 'teal',
-    source: '한국경제',
-    publishedAt: '6시간 전',
-    title: 'SK하이닉스 ADR 상장 임박…나스닥發 수급 기대감',
-    summary:
-      'SK하이닉스의 나스닥 주식예탁증서(ADR) 상장을 앞두고 외국인 자금 유입 기대가 커지고 있다.',
-    url: 'https://n.news.naver.com/article/215/0001258077',
-  },
-  {
-    id: 'news-4',
-    sector: '증시',
-    sectorTone: 'teal',
-    source: '헤럴드경제',
-    publishedAt: '8시간 전',
-    title: '‘-35%’ 처참한 수익률…스페이스X 테마주 투자자 비명',
-    summary: '기대를 모았던 우주·항공 테마주가 급락하며 투자 심리가 악화됐다.',
-    url: 'https://n.news.naver.com/article/016/0002667720',
-  },
-];
+import type { AnalysisResult, FloatingChip, RecentAnalysis } from '@/lib/types';
 
 /* ── 메인: 최근 분석 내역 (F-03c) ────────────────────────── */
 export const recentAnalyses: RecentAnalysis[] = [
