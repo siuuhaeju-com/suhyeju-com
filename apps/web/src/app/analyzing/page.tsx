@@ -7,6 +7,7 @@ import { NetworkSphere } from '@/components/loading/NetworkSphere';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { isValidNewsLink } from '@/lib/link';
 import { cn } from '@/lib/utils';
 import { floatingChips } from '@/lib/mock-data';
 
@@ -18,9 +19,10 @@ const STEP_LABELS = [
   '산업 영향도 히트맵 생성 중',
 ] as const;
 
-// analyze 수신 후 ②→③→④까지만 타이머로 채우고 멈춘다(④는 quote 이벤트로만 완료 처리).
+// analyze 수신 후 ②→③까지만 타이머로 채우고 멈춘다(④는 quote 이벤트로만 완료 처리).
 const TIMER_INTERVAL_MS = 1300;
 const TIMER_CAP = 3;
+const DONE_NAVIGATE_DELAY_MS = 400;
 
 type AnalyzeEvent =
   | { step: 'extract' | 'analyze' | 'quote'; label: string }
@@ -33,8 +35,10 @@ type AnalyzeEvent =
  * - extract 수신 → ①(기본 상태이므로 별도 처리 없음)
  * - analyze 수신 → ① 완료, ② 진행 중 시작 + 타이머로 ②→③→④ 순차 진행(④에서 대기)
  * - quote 수신 → ②③④ 즉시 완료 처리(타이머 캐치업 점프) + ⑤ 진행 중
- * - done 수신 → /analysis/[id]로 라우팅 (오직 이 이벤트로만 트리거, 타이머로는 넘어가지 않음)
- * - error 수신 → 고정 문구 + 재시도 버튼
+ * - done 수신 → ⑤까지 완료 표시 후 /analysis/[id]로 라우팅
+ * - error 수신(또는 스트림이 done/error 없이 끊김) → 서버가 준 문구(or 기본 문구) + 재시도 버튼
+ * 언마운트되거나 url/retryKey가 바뀌면 AbortController로 진행 중이던 요청을 취소한다 —
+ * 그러지 않으면 화면을 떠난 뒤에도 늦게 도착한 done 이벤트가 엉뚱하게 라우팅을 일으킨다.
  */
 export default function AnalyzingPage() {
   const router = useRouter();
@@ -42,25 +46,17 @@ export default function AnalyzingPage() {
   const url = searchParams.get('url');
 
   const [completed, setCompleted] = useState(0);
-  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [retryKey, setRetryKey] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  // React Strict Mode(dev)가 effect를 두 번 실행하는데, 매번 fetch를 새로 시작하면
-  // 서버에서 분석이 중복 실행되어 서로 다른 id가 생기고 무엇이 저장됐는지 꼬인다.
-  // (url, retryKey) 조합당 실제 요청은 정확히 한 번만 시작하도록 ref로 막는다.
-  const startedKeyRef = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!url) {
+    if (!url || !isValidNewsLink(url)) {
       router.replace('/');
       return;
     }
 
-    const key = `${url}:${retryKey}`;
-    if (startedKeyRef.current === key) {
-      return;
-    }
-    startedKeyRef.current = key;
+    const controller = new AbortController();
 
     function clearTimer() {
       if (timerRef.current) {
@@ -69,15 +65,17 @@ export default function AnalyzingPage() {
       }
     }
 
-    function tick() {
-      setCompleted((prev) => {
-        if (prev >= TIMER_CAP) return prev;
-        const next = prev + 1;
-        if (next < TIMER_CAP) {
-          timerRef.current = setTimeout(tick, TIMER_INTERVAL_MS);
+    // 부작용(다음 tick 예약)을 setState updater 밖, 평범한 클로저 변수로 관리한다 —
+    // Strict Mode가 updater 함수를 이중 호출해도 타이머가 두 번 걸리지 않도록.
+    let ticks = 0;
+    function scheduleTick() {
+      timerRef.current = setTimeout(() => {
+        ticks += 1;
+        setCompleted(ticks);
+        if (ticks < TIMER_CAP) {
+          scheduleTick();
         }
-        return next;
-      });
+      }, TIMER_INTERVAL_MS);
     }
 
     async function run() {
@@ -86,6 +84,7 @@ export default function AnalyzingPage() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ url }),
+          signal: controller.signal,
         });
         if (!response.ok || !response.body) {
           throw new Error('요청에 실패했습니다');
@@ -106,25 +105,36 @@ export default function AnalyzingPage() {
             const event = JSON.parse(line) as AnalyzeEvent;
             if (event.step === 'analyze') {
               clearTimer();
+              ticks = 1;
               setCompleted(1);
-              timerRef.current = setTimeout(tick, TIMER_INTERVAL_MS);
+              scheduleTick();
             } else if (event.step === 'quote') {
               clearTimer();
+              ticks = TIMER_CAP;
               setCompleted(4);
             } else if (event.step === 'done') {
               clearTimer();
-              router.push(`/analysis/${event.id}`);
+              setCompleted(STEP_LABELS.length);
+              setTimeout(() => router.push(`/analysis/${event.id}`), DONE_NAVIGATE_DELAY_MS);
               return;
             } else if (event.step === 'error') {
               clearTimer();
-              setHasError(true);
+              setErrorMessage(event.message);
               return;
             }
           }
         }
-      } catch {
+
+        // 루프가 done/error 이벤트 없이 끝났다 = 서버가 스트림을 예기치 않게 닫음
         clearTimer();
-        setHasError(true);
+        setErrorMessage('분석 서버 연결이 끊겼습니다. 다시 시도해주세요');
+      } catch (err) {
+        if (controller.signal.aborted) {
+          return; // 언마운트/재시도로 인한 의도된 취소 — 에러 아님
+        }
+        clearTimer();
+        console.error('[analyzing]', err);
+        setErrorMessage('네트워크 오류로 분석에 실패했습니다');
       }
     }
 
@@ -132,17 +142,18 @@ export default function AnalyzingPage() {
 
     return () => {
       clearTimer();
+      controller.abort();
     };
   }, [url, router, retryKey]);
 
-  if (hasError) {
+  if (errorMessage) {
     return (
       <main className="mx-auto flex w-full max-w-xl flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center">
-        <p className="text-sm text-muted-foreground">분석 중 오류가 발생했습니다</p>
+        <p className="text-sm text-muted-foreground">{errorMessage}</p>
         <Button
           onClick={() => {
             setCompleted(0);
-            setHasError(false);
+            setErrorMessage(null);
             setRetryKey((key) => key + 1);
           }}
         >
