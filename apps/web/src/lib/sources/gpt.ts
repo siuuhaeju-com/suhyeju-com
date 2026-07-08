@@ -1,21 +1,33 @@
 /**
- * GPT 게이트웨이 클라이언트 + 뉴스 분석 (analyze 파이프라인 ②단계).
+ * GPT 클라이언트 + 뉴스 분석 (analyze 파이프라인 ②단계).
  *
- * 엘리스 프록시(OpenAI 호환)를 통해 openai/gpt-5.4를 호출한다.
- * baseURL(GPT_BASE_URL)·키(OPENAI_API_KEY)는 .env.local에서 읽는다.
- * ⚠️ GPT_BASE_URL(엘리스 실제 주소)이 채워져야 실제 호출된다.
+ * OPENAI_API_KEY가 있으면 실제 호출, 없으면 mock 폴백.
+ *   - GPT_BASE_URL 있음 → 엘리스 OpenAI 호환 프록시(기본 모델 openai/gpt-5.4)
+ *   - GPT_BASE_URL 없음 → 표준 OpenAI(api.openai.com, 기본 모델 gpt-4o, 키 sk-…)
+ * 모델은 GPT_MODEL로 덮어쓸 수 있다. 키·주소는 .env.local에서 읽는다.
  */
 import OpenAI from 'openai';
 import { zodResponseFormat } from 'openai/helpers/zod';
 import { z } from 'zod';
 
 function getClient(): OpenAI {
-  const baseURL = process.env.GPT_BASE_URL;
   const apiKey = process.env.OPENAI_API_KEY;
-  if (!baseURL || !apiKey) {
-    throw new Error('GPT_BASE_URL 또는 OPENAI_API_KEY가 설정되지 않았습니다 (.env.local 확인)');
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY가 설정되지 않았습니다 (.env.local 확인)');
   }
-  return new OpenAI({ baseURL, apiKey });
+  // GPT_BASE_URL 있으면 엘리스 게이트웨이, 없으면 표준 OpenAI(baseURL 생략).
+  const baseURL = process.env.GPT_BASE_URL || undefined;
+  return new OpenAI({ apiKey, ...(baseURL ? { baseURL } : {}) });
+}
+
+/**
+ * 호출할 모델명. GPT_MODEL로 지정하거나, base_url 유무로 기본값을 고른다.
+ *   - 게이트웨이(GPT_BASE_URL 있음) → 'openai/gpt-5.4'
+ *   - 표준 OpenAI(없음)            → 'gpt-4o'
+ */
+function resolveModel(): string {
+  if (process.env.GPT_MODEL) return process.env.GPT_MODEL;
+  return process.env.GPT_BASE_URL ? 'openai/gpt-5.4' : 'gpt-4o';
 }
 
 /* ── AnalysisResult 중 "GPT가 생성"하는 부분의 스키마 ──
@@ -92,28 +104,28 @@ const SYSTEM_PROMPT = `당신은 한국 주식시장 전문 애널리스트입�
 /**
  * 뉴스 본문을 분석해 AnalysisResult 초안(GPT 생성 부분)을 반환한다.
  *
- * ⚠️ B안(mock 폴백): 엘리스 프록시 base_url이 아직 미확보이므로,
- *   - GPT_BASE_URL(+키)이 없으면 → 샘플 초안을 반환(LLM 호출 없음).
- *   - base_url이 채워지면 → 자동으로 실제 호출로 전환(코드 재수정 불필요).
- *   - MOCK_ANALYZE=1 → base_url이 있어도 강제로 mock(테스트용).
- * base_url이 확보되면 이 mock 분기는 그대로 두거나 삭제하면 된다.
+ * 실호출 조건: OPENAI_API_KEY가 있고 MOCK_ANALYZE 강제가 아닐 때.
+ *   - 키 없음 / MOCK_ANALYZE=1 → 샘플 초안(mock) 반환.
+ *   - 키 있음 + GPT_BASE_URL 있음 → 엘리스 게이트웨이 호출.
+ *   - 키 있음 + GPT_BASE_URL 없음 → 표준 OpenAI 직접 호출.
  */
 export async function analyzeNews(articleText: string): Promise<AnalysisDraft> {
   const forceMock = process.env.MOCK_ANALYZE === '1' || process.env.MOCK_ANALYZE === 'true';
-  const hasGateway = !!(process.env.GPT_BASE_URL && process.env.OPENAI_API_KEY);
+  const hasKey = !!process.env.OPENAI_API_KEY;
 
-  if (forceMock || !hasGateway) {
+  // 실호출 조건: 키가 있고 mock 강제가 아닐 때. 키가 없으면 mock 폴백(개발·데모 가능).
+  if (forceMock || !hasKey) {
     console.warn(
       `[analyzeNews] mock 모드로 동작합니다 (${
-        forceMock ? 'MOCK_ANALYZE 강제' : 'GPT_BASE_URL 미설정'
-      }). 실제 분석은 .env.local에 GPT_BASE_URL·OPENAI_API_KEY를 채우면 자동 전환됩니다.`,
+        forceMock ? 'MOCK_ANALYZE 강제' : 'OPENAI_API_KEY 미설정'
+      }). OPENAI_API_KEY를 .env.local에 채우면 실제 호출로 전환됩니다.`,
     );
     return mockAnalysis(articleText);
   }
 
   const client = getClient();
   const completion = await client.chat.completions.parse({
-    model: 'openai/gpt-5.4',
+    model: resolveModel(),
     messages: [
       { role: 'system', content: SYSTEM_PROMPT },
       { role: 'user', content: articleText },
