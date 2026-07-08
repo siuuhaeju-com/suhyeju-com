@@ -1,59 +1,10 @@
 /**
  * 화면 프로토타입용 mock 데이터 — 시각 정본(docs/design/mockup)과 동일한 내용.
  * FE 연동 시 이 모듈의 export를 API 호출(react-query)로 교체한다.
- *   - 메인:   GET /api/news/popular, /api/sectors, /api/analysis/recent
+ *   - 메인:   GET /api/news (✅완료), GET /api/market/kr/major-sectors (✅완료), /api/analysis/recent
  *   - 분석:   GET /api/analysis/:id  →  AnalysisResult
  */
-import type {
-  AnalysisResult,
-  AnalysisStep,
-  FloatingChip,
-  NewsItem,
-  RecentAnalysis,
-} from '@/lib/types';
-
-/* ── 메인: 인기 뉴스 (F-03a) ─────────────────────────────── */
-export const popularNews: NewsItem[] = [
-  {
-    id: 'news-battery',
-    sector: '2차전지',
-    sectorTone: 'negative',
-    source: '한국경제',
-    publishedAt: '6시간 전',
-    title: '전기차 수요 둔화 우려…배터리 소재 업체 실적 하향 조정',
-    summary:
-      '글로벌 완성차 업체의 전기차 생산 계획 축소로 국내 배터리 소재 기업의 하반기 실적 전망이 낮아졌다.',
-  },
-  {
-    id: 'news-semicon',
-    sector: '반도체',
-    sectorTone: 'positive',
-    source: '매일경제',
-    publishedAt: '8시간 전',
-    title: '삼성전자, 파운드리 2나노 시험 생산 성공…TSMC 추격 본격화',
-    summary:
-      '삼성전자가 2나노 공정 시험 생산에 성공하며 첨단 파운드리 경쟁에서 반등 발판을 마련했다.',
-  },
-  {
-    id: 'news-bio',
-    sector: '바이오',
-    sectorTone: 'teal',
-    source: '이데일리',
-    publishedAt: '10시간 전',
-    title: '신약 임상 3상 일부 지연…바이오 섹터 변동성 확대',
-    summary: '주요 바이오 기업의 임상 일정 조정 소식에 섹터 전반의 투자 심리가 엇갈리고 있다.',
-  },
-  {
-    id: 'news-energy',
-    sector: '에너지',
-    sectorTone: 'amber',
-    source: '연합인포맥스',
-    publishedAt: '12시간 전',
-    title: '국제유가 급등…정유·태양광 밸류체인 동반 강세',
-    summary:
-      '지정학적 리스크로 국제유가가 급등하며 에너지 관련 종목 전반에 매수세가 유입되고 있다.',
-  },
-];
+import type { AnalysisResult, AnalysisStep, FloatingChip, RecentAnalysis } from '@/lib/types';
 
 /* ── 메인: 최근 분석 내역 (F-03c) ────────────────────────── */
 export const recentAnalyses: RecentAnalysis[] = [
