@@ -124,7 +124,7 @@ const SECTOR_TONES: Readonly<Record<string, 'teal' | 'amber' | 'blue' | 'neutral
   유틸리티: 'blue',
 };
 
-/** GICS 섹터(또는 검색어 폴백)에 맞는 배지 색을 반환한다. 매핑에 없으면 neutral. */
+/** GICS 섹터(또는 미분류 기본값 '증시')에 맞는 배지 색을 반환한다. 매핑에 없으면 neutral. */
 export function getSectorTone(sector: string): 'teal' | 'amber' | 'blue' | 'neutral' {
   return SECTOR_TONES[sector] ?? 'neutral';
 }
