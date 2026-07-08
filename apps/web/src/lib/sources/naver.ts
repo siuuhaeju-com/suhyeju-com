@@ -133,12 +133,23 @@ export interface StockSectorInfo {
   wicsSector: string;
 }
 
+const STOCK_NAME_TO_SECTOR_TTL_MS = 60_000; // 파일 내 다른 fetch들의 60초 캐시와 동일한 주기
+
+// fetchStockNameToSectorInfo()가 매 호출마다 79개 업종을 다시 훑지 않도록 하는 인메모리 캐시.
+// 개별 fetch 자체는 이미 revalidate:60으로 캐시되지만, 79개를 순회하며 Map을 다시 만드는
+// JS 연산은 그때마다 반복되므로 결과물(Map)을 통째로 짧게 캐시한다.
+let stockNameToSectorCache: { data: Map<string, StockSectorInfo>; expiresAt: number } | null = null;
+
 /**
  * 종목명(예: "삼성전자") → 섹터 정보 매핑을 반환한다 (뉴스 섹터 분류용, #15).
  * 79개 업종 전체 구성종목을 훑어서 만들며, 개별 fetch는 fetchIndustryStocks의
  * 60초 캐시(next.revalidate)를 그대로 타므로 반복 호출해도 실네트워크 요청은 늘지 않는다.
  */
 export async function fetchStockNameToSectorInfo(): Promise<Map<string, StockSectorInfo>> {
+  if (stockNameToSectorCache && stockNameToSectorCache.expiresAt > Date.now()) {
+    return stockNameToSectorCache.data;
+  }
+
   const data = await fetchIndustryResponse();
 
   const perGroup = await Promise.all(
@@ -153,7 +164,25 @@ export async function fetchStockNameToSectorInfo(): Promise<Map<string, StockSec
     }),
   );
 
-  return new Map(perGroup.flat());
+  const result = new Map(perGroup.flat());
+  stockNameToSectorCache = { data: result, expiresAt: Date.now() + STOCK_NAME_TO_SECTOR_TTL_MS };
+  return result;
+}
+
+/**
+ * 텍스트에 실제 종목명이 언급됐는지로 섹터를 찾는다 (뉴스 섹터 분류용, #15 — 키워드
+ * 매칭보다 정확도 높음). 종목명이 서로 부분 문자열일 수 있어(예: "SK"·"SK하이닉스")
+ * 긴 이름부터 검사해야 하므로, 호출 측이 `sortedNames`를 길이 내림차순으로 정렬해 넘긴다.
+ */
+export function classifyByStockNames(
+  text: string,
+  sortedNames: readonly string[],
+  nameToSector: ReadonlyMap<string, StockSectorInfo>,
+): StockSectorInfo | null {
+  for (const name of sortedNames) {
+    if (text.includes(name)) return nameToSector.get(name) ?? null;
+  }
+  return null;
 }
 
 /**

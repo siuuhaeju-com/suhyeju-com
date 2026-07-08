@@ -2,26 +2,17 @@ import { NextResponse } from 'next/server';
 
 import { classifyNewsSector, getSectorTone } from '@/lib/gics-sectors';
 import { fetchRankNews } from '@/lib/sources/naver-news';
-import { fetchStockNameToSectorInfo, type StockSectorInfo } from '@/lib/sources/naver';
+import {
+  classifyByStockNames,
+  fetchStockNameToSectorInfo,
+  type StockSectorInfo,
+} from '@/lib/sources/naver';
 import type { NewsItem } from '@/lib/types';
 
 // 인기 뉴스 API (#15·#53) — 네이버 증권 '많이 본 뉴스'(ranknews)에 종목명·키워드 기반
 // 섹터 자동 분류(#15)를 적용한다. 응답 형태는 lib/types.ts 의 NewsItem 과 맞춘다.
 
 const DEFAULT_SECTOR = '증시';
-
-// 제목·요약에 실제 종목명이 언급됐는지로 섹터를 찾는다 (키워드 매칭보다 정확도 높음).
-// 종목명이 서로 부분 문자열일 수 있어(예: "SK"·"SK하이닉스") 긴 이름부터 검사한다.
-function classifyByStockNames(
-  text: string,
-  sortedNames: readonly string[],
-  nameToSector: ReadonlyMap<string, StockSectorInfo>,
-): StockSectorInfo | null {
-  for (const name of sortedNames) {
-    if (text.includes(name)) return nameToSector.get(name) ?? null;
-  }
-  return null;
-}
 
 export async function GET() {
   try {
@@ -33,7 +24,7 @@ export async function GET() {
     ]);
     const sortedStockNames = [...stockNameToSector.keys()].sort((a, b) => b.length - a.length);
 
-    const news: NewsItem[] = articles.map((article, index) => {
+    const news: NewsItem[] = articles.map((article) => {
       const text = `${article.title} ${article.summary}`;
 
       // 1) 실제 종목명 언급 → 2) 주제 키워드 → 3) 기본값(증시) 순으로 섹터 추정.
@@ -43,11 +34,10 @@ export async function GET() {
       const sector = stockMatch?.gicsSector ?? keywordMatch?.sector ?? DEFAULT_SECTOR;
 
       return {
-        id: `news-${index}`,
+        ...article,
         sector,
         subTag: stockMatch?.wicsSector ?? keywordMatch?.keyword,
         sectorTone: getSectorTone(sector),
-        ...article,
       };
     });
 

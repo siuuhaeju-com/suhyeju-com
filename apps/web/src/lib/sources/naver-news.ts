@@ -51,7 +51,7 @@ function toRelativeTime(dt: string): string {
 }
 
 /** ranknews 원본을 화면용으로 옮긴 것 — 섹터 분류(#15)는 route.ts에서 별도로 붙인다. */
-export type RankNewsArticle = Omit<NewsItem, 'id' | 'sector' | 'subTag' | 'sectorTone'>;
+export type RankNewsArticle = Omit<NewsItem, 'sector' | 'subTag' | 'sectorTone'>;
 
 /** 네이버 증권 '많이 본 뉴스' 상위 limit개 → RankNewsArticle[] */
 export async function fetchRankNews(limit = 5): Promise<RankNewsArticle[]> {
@@ -65,6 +65,8 @@ export async function fetchRankNews(limit = 5): Promise<RankNewsArticle[]> {
 
   const items = (await res.json()) as RankNewsItem[];
   return items.slice(0, limit).map((item) => ({
+    // 언론사 id + 기사 id 조합 — ranknews가 주는 유일한 안정 식별자(배열 순서에 안 흔들림)
+    id: `${item.oid}-${item.aid}`,
     source: item.ohnm,
     publishedAt: toRelativeTime(item.dt),
     title: stripHtml(item.tit),
