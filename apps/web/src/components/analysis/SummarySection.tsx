@@ -9,7 +9,7 @@ export function SummarySection({ result }: { result: AnalysisResult }) {
   return (
     <section aria-labelledby="summary-heading">
       <div className="flex flex-wrap items-center gap-2">
-        <Badge tone="red">{result.sector}</Badge>
+        <Badge tone="positive">{result.sector}</Badge>
         <Badge tone="neutral">{result.verdict}</Badge>
       </div>
       <h1
@@ -54,7 +54,7 @@ export function SummarySection({ result }: { result: AnalysisResult }) {
           <h2 className="mt-6 text-[13px] font-bold text-muted-foreground">관련 섹터</h2>
           <div className="mt-3 flex flex-wrap gap-2">
             {result.relatedSectors.map((sector) => (
-              <Badge key={sector.name} tone={sector.changePct >= 0 ? 'red' : 'green'}>
+              <Badge key={sector.name} tone={sector.changePct >= 0 ? 'positive' : 'negative'}>
                 {sector.name}
                 <span className={`font-bold ${getPctToneClass(sector.changePct)}`}>
                   {formatPct(sector.changePct)}

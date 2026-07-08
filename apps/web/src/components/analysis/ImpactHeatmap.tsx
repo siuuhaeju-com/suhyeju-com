@@ -8,7 +8,7 @@ import { formatPct } from '@/lib/format';
 import type { HeatmapCell, TopStock } from '@/lib/types';
 
 /**
- * 섹터별 영향도 히트맵 (F-08) — 트리맵: 면적=영향도, 긍정=레드/부정=그린(진하기=크기).
+ * 섹터별 영향도 히트맵 (F-08) — 트리맵: 면적=영향도, 긍정=레드/부정=블루(진하기=크기).
  * 셀 hover 시 Top5 종목 툴팁(F-10).
  * 배치는 목업 비율의 고정 트리맵 — FE 연동 시 weight 기반 d3-treemap 등으로 대체 가능.
  */

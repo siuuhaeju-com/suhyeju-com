@@ -23,7 +23,7 @@ export function StockTooltip({ sector, stocks }: { sector: string; stocks: TopSt
         ))}
       </ul>
       <p className="mt-2 border-t border-border pt-1.5 text-[10.5px] text-muted-foreground">
-        긍정=레드 · 부정=그린 (전일대비)
+        상승=레드 · 하락=블루 (전일대비)
       </p>
     </div>
   );

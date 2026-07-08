@@ -22,7 +22,7 @@ export function SiteHeader() {
           {/* 라이브 인디케이터 — 글로우 허용 지점 (DESIGN.md Elevation) */}
           <span
             aria-hidden
-            className="size-1.5 rounded-full bg-negative shadow-[0_0_6px_var(--negative)] animate-glow-pulse"
+            className="size-1.5 rounded-full bg-blue-bright shadow-[0_0_6px_var(--blue-bright)] animate-glow-pulse"
           />
           실시간 뉴스 영향력 분석
         </div>

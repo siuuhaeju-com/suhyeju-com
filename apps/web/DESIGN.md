@@ -12,9 +12,10 @@ colors:
   brand-blue: '#3d6bff'
   blue-bright: '#6ea0ff'
   positive: '#f2495c'
-  negative: '#2fbf71'
+  negative: '#3b9eff'
   tier2-purple: '#8b7bff'
   tier3-teal: '#2fb3c9'
+  success: '#7fd8a8'
 typography:
   headline:
     fontFamily: "'Pretendard Variable', Pretendard, sans-serif"
@@ -76,11 +77,12 @@ components:
 - **brand-blue** (`#3d6bff` / oklch(0.585 0.226 266.2)): 주 액션(분석하기 버튼)·포커스 링. ⚠️ 배경 위 대비 4.4:1 — **작은 텍스트 링크로 쓰지 말 것**(텍스트 링크는 blue-bright 사용). 버튼 라벨(흰색)은 14px bold 이상만.
 - **blue-bright** (`#6ea0ff` / oklch(0.713 0.149 262.2)): 텍스트 링크·하이라이트·그래프 1차 파급. 배경 위 7.5:1로 안전.
 
-### Secondary (의미색 — ⚠️ 한국 시장 관례, 서구와 반대)
+### Secondary (의미색 — ⚠️ 국내 증시 관례: 상승=레드, 하락=블루)
 
 - **positive** (`#f2495c` / oklch(0.650 0.204 18.8)): 긍정/상승/호재. 틴트 배경 `rgba(242,73,92,0.07)`. surface-raised 위 4.6:1 — 통과하지만 여유 없음, 수치는 bold로.
-- **negative** (`#2fbf71` / oklch(0.712 0.164 154.1)): 부정/하락/악재. 틴트 배경 `rgba(47,191,113,0.07)`.
+- **negative** (`#3b9eff` / oklch(0.688 0.169 251.4)): 부정/하락/악재. 틴트 배경 `rgba(59,158,255,0.07)`. 배경 위 7.0:1·surface-raised 위 5.9:1로 AA 여유. 브랜드 블루(primary)와는 명도·용도로 구분 — negative는 **항상 ↘·− 부호와 함께** 수치·상태에만 쓰고, 버튼·링크에는 쓰지 않는다.
 - 등락·신호 카드·히트맵 전부 이 규칙. **범례 필수 병기**, 색 외에 화살표·부호(+/−) 병용.
+- **success** (`#7fd8a8`): 로딩 '완료' 체크 등 **상태 성공 전용** 그린. 시세·영향도에는 절대 쓰지 않는다(하락=negative 블루와 역할 분리).
 
 ### Tertiary (파급 단계색 — 영향력 확산 그래프)
 
@@ -122,19 +124,19 @@ components:
 
 **구현 스택: Next.js + Tailwind v4 + shadcn/ui.** shadcn CSS 변수 매핑(globals.css `:root`):
 
-| shadcn 변수                          | 토큰                                                                  |
-| ------------------------------------ | --------------------------------------------------------------------- |
-| `--background`                       | `{colors.bg}`                                                         |
-| `--card` / `--popover`               | `{colors.surface}`                                                    |
-| `--foreground` / `--card-foreground` | `{colors.ink}`                                                        |
-| `--muted-foreground`                 | `{colors.ink-muted}`                                                  |
-| `--primary`                          | `{colors.brand-blue}` (foreground `#ffffff`)                          |
-| `--secondary` / `--accent`           | `{colors.surface-raised}`                                             |
-| `--destructive`                      | `{colors.negative}` — 파괴적 액션(삭제)용. 시세 하락과 의미 구분 주의 |
-| `--border` / `--input`               | `rgba(255,255,255,0.08)`                                              |
-| `--ring`                             | `{colors.brand-blue}`                                                 |
-| `--chart-1..5`                       | blue-bright · tier2-purple · tier3-teal · positive · negative         |
-| `--radius`                           | `12px` (카드는 `{rounded.lg}`)                                        |
+| shadcn 변수                          | 토큰                                                                                           |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| `--background`                       | `{colors.bg}`                                                                                  |
+| `--card` / `--popover`               | `{colors.surface}`                                                                             |
+| `--foreground` / `--card-foreground` | `{colors.ink}`                                                                                 |
+| `--muted-foreground`                 | `{colors.ink-muted}`                                                                           |
+| `--primary`                          | `{colors.brand-blue}` (foreground `#ffffff`)                                                   |
+| `--secondary` / `--accent`           | `{colors.surface-raised}`                                                                      |
+| `--destructive`                      | `#f2495c` — 파괴적 액션(삭제)용 표준 레드. 시세 상승색과 톤이 같으므로 반드시 아이콘·문구 병기 |
+| `--border` / `--input`               | `rgba(255,255,255,0.08)`                                                                       |
+| `--ring`                             | `{colors.brand-blue}`                                                                          |
+| `--chart-1..5`                       | blue-bright · tier2-purple · tier3-teal · positive · negative                                  |
+| `--radius`                           | `12px` (카드는 `{rounded.lg}`)                                                                 |
 
 주요 컴포넌트 규칙:
 
@@ -150,7 +152,7 @@ components:
 
 **Do**
 
-- 긍정=빨강 / 부정=초록(한국 관례)을 전 화면 일관 적용 + 범례·화살표·부호 병기.
+- 긍정=빨강 / 부정=파랑(국내 증시 관례)을 전 화면 일관 적용 + 범례·화살표·부호 병기.
 - 모든 시각화 수치에 "왜"(근거 툴팁·출처)를 한 번의 인터랙션 안에 배치.
 - 로딩은 단계 서사(뉴스 읽기 → 키워드 추출 → 전망 분석 → 산업 영향 시각화)로.
 - 캔버스 시각화에는 동등한 정보의 텍스트 대안(툴팁·표) 제공.
@@ -162,4 +164,4 @@ components:
 - 카드·버튼 장식용 다크 글로우(목업의 블루 글로우는 라이브 인디케이터로만 축소 계승).
 - `width`/`height`/레이아웃 속성 transition(목업에 있음) — transform/opacity로 대체.
 - brand-blue 배경 위 작은 컬러 텍스트(대비 1.0~1.4:1 — 목업 위반), 헤딩 레벨 건너뛰기(h1→h3).
-- 긍정=초록/부정=빨강 혼용, 크림/라이트 배경, 그라데이션 텍스트, 카드 좌측 스트라이프, `01/02/03` 섹션 번호 스캐폴딩, 단계 서사 없는 단독 스피너, 임의 z-index(999).
+- 서구식(상승=초록/하락=빨강) 혼용·초록 계열의 시세 표기, 크림/라이트 배경, 그라데이션 텍스트, 카드 좌측 스트라이프, `01/02/03` 섹션 번호 스캐폴딩, 단계 서사 없는 단독 스피너, 임의 z-index(999).

@@ -10,8 +10,8 @@ const badgeVariants = cva(
       tone: {
         neutral: 'border-border bg-surface-raised text-ink-sub',
         blue: 'border-primary/40 bg-primary/10 text-blue-bright',
-        red: 'border-positive/40 bg-positive/10 text-positive',
-        green: 'border-negative/40 bg-negative/10 text-negative',
+        positive: 'border-positive/40 bg-positive/10 text-positive',
+        negative: 'border-negative/40 bg-negative/10 text-negative',
         teal: 'border-tier3/40 bg-tier3/10 text-tier3',
         amber: 'border-[#f2907c]/40 bg-[#f2907c]/10 text-[#f2907c]',
       },
