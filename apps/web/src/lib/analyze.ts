@@ -36,11 +36,16 @@ export async function runAnalysis(input: AnalyzeInput): Promise<AnalysisResult> 
   if (!text) throw new Error('분석할 뉴스 본문이 없습니다');
 
   // 2) GPT 분석 (구조 생성)
+  const tGpt = performance.now();
   const draft = await analyzeNews(text);
+  const tJoin = performance.now();
 
   // 3) 시세 join — topStocks 종목에 네이버 실시세를 붙이고,
   //    섹터(spreadNodes/heatmap/relatedSectors)는 그 섹터 종목들의 실시세 평균으로 파생.
   await joinQuotes(draft);
+  console.log(
+    `[analyze] GPT ${Math.round(tJoin - tGpt)}ms · join ${Math.round(performance.now() - tJoin)}ms`,
+  );
 
   // 4) AnalysisResult 조립
   return assemble(draft, {

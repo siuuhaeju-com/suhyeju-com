@@ -65,7 +65,9 @@ const zKnowledgeNode = z.object({
   group: z.enum(['center', 'tier1', 'tier2', 'etc']),
 });
 
-export const AnalysisSchema = z.object({
+// ── 3분할 스키마 (응답시간 단축: 큰 생성 1회를 3콜 병렬로) ──
+// A: 텍스트/여론 · B: 파급+종목(서로 참조) · C: 지식그래프+히트맵
+const SchemaA = z.object({
   sector: z.string(),
   verdict: z.string(), // "호재 분석" / "악재 분석"
   summary: z.string(),
@@ -74,11 +76,11 @@ export const AnalysisSchema = z.object({
   reviewedCount: z.number().int(),
   goodSignal: zSignalGroup,
   warnSignal: zSignalGroup,
+});
+
+const SchemaB = z.object({
   spreadNodes: z.array(zSpreadNode),
   spreadEdges: z.array(zSpreadEdge),
-  heatmap: z.array(z.object({ sector: z.string(), changePct: z.number() })),
-  knowledgeNodes: z.array(zKnowledgeNode),
-  knowledgeEdges: z.array(z.object({ from: z.string(), to: z.string() })),
   topStocks: z.array(
     z.object({
       sector: z.string(),
@@ -87,28 +89,47 @@ export const AnalysisSchema = z.object({
   ),
 });
 
+const SchemaC = z.object({
+  knowledgeNodes: z.array(zKnowledgeNode),
+  knowledgeEdges: z.array(z.object({ from: z.string(), to: z.string() })),
+  heatmap: z.array(z.object({ sector: z.string(), changePct: z.number() })),
+});
+
+// 전체 스키마 = 3분할 병합 (타입·mock용)
+export const AnalysisSchema = SchemaA.merge(SchemaB).merge(SchemaC);
+
 export type AnalysisDraft = z.infer<typeof AnalysisSchema>;
 
-const SYSTEM_PROMPT = `당신은 한국 주식시장 전문 애널리스트입니다. 뉴스 기사를 읽고, 그 이슈가 어느 산업으로 번지는지 1→2→3차 파급 경로를 **깊고 구체적으로** 분석합니다.
+const COMMON = `당신은 한국 주식시장 전문 애널리스트입니다. 항상 **한국 시장 관점**으로 분석하고(외국 뉴스여도 한국의 어느 산업·종목이 수혜/타격받는지 짚음), 모든 텍스트는 한국어로 작성합니다. changePct는 부호 포함(상승 +, 하락 −)으로 방향성만 추정합니다(실제 시세는 서버가 교체).`;
 
-## 파급 그래프 (spreadNodes/spreadEdges) — 가장 중요
+const PROMPT_A = `${COMMON}
+
+아래 뉴스의 핵심을 요약하고 여론 신호를 정리합니다.
+- sector: 뉴스의 핵심 산업 1개. verdict: "호재 분석" 또는 "악재 분석".
+- summary: 2~3문장 요약. keywords: 핵심 키워드 5개 내외. reviewedCount: 검토한 자료 수(정수).
+- relatedSectors: 관련 산업과 방향성 3개 내외.
+- goodSignal(좋은 신호)/warnSignal(주의 신호): ratio(%)·headline·news·reports·analyst(name/firm/quote).`;
+
+const PROMPT_B = `${COMMON}
+
+이 뉴스의 이슈가 어느 산업으로 번지는지 1→2→3차 파급 경로를 **깊고 구체적으로** 분석합니다.
+## 파급 그래프 (spreadNodes/spreadEdges)
 - **반드시 tier 0·1·2·3을 모두 채웁니다. tier 2·3을 생략하면 안 됩니다.**
   - tier 0: 뉴스의 원점 (정확히 1개)
   - tier 1: 뉴스에서 **직접** 수혜/타격받는 산업 (2~3개)
   - tier 2: tier 1 산업의 **공급망(전방·후방)**으로 번지는 산업 (2~3개)
   - tier 3: tier 2에서 **한 단계 더** 확산되는 산업 (1~2개)
-- spreadNodes는 **전체 최소 7개** 이상.
-- 각 노드에 고유 id를 부여합니다.
+- spreadNodes는 **전체 최소 7개** 이상, 각 노드에 고유 id.
 - **tier N(N≥1)의 모든 노드는 tier N-1의 어떤 노드로부터 spreadEdges 연결을 최소 1개 받습니다 (고립 노드 금지).**
-- spreadEdges의 from/to는 반드시 spreadNodes에 존재하는 id여야 하고(없는 id 금지), reason에 "왜 그 산업으로 번지는지" 한 줄 근거를 답니다.
+- spreadEdges의 from/to는 반드시 존재하는 spreadNodes id, reason에 한 줄 근거.
+## 종목 (topStocks)
+- 각 sector 이름을 spreadNodes의 name과 **일치**시키고, 대표 종목을 2개 이상 담습니다.`;
 
-## 그 외 규칙
-- 항상 **한국 시장 관점**으로 분석합니다. 외국(미국 등) 뉴스여도 "한국의 어느 산업·종목이 수혜/타격을 받는가"를 짚습니다.
+const PROMPT_C = `${COMMON}
+
+이 뉴스와 관련된 산업 지식그래프와 섹터 히트맵을 구성합니다.
 - knowledgeNodes/knowledgeEdges: 중심 산업과 연관 산업을 group(center/tier1/tier2/etc)으로 구성하고, edge의 from/to는 존재하는 knowledgeNodes id를 참조합니다.
-- topStocks: 각 sector 이름을 spreadNodes의 name과 일치시키고, 대표 종목을 2개 이상 담습니다.
-- changePct는 부호 포함(상승 +, 하락 −). 실제 시세는 서버가 다시 채우니 방향성 위주로 추정합니다.
-- verdict는 "호재 분석" 또는 "악재 분석" 형태입니다.
-- 모든 텍스트는 한국어로 작성합니다.`;
+- heatmap: 영향받는 주요 산업과 방향성 5개 내외. sector는 대표 산업명(반도체·HBM 등).`;
 
 /**
  * 뉴스 본문을 분석해 AnalysisResult 초안(GPT 생성 부분)을 반환한다.
@@ -133,19 +154,33 @@ export async function analyzeNews(articleText: string): Promise<AnalysisDraft> {
   }
 
   const client = getClient();
-  const completion = await client.chat.completions.parse({
-    model: resolveModel(),
-    messages: [
-      { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: articleText },
-    ],
-    response_format: zodResponseFormat(AnalysisSchema, 'analysis'),
-    max_completion_tokens: 8000,
-  });
+  const model = resolveModel();
 
-  const parsed = completion.choices[0]?.message.parsed;
-  if (!parsed) throw new Error('GPT 분석 결과 파싱에 실패했습니다');
-  return parsed;
+  // 3분할 병렬 호출 — 큰 생성 1회를 텍스트/파급+종목/지식그래프로 쪼개 응답시간 단축.
+  const call = <T extends z.ZodType>(prompt: string, schema: T, name: string) =>
+    client.chat.completions.parse({
+      model,
+      messages: [
+        { role: 'system', content: prompt },
+        { role: 'user', content: articleText },
+      ],
+      response_format: zodResponseFormat(schema, name),
+      max_completion_tokens: 3500,
+    });
+
+  const [a, b, c] = await Promise.all([
+    call(PROMPT_A, SchemaA, 'analysisA'),
+    call(PROMPT_B, SchemaB, 'analysisB'),
+    call(PROMPT_C, SchemaC, 'analysisC'),
+  ]);
+
+  const parsedA = a.choices[0]?.message.parsed;
+  const parsedB = b.choices[0]?.message.parsed;
+  const parsedC = c.choices[0]?.message.parsed;
+  if (!parsedA || !parsedB || !parsedC) {
+    throw new Error('GPT 분석 결과 파싱에 실패했습니다');
+  }
+  return { ...parsedA, ...parsedB, ...parsedC };
 }
 
 /**
