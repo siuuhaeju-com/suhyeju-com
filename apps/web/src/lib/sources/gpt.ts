@@ -155,6 +155,9 @@ export async function analyzeNews(articleText: string): Promise<AnalysisDraft> {
 
   const client = getClient();
   const model = resolveModel();
+  console.log(
+    `[analyzeNews] 실호출: model=${model}, gateway=${process.env.GPT_BASE_URL ? 'elice' : 'openai'}`,
+  );
 
   // 3분할 병렬 호출 — 큰 생성 1회를 텍스트/파급+종목/지식그래프로 쪼개 응답시간 단축.
   const call = <T extends z.ZodType>(prompt: string, schema: T, name: string) =>
