@@ -82,7 +82,7 @@ export default function AnalyzingPage() {
                   {state === 'done' && (
                     <span
                       aria-hidden
-                      className="flex size-6 items-center justify-center rounded-full border border-negative/50 bg-negative/10 text-xs text-[#7fd8a8]"
+                      className="flex size-6 items-center justify-center rounded-full border border-success/40 bg-success/10 text-xs text-success"
                     >
                       ✓
                     </span>
@@ -110,7 +110,7 @@ export default function AnalyzingPage() {
                 <span
                   className={cn(
                     'shrink-0 text-xs font-bold',
-                    state === 'done' && 'text-[#7fd8a8]',
+                    state === 'done' && 'text-success',
                     state === 'active' && 'text-blue-bright',
                     state === 'pending' && 'text-muted-foreground',
                   )}

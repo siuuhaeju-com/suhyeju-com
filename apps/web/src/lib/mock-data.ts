@@ -18,7 +18,7 @@ export const popularNews: NewsItem[] = [
   {
     id: 'news-battery',
     sector: '2차전지',
-    sectorTone: 'green',
+    sectorTone: 'negative',
     source: '한국경제',
     publishedAt: '6시간 전',
     title: '전기차 수요 둔화 우려…배터리 소재 업체 실적 하향 조정',
@@ -28,7 +28,7 @@ export const popularNews: NewsItem[] = [
   {
     id: 'news-semicon',
     sector: '반도체',
-    sectorTone: 'red',
+    sectorTone: 'positive',
     source: '매일경제',
     publishedAt: '8시간 전',
     title: '삼성전자, 파운드리 2나노 시험 생산 성공…TSMC 추격 본격화',
@@ -88,8 +88,8 @@ export const analysisSteps: AnalysisStep[] = [
 export const floatingChips: FloatingChip[] = [
   { label: '# HBM4', tone: 'neutral', x: 22, y: 12, delay: 0 },
   { label: '# 엔비디아', tone: 'neutral', x: 58, y: 20, delay: 0.8 },
-  { label: '전기장비', tone: 'green', x: 8, y: 32, delay: 1.6 },
-  { label: '반도체', tone: 'red', x: 78, y: 44, delay: 0.4 },
+  { label: '전기장비', tone: 'teal', x: 8, y: 32, delay: 1.6 },
+  { label: '반도체', tone: 'positive', x: 78, y: 44, delay: 0.4 },
   { label: '# TC본더', tone: 'neutral', x: 6, y: 62, delay: 2.0 },
   { label: '# AI 데이터센터', tone: 'neutral', x: 60, y: 76, delay: 1.2 },
   { label: 'IT하드웨어', tone: 'blue', x: 30, y: 86, delay: 0.6 },

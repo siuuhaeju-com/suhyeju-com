@@ -3,7 +3,7 @@
  * FE 연동 시 lib/mock-data.ts 를 API 호출로 교체하면 된다. (SETUP-04 스키마 참고)
  */
 
-/** 등락 방향: 긍정=up(레드), 부정=down(그린) — 한국 시장 관례 */
+/** 등락 방향: 긍정=up(레드), 부정=down(블루) — 국내 증시 관례 */
 export type Direction = 'up' | 'down';
 
 export interface SectorChange {
@@ -20,7 +20,7 @@ export interface NewsItem {
   /** 관련 섹터 태그 */
   sector: string;
   /** 태그 색 변형 (메인 인기 뉴스 칩) */
-  sectorTone: 'red' | 'green' | 'teal' | 'amber';
+  sectorTone: 'positive' | 'negative' | 'teal' | 'amber';
   source: string;
   /** 상대 시각 텍스트 (예: 6시간 전) */
   publishedAt: string;
@@ -42,7 +42,7 @@ export interface AnalysisStep {
 /** 로딩 화면 좌측에 부유하는 키워드 칩 */
 export interface FloatingChip {
   label: string;
-  tone: 'neutral' | 'red' | 'green' | 'blue';
+  tone: 'neutral' | 'positive' | 'negative' | 'teal' | 'blue';
   /** 구체 주위 배치 (% 단위 좌표) */
   x: number;
   y: number;

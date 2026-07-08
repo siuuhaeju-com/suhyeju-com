@@ -32,12 +32,15 @@
   --accent: #1a1f2c;
   --accent-foreground: #e9edf4;
 
-  /* 의미색 — 한국 시장 관례(서구와 반대): 긍정=레드, 부정=그린. 범례 필수 병기 */
+  /* 의미색 — 국내 증시 관례: 긍정/상승=레드, 부정/하락=블루. 범례 필수 병기 */
   --positive: #f2495c;
-  --negative: #2fbf71;
-  --destructive: #2fbf71;
+  --negative: #3b9eff;
+  --destructive: #f2495c;
 
   /* 파급 단계색 */
+  /* 상태 성공(완료 체크) 전용 그린 — 시세 색 아님. 시세 하락은 --negative(블루) */
+  --success: #7fd8a8;
+
   --tier1: #6ea0ff;
   --tier2: #8b7bff;
   --tier3: #2fb3c9;
@@ -50,7 +53,7 @@
   --chart-2: #8b7bff;
   --chart-3: #2fb3c9;
   --chart-4: #f2495c;
-  --chart-5: #2fbf71;
+  --chart-5: #3b9eff;
 
   --radius: 0.75rem; /* 12px — 카드는 radius-lg(16px) */
 
@@ -89,6 +92,7 @@
   --color-positive: var(--positive);
   --color-negative: var(--negative);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
   --color-tier1: var(--tier1);
   --color-tier2: var(--tier2);
   --color-tier3: var(--tier3);

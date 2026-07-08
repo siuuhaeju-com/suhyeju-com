@@ -4,7 +4,7 @@ export function formatPct(n: number): string {
   return `${n > 0 ? '+' : ''}${n.toFixed(1)}%`;
 }
 
-/** 긍정=positive(레드) / 부정=negative(그린) — 한국 시장 관례 */
+/** 긍정=positive(레드) / 부정=negative(블루) — 한국 시장 관례 */
 export function getPctToneClass(n: number): string {
   return n >= 0 ? 'text-positive' : 'text-negative';
 }
