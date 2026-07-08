@@ -115,7 +115,9 @@ export default function AnalyzingPage() {
             } else if (event.step === 'done') {
               clearTimer();
               setCompleted(STEP_LABELS.length);
-              setTimeout(() => router.push(`/analysis/${event.id}`), DONE_NAVIGATE_DELAY_MS);
+              // replace: 로딩 화면을 히스토리에 남기지 않는다 — push로 두면 분석 페이지에서
+              // 뒤로가기 시 이 페이지로 돌아와 재마운트되며 분석 전체가 다시 실행된다.
+              setTimeout(() => router.replace(`/analysis/${event.id}`), DONE_NAVIGATE_DELAY_MS);
               return;
             } else if (event.step === 'error') {
               clearTimer();
