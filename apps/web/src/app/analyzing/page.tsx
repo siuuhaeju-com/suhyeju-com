@@ -21,7 +21,9 @@ const STEP_LABELS = [
 ] as const;
 
 // analyze 수신 후 ②→③까지만 타이머로 채우고 멈춘다(④는 quote 이벤트로만 완료 처리).
-const TIMER_INTERVAL_MS = 1300;
+// 실제 GPT 호출이 13~16초 걸리는데(analyze→quote 구간), 간격이 너무 짧으면
+// ③에서 quote가 올 때까지 오래 멈춰 있는 것처럼 보인다 — 대기 시간에 맞춰 넉넉하게 잡는다.
+const TIMER_INTERVAL_MS = 4000;
 const TIMER_CAP = 3;
 const DONE_NAVIGATE_DELAY_MS = 400;
 
