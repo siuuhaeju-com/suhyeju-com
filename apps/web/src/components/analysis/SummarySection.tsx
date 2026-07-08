@@ -37,6 +37,7 @@ export function SummarySection({ result }: { result: AnalysisResult }) {
             <Button
               variant="outline"
               size="sm"
+              nativeButton={false}
               render={<a href={result.originUrl} target="_blank" rel="noreferrer" />}
             >
               원문 보기 ↗

@@ -15,7 +15,9 @@ export default function AnalysisNotFound() {
       <p className="text-sm text-muted-foreground">
         분석 결과를 찾을 수 없습니다. 링크가 잘못됐거나 결과가 만료됐을 수 있어요.
       </p>
-      <Button render={<Link href="/" />}>새 분석 시작하기</Button>
+      <Button nativeButton={false} render={<Link href="/" />}>
+        새 분석 시작하기
+      </Button>
     </main>
   );
 }
