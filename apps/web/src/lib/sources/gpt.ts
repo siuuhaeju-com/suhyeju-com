@@ -126,7 +126,8 @@ const PROMPT_B = `${COMMON}
 - **tier N(N≥1)의 모든 노드는 tier N-1의 어떤 노드로부터 spreadEdges 연결을 최소 1개 받습니다 (고립 노드 금지).**
 - spreadEdges의 from/to는 반드시 존재하는 spreadNodes id, reason에 한 줄 근거.
 ## 종목 (topStocks)
-- 각 sector 이름을 spreadNodes의 name과 **일치**시키고, 대표 종목을 2개 이상 담습니다.
+- **spreadNodes의 tier 1·2·3 노드 각각에 대해** topStocks 항목을 하나씩 만듭니다(빠짐없이 전부).
+- 각 sector 이름을 해당 spreadNodes의 name과 **일치**시키고, 대표 종목을 **정확히 5개**(Top5) 담습니다.
 - 판별한 시장 관점을 따릅니다(미국 관점이면 미국 종목). name은 위 표기 규칙(한글 표기 또는 티커)을 지켜 시세 조회가 되게 합니다.`;
 
 const PROMPT_C = `${COMMON}
@@ -284,6 +285,9 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         stocks: [
           { name: 'SK하이닉스', changePct: 5.2 },
           { name: '삼성전자', changePct: 3.5 },
+          { name: '한미반도체', changePct: 6.1 },
+          { name: '디아이', changePct: 4.0 },
+          { name: '테크윙', changePct: 3.1 },
         ],
       },
       {
@@ -291,6 +295,9 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         stocks: [
           { name: '한미반도체', changePct: 6.1 },
           { name: '주성엔지니어링', changePct: 3.3 },
+          { name: '원익IPS', changePct: 2.8 },
+          { name: '피에스케이', changePct: 2.2 },
+          { name: '유진테크', changePct: 1.9 },
         ],
       },
       {
@@ -298,6 +305,9 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         stocks: [
           { name: '동진쎄미켐', changePct: 2.4 },
           { name: '솔브레인', changePct: 1.7 },
+          { name: '한솔케미칼', changePct: 1.5 },
+          { name: 'SK머티리얼즈', changePct: 1.2 },
+          { name: '이엔에프테크', changePct: 1.0 },
         ],
       },
       {
@@ -305,6 +315,19 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         stocks: [
           { name: '하나마이크론', changePct: 2.9 },
           { name: 'SFA반도체', changePct: 1.8 },
+          { name: '이오테크닉스', changePct: 1.6 },
+          { name: '네패스', changePct: 1.3 },
+          { name: '테스나', changePct: 1.1 },
+        ],
+      },
+      {
+        sector: '전력·냉각',
+        stocks: [
+          { name: 'LS ELECTRIC', changePct: 1.9 },
+          { name: 'HD현대일렉트릭', changePct: 1.6 },
+          { name: '효성중공업', changePct: 1.4 },
+          { name: '한전KPS', changePct: 1.0 },
+          { name: '비앤비성원', changePct: 0.8 },
         ],
       },
     ],

@@ -108,7 +108,10 @@ export function SpreadGraph({
                   stroke="transparent"
                   strokeWidth={16}
                   className="cursor-pointer"
-                  onMouseEnter={() => setHoveredEdge(index)}
+                  onMouseEnter={() => {
+                    setHoveredEdge(index);
+                    setHoveredNode(null);
+                  }}
                   onMouseLeave={() => setHoveredEdge(null)}
                 />
               </g>
@@ -124,9 +127,15 @@ export function SpreadGraph({
             <button
               key={node.id}
               type="button"
-              onMouseEnter={() => setHoveredNode(node.id)}
+              onMouseEnter={() => {
+                setHoveredNode(node.id);
+                setHoveredEdge(null);
+              }}
               onMouseLeave={() => setHoveredNode(null)}
-              onFocus={() => setHoveredNode(node.id)}
+              onFocus={() => {
+                setHoveredNode(node.id);
+                setHoveredEdge(null);
+              }}
               onBlur={() => setHoveredNode(null)}
               className={cn(
                 'absolute -translate-x-1/2 -translate-y-1/2 cursor-default rounded-md border bg-card px-3.5 py-2 text-left transition-colors outline-none',
