@@ -1,20 +1,18 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { isValidNewsLink } from '@/lib/link';
 
-// 본문 수집 연출 지연 (SETUP-05 연동 전 임시)
-const MOCK_FETCH_DELAY_MS = 600;
-
 /**
  * 뉴스 링크 입력 폼 (F-01 · F-02)
- * 제출(버튼 클릭 / Enter) 시 분석을 시작하고 로딩 화면으로 이동한다.
- * FE 연동 지점: POST /api/analysis(SETUP-05) 호출 후 반환된 id로 /analyzing?id=... 이동.
- * 현재는 API 미연동 상태라 지연으로 "본문 가져오는 중" 상태만 재현한다.
+ * 제출(버튼 클릭 / Enter) 시 형식 검증만 하고 로딩 화면(/analyzing, F-04)으로 넘긴다.
+ * POST /api/analyze(SETUP-05)는 NDJSON 스트림으로 진행 단계를 흘려 보내는데,
+ * 여기서 스트림을 끝까지 읽어버리면 로딩 화면이 실시간 단계 표시를 할 수 없으므로
+ * 실제 분석 요청은 로딩 화면 쪽에서 시작한다 — 이 폼은 입력값만 넘긴다.
  */
 export function AnalyzeForm() {
   const router = useRouter();
@@ -22,6 +20,13 @@ export function AnalyzeForm() {
   const [link, setLink] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // input이 disabled → enabled로 커밋된 뒤에 포커스해야 focus()가 먹히므로 렌더 이후로 미룬다
+  useEffect(() => {
+    if (errorMessage && !isSubmitting) {
+      inputRef.current?.focus();
+    }
+  }, [errorMessage, isSubmitting]);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setLink(event.target.value);
@@ -38,16 +43,14 @@ export function AnalyzeForm() {
     const value = link.trim();
     if (!value) {
       setErrorMessage('링크를 입력해주세요');
-      inputRef.current?.focus();
       return;
     }
     if (!isValidNewsLink(value)) {
       setErrorMessage('http(s)://로 시작하는 올바른 링크를 입력해주세요');
-      inputRef.current?.focus();
       return;
     }
     setIsSubmitting(true);
-    window.setTimeout(() => router.push('/analyzing'), MOCK_FETCH_DELAY_MS);
+    router.push(`/analyzing?url=${encodeURIComponent(value)}`);
   }
 
   return (
