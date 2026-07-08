@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 
+import { classifyNewsSector, getSectorTone } from '@/lib/gics-sectors';
+import { fetchStockNameToSectorInfo, type StockSectorInfo } from '@/lib/sources/naver';
 import type { NewsItem } from '@/lib/types';
 
-// 인기 뉴스 API (#33) — 네이버 검색 API로 최신 뉴스를 가져와 화면용 형태로 변환한다.
+// 최신 뉴스 API (#33) — 네이버 검색 API로 최신 뉴스를 가져와 화면용 형태로 변환한다.
 // 응답 형태는 lib/types.ts 의 NewsItem 과 맞춘다.
 
 // 네이버 뉴스 검색 응답의 각 항목
@@ -46,6 +48,19 @@ function extractSource(link: string): string {
   }
 }
 
+// 제목·요약에 실제 종목명이 언급됐는지로 섹터를 찾는다 (키워드 매칭보다 정확도 높음).
+// 종목명이 서로 부분 문자열일 수 있어(예: "SK"·"SK하이닉스") 긴 이름부터 검사한다.
+function classifyByStockNames(
+  text: string,
+  sortedNames: readonly string[],
+  nameToSector: ReadonlyMap<string, StockSectorInfo>,
+): StockSectorInfo | null {
+  for (const name of sortedNames) {
+    if (text.includes(name)) return nameToSector.get(name) ?? null;
+  }
+  return null;
+}
+
 export async function GET(request: Request) {
   const clientId = process.env.NAVER_CLIENT_ID;
   const clientSecret = process.env.NAVER_CLIENT_SECRET;
@@ -82,15 +97,35 @@ export async function GET(request: Request) {
 
   const data = (await response.json()) as { items: NaverNewsItem[] };
 
-  const news: NewsItem[] = data.items.map((item, index) => ({
-    id: `news-${index}`,
-    sector: query, // 데모용: 검색어를 섹터로. 추후 분류 로직으로 개선
-    sectorTone: 'teal',
-    source: extractSource(item.originallink || item.link),
-    publishedAt: toRelativeTime(item.pubDate),
-    title: stripHtml(item.title),
-    summary: stripHtml(item.description),
-  }));
+  // 종목명 매칭을 우선으로 섹터를 추정한다. 실패해도 뉴스 자체는 보여줘야 하므로
+  // 종목 데이터 조회 실패는 무시하고 빈 맵(→ 키워드/검색어 폴백)으로 넘어간다.
+  const stockNameToSector = await fetchStockNameToSectorInfo().catch(
+    () => new Map<string, StockSectorInfo>(),
+  );
+  const sortedStockNames = [...stockNameToSector.keys()].sort((a, b) => b.length - a.length);
+
+  const news: NewsItem[] = data.items.map((item, index) => {
+    const title = stripHtml(item.title);
+    const summary = stripHtml(item.description);
+    const text = `${title} ${summary}`;
+
+    // 1) 실제 종목명 언급 → 2) 주제 키워드 → 3) 검색어(증시) 순으로 섹터 추정.
+    // subTag(보조 태그)는 종목명 매칭 시 WICS 소분류, 키워드 매칭 시 그 키워드 자체.
+    const stockMatch = classifyByStockNames(text, sortedStockNames, stockNameToSector);
+    const keywordMatch = stockMatch ? null : classifyNewsSector(text);
+    const sector = stockMatch?.gicsSector ?? keywordMatch?.sector ?? query;
+
+    return {
+      id: `news-${index}`,
+      sector,
+      subTag: stockMatch?.wicsSector ?? keywordMatch?.keyword,
+      sectorTone: getSectorTone(sector),
+      source: extractSource(item.originallink || item.link),
+      publishedAt: toRelativeTime(item.pubDate),
+      title,
+      summary,
+    };
+  });
 
   return NextResponse.json(news);
 }
