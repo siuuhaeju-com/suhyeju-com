@@ -86,7 +86,7 @@ flowchart TB
   spread & heatmap --> tooltip
 
   main -. 인기뉴스·섹터현황·최근분석 .-> mock
-  analyzing -. 진행 단계·키워드 칩 .-> mock
+  analyzing -. 부유 키워드 칩만 .-> mock
   analysis -. "getAnalysis(id)" .-> mock
   mock --> types
 ```
@@ -107,7 +107,6 @@ flowchart TB
 | `popularNews`                          | 메인 — 인기 뉴스 카드 4개             | `NewsItem[]`                 | **#33**                                                |
 | `sectorOverview`                       | 메인 — 주요 섹터 현황 8칸             | `SectorChange[]`             | **#34**                                                |
 | `recentAnalyses`                       | 메인 — 최근 분석 내역                 | `RecentAnalysis[]`           | 미정 (§4-2에 제안 있음)                                |
-| `analysisSteps`                        | 로딩 — 5단계 체크리스트 문구          | `AnalysisStep[]`             | 상태 폴링으로 대체 (§4-4)                              |
 | `floatingChips`                        | 로딩 — 떠다니는 키워드 칩             | `FloatingChip[]`             | #36의 키워드 재사용 가능                               |
 | `analysisResult.summary` 등            | 분석 — AI 요약·키워드·관련 섹터       | `AnalysisResult`             | **#36**                                                |
 | `analysisResult.goodSignal/warnSignal` | 분석 — 전망 분석(좋은/주의 신호)      | `SignalGroup`                | **#37**                                                |
@@ -133,13 +132,14 @@ flowchart TB
   comp --> queries --> api --> be
 ```
 
-### 4-1. 준비: `lib/api.ts` 만들기
+### 4-1. 준비: `lib/api.ts` (구현 완료)
 
-작은 `fetch` 래퍼 하나로 시작하면 충분합니다.
+작은 `fetch` 래퍼로 시작합니다. 이미 두 가지가 구현되어 있습니다.
 
-- baseURL은 환경변수(`NEXT_PUBLIC_API_URL`)로 두고, `.env` 규약은 INFRA-01(#10)을 따릅니다.
-- HTTP 에러는 status와 message를 담은 Error로 통일해 throw하면, 쿼리 훅과 `error.tsx`에서 같은 방식으로 처리할 수 있습니다.
-- BE 응답이 `types.ts`와 다르면 이 단계에서 변환합니다.
+- `apiGet<T>(path)` — 단순 JSON GET 전용. `usePopularNews`·`useKrMajorSectors` 등 대부분의 쿼리 훅이 사용.
+- `apiPostStream<T>(path, body, signal?)` — NDJSON 스트림 POST 응답을 한 줄씩 파싱해 `for await`로 순회하는 async generator. `/api/analyze`처럼 진행 이벤트를 실시간으로 흘리는 엔드포인트 전용(§4-4 참고). 폴링용 `useQuery` 훅으로는 표현이 안 되는 패턴이라 컴포넌트의 `useEffect` 안에서 직접 순회합니다.
+- 두 함수 다 HTTP 에러를 `ApiError(status, message)`로 통일해 throw합니다 — 소비하는 쪽에서 `err instanceof ApiError`로 서버가 준 실제 메시지를 그대로 노출할 수 있습니다.
+- baseURL은 별도로 안 둡니다. BE가 같은 오리진의 Next.js Route Handler라 `/api/...` 상대경로로 바로 호출됩니다.
 
 ### 4-2. 몸풀기: 메인 페이지부터 (#33, #34)
 
@@ -158,13 +158,14 @@ flowchart TB
 - BE가 **통합 응답**(#36~#39를 한 번에)을 준다면 `getAnalysis`를 async fetch로 바꾸고 페이지 호출에 `await`만 붙이면 됩니다. 결과가 불변이라면 클라이언트 쿼리에서는 `staleTime: Infinity`가 적절합니다.
 - 엔드포인트가 분리되어 나오면 섹션별 훅(`useAnalysisSummary(id)` 등)으로 나누고, 기존 props 형태를 유지한 채 전달하세요. UI는 그대로 동작합니다.
 
-### 4-4. 로딩 페이지: 타이머 → 진짜 진행 상태
+### 4-4. 로딩 페이지: 실제 진행 상태 (구현 완료 — 폴링 아님)
 
-현재 로딩 화면은 `STEP_INTERVAL_MS` 타이머로 5단계를 흉내 내고 있습니다. 이 부분을 실제 상태로 바꾸면 됩니다.
+폴링(`useAnalysisStatus` + `refetchInterval`) 대신 **NDJSON 스트림**으로 구현되어 있습니다. `POST /api/analyze`가 요청 하나를 계속 열어둔 채 진행 이벤트를 한 줄씩 흘려보내기 때문에, 상태를 반복 조회할 필요가 없습니다.
 
-1. 폼 제출 시: `AnalyzeForm.tsx`에서 `POST /api/analysis`(URL 제출) → 응답의 `id`를 받아 `/analyzing?id=...`로 이동
-2. 로딩 화면: `useAnalysisStatus(id)`를 `refetchInterval: 1500` 정도로 폴링 → 응답의 단계 인덱스를 기존 `done` state에 넣어 주면 **렌더 로직은 수정 없이** 그대로 살아납니다
-3. status가 `complete`이면 `/analysis/[id]`로 이동하고, `failed`이면 §4-5의 에러 UI로 보냅니다.
+1. 폼 제출 시: `AnalyzeForm.tsx`는 API를 호출하지 않고 형식 검증만 한 뒤 `/analyzing?url=...`로 이동합니다(원문 URL을 쿼리로 그대로 전달, `id`가 아직 없으므로).
+2. 로딩 화면(`analyzing/page.tsx`): `apiPostStream<AnalyzeEvent>('/api/analyze', { url }, signal)`을 `for await`로 순회하며 `{ step: 'extract'|'analyze'|'quote', label }` 이벤트가 올 때마다 5단계 중 몇 번째까지 완료됐는지를 갱신합니다. 서버가 주는 체크포인트는 3개뿐이라, 두 체크포인트 사이는 타이머로 자연스럽게 채웁니다(실제 이벤트 도착이 언제나 우선).
+3. `{ step: 'done', id }`를 받으면 `router.replace('/analysis/'+id)`로 이동합니다(`push`가 아니라 `replace` — 결과 페이지에서 뒤로가기 시 로딩 화면이 재실행되는 걸 막기 위함). `{ step: 'error', message }`나 스트림이 이벤트 없이 끊기면 §4-5로.
+4. 언마운트되거나 재시도로 `url`이 바뀌면 `AbortController.abort()`로 진행 중이던 요청을 취소합니다 — 안 그러면 화면을 떠난 뒤 늦게 도착한 `done`이 엉뚱하게 라우팅을 일으킵니다.
 
 ### 4-5. 에러 핸들링 (현재 미구현)
 
@@ -205,7 +206,6 @@ npx impeccable detect apps/web/src   # 현재 0건 — 이 상태를 유지해 �
 | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | 어떤 링크를 넣어도 같은 분석 결과가 나와요   | `getAnalysis(id)`가 id를 무시하고 같은 mock을 반환합니다. 연동하면 해결됩니다                                                    |
 | 최근 분석 3건이 전부 같은 페이지로 가요      | 같은 이유입니다. 현재 mock id가 `hbm4` 하나뿐입니다                                                                              |
-| 로딩 화면 뉴스 제목이 항상 같아요            | `analysisResult.title`이 고정값입니다. 제출한 뉴스 제목으로 바꿔 주세요                                                          |
 | 지식그래프에 three.js가 없네요?              | 순수 SVG + 원근 투영으로 구현했습니다. 노드가 크게 늘기 전까지는 충분합니다                                                      |
 | 히트맵 배치가 하드코딩이에요                 | 목업 비율 고정 레이아웃(`LAYOUT` 상수)입니다. 섹터 구성이 동적이면 weight 기반 treemap으로 교체하세요                            |
 | Tailwind로 애니메이션 duration이 안 바뀌어요 | `globals.css`의 `.animate-*`가 무레이어 CSS라 Tailwind 유틸리티보다 우선합니다. 인라인 style을 쓰세요 (`NetworkSphere.tsx` 참고) |

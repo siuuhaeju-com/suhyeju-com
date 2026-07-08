@@ -34,11 +34,6 @@ export interface RecentAnalysis {
   analyzedAt: string;
 }
 
-/** 로딩 화면 진행 단계 */
-export interface AnalysisStep {
-  label: string;
-}
-
 /** 로딩 화면 좌측에 부유하는 키워드 칩 */
 export interface FloatingChip {
   label: string;

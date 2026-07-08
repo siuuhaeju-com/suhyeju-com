@@ -7,6 +7,7 @@ import { NetworkSphere } from '@/components/loading/NetworkSphere';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { apiPostStream, ApiError } from '@/lib/api';
 import { isValidNewsLink } from '@/lib/link';
 import { cn } from '@/lib/utils';
 import { floatingChips } from '@/lib/mock-data';
@@ -80,50 +81,29 @@ export default function AnalyzingPage() {
 
     async function run() {
       try {
-        const response = await fetch('/api/analyze', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url }),
-          signal: controller.signal,
-        });
-        if (!response.ok || !response.body) {
-          throw new Error('요청에 실패했습니다');
-        }
+        const stream = apiPostStream<AnalyzeEvent>('/api/analyze', { url }, controller.signal);
 
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
-
-        for (;;) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n');
-          buffer = lines.pop() ?? '';
-          for (const line of lines) {
-            if (!line.trim()) continue;
-            const event = JSON.parse(line) as AnalyzeEvent;
-            if (event.step === 'analyze') {
-              clearTimer();
-              ticks = 1;
-              setCompleted(1);
-              scheduleTick();
-            } else if (event.step === 'quote') {
-              clearTimer();
-              ticks = TIMER_CAP;
-              setCompleted(4);
-            } else if (event.step === 'done') {
-              clearTimer();
-              setCompleted(STEP_LABELS.length);
-              // replace: 로딩 화면을 히스토리에 남기지 않는다 — push로 두면 분석 페이지에서
-              // 뒤로가기 시 이 페이지로 돌아와 재마운트되며 분석 전체가 다시 실행된다.
-              setTimeout(() => router.replace(`/analysis/${event.id}`), DONE_NAVIGATE_DELAY_MS);
-              return;
-            } else if (event.step === 'error') {
-              clearTimer();
-              setErrorMessage(event.message);
-              return;
-            }
+        for await (const event of stream) {
+          if (event.step === 'analyze') {
+            clearTimer();
+            ticks = 1;
+            setCompleted(1);
+            scheduleTick();
+          } else if (event.step === 'quote') {
+            clearTimer();
+            ticks = TIMER_CAP;
+            setCompleted(4);
+          } else if (event.step === 'done') {
+            clearTimer();
+            setCompleted(STEP_LABELS.length);
+            // replace: 로딩 화면을 히스토리에 남기지 않는다 — push로 두면 분석 페이지에서
+            // 뒤로가기 시 이 페이지로 돌아와 재마운트되며 분석 전체가 다시 실행된다.
+            setTimeout(() => router.replace(`/analysis/${event.id}`), DONE_NAVIGATE_DELAY_MS);
+            return;
+          } else if (event.step === 'error') {
+            clearTimer();
+            setErrorMessage(event.message);
+            return;
           }
         }
 
@@ -136,7 +116,9 @@ export default function AnalyzingPage() {
         }
         clearTimer();
         console.error('[analyzing]', err);
-        setErrorMessage('네트워크 오류로 분석에 실패했습니다');
+        setErrorMessage(
+          err instanceof ApiError ? err.message : '네트워크 오류로 분석에 실패했습니다',
+        );
       }
     }
 
