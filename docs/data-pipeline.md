@@ -66,8 +66,12 @@ GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 �
 
 ### ⑤ 저장·응답 — `store.ts`
 
-- MVP는 인메모리 `Map`(서버리스라 인스턴스별 휘발). 운영 전환 시 Vercel KV(Upstash).
-- `POST /api/analyze`는 `{ id }`만 반환(201). 화면은 `GET /api/analysis/[id]`로 전체를 가져온다.
+- `UPSTASH_REDIS_REST_URL`(+TOKEN)이 있으면 Upstash Redis(KV)에 영속 저장, 없으면 인메모리 `Map` 폴백(서버리스라 인스턴스별 휘발 — 로컬·개발용).
+- `POST /api/analyze`는 `{ id }`를 단순 반환하지 않고, 진행 상황을 **NDJSON 스트림**으로 흘린다(`Content-Type: application/x-ndjson`, 로딩 화면 단계 표시용). 한 줄 = JSON 이벤트 하나:
+  - `{ step: 'extract' | 'analyze' | 'quote', label }` — 각 단계 시작 시
+  - `{ step: 'done', id }` — 저장 완료. 화면은 이 `id`로 `/analysis/[id]`로 이동
+  - `{ step: 'error', message }` — 실패 시
+- `/analysis/[id]` 페이지는 `GET /api/analysis/[id]`를 클라이언트에서 다시 호출하지 않는다 — 서버 컴포넌트에서 `store.ts`를 직접 읽는다. `GET /api/analysis/[id]` 라우트 자체는 남아 있고 별도 API 소비처(공유 링크 등)를 위해 존재한다.
 
 ---
 
