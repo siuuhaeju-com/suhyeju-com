@@ -127,6 +127,35 @@ async function fetchIndustryStocks(no: number, totalCount: number): Promise<Nave
   return results.filter((d): d is NaverIndustryDetail => d !== null).flatMap((d) => d.stocks);
 }
 
+/** 종목명 하나가 속한 섹터 정보 — GICS 11개 대분류 + WICS 79개 소분류(업종명) */
+export interface StockSectorInfo {
+  gicsSector: string;
+  wicsSector: string;
+}
+
+/**
+ * 종목명(예: "삼성전자") → 섹터 정보 매핑을 반환한다 (뉴스 섹터 분류용, #15).
+ * 79개 업종 전체 구성종목을 훑어서 만들며, 개별 fetch는 fetchIndustryStocks의
+ * 60초 캐시(next.revalidate)를 그대로 타므로 반복 호출해도 실네트워크 요청은 늘지 않는다.
+ */
+export async function fetchStockNameToSectorInfo(): Promise<Map<string, StockSectorInfo>> {
+  const data = await fetchIndustryResponse();
+
+  const perGroup = await Promise.all(
+    data.groups.map(async (group) => {
+      const gicsSector = WICS_TO_GICS_SECTOR[group.name];
+      if (!gicsSector) return [];
+
+      const stocks = await fetchIndustryStocks(group.no, group.totalCount);
+      return stocks.map(
+        (stock) => [stock.stockName, { gicsSector, wicsSector: group.name }] as const,
+      );
+    }),
+  );
+
+  return new Map(perGroup.flat());
+}
+
 /**
  * 한국 시장 히트맵(Finviz식 트리맵) 데이터를 반환한다.
  * 업종별로 시총 상위 종목을 묶고, 각 종목은 시가총액(크기)·등락률(색)을 갖는다.
