@@ -51,7 +51,7 @@ export async function runAnalysis(
   // 2) GPT 분석 (구조 생성)
   onProgress?.({ step: 'analyze', label: '이슈·파급 분석 중' });
   const tGpt = performance.now();
-  const draft = await analyzeNews(text);
+  const draft = await analyzeNews({ text, title, source });
   const tJoin = performance.now();
 
   // 3) 시세 join — topStocks 종목에 네이버 실시세를 붙이고,

@@ -56,7 +56,7 @@ const zSpreadEdge = z.object({
   from: z.string(),
   to: z.string(),
   reason: z.string(),
-  sources: z.array(z.string()),
+  sources: z.array(z.object({ title: z.string(), meta: z.string() })),
 });
 
 const zKnowledgeNode = z.object({
@@ -103,7 +103,8 @@ export type AnalysisDraft = z.infer<typeof AnalysisSchema>;
 const COMMON = `당신은 증시 전문 애널리스트입니다. 먼저 뉴스의 **핵심 시장을 판별**합니다:
 - 핵심 주체가 한국 기업·한국 경제 이슈면 → **한국 시장 관점**(한국 산업·종목).
 - 핵심 주체가 미국·글로벌 기업(예: 엔비디아·애플·테슬라)이면 → **미국 시장 관점**(미국 산업·종목).
-판별한 관점을 sector·spreadNodes·relatedSectors·heatmap·topStocks **전체에 일관되게** 적용합니다(두 시장을 한 분석에 섞지 않음). 모든 텍스트는 한국어로 작성하되, 종목명은 시세 조회가 되도록 널리 쓰이는 표기를 씁니다(한국: 종목명, 미국: 엔비디아·애플 등 한글 표기 또는 티커). changePct는 부호 포함(상승 +, 하락 −)으로 방향성만 추정합니다(실제 시세는 서버가 교체).`;
+판별한 관점을 sector·spreadNodes·relatedSectors·heatmap·topStocks **전체에 일관되게** 적용합니다(두 시장을 한 분석에 섞지 않음). 모든 텍스트는 한국어로 작성하되, 종목명은 시세 조회가 되도록 널리 쓰이는 표기를 씁니다(한국: 종목명, 미국: 엔비디아·애플 등 한글 표기 또는 티커). changePct는 부호 포함(상승 +, 하락 −)으로 방향성만 추정합니다(실제 시세는 서버가 교체).
+사용자 메시지 맨 앞에 "제목: …"·"출처: …" 줄이 주어지면 그것이 분석 대상 원문 기사입니다(맥락 참고용).`;
 
 const PROMPT_A = `${COMMON}
 
@@ -125,8 +126,12 @@ const PROMPT_B = `${COMMON}
 - spreadNodes는 **전체 최소 7개** 이상, 각 노드에 고유 id.
 - **tier N(N≥1)의 모든 노드는 tier N-1의 어떤 노드로부터 spreadEdges 연결을 최소 1개 받습니다 (고립 노드 금지).**
 - spreadEdges의 from/to는 반드시 존재하는 spreadNodes id, reason에 한 줄 근거.
+- spreadEdges.sources는 그 **연결 하나하나에 특정된** 근거 뉴스·리포트를 1~2개, 각각 title(헤드라인)·meta("언론사 · MM.DD" 형식) 필드로 담습니다.
+  실제 언론사명(한국경제·매일경제·전자신문·이데일리·서울경제·연합인포맥스 등)과 그 연결에 맞는 구체적 헤드라인을 씁니다.
+  **모든 edge에 동일한 title을 반복하지 않습니다** — edge마다 다른 헤드라인.
 ## 종목 (topStocks)
-- 각 sector 이름을 spreadNodes의 name과 **일치**시키고, 대표 종목을 2개 이상 담습니다.
+- **spreadNodes의 tier 1·2·3 노드 각각에 대해** topStocks 항목을 하나씩 만듭니다(빠짐없이 전부).
+- 각 sector 이름을 해당 spreadNodes의 name과 **일치**시키고, 대표 종목을 **정확히 5개**(Top5) 담습니다.
 - 판별한 시장 관점을 따릅니다(미국 관점이면 미국 종목). name은 위 표기 규칙(한글 표기 또는 티커)을 지켜 시세 조회가 되게 합니다.`;
 
 const PROMPT_C = `${COMMON}
@@ -134,6 +139,21 @@ const PROMPT_C = `${COMMON}
 이 뉴스와 관련된 산업 지식그래프와 섹터 히트맵을 구성합니다.
 - knowledgeNodes/knowledgeEdges: 중심 산업과 연관 산업을 group(center/tier1/tier2/etc)으로 구성하고, edge의 from/to는 존재하는 knowledgeNodes id를 참조합니다.
 - heatmap: 영향받는 주요 산업과 방향성 5개 내외. sector는 대표 산업명(반도체·HBM 등).`;
+
+/** GPT에게 넘길 기사 메타 — 있으면 원문 제목·출처를 근거 인용에 그대로 쓰게 한다. */
+export interface ArticleInput {
+  text: string;
+  title?: string;
+  source?: string;
+}
+
+/** 사용자 메시지 맨 앞에 제목·출처 줄을 붙인다(없으면 본문만). */
+function buildUserMessage({ text, title, source }: ArticleInput): string {
+  const lines = [];
+  if (title) lines.push(`제목: ${title}`);
+  if (source) lines.push(`출처: ${source}`);
+  return lines.length ? `${lines.join('\n')}\n\n${text}` : text;
+}
 
 /**
  * 뉴스 본문을 분석해 AnalysisResult 초안(GPT 생성 부분)을 반환한다.
@@ -143,7 +163,7 @@ const PROMPT_C = `${COMMON}
  *   - 키 있음 + GPT_BASE_URL 있음 → 엘리스 게이트웨이 호출.
  *   - 키 있음 + GPT_BASE_URL 없음 → 표준 OpenAI 직접 호출.
  */
-export async function analyzeNews(articleText: string): Promise<AnalysisDraft> {
+export async function analyzeNews(article: ArticleInput): Promise<AnalysisDraft> {
   const forceMock = process.env.MOCK_ANALYZE === '1' || process.env.MOCK_ANALYZE === 'true';
   const hasKey = !!process.env.OPENAI_API_KEY;
 
@@ -154,7 +174,7 @@ export async function analyzeNews(articleText: string): Promise<AnalysisDraft> {
         forceMock ? 'MOCK_ANALYZE 강제' : 'OPENAI_API_KEY 미설정'
       }). OPENAI_API_KEY를 .env.local에 채우면 실제 호출로 전환됩니다.`,
     );
-    return mockAnalysis(articleText);
+    return mockAnalysis(article.text);
   }
 
   const client = getClient();
@@ -163,13 +183,15 @@ export async function analyzeNews(articleText: string): Promise<AnalysisDraft> {
     `[analyzeNews] 실호출: model=${model}, gateway=${process.env.GPT_BASE_URL ? 'elice' : 'openai'}`,
   );
 
+  const userMessage = buildUserMessage(article);
+
   // 3분할 병렬 호출 — 큰 생성 1회를 텍스트/파급+종목/지식그래프로 쪼개 응답시간 단축.
   const call = <T extends z.ZodType>(prompt: string, schema: T, name: string) =>
     client.chat.completions.parse({
       model,
       messages: [
         { role: 'system', content: prompt },
-        { role: 'user', content: articleText },
+        { role: 'user', content: userMessage },
       ],
       response_format: zodResponseFormat(schema, name),
       max_completion_tokens: 3500,
@@ -245,15 +267,35 @@ function mockAnalysis(articleText: string): AnalysisDraft {
       { id: 'n5', name: '전력·냉각', tier: 3, changePct: 1.1 },
     ],
     spreadEdges: [
-      { from: 'n0', to: 'n1', reason: 'AI 가속기 수요가 HBM 주문으로 직결', sources: ['샘플뉴스'] },
-      { from: 'n0', to: 'n2', reason: '증설 사이클로 장비 발주 확대', sources: ['샘플뉴스'] },
-      { from: 'n1', to: 'n3', reason: 'HBM 생산 확대가 소재 수요를 견인', sources: ['샘플리포트'] },
-      { from: 'n2', to: 'n4', reason: '전공정 증설이 후공정 병목을 유발', sources: ['샘플리포트'] },
+      {
+        from: 'n0',
+        to: 'n1',
+        reason: 'AI 가속기 수요가 HBM 주문으로 직결',
+        sources: [{ title: 'HBM 시장 규모, 2027년까지 3배 성장 전망', meta: '가트너 · 06.02' }],
+      },
+      {
+        from: 'n0',
+        to: 'n2',
+        reason: '증설 사이클로 장비 발주 확대',
+        sources: [{ title: '반도체 장비 수주잔고 사상 최대', meta: '한국경제 · 06.05' }],
+      },
+      {
+        from: 'n1',
+        to: 'n3',
+        reason: 'HBM 생산 확대가 소재 수요를 견인',
+        sources: [{ title: 'HBM 증산에 반도체 소재 수급 빠듯', meta: '전자신문 · 06.09' }],
+      },
+      {
+        from: 'n2',
+        to: 'n4',
+        reason: '전공정 증설이 후공정 병목을 유발',
+        sources: [{ title: '후공정 장비 발주 전망 상향', meta: '이데일리 · 06.11' }],
+      },
       {
         from: 'n1',
         to: 'n5',
         reason: '고발열 칩 확산으로 전력·냉각 수요 증가',
-        sources: ['샘플뉴스'],
+        sources: [{ title: 'AI 서버 발열 대응 냉각 수요 급증', meta: '서울경제 · 06.14' }],
       },
     ],
     heatmap: [
@@ -284,6 +326,9 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         stocks: [
           { name: 'SK하이닉스', changePct: 5.2 },
           { name: '삼성전자', changePct: 3.5 },
+          { name: '한미반도체', changePct: 6.1 },
+          { name: '디아이', changePct: 4.0 },
+          { name: '테크윙', changePct: 3.1 },
         ],
       },
       {
@@ -291,6 +336,9 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         stocks: [
           { name: '한미반도체', changePct: 6.1 },
           { name: '주성엔지니어링', changePct: 3.3 },
+          { name: '원익IPS', changePct: 2.8 },
+          { name: '피에스케이', changePct: 2.2 },
+          { name: '유진테크', changePct: 1.9 },
         ],
       },
       {
@@ -298,6 +346,9 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         stocks: [
           { name: '동진쎄미켐', changePct: 2.4 },
           { name: '솔브레인', changePct: 1.7 },
+          { name: '한솔케미칼', changePct: 1.5 },
+          { name: 'SK머티리얼즈', changePct: 1.2 },
+          { name: '이엔에프테크', changePct: 1.0 },
         ],
       },
       {
@@ -305,6 +356,19 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         stocks: [
           { name: '하나마이크론', changePct: 2.9 },
           { name: 'SFA반도체', changePct: 1.8 },
+          { name: '이오테크닉스', changePct: 1.6 },
+          { name: '네패스', changePct: 1.3 },
+          { name: '테스나', changePct: 1.1 },
+        ],
+      },
+      {
+        sector: '전력·냉각',
+        stocks: [
+          { name: 'LS ELECTRIC', changePct: 1.9 },
+          { name: 'HD현대일렉트릭', changePct: 1.6 },
+          { name: '효성중공업', changePct: 1.4 },
+          { name: '한전KPS', changePct: 1.0 },
+          { name: '비앤비성원', changePct: 0.8 },
         ],
       },
     ],

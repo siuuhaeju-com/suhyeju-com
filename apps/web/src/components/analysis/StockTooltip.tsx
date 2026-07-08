@@ -9,22 +9,31 @@ export function StockTooltip({ sector, stocks }: { sector: string; stocks: TopSt
   return (
     <div
       role="tooltip"
-      className="w-56 rounded-md border bg-popover p-3 text-popover-foreground shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
+      className="w-[260px] rounded-md border bg-popover p-3.5 text-popover-foreground shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
     >
-      <p className="text-xs font-bold">{sector} · Top5 종목</p>
-      <ul className="mt-2 flex flex-col gap-1.5">
-        {stocks.map((stock) => (
-          <li key={stock.name} className="flex items-center justify-between gap-3 text-xs">
-            <span className="truncate text-ink-sub">{stock.name}</span>
-            <span className={`font-bold ${getPctToneClass(stock.changePct)}`}>
+      <div className="flex items-baseline justify-between gap-2">
+        <span className="text-[13px] font-extrabold tracking-tight">{sector}</span>
+        <span className="text-[10.5px] font-bold tracking-wide text-muted-foreground">
+          TOP 5 종목
+        </span>
+      </div>
+      <ul className="mt-2.5 flex flex-col gap-1.5">
+        {stocks.map((stock, index) => (
+          <li key={stock.name} className="flex items-center gap-2.5">
+            <span className="w-3.5 flex-none text-[11px] font-extrabold tabular-nums text-muted-foreground">
+              {index + 1}
+            </span>
+            <span className="min-w-0 flex-1 truncate text-[12.5px] font-semibold text-ink-sub">
+              {stock.name}
+            </span>
+            <span
+              className={`flex-none text-[12.5px] font-extrabold tabular-nums ${getPctToneClass(stock.changePct)}`}
+            >
               {formatPct(stock.changePct)}
             </span>
           </li>
         ))}
       </ul>
-      <p className="mt-2 border-t border-border pt-1.5 text-[10.5px] text-muted-foreground">
-        상승=레드 · 하락=블루 (전일대비)
-      </p>
     </div>
   );
 }

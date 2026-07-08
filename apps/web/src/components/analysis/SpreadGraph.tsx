@@ -108,7 +108,10 @@ export function SpreadGraph({
                   stroke="transparent"
                   strokeWidth={16}
                   className="cursor-pointer"
-                  onMouseEnter={() => setHoveredEdge(index)}
+                  onMouseEnter={() => {
+                    setHoveredEdge(index);
+                    setHoveredNode(null);
+                  }}
                   onMouseLeave={() => setHoveredEdge(null)}
                 />
               </g>
@@ -124,9 +127,15 @@ export function SpreadGraph({
             <button
               key={node.id}
               type="button"
-              onMouseEnter={() => setHoveredNode(node.id)}
+              onMouseEnter={() => {
+                setHoveredNode(node.id);
+                setHoveredEdge(null);
+              }}
               onMouseLeave={() => setHoveredNode(null)}
-              onFocus={() => setHoveredNode(node.id)}
+              onFocus={() => {
+                setHoveredNode(node.id);
+                setHoveredEdge(null);
+              }}
               onBlur={() => setHoveredNode(null)}
               className={cn(
                 'absolute -translate-x-1/2 -translate-y-1/2 cursor-default rounded-md border bg-card px-3.5 py-2 text-left transition-colors outline-none',
@@ -174,17 +183,37 @@ export function SpreadGraph({
             return (
               <div
                 role="tooltip"
-                className="pointer-events-none absolute z-10 w-64 -translate-x-1/2 rounded-md border bg-popover p-3 shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
+                className="pointer-events-none absolute z-10 w-80 -translate-x-1/2 rounded-md border bg-popover p-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
                 style={{ left: `${cx}%`, top: `${cy}%` }}
               >
-                <p className="text-xs leading-5 font-medium text-foreground">{edge.reason}</p>
-                <ul className="mt-2 flex flex-col gap-1 border-t border-border pt-2">
-                  {edge.sources.map((source) => (
-                    <li key={source} className="text-[11px] text-muted-foreground">
-                      📰 {source}
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-[11px] font-extrabold tracking-wide text-blue-bright">
+                  연결 근거 · {byId[edge.from].name} → {byId[edge.to].name}
+                </p>
+                <p className="mt-1.5 text-[13px] leading-relaxed font-semibold text-foreground">
+                  {edge.reason}
+                </p>
+                <div className="mt-2.5 border-t border-border pt-2.5">
+                  <p className="text-[10.5px] font-bold tracking-wide text-muted-foreground">
+                    근거 뉴스
+                  </p>
+                  <ul className="mt-1.5 flex flex-col gap-1.5">
+                    {edge.sources.map((source) => (
+                      <li key={source.title} className="flex gap-2">
+                        <span aria-hidden className="text-[11px] leading-relaxed text-primary">
+                          ▪
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-xs leading-snug font-semibold text-ink-sub">
+                            {source.title}
+                          </span>
+                          <span className="mt-0.5 block text-[11px] text-muted-foreground">
+                            {source.meta}
+                          </span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             );
           })()}

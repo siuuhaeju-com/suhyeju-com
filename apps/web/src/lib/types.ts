@@ -91,6 +91,13 @@ export interface SpreadNode {
   row: number;
 }
 
+/** 연결 근거 뉴스/리포트 한 건 — 헤드라인 + 출처·날짜 */
+export interface EdgeSource {
+  title: string;
+  /** "출처 · 날짜" 형식 (예: "한국경제 · 06.02") */
+  meta: string;
+}
+
 /** 영향력 확산 그래프 연결선 — hover 시 근거 툴팁 (F-09) */
 export interface SpreadEdge {
   from: string;
@@ -98,7 +105,7 @@ export interface SpreadEdge {
   /** 한 줄 근거 */
   reason: string;
   /** 근거 출처 뉴스 목록 */
-  sources: string[];
+  sources: EdgeSource[];
 }
 
 /** 섹터별 영향도 히트맵 셀 */
