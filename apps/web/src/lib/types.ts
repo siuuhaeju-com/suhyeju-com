@@ -17,10 +17,12 @@ export interface SectorChange {
 
 export interface NewsItem {
   id: string;
-  /** 관련 섹터 태그 */
+  /** 관련 섹터 태그 (GICS 11개 대분류) */
   sector: string;
-  /** 태그 색 변형 (메인 인기 뉴스 칩) */
-  sectorTone: 'positive' | 'negative' | 'teal' | 'amber';
+  /** 보조 태그 — 종목명 매칭 시 WICS 소분류, 키워드 매칭 시 그 키워드. 없을 수 있음 */
+  subTag?: string;
+  /** 태그 색 변형 (메인 인기 뉴스 칩) — 섹터별로 고정 배정, positive/negative는 등락 전용이라 미사용 */
+  sectorTone: 'teal' | 'amber' | 'blue' | 'neutral';
   source: string;
   /** 상대 시각 텍스트 (예: 6시간 전) */
   publishedAt: string;
