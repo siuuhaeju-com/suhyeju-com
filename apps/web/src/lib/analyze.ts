@@ -6,6 +6,7 @@ import { randomUUID } from 'crypto';
 
 import { extractArticle } from '@/lib/extract-article';
 import { analyzeNews, type AnalysisDraft } from '@/lib/sources/gpt';
+import { fetchStockChangePcts } from '@/lib/sources/naver-stock';
 import type { AnalysisResult, HeatmapCell, KnowledgeNode, SpreadNode } from '@/lib/types';
 
 const ENGINE_VERSION = '수혜주.com AI v2.1';
@@ -33,11 +34,61 @@ export async function runAnalysis(input: AnalyzeInput): Promise<AnalysisResult> 
   // 2) GPT 분석 (구조 생성)
   const draft = await analyzeNews(text);
 
-  // 3) 시세 join — TODO(종목마스터): draft의 종목·섹터명에 네이버 실시세를 붙여
-  //    changePct를 교체한다. 지금은 GPT 초안값을 그대로 사용.
+  // 3) 시세 join — topStocks 종목에 네이버 실시세를 붙이고,
+  //    섹터(spreadNodes/heatmap/relatedSectors)는 그 섹터 종목들의 실시세 평균으로 파생.
+  await joinQuotes(draft);
 
   // 4) AnalysisResult 조립
   return assemble(draft, { title, originUrl: input.url ?? '' });
+}
+
+/**
+ * draft에 네이버 실시세를 join한다(in-place).
+ * - topStocks 종목: 종목명→실시세로 changePct 교체(매칭 실패 시 GPT 초안 유지).
+ * - spreadNodes/heatmap/relatedSectors: 이름이 topStocks의 섹터와 맞으면
+ *   그 섹터 종목들의 실시세 평균으로 changePct 교체.
+ * 네이버가 막히거나 종목이 매칭 안 되면 조용히 GPT 초안값을 유지한다(분석 자체는 성공).
+ */
+async function joinQuotes(draft: AnalysisDraft): Promise<void> {
+  const names = draft.topStocks.flatMap((g) => g.stocks.map((s) => s.name));
+  if (names.length === 0) return;
+
+  let quotes: Map<string, number | null>;
+  try {
+    quotes = await fetchStockChangePcts(names);
+  } catch {
+    return; // 시세 소스 장애 시 GPT 초안 유지
+  }
+
+  // 종목 changePct 교체 + 섹터별 실시세 평균 계산
+  const sectorAvg = new Map<string, number>();
+  for (const group of draft.topStocks) {
+    const matched: number[] = [];
+    for (const stock of group.stocks) {
+      const pct = quotes.get(stock.name);
+      if (pct != null) {
+        stock.changePct = pct;
+        matched.push(pct);
+      }
+    }
+    if (matched.length) {
+      sectorAvg.set(group.sector, matched.reduce((a, b) => a + b, 0) / matched.length);
+    }
+  }
+
+  // 섹터명이 topStocks 섹터와 일치하면 평균값으로 교체(원점 등 미매칭은 GPT 초안 유지)
+  for (const node of draft.spreadNodes) {
+    const avg = sectorAvg.get(node.name);
+    if (avg != null) node.changePct = avg;
+  }
+  for (const cell of draft.heatmap) {
+    const avg = sectorAvg.get(cell.sector);
+    if (avg != null) cell.changePct = avg;
+  }
+  for (const related of draft.relatedSectors) {
+    const avg = sectorAvg.get(related.name);
+    if (avg != null) related.changePct = avg;
+  }
 }
 
 /** GPT 초안(draft) + 메타 → 완성 AnalysisResult (표현 필드는 여기서 파생) */
