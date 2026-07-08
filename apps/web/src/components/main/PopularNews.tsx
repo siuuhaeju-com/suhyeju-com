@@ -8,7 +8,7 @@ import { usePopularNews } from '@/lib/queries';
 
 const NEWS_COUNT = 5;
 
-/** 최신 뉴스 리스트 (F-03a · #15) */
+/** 인기 뉴스 리스트 (F-03a · #15) */
 export function PopularNews() {
   const { data, isPending, isError, refetch } = usePopularNews();
 
@@ -27,7 +27,7 @@ export function PopularNews() {
   if (isError) {
     return (
       <Card className="flex flex-col items-start gap-2 p-4">
-        <p className="text-sm text-muted-foreground">최신 뉴스를 불러오지 못했습니다.</p>
+        <p className="text-sm text-muted-foreground">인기 뉴스를 불러오지 못했습니다.</p>
         <button
           type="button"
           onClick={() => refetch()}
@@ -43,9 +43,9 @@ export function PopularNews() {
     <ul className="flex flex-col gap-4">
       {data.map((news) => (
         <li key={news.id}>
-          {/* 뉴스 카드 클릭 → 해당 뉴스 분석 시작 */}
+          {/* 뉴스 카드 클릭 → 원문 링크로 해당 뉴스 분석 시작 (AnalyzeForm과 동일한 경로) */}
           <Link
-            href="/analyzing"
+            href={`/analyzing?url=${encodeURIComponent(news.url ?? '')}`}
             className="group block rounded-lg outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
             aria-label={`${news.title} 분석 보기`}
           >

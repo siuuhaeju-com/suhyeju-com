@@ -10,7 +10,7 @@ import { recentAnalyses } from '@/lib/mock-data';
 
 /**
  * 메인 페이지 (PAGE-1 · #30)
- * 링크 입력(F-01/F-02) + 최신 뉴스(F-03a) + 주요 섹터 현황(F-03b) + 최근 분석 내역(F-03c)
+ * 링크 입력(F-01/F-02) + 인기 뉴스(F-03a) + 주요 섹터 현황(F-03b) + 최근 분석 내역(F-03c)
  */
 export default function HomePage() {
   return (
@@ -35,10 +35,10 @@ export default function HomePage() {
         <AnalyzeForm />
       </section>
 
-      {/* 최신 뉴스 + 우측 현황 */}
+      {/* 인기 뉴스 + 우측 현황 */}
       <section className="grid gap-10 lg:grid-cols-[1fr_400px]">
         <div>
-          <h2 className="mb-4 text-lg font-bold">📰 최신 뉴스</h2>
+          <h2 className="mb-4 text-lg font-bold">🔥 인기 뉴스</h2>
           <PopularNews />
         </div>
 

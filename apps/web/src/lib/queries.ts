@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { apiGet } from '@/lib/api';
 import type { NewsItem, SectorChange } from '@/lib/types';
 
-/** 최신 뉴스 (F-03a · #15 · GET /api/news) — 10분 캐시(BE route 자체 revalidate)에 맞춰 폴링 없이 재검증만 */
+/** 인기 뉴스 (F-03a · #15 · GET /api/news) — 10분 캐시(BE route 자체 revalidate)에 맞춰 폴링 없이 재검증만 */
 export function usePopularNews() {
   return useQuery({
     queryKey: ['news', 'popular'],
