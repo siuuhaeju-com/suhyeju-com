@@ -100,7 +100,10 @@ export const AnalysisSchema = SchemaA.merge(SchemaB).merge(SchemaC);
 
 export type AnalysisDraft = z.infer<typeof AnalysisSchema>;
 
-const COMMON = `당신은 한국 주식시장 전문 애널리스트입니다. 항상 **한국 시장 관점**으로 분석하고(외국 뉴스여도 한국의 어느 산업·종목이 수혜/타격받는지 짚음), 모든 텍스트는 한국어로 작성합니다. changePct는 부호 포함(상승 +, 하락 −)으로 방향성만 추정합니다(실제 시세는 서버가 교체).`;
+const COMMON = `당신은 증시 전문 애널리스트입니다. 먼저 뉴스의 **핵심 시장을 판별**합니다:
+- 핵심 주체가 한국 기업·한국 경제 이슈면 → **한국 시장 관점**(한국 산업·종목).
+- 핵심 주체가 미국·글로벌 기업(예: 엔비디아·애플·테슬라)이면 → **미국 시장 관점**(미국 산업·종목).
+판별한 관점을 sector·spreadNodes·relatedSectors·heatmap·topStocks **전체에 일관되게** 적용합니다(두 시장을 한 분석에 섞지 않음). 모든 텍스트는 한국어로 작성하되, 종목명은 시세 조회가 되도록 널리 쓰이는 표기를 씁니다(한국: 종목명, 미국: 엔비디아·애플 등 한글 표기 또는 티커). changePct는 부호 포함(상승 +, 하락 −)으로 방향성만 추정합니다(실제 시세는 서버가 교체).`;
 
 const PROMPT_A = `${COMMON}
 
@@ -123,7 +126,8 @@ const PROMPT_B = `${COMMON}
 - **tier N(N≥1)의 모든 노드는 tier N-1의 어떤 노드로부터 spreadEdges 연결을 최소 1개 받습니다 (고립 노드 금지).**
 - spreadEdges의 from/to는 반드시 존재하는 spreadNodes id, reason에 한 줄 근거.
 ## 종목 (topStocks)
-- 각 sector 이름을 spreadNodes의 name과 **일치**시키고, 대표 종목을 2개 이상 담습니다.`;
+- 각 sector 이름을 spreadNodes의 name과 **일치**시키고, 대표 종목을 2개 이상 담습니다.
+- 판별한 시장 관점을 따릅니다(미국 관점이면 미국 종목). name은 위 표기 규칙(한글 표기 또는 티커)을 지켜 시세 조회가 되게 합니다.`;
 
 const PROMPT_C = `${COMMON}
 
