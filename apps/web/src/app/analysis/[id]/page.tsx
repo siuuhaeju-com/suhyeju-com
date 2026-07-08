@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 import { ImpactHeatmap } from '@/components/analysis/ImpactHeatmap';
 import { KnowledgeGraph } from '@/components/analysis/KnowledgeGraph';
@@ -6,7 +7,7 @@ import { SignalSection } from '@/components/analysis/SignalSection';
 import { SpreadGraph } from '@/components/analysis/SpreadGraph';
 import { SummarySection } from '@/components/analysis/SummarySection';
 import { formatDateTime } from '@/lib/format';
-import { getAnalysis } from '@/lib/mock-data';
+import { getAnalysis } from '@/lib/store';
 
 type AnalysisPageProps = {
   params: Promise<{ id: string }>;
@@ -16,11 +17,13 @@ type AnalysisPageProps = {
  * 분석 페이지 (PAGE-3 · #32)
  * AI 요약(F-05) → 전망 분석(F-06) → 영향력 확산 그래프(F-07) →
  * 섹터별 영향도 히트맵(F-08) → 산업 연결 지식그래프(F-12)
- * FE 연동 지점: getAnalysis(id) → GET /api/analysis/:id
  */
 export default async function AnalysisPage({ params }: AnalysisPageProps) {
   const { id } = await params;
-  const result = getAnalysis(id);
+  const result = await getAnalysis(id);
+  if (!result) {
+    notFound();
+  }
 
   return (
     <main className="mx-auto w-full max-w-[1100px] flex-1 px-6 pt-6 pb-24">
