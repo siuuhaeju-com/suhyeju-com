@@ -139,37 +139,49 @@ export interface StockSectorInfo {
 const STOCK_NAME_TO_SECTOR_TTL_MS = 600_000;
 
 // fetchStockNameToSectorInfo()가 매 호출마다 79개 업종을 다시 훑지 않도록 하는 인메모리 캐시.
-// 개별 fetch 자체는 이미 revalidate:60으로 캐시되지만, 79개를 순회하며 Map을 다시 만드는
-// JS 연산은 그때마다 반복되므로 결과물(Map)을 통째로 캐시한다.
-let stockNameToSectorCache: { data: Map<string, StockSectorInfo>; expiresAt: number } | null = null;
+// 값이 아니라 진행 중인 Promise 자체를 캐시한다 — 캐시가 막 만료된 순간 여러 요청이
+// 동시에 들어와도 전부 같은 Promise를 기다리게 해서 79개 업종 스캔이 중복 실행되지
+// 않게 한다(thundering herd 방지).
+let stockNameToSectorCache: {
+  promise: Promise<Map<string, StockSectorInfo>>;
+  expiresAt: number;
+} | null = null;
 
 /**
  * 종목명(예: "삼성전자") → 섹터 정보 매핑을 반환한다 (뉴스 섹터 분류용, #15).
  * 79개 업종 전체 구성종목을 훑어서 만들며, 개별 fetch는 fetchIndustryStocks의
  * 60초 캐시(next.revalidate)를 그대로 타므로 반복 호출해도 실네트워크 요청은 늘지 않는다.
  */
-export async function fetchStockNameToSectorInfo(): Promise<Map<string, StockSectorInfo>> {
+export function fetchStockNameToSectorInfo(): Promise<Map<string, StockSectorInfo>> {
   if (stockNameToSectorCache && stockNameToSectorCache.expiresAt > Date.now()) {
-    return stockNameToSectorCache.data;
+    return stockNameToSectorCache.promise;
   }
 
-  const data = await fetchIndustryResponse();
+  const promise = (async () => {
+    const data = await fetchIndustryResponse();
 
-  const perGroup = await Promise.all(
-    data.groups.map(async (group) => {
-      const gicsSector = WICS_TO_GICS_SECTOR[group.name];
-      if (!gicsSector) return [];
+    const perGroup = await Promise.all(
+      data.groups.map(async (group) => {
+        const gicsSector = WICS_TO_GICS_SECTOR[group.name];
+        if (!gicsSector) return [];
 
-      const stocks = await fetchIndustryStocks(group.no, group.totalCount);
-      return stocks.map(
-        (stock) => [stock.stockName, { gicsSector, wicsSector: group.name }] as const,
-      );
-    }),
-  );
+        const stocks = await fetchIndustryStocks(group.no, group.totalCount);
+        return stocks.map(
+          (stock) => [stock.stockName, { gicsSector, wicsSector: group.name }] as const,
+        );
+      }),
+    );
 
-  const result = new Map(perGroup.flat());
-  stockNameToSectorCache = { data: result, expiresAt: Date.now() + STOCK_NAME_TO_SECTOR_TTL_MS };
-  return result;
+    return new Map(perGroup.flat());
+  })();
+
+  // 실패한 시도는 캐시에 남기지 않는다 — 다음 호출이 새로 재시도할 수 있게.
+  promise.catch(() => {
+    if (stockNameToSectorCache?.promise === promise) stockNameToSectorCache = null;
+  });
+
+  stockNameToSectorCache = { promise, expiresAt: Date.now() + STOCK_NAME_TO_SECTOR_TTL_MS };
+  return promise;
 }
 
 /**
