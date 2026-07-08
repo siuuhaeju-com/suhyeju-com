@@ -85,6 +85,65 @@ export const WICS_TO_GICS_SECTOR: Readonly<Record<string, string>> = {
   전기장비: '산업재',
 };
 
+/**
+ * 뉴스 제목·요약 텍스트를 GICS 11개 대분류로 분류하기 위한 키워드 셋.
+ * WICS_TO_GICS_SECTOR는 네이버 "업종명" 매핑이라 뉴스 본문엔 그대로 안 나오므로
+ * 별도로 뉴스에 흔히 쓰이는 표현 기준 키워드를 둔다. 배열 순서 = 우선순위
+ * (겹치는 키워드가 있는 앞쪽 섹터가 먼저 매칭됨, 예: "가스"는 유틸리티보다 에너지 우선).
+ */
+const NEWS_SECTOR_KEYWORDS: ReadonlyArray<readonly [string, readonly string[]]> = [
+  // '유가'는 "유가증권시장"(코스피 공식 명칭)에 항상 포함돼 오탐이 매우 잦아 제외
+  ['에너지', ['정유', '원유', '국제유가', '유가급등', '유가하락', 'LNG', '가스전', '석유']],
+  ['유틸리티', ['전기요금', '전력', '한전', '가스요금', '유틸리티']],
+  ['건강관리', ['제약', '바이오', '헬스케어', '의료기기', '병원', '신약', '임상']],
+  ['금융', ['은행', '증권사', '보험', '카드사', '금융지주', '기준금리', '여신']],
+  ['정보기술', ['반도체', '소프트웨어', 'AI', '인공지능', '디스플레이', '스마트폰', 'IT서비스']],
+  ['커뮤니케이션서비스', ['통신사', '게임', '엔터테인먼트', '방송', '미디어', 'OTT']],
+  ['소재', ['화학', '철강', '비철금속', '시멘트', '소재주']],
+  ['산업재', ['조선', '건설사', '기계', '방산', '항공사', '해운', '물류']],
+  ['부동산', ['부동산', '아파트', '분양', '재건축', '재개발']],
+  ['필수소비재', ['식품', '음료', '담배', '생활용품', '화장품']],
+  ['경기소비재', ['자동차', '유통', '백화점', '여행', '레저', '호텔']],
+];
+
+/**
+ * 섹터별 뉴스 카드 배지 색 — 같은 섹터는 항상 같은 색으로 보이도록 고정 배정한다.
+ * positive/negative(Badge 톤)는 등락 방향 전용 의미라 여기선 쓰지 않는다.
+ */
+const SECTOR_TONES: Readonly<Record<string, 'teal' | 'amber' | 'blue' | 'neutral'>> = {
+  정보기술: 'teal',
+  커뮤니케이션서비스: 'blue',
+  금융: 'amber',
+  건강관리: 'teal',
+  소재: 'neutral',
+  산업재: 'amber',
+  부동산: 'blue',
+  필수소비재: 'neutral',
+  경기소비재: 'teal',
+  에너지: 'amber',
+  유틸리티: 'blue',
+};
+
+/** GICS 섹터(또는 미분류 기본값 '증시')에 맞는 배지 색을 반환한다. 매핑에 없으면 neutral. */
+export function getSectorTone(sector: string): 'teal' | 'amber' | 'blue' | 'neutral' {
+  return SECTOR_TONES[sector] ?? 'neutral';
+}
+
+/** 키워드 매칭으로 찾은 GICS 섹터 + 실제로 매칭된 키워드(뉴스 카드 보조 태그용) */
+export interface NewsSectorMatch {
+  sector: string;
+  keyword: string;
+}
+
+/** 뉴스 텍스트에서 GICS 11개 대분류 중 하나를 찾는다. 매칭 없으면 null. */
+export function classifyNewsSector(text: string): NewsSectorMatch | null {
+  for (const [sector, keywords] of NEWS_SECTOR_KEYWORDS) {
+    const keyword = keywords.find((k) => text.includes(k));
+    if (keyword) return { sector, keyword };
+  }
+  return null;
+}
+
 /** GICS 11개 대분류 설명 — API엔 없는 문구라 FE에서 고정 텍스트로 붙인다. */
 export const GICS_SECTOR_DESCRIPTIONS: Readonly<Record<string, string>> = {
   에너지: '정유·가스·에너지 설비 등 전통 에너지 산업',

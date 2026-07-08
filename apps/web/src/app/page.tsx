@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 import { AnalyzeForm } from '@/components/main/AnalyzeForm';
+import { PopularNews } from '@/components/main/PopularNews';
 import { SectorOverview } from '@/components/main/SectorOverview';
 import { ParticleField } from '@/components/ParticleField';
-import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { formatDateTime } from '@/lib/format';
-import { popularNews, recentAnalyses } from '@/lib/mock-data';
+import { recentAnalyses } from '@/lib/mock-data';
 
 /**
  * 메인 페이지 (PAGE-1 · #30)
@@ -39,31 +39,7 @@ export default function HomePage() {
       <section className="grid gap-10 lg:grid-cols-[1fr_400px]">
         <div>
           <h2 className="mb-4 text-lg font-bold">🔥 인기 뉴스</h2>
-          <ul className="flex flex-col gap-4">
-            {popularNews.map((news) => (
-              <li key={news.id}>
-                {/* 뉴스 카드 클릭 → 해당 뉴스 분석 시작 */}
-                <Link
-                  href="/analyzing"
-                  className="group block rounded-lg outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-                  aria-label={`${news.title} 분석 보기`}
-                >
-                  <Card className="p-5 transition-colors group-hover:border-primary/40 group-hover:bg-surface-raised/60">
-                    <div className="flex items-center gap-2.5">
-                      <Badge tone={news.sectorTone}>{news.sector}</Badge>
-                      <span className="text-xs text-muted-foreground">
-                        {news.source} · {news.publishedAt}
-                      </span>
-                    </div>
-                    <h3 className="mt-3 text-[15px] font-bold text-foreground">{news.title}</h3>
-                    <p className="mt-2 text-[13.5px] leading-6 text-muted-foreground">
-                      {news.summary}
-                    </p>
-                  </Card>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <PopularNews />
         </div>
 
         <div className="flex flex-col gap-10">

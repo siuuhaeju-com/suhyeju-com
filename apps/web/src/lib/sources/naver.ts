@@ -127,6 +127,79 @@ async function fetchIndustryStocks(no: number, totalCount: number): Promise<Nave
   return results.filter((d): d is NaverIndustryDetail => d !== null).flatMap((d) => d.stocks);
 }
 
+/** 종목명 하나가 속한 섹터 정보 — GICS 11개 대분류 + WICS 79개 소분류(업종명) */
+export interface StockSectorInfo {
+  gicsSector: string;
+  wicsSector: string;
+}
+
+// 종목명→섹터는 "분류"(어느 업종 소속인지)라서 등락률과 달리 초 단위로 안 바뀐다.
+// 유일한 사용처인 뉴스 분류(GET /api/news)도 ranknews 자체가 10분(600s) 캐시라, 그보다
+// 자주 다시 만들 이유가 없다 — fetchIndustryStocks의 60초 캐시(가격용)를 그대로 빌려 쓰지 않는다.
+const STOCK_NAME_TO_SECTOR_TTL_MS = 600_000;
+
+// fetchStockNameToSectorInfo()가 매 호출마다 79개 업종을 다시 훑지 않도록 하는 인메모리 캐시.
+// 값이 아니라 진행 중인 Promise 자체를 캐시한다 — 캐시가 막 만료된 순간 여러 요청이
+// 동시에 들어와도 전부 같은 Promise를 기다리게 해서 79개 업종 스캔이 중복 실행되지
+// 않게 한다(thundering herd 방지).
+let stockNameToSectorCache: {
+  promise: Promise<Map<string, StockSectorInfo>>;
+  expiresAt: number;
+} | null = null;
+
+/**
+ * 종목명(예: "삼성전자") → 섹터 정보 매핑을 반환한다 (뉴스 섹터 분류용, #15).
+ * 79개 업종 전체 구성종목을 훑어서 만들며, 개별 fetch는 fetchIndustryStocks의
+ * 60초 캐시(next.revalidate)를 그대로 타므로 반복 호출해도 실네트워크 요청은 늘지 않는다.
+ */
+export function fetchStockNameToSectorInfo(): Promise<Map<string, StockSectorInfo>> {
+  if (stockNameToSectorCache && stockNameToSectorCache.expiresAt > Date.now()) {
+    return stockNameToSectorCache.promise;
+  }
+
+  const promise = (async () => {
+    const data = await fetchIndustryResponse();
+
+    const perGroup = await Promise.all(
+      data.groups.map(async (group) => {
+        const gicsSector = WICS_TO_GICS_SECTOR[group.name];
+        if (!gicsSector) return [];
+
+        const stocks = await fetchIndustryStocks(group.no, group.totalCount);
+        return stocks.map(
+          (stock) => [stock.stockName, { gicsSector, wicsSector: group.name }] as const,
+        );
+      }),
+    );
+
+    return new Map(perGroup.flat());
+  })();
+
+  // 실패한 시도는 캐시에 남기지 않는다 — 다음 호출이 새로 재시도할 수 있게.
+  promise.catch(() => {
+    if (stockNameToSectorCache?.promise === promise) stockNameToSectorCache = null;
+  });
+
+  stockNameToSectorCache = { promise, expiresAt: Date.now() + STOCK_NAME_TO_SECTOR_TTL_MS };
+  return promise;
+}
+
+/**
+ * 텍스트에 실제 종목명이 언급됐는지로 섹터를 찾는다 (뉴스 섹터 분류용, #15 — 키워드
+ * 매칭보다 정확도 높음). 종목명이 서로 부분 문자열일 수 있어(예: "SK"·"SK하이닉스")
+ * 긴 이름부터 검사해야 하므로, 호출 측이 `sortedNames`를 길이 내림차순으로 정렬해 넘긴다.
+ */
+export function classifyByStockNames(
+  text: string,
+  sortedNames: readonly string[],
+  nameToSector: ReadonlyMap<string, StockSectorInfo>,
+): StockSectorInfo | null {
+  for (const name of sortedNames) {
+    if (text.includes(name)) return nameToSector.get(name) ?? null;
+  }
+  return null;
+}
+
 /**
  * 한국 시장 히트맵(Finviz식 트리맵) 데이터를 반환한다.
  * 업종별로 시총 상위 종목을 묶고, 각 종목은 시가총액(크기)·등락률(색)을 갖는다.
