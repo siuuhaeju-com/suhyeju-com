@@ -18,6 +18,7 @@
 | 종목명→코드 자동완성   | `ac.stock.naver.com/ac`                         | 시세 join (#9) — 한글명으로 한·미 종목 매칭                               |
 | 한국 종목 시세         | `m.stock.naver.com/api/stock/{code}/basic`      | 시세 join (#9)                                                            |
 | 미국 종목 시세         | `api.stock.naver.com/stock/{reutersCode}/basic` | 시세 join (#9) — `NVDA.O`·`AFL` 등 접미사 가변                            |
+| 인기 뉴스(많이 본)     | `api.stock.naver.com/news/ranknews`             | 인기 뉴스 API (#15/#53) — 실제 조회수 랭킹, API 키 불필요                 |
 
 ### 1-1. WICS→GICS 파생 로직 (원본 API 위에 얹은 가공, 신규 호출 없음)
 
@@ -40,21 +41,16 @@
   훑어 `종목명 → {GICS 대분류, WICS 소분류}` 매핑을 만든다. `GET /api/news`가 기사 본문의 종목명을
   1차로 조회하고, 종목명이 안 잡히면 `lib/gics-sectors.ts`의 키워드 매핑으로 폴백한다(순수 키워드
   매칭만 쓰면 "반도체 인력난" 같은 기사를 특정 종목으로 오탐하는 문제가 있어 종목명 매칭을
-  우선한다).
+  우선한다). ranknews(#53)는 종목/섹터 정보를 안 주기 때문에 이 분류 파이프라인이 여전히
+  필요하며, 매칭이 안 되면 `'증시'` 기본값으로 폴백한다.
 
-### 2. 네이버 검색 API (공식) — 인증 필요
-
-- `openapi.naver.com/v1/search/news.json`
-- 키: `NAVER_CLIENT_ID` / `NAVER_CLIENT_SECRET` (.env.local)
-- 용도: 인기 뉴스 (#33)
-
-### 3. GPT 게이트웨이 (엘리스, OpenAI 호환)
+### 2. GPT 게이트웨이 (엘리스, OpenAI 호환)
 
 - `mlapi.run/{api_id}/v1` — 모델 `openai/gpt-5.4`
 - 키: `OPENAI_API_KEY` (JWT, .env.local) / 주소: `GPT_BASE_URL`
 - 용도: 뉴스 분석 (#9). **표준 OpenAI(gpt-4o 등)로도 전환 가능** — `GPT_BASE_URL` 비우면 자동.
 
-### 4. 뉴스 본문 추출 (직접 스크래핑)
+### 3. 뉴스 본문 추출 (직접 스크래핑)
 
 - `cheerio` 셀렉터맵(`#dic_area` 등) + `@extractus/article-extractor` 폴백
 - 용도: URL → 본문 (#9)
