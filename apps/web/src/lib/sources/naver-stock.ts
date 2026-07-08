@@ -19,9 +19,24 @@ function normalize(name: string): string {
   return name.replace(/\s+/g, '');
 }
 
+// 개명·별칭 종목 → 현재 상장명 (자동완성이 옛 이름을 못 찾는 케이스 보정)
+const STOCK_ALIASES: Record<string, string> = {
+  두산중공업: '두산에너빌리티',
+  대우조선해양: '한화오션',
+  현대중공업: 'HD현대중공업',
+  한국조선해양: 'HD한국조선해양',
+  LG상사: 'LX인터내셔널',
+};
+
+/** 별칭이면 현재 상장명으로 바꾼다(아니면 그대로). */
+function canonicalName(name: string): string {
+  return STOCK_ALIASES[normalize(name)] ?? name;
+}
+
 /** 종목명 → 종목코드 (자동완성에서 정규화 exact match, 국내 주식만) */
 async function resolveCode(name: string): Promise<string | null> {
-  const url = `https://ac.stock.naver.com/ac?target=stock&q=${encodeURIComponent(name)}`;
+  const canonical = canonicalName(name);
+  const url = `https://ac.stock.naver.com/ac?target=stock&q=${encodeURIComponent(canonical)}`;
   const res = await fetch(url, {
     headers: { 'User-Agent': UA },
     next: { revalidate: 3600 }, // 종목명↔코드는 잘 안 바뀜 → 1시간 캐시
@@ -29,7 +44,7 @@ async function resolveCode(name: string): Promise<string | null> {
   if (!res.ok) return null;
 
   const data = (await res.json()) as { items?: AcItem[] };
-  const target = normalize(name);
+  const target = normalize(canonical);
   const hit = data.items?.find(
     (i) => normalize(i.name) === target && (i.typeCode === 'KOSPI' || i.typeCode === 'KOSDAQ'),
   );

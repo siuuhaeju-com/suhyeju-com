@@ -28,8 +28,22 @@ const DOMAIN_SELECTORS: Record<string, string> = {
 export interface ExtractedArticle {
   text: string;
   title: string;
+  /** 발행처 (og:site_name 등). 없으면 '' */
+  source: string;
+  /** 발행시각 (ISO). 없으면 '' */
+  publishedAt: string;
   /** 추출 경로 (디버깅용) */
   via: 'selector' | 'readability';
+}
+
+/** og/article 메타에서 발행처·발행시각을 뽑는다(없으면 빈 문자열). */
+function readMeta($: cheerio.CheerioAPI): { source: string; publishedAt: string } {
+  const publishedAt =
+    $('meta[property="article:published_time"]').attr('content') ??
+    $('meta[property="og:regDate"]').attr('content') ??
+    '';
+  const source = $('meta[property="og:site_name"]').attr('content') ?? '';
+  return { source: source.trim(), publishedAt: publishedAt.trim() };
 }
 
 const MIN_LENGTH = 200; // 이보다 짧으면 추출 실패로 간주
@@ -56,7 +70,12 @@ export async function extractArticle(url: string): Promise<ExtractedArticle | nu
         $(selector).find('script, style').remove();
         const text = $(selector).text().replace(/\s+/g, ' ').trim();
         if (text.length > MIN_LENGTH) {
-          return { text, title: $('title').text().trim(), via: 'selector' };
+          return {
+            text,
+            title: $('title').text().trim(),
+            ...readMeta($),
+            via: 'selector',
+          };
         }
       }
     } catch {
@@ -72,7 +91,13 @@ export async function extractArticle(url: string): Promise<ExtractedArticle | nu
       .replace(/\s+/g, ' ')
       .trim();
     if (text.length > MIN_LENGTH) {
-      return { text, title: article?.title ?? '', via: 'readability' };
+      return {
+        text,
+        title: article?.title ?? '',
+        source: article?.source ?? host,
+        publishedAt: article?.published ?? '',
+        via: 'readability',
+      };
     }
   } catch {
     // 최종 실패

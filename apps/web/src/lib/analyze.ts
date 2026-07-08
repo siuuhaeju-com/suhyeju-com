@@ -21,6 +21,8 @@ export async function runAnalysis(input: AnalyzeInput): Promise<AnalysisResult> 
   // 1) 본문 확보 — 붙여넣기(text) 우선, 없으면 URL 스크래핑
   let text = input.text?.trim();
   let title = '';
+  let source = '';
+  let publishedAt = '';
   if (!text && input.url) {
     const article = await extractArticle(input.url);
     if (!article) {
@@ -28,6 +30,8 @@ export async function runAnalysis(input: AnalyzeInput): Promise<AnalysisResult> 
     }
     text = article.text;
     title = article.title;
+    source = article.source;
+    publishedAt = article.publishedAt;
   }
   if (!text) throw new Error('분석할 뉴스 본문이 없습니다');
 
@@ -39,7 +43,12 @@ export async function runAnalysis(input: AnalyzeInput): Promise<AnalysisResult> 
   await joinQuotes(draft);
 
   // 4) AnalysisResult 조립
-  return assemble(draft, { title, originUrl: input.url ?? '' });
+  return assemble(draft, {
+    title,
+    originUrl: input.url ?? '',
+    source,
+    publishedAt,
+  });
 }
 
 /**
@@ -94,7 +103,7 @@ async function joinQuotes(draft: AnalysisDraft): Promise<void> {
 /** GPT 초안(draft) + 메타 → 완성 AnalysisResult (표현 필드는 여기서 파생) */
 function assemble(
   draft: AnalysisDraft,
-  meta: { title: string; originUrl: string },
+  meta: { title: string; originUrl: string; source: string; publishedAt: string },
 ): AnalysisResult {
   // topStocks: 배열 → Record<섹터명, 종목[]>
   const topStocks: Record<string, { name: string; changePct: number }[]> = {};
@@ -105,8 +114,8 @@ function assemble(
     sector: draft.sector,
     verdict: draft.verdict,
     title: meta.title || draft.summary.slice(0, 40),
-    source: '', // TODO: 스크래핑 메타(발행처)
-    publishedAt: '',
+    source: meta.source,
+    publishedAt: meta.publishedAt,
     desk: '',
     analyzedAt: new Date().toISOString(),
     engineVersion: ENGINE_VERSION,
