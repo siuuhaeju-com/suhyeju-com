@@ -4,13 +4,7 @@
  *   - 메인:   GET /api/news/popular, /api/sectors, /api/analysis/recent
  *   - 분석:   GET /api/analysis/:id  →  AnalysisResult
  */
-import type {
-  AnalysisResult,
-  AnalysisStep,
-  FloatingChip,
-  NewsItem,
-  RecentAnalysis,
-} from '@/lib/types';
+import type { AnalysisResult, FloatingChip, NewsItem, RecentAnalysis } from '@/lib/types';
 
 /* ── 메인: 인기 뉴스 (F-03a) ─────────────────────────────── */
 export const popularNews: NewsItem[] = [
@@ -60,15 +54,6 @@ export const recentAnalyses: RecentAnalysis[] = [
   { id: 'hbm4', title: '테슬라 로보택시 공개 임박…자율주행 밸류체인 재조명', analyzedAt: '어제' },
   { id: 'hbm4', title: '메모리 반도체 가격 3분기 연속 상승', analyzedAt: '3일 전' },
   { id: 'hbm4', title: '방산 수출 사상 최대…관련주 재평가 흐름', analyzedAt: '지난주' },
-];
-
-/* ── 로딩: 진행 단계 (F-04) ─────────────────────────────── */
-export const analysisSteps: AnalysisStep[] = [
-  { label: '뉴스 읽는 중' },
-  { label: '핵심 이슈 및 키워드 추출 중' },
-  { label: '호재/악재 의견 비교 중' },
-  { label: '수혜 산업 그래프 생성 중' },
-  { label: '산업 영향도 히트맵 생성 중' },
 ];
 
 /* ── 로딩: 부유 키워드 칩 ───────────────────────────────── */
