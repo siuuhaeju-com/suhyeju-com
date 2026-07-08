@@ -1,11 +1,12 @@
 import Link from 'next/link';
 
 import { AnalyzeForm } from '@/components/main/AnalyzeForm';
+import { SectorOverview } from '@/components/main/SectorOverview';
 import { ParticleField } from '@/components/ParticleField';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { formatDateTime, formatPct, getPctArrow, getPctToneClass } from '@/lib/format';
-import { popularNews, recentAnalyses, sectorOverview } from '@/lib/mock-data';
+import { formatDateTime } from '@/lib/format';
+import { popularNews, recentAnalyses } from '@/lib/mock-data';
 
 /**
  * 메인 페이지 (PAGE-1 · #30)
@@ -69,26 +70,7 @@ export default function HomePage() {
           {/* 주요 섹터 현황 */}
           <div>
             <h2 className="mb-4 text-lg font-bold">주요 섹터 현황</h2>
-            <div className="grid grid-cols-2 gap-3">
-              {sectorOverview.map((sector) => (
-                <Card
-                  key={sector.name}
-                  className="p-4 transition-colors hover:border-primary/40 hover:bg-surface-raised/60"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="text-sm font-bold">{sector.name}</span>
-                    <span
-                      className={`text-[13px] font-bold whitespace-nowrap ${getPctToneClass(sector.changePct)}`}
-                    >
-                      {getPctArrow(sector.changePct)} {formatPct(sector.changePct)}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                    {sector.description}
-                  </p>
-                </Card>
-              ))}
-            </div>
+            <SectorOverview />
           </div>
 
           {/* 최근 분석 내역 — 표시 전용 목록, 항목 클릭 시 결과 재열람 */}

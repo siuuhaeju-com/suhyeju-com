@@ -10,7 +10,6 @@ import type {
   FloatingChip,
   NewsItem,
   RecentAnalysis,
-  SectorChange,
 } from '@/lib/types';
 
 /* ── 메인: 인기 뉴스 (F-03a) ─────────────────────────────── */
@@ -54,18 +53,6 @@ export const popularNews: NewsItem[] = [
     summary:
       '지정학적 리스크로 국제유가가 급등하며 에너지 관련 종목 전반에 매수세가 유입되고 있다.',
   },
-];
-
-/* ── 메인: 주요 섹터 현황 (F-03b) ────────────────────────── */
-export const sectorOverview: SectorChange[] = [
-  { name: '반도체', changePct: 2.4, description: '메모리·파운드리·설계 전반의 밸류체인' },
-  { name: '2차전지', changePct: -1.1, description: '양극재·음극재·셀 제조 및 소재' },
-  { name: '바이오', changePct: 0.8, description: '신약 개발·CMO·헬스케어 플랫폼' },
-  { name: 'AI·소프트웨어', changePct: 3.6, description: '생성형 AI·클라우드·데이터센터' },
-  { name: '자동차', changePct: -0.5, description: '완성차·전장·자율주행 부품' },
-  { name: '에너지', changePct: 1.2, description: '정유·태양광·원전 및 신재생' },
-  { name: '금융', changePct: 0.3, description: '은행·증권·보험 및 핀테크' },
-  { name: '방산', changePct: 1.9, description: '지상·항공·해양 방위 산업' },
 ];
 
 /* ── 메인: 최근 분석 내역 (F-03c) ────────────────────────── */
