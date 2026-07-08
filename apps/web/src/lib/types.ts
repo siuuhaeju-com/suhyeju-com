@@ -54,6 +54,10 @@ export interface FloatingChip {
 export interface TopStock {
   name: string;
   changePct: number;
+  /** 종목 코드 — 한국=6자리(예: 005930), 미국=reutersCode(예: NVDA.O). 시세 매칭 성공 시에만 채워짐 (#49) */
+  code?: string;
+  /** 상장 시장 — 코드와 함께 채워짐 (링크 분기용) */
+  market?: 'KR' | 'US';
 }
 
 export interface SignalItem {

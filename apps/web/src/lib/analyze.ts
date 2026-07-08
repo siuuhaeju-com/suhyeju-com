@@ -6,8 +6,8 @@ import { randomUUID } from 'crypto';
 
 import { extractArticle } from '@/lib/extract-article';
 import { analyzeNews, type AnalysisDraft } from '@/lib/sources/gpt';
-import { fetchStockChangePcts } from '@/lib/sources/naver-stock';
-import type { AnalysisResult, HeatmapCell, KnowledgeNode, SpreadNode } from '@/lib/types';
+import { fetchStockQuotes, type StockQuote } from '@/lib/sources/naver-stock';
+import type { AnalysisResult, HeatmapCell, KnowledgeNode, SpreadNode, TopStock } from '@/lib/types';
 
 const ENGINE_VERSION = '수혜주.com AI v2.1';
 
@@ -57,13 +57,13 @@ export async function runAnalysis(
   // 3) 시세 join — topStocks 종목에 네이버 실시세를 붙이고,
   //    섹터(spreadNodes/heatmap/relatedSectors)는 그 섹터 종목들의 실시세 평균으로 파생.
   onProgress?.({ step: 'quote', label: '실시간 시세 확인 중' });
-  await joinQuotes(draft);
+  const quotes = await joinQuotes(draft);
   console.log(
     `[analyze] GPT ${Math.round(tJoin - tGpt)}ms · join ${Math.round(performance.now() - tJoin)}ms`,
   );
 
   // 4) AnalysisResult 조립
-  return assemble(draft, {
+  return assemble(draft, quotes, {
     title,
     originUrl: input.url ?? '',
     source,
@@ -72,21 +72,22 @@ export async function runAnalysis(
 }
 
 /**
- * draft에 네이버 실시세를 join한다(in-place).
+ * draft에 네이버 실시세를 join한다(in-place) + 종목명→StockQuote 맵을 반환한다.
  * - topStocks 종목: 종목명→실시세로 changePct 교체(매칭 실패 시 GPT 초안 유지).
+ *   코드·시장은 반환 맵으로 넘겨 assemble에서 TopStock에 부여한다(#49).
  * - spreadNodes/heatmap/relatedSectors: 이름이 topStocks의 섹터와 맞으면
  *   그 섹터 종목들의 실시세 평균으로 changePct 교체.
  * 네이버가 막히거나 종목이 매칭 안 되면 조용히 GPT 초안값을 유지한다(분석 자체는 성공).
  */
-async function joinQuotes(draft: AnalysisDraft): Promise<void> {
+async function joinQuotes(draft: AnalysisDraft): Promise<Map<string, StockQuote | null>> {
   const names = draft.topStocks.flatMap((g) => g.stocks.map((s) => s.name));
-  if (names.length === 0) return;
+  if (names.length === 0) return new Map();
 
-  let quotes: Map<string, number | null>;
+  let quotes: Map<string, StockQuote | null>;
   try {
-    quotes = await fetchStockChangePcts(names);
+    quotes = await fetchStockQuotes(names);
   } catch {
-    return; // 시세 소스 장애 시 GPT 초안 유지
+    return new Map(); // 시세 소스 장애 시 GPT 초안 유지
   }
 
   // 종목 changePct 교체 + 섹터별 실시세 평균 계산
@@ -94,7 +95,7 @@ async function joinQuotes(draft: AnalysisDraft): Promise<void> {
   for (const group of draft.topStocks) {
     const matched: number[] = [];
     for (const stock of group.stocks) {
-      const pct = quotes.get(stock.name);
+      const pct = quotes.get(stock.name)?.changePct;
       if (pct != null) {
         stock.changePct = pct;
         matched.push(pct);
@@ -118,16 +119,24 @@ async function joinQuotes(draft: AnalysisDraft): Promise<void> {
     const avg = sectorAvg.get(related.name);
     if (avg != null) related.changePct = avg;
   }
+
+  return quotes;
 }
 
 /** GPT 초안(draft) + 메타 → 완성 AnalysisResult (표현 필드는 여기서 파생) */
 function assemble(
   draft: AnalysisDraft,
+  quotes: Map<string, StockQuote | null>,
   meta: { title: string; originUrl: string; source: string; publishedAt: string },
 ): AnalysisResult {
-  // topStocks: 배열 → Record<섹터명, 종목[]>
-  const topStocks: Record<string, { name: string; changePct: number }[]> = {};
-  for (const group of draft.topStocks) topStocks[group.sector] = group.stocks;
+  // topStocks: 배열 → Record<섹터명, 종목[]> (매칭된 종목엔 코드·시장 부여 #49)
+  const topStocks: Record<string, TopStock[]> = {};
+  for (const group of draft.topStocks) {
+    topStocks[group.sector] = group.stocks.map((s) => {
+      const q = quotes.get(s.name);
+      return q ? { ...s, code: q.code, market: q.market } : { ...s };
+    });
+  }
 
   return {
     id: randomUUID().slice(0, 8),
