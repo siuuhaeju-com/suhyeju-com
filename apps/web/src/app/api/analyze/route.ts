@@ -24,7 +24,7 @@ export async function POST(request: Request) {
         controller.enqueue(encoder.encode(JSON.stringify(event) + '\n'));
       try {
         const result = await runAnalysis(body, send);
-        saveAnalysis(result);
+        await saveAnalysis(result);
         send({ step: 'done', id: result.id });
       } catch (error) {
         console.error('[api/analyze]', error);
