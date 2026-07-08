@@ -4,7 +4,7 @@ import { AnalyzeForm } from '@/components/main/AnalyzeForm';
 import { ParticleField } from '@/components/ParticleField';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { formatPct, getPctArrow, getPctToneClass } from '@/lib/format';
+import { formatDateTime, formatPct, getPctArrow, getPctToneClass } from '@/lib/format';
 import { popularNews, recentAnalyses, sectorOverview } from '@/lib/mock-data';
 
 /**
@@ -106,7 +106,9 @@ export default function HomePage() {
                   <span className="truncate text-[13.5px] font-medium text-ink-sub">
                     {item.title}
                   </span>
-                  <span className="shrink-0 text-xs text-muted-foreground">{item.analyzedAt}</span>
+                  <span className="shrink-0 text-xs text-muted-foreground">
+                    {formatDateTime(item.analyzedAt)}
+                  </span>
                 </Link>
               ))}
             </Card>

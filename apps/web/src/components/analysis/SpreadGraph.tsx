@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { StockTooltip } from '@/components/analysis/StockTooltip';
 import { Card } from '@/components/ui/card';
-import { formatPct } from '@/lib/format';
+import { formatPct, getPctToneClass } from '@/lib/format';
 import { cn } from '@/lib/utils';
 import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
 
@@ -149,7 +149,13 @@ export function SpreadGraph({
                   원점
                 </span>
               ) : (
-                <span className="mt-0.5 block text-[13px] font-extrabold text-positive">
+                // 등락 색은 부호 기준 — 하락(음수)은 negative 토큰 (색 하드코딩 금지)
+                <span
+                  className={cn(
+                    'mt-0.5 block text-[13px] font-extrabold',
+                    getPctToneClass(node.changePct ?? 0),
+                  )}
+                >
                   {node.changePct != null ? formatPct(node.changePct) : ''}
                 </span>
               )}

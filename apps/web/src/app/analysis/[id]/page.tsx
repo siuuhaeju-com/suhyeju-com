@@ -5,6 +5,7 @@ import { KnowledgeGraph } from '@/components/analysis/KnowledgeGraph';
 import { SignalSection } from '@/components/analysis/SignalSection';
 import { SpreadGraph } from '@/components/analysis/SpreadGraph';
 import { SummarySection } from '@/components/analysis/SummarySection';
+import { formatDateTime } from '@/lib/format';
 import { getAnalysis } from '@/lib/mock-data';
 
 type AnalysisPageProps = {
@@ -31,8 +32,9 @@ export default async function AnalysisPage({ params }: AnalysisPageProps) {
         >
           <span aria-hidden>←</span> 새 분석
         </Link>
+        {/* analyzedAt은 실데이터에서 ISO로 오므로 표시 형식으로 변환 */}
         <p className="text-xs text-muted-foreground">
-          분석 완료 · {result.analyzedAt} · {result.engineVersion}
+          분석 완료 · {formatDateTime(result.analyzedAt)} · {result.engineVersion}
         </p>
       </div>
 
