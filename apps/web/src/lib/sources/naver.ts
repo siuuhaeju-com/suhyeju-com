@@ -133,11 +133,14 @@ export interface StockSectorInfo {
   wicsSector: string;
 }
 
-const STOCK_NAME_TO_SECTOR_TTL_MS = 60_000; // 파일 내 다른 fetch들의 60초 캐시와 동일한 주기
+// 종목명→섹터는 "분류"(어느 업종 소속인지)라서 등락률과 달리 초 단위로 안 바뀐다.
+// 유일한 사용처인 뉴스 분류(GET /api/news)도 ranknews 자체가 10분(600s) 캐시라, 그보다
+// 자주 다시 만들 이유가 없다 — fetchIndustryStocks의 60초 캐시(가격용)를 그대로 빌려 쓰지 않는다.
+const STOCK_NAME_TO_SECTOR_TTL_MS = 600_000;
 
 // fetchStockNameToSectorInfo()가 매 호출마다 79개 업종을 다시 훑지 않도록 하는 인메모리 캐시.
 // 개별 fetch 자체는 이미 revalidate:60으로 캐시되지만, 79개를 순회하며 Map을 다시 만드는
-// JS 연산은 그때마다 반복되므로 결과물(Map)을 통째로 짧게 캐시한다.
+// JS 연산은 그때마다 반복되므로 결과물(Map)을 통째로 캐시한다.
 let stockNameToSectorCache: { data: Map<string, StockSectorInfo>; expiresAt: number } | null = null;
 
 /**
