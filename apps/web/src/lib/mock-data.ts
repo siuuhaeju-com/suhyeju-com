@@ -13,45 +13,60 @@ import type {
 } from '@/lib/types';
 
 /* ── 메인: 인기 뉴스 (F-03a) ─────────────────────────────── */
+// GET /api/news 응답 형태와 동일 — 네이버 증권 '많이 본 뉴스'(ranknews, #53) 기준.
+// ranknews는 종목/섹터 분류가 없어 sector='증시'·tone='teal' 고정, url은 네이버 기사 링크.
+// (url의 기사 id는 예시값 — 실제 API는 실시간 랭킹을 반환)
 export const popularNews: NewsItem[] = [
   {
-    id: 'news-battery',
-    sector: '2차전지',
-    sectorTone: 'negative',
+    id: 'news-0',
+    sector: '증시',
+    sectorTone: 'teal',
+    source: '매일경제',
+    publishedAt: '2시간 전',
+    title: '“아 아침에 그냥 팔 걸”…변동성 극에 달한 국장, 개미는 못 버틴다',
+    summary: '코스피가 장중 2%대 급락하며 개인 투자자 이탈이 이어지고 있다.',
+    url: 'https://n.news.naver.com/article/009/0005704830',
+  },
+  {
+    id: 'news-1',
+    sector: '증시',
+    sectorTone: 'teal',
+    source: '한국경제',
+    publishedAt: '3시간 전',
+    title: '삼전닉스 빼곤 대부분 고점서 물려…개미 손실 확대',
+    summary: '반도체 대형주를 제외한 상당수 종목이 고점 대비 크게 하락한 것으로 나타났다.',
+    url: 'https://n.news.naver.com/article/009/0005704795',
+  },
+  {
+    id: 'news-2',
+    sector: '증시',
+    sectorTone: 'teal',
+    source: '서울경제',
+    publishedAt: '5시간 전',
+    title: '“수익률 -50%, 내가 이걸 왜 했을까” 레버리지 ETF 또 폭락',
+    summary: '고배율 레버리지 상품에 투자한 개인들의 손실이 커지며 주의가 요구된다.',
+    url: 'https://n.news.naver.com/article/011/0004639646',
+  },
+  {
+    id: 'news-3',
+    sector: '증시',
+    sectorTone: 'teal',
     source: '한국경제',
     publishedAt: '6시간 전',
-    title: '전기차 수요 둔화 우려…배터리 소재 업체 실적 하향 조정',
+    title: 'SK하이닉스 ADR 상장 임박…나스닥發 수급 기대감',
     summary:
-      '글로벌 완성차 업체의 전기차 생산 계획 축소로 국내 배터리 소재 기업의 하반기 실적 전망이 낮아졌다.',
+      'SK하이닉스의 나스닥 주식예탁증서(ADR) 상장을 앞두고 외국인 자금 유입 기대가 커지고 있다.',
+    url: 'https://n.news.naver.com/article/215/0001258077',
   },
   {
-    id: 'news-semicon',
-    sector: '반도체',
-    sectorTone: 'positive',
-    source: '매일경제',
-    publishedAt: '8시간 전',
-    title: '삼성전자, 파운드리 2나노 시험 생산 성공…TSMC 추격 본격화',
-    summary:
-      '삼성전자가 2나노 공정 시험 생산에 성공하며 첨단 파운드리 경쟁에서 반등 발판을 마련했다.',
-  },
-  {
-    id: 'news-bio',
-    sector: '바이오',
+    id: 'news-4',
+    sector: '증시',
     sectorTone: 'teal',
-    source: '이데일리',
-    publishedAt: '10시간 전',
-    title: '신약 임상 3상 일부 지연…바이오 섹터 변동성 확대',
-    summary: '주요 바이오 기업의 임상 일정 조정 소식에 섹터 전반의 투자 심리가 엇갈리고 있다.',
-  },
-  {
-    id: 'news-energy',
-    sector: '에너지',
-    sectorTone: 'amber',
-    source: '연합인포맥스',
-    publishedAt: '12시간 전',
-    title: '국제유가 급등…정유·태양광 밸류체인 동반 강세',
-    summary:
-      '지정학적 리스크로 국제유가가 급등하며 에너지 관련 종목 전반에 매수세가 유입되고 있다.',
+    source: '헤럴드경제',
+    publishedAt: '8시간 전',
+    title: '‘-35%’ 처참한 수익률…스페이스X 테마주 투자자 비명',
+    summary: '기대를 모았던 우주·항공 테마주가 급락하며 투자 심리가 악화됐다.',
+    url: 'https://n.news.naver.com/article/016/0002667720',
   },
 ];
 
