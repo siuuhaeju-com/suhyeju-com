@@ -1,11 +1,17 @@
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { formatPct, getPctToneClass } from '@/lib/format';
+import { formatDateTime, formatPct, getPctToneClass } from '@/lib/format';
 import type { AnalysisResult } from '@/lib/types';
 
 /** AI 요약 섹션 (F-05) — 요약 카드 + 핵심 키워드·관련 섹터 패널 */
 export function SummarySection({ result }: { result: AnalysisResult }) {
+  // 실데이터는 source/publishedAt/desk가 비어 올 수 있다 — 있는 값만 ' · '로 연결.
+  // publishedAt은 ISO(메타태그 추출)일 수 있어 표시 형식으로 변환한다.
+  const newsMeta = [result.source, formatDateTime(result.publishedAt), result.desk]
+    .filter(Boolean)
+    .join(' · ');
+
   return (
     <section aria-labelledby="summary-heading">
       <div className="flex flex-wrap items-center gap-2">
@@ -18,9 +24,7 @@ export function SummarySection({ result }: { result: AnalysisResult }) {
       >
         {result.title}
       </h1>
-      <p className="mt-2 text-xs text-muted-foreground">
-        {result.source} · {result.publishedAt} · {result.desk}
-      </p>
+      {newsMeta && <p className="mt-2 text-xs text-muted-foreground">{newsMeta}</p>}
 
       <div className="mt-6 grid gap-4 lg:grid-cols-[1fr_360px]">
         {/* AI 요약 */}
