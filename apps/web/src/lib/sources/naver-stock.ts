@@ -83,17 +83,26 @@ async function fetchChangePct(stock: ResolvedStock): Promise<number | null> {
   return Number.isFinite(pct) ? pct : null;
 }
 
-/** 종목명 → 실시세 등락률(%). 매칭·조회 실패 시 null */
-export async function fetchStockChangePct(name: string): Promise<number | null> {
-  const stock = await resolveStock(name);
-  return stock ? fetchChangePct(stock) : null;
+/** 종목 시세 결과 — 코드·시장은 매칭되면 채워지고, 시세 조회만 실패하면 changePct=null (#49) */
+export interface StockQuote {
+  code: string; // 한국=6자리 종목코드(예: 005930), 미국=reutersCode(예: NVDA.O)
+  market: 'KR' | 'US';
+  changePct: number | null;
 }
 
-/** 여러 종목명을 병렬 조회 → Map<종목명, 등락률|null> (중복 제거) */
-export async function fetchStockChangePcts(names: string[]): Promise<Map<string, number | null>> {
+/** 종목명 → {코드, 시장, 실시세}. 종목 매칭 실패 시 null(코드도 없음). */
+export async function fetchStockQuote(name: string): Promise<StockQuote | null> {
+  const stock = await resolveStock(name);
+  if (!stock) return null;
+  const changePct = await fetchChangePct(stock);
+  return { code: stock.key, market: stock.market, changePct };
+}
+
+/** 여러 종목명을 병렬 조회 → Map<종목명, StockQuote|null> (중복 제거) */
+export async function fetchStockQuotes(names: string[]): Promise<Map<string, StockQuote | null>> {
   const unique = [...new Set(names)];
   const entries = await Promise.all(
-    unique.map(async (name) => [name, await fetchStockChangePct(name)] as const),
+    unique.map(async (name) => [name, await fetchStockQuote(name)] as const),
   );
   return new Map(entries);
 }
