@@ -26,6 +26,8 @@ export interface NewsItem {
   publishedAt: string;
   title: string;
   summary: string;
+  /** 원문 기사 링크 (네이버 뉴스) */
+  url?: string;
 }
 
 export interface RecentAnalysis {
