@@ -212,6 +212,66 @@ npx impeccable detect apps/web/src   # 현재 0건 — 이 상태를 유지해 �
 
 ---
 
+## 7. 시장 데이터 API 연동 — 구현 완료 (PR #44)
+
+네이버 금융 기반 **실시간 시장 API 2종**이 구현되어 바로 붙일 수 있습니다. 데이터 소스는 네이버 금융 비공식(키·인증 불필요)이고, BE가 캐싱(60초)·폴백을 처리합니다. 타입은 `types.ts`에 이미 있습니다.
+
+### 7-1. 주요 섹터 현황 — `GET /api/market/kr/sectors` (#34)
+
+- **교체 대상:** `mock-data.ts`의 `sectorOverview`
+- **응답:** `SectorChange[]` — 네이버 79개 업종 **전체**(등락률순 아님). 화면에 8개만 쓰려면 `.slice(0, 8)`. `description`은 API엔 없으니 UI에서 옵셔널 처리
+- **훅 (복붙용):**
+
+```ts
+// lib/queries.ts
+import type { SectorChange } from '@/lib/types';
+
+export function useKrSectors() {
+  return useQuery({
+    queryKey: ['market', 'kr', 'sectors'],
+    queryFn: () => apiGet<SectorChange[]>('/api/market/kr/sectors'),
+    staleTime: 60_000,
+    refetchInterval: 60_000, // 헤더 "실시간" 문구가 진짜가 됩니다
+  });
+}
+```
+
+- **화면:** 메인 "주요 섹터 현황". `sectorOverview` → `useKrSectors().data?.slice(0, 8)`
+
+### 7-2. 시장 히트맵 — `GET /api/market/kr/heatmap?top=15` (신규)
+
+- **신규 컴포넌트 필요** — 기존 화면에 없던 Finviz식 **시장 전체 트리맵**입니다 (분석 페이지의 `ImpactHeatmap`과는 별개)
+- **응답:** `MarketHeatmap`
+
+```ts
+{ market: 'KR', asOf, status: 'OPEN' | 'CLOSE',
+  sectors: [{ name, changePct, stocks: [{ name, code, marketCap, changePct }] }] }
+```
+
+- **훅 (복붙용):**
+
+```ts
+import type { MarketHeatmap } from '@/lib/types';
+
+export function useKrHeatmap(top = 15) {
+  return useQuery({
+    queryKey: ['market', 'kr', 'heatmap', top],
+    queryFn: () => apiGet<MarketHeatmap>(`/api/market/kr/heatmap?top=${top}`),
+    staleTime: 60_000,
+  });
+}
+```
+
+- **렌더 권장:** `pnpm add d3-hierarchy` 후 `treemap`으로 (섹터 그룹 + 종목 `marketCap` 크기 + `changePct` 색). 색은 §5 규칙(상승=레드/하락=그린). 계산은 순수 함수라 SSR 무관, 컨테이너 크기는 `ResizeObserver` + `"use client"`
+
+### 참고
+
+- `apiGet`은 §4-1 `lib/api.ts`의 fetch 래퍼입니다 (프론트가 만들 것). BE가 Next.js Route Handler라 같은 오리진이므로 `NEXT_PUBLIC_API_URL` 없이 `/api/...` 상대경로로 바로 호출됩니다
+- 실측 속도: 섹터 ~0.1초 / 히트맵 첫 회 ~2.4초 (캐시 후 즉시)
+- 에러 시 `{ error: string }` + 502 반환 (§4-1 에러 정규화와 동일 패턴)
+
+---
+
 문서와 코드가 다르게 느껴지는 부분이 있으면 알려 주세요. 필요한 부분은 바로 수정하겠습니다.
 
 구조보다 더 중요한 것은 `types.ts` 계약과 §5의 규칙입니다. 이 둘만 유지되면 화면은 그대로 동작합니다.
