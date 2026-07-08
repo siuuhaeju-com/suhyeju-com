@@ -21,7 +21,7 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
       </head>
-      <body className="flex min-h-full flex-col font-sans antialiased">
+      <body className="flex min-h-full flex-col overflow-x-hidden font-sans antialiased">
         <Providers>
           <SiteHeader />
           {children}
