@@ -1,0 +1,586 @@
+{
+  "edges": [
+    {
+      "source": "news-1",
+      "target": "sector-semi",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-1",
+      "target": "company-samsung",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-1",
+      "target": "company-sk",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-2",
+      "target": "sector-cloud",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-2",
+      "target": "sector-ai",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-2",
+      "target": "company-microsoft",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-2",
+      "target": "company-amazon",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-2",
+      "target": "company-meta",
+      "relation": "mentions",
+      "weight": 0.8
+    },
+    {
+      "source": "news-2",
+      "target": "company-google",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-3",
+      "target": "sector-semi",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-3",
+      "target": "sector-ai",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-3",
+      "target": "company-nvidia",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-3",
+      "target": "company-tsmc",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-3",
+      "target": "company-sk",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-3",
+      "target": "company-samsung",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-4",
+      "target": "sector-battery",
+      "relation": "mentions",
+      "weight": 0.94
+    },
+    {
+      "source": "news-4",
+      "target": "sector-energy",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-4",
+      "target": "company-lgensol",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-4",
+      "target": "company-samsungsdi",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-4",
+      "target": "company-skon",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-5",
+      "target": "sector-battery",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-5",
+      "target": "sector-auto",
+      "relation": "mentions",
+      "weight": 0.75
+    },
+    {
+      "source": "news-5",
+      "target": "company-lgensol",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-5",
+      "target": "company-samsungsdi",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-6",
+      "target": "sector-battery",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-6",
+      "target": "sector-robotics",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-6",
+      "target": "company-skon",
+      "relation": "mentions",
+      "weight": 0.8
+    },
+    {
+      "source": "news-7",
+      "target": "sector-robotics",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-7",
+      "target": "company-samsung",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-7",
+      "target": "company-rainbow",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-8",
+      "target": "sector-robotics",
+      "relation": "mentions",
+      "weight": 0.91
+    },
+    {
+      "source": "news-8",
+      "target": "sector-auto",
+      "relation": "mentions",
+      "weight": 0.8
+    },
+    {
+      "source": "news-8",
+      "target": "company-boston",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-8",
+      "target": "company-hyundai",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-9",
+      "target": "sector-shipbuilding",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-9",
+      "target": "sector-defense",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-9",
+      "target": "company-hanwhaocean",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-9",
+      "target": "company-hdhyundai",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-10",
+      "target": "sector-shipbuilding",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-10",
+      "target": "sector-defense",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-10",
+      "target": "company-hanwhaocean",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-11",
+      "target": "sector-shipbuilding",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-11",
+      "target": "sector-cybersecurity",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-11",
+      "target": "company-hanwhaocean",
+      "relation": "mentions",
+      "weight": 0.8
+    },
+    {
+      "source": "news-11",
+      "target": "company-hdhyundai",
+      "relation": "mentions",
+      "weight": 0.8
+    },
+    {
+      "source": "news-12",
+      "target": "sector-entertainment",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-12",
+      "target": "company-webtoon",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-12",
+      "target": "company-naver",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-13",
+      "target": "sector-entertainment",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-13",
+      "target": "company-webtoon",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-14",
+      "target": "sector-entertainment",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-14",
+      "target": "company-hybe",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-15",
+      "target": "sector-cybersecurity",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-15",
+      "target": "sector-ai",
+      "relation": "mentions",
+      "weight": 0.75
+    },
+    {
+      "source": "news-15",
+      "target": "company-crowdstrike",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-16",
+      "target": "sector-cybersecurity",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-16",
+      "target": "company-crowdstrike",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-17",
+      "target": "sector-pharma",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-17",
+      "target": "sector-bio",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-17",
+      "target": "company-lilly",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-18",
+      "target": "sector-pharma",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-18",
+      "target": "company-lilly",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-18",
+      "target": "company-novo",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-19",
+      "target": "sector-pharma",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-19",
+      "target": "company-lilly",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-20",
+      "target": "sector-fintech",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-20",
+      "target": "sector-finance",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-20",
+      "target": "company-toss",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-21",
+      "target": "sector-renewable",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-21",
+      "target": "sector-energy",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-21",
+      "target": "company-hanwhasol",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-22",
+      "target": "sector-defense",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-22",
+      "target": "company-hanwhaaero",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-22",
+      "target": "company-lignex1",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-23",
+      "target": "sector-aerospace",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-23",
+      "target": "company-kasa",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-23",
+      "target": "company-hanwhaaero",
+      "relation": "mentions",
+      "weight": 0.8
+    },
+    {
+      "source": "news-24",
+      "target": "sector-materials",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-24",
+      "target": "sector-battery",
+      "relation": "mentions",
+      "weight": 0.8
+    },
+    {
+      "source": "news-24",
+      "target": "company-solbrain",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-25",
+      "target": "sector-semi",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-25",
+      "target": "sector-renewable",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-25",
+      "target": "company-samsung",
+      "relation": "mentions",
+      "weight": 0.8
+    },
+    {
+      "source": "news-26",
+      "target": "sector-semi",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-26",
+      "target": "company-asml",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-26",
+      "target": "company-tsmc",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-27",
+      "target": "sector-autonomous",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-27",
+      "target": "company-tesla",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-28",
+      "target": "sector-metaverse",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-28",
+      "target": "company-apple",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-28",
+      "target": "company-meta",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-29",
+      "target": "sector-cybersecurity",
+      "relation": "mentions",
+      "weight": 0.93
+    },
+    {
+      "source": "news-29",
+      "target": "company-paloalto",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-29",
+      "target": "company-crowdstrike",
+      "relation": "mentions",
+      "weight": 0.88
+    },
+    {
+      "source": "news-30",
+      "target": "sector-fintech",
+      "relation": "mentions",
+      "weight": 0.92
+    },
+    {
+      "source": "news-30",
+      "target": "company-kakaopay",
+      "relation": "mentions",
+      "weight": 0.95
+    },
+    {
+      "source": "news-30",
+      "target": "company-toss",
+      "relation": "mentions",
+      "weight": 0.87
+    }
+  ]
+}

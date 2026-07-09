@@ -1,0 +1,59 @@
+/* knowledge-graph — 수혜주.com DESIGN.md 토큰 기반 (임베드 컨테이너 스코프) */
+.kg-embed {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.kg-embed[data-theme='midnight'] {
+  --graph-bg: #12151d;
+  --graph-text: #e9edf4;
+  --graph-muted: #8a93a6;
+  --graph-edge: #7b8aa3;
+  --graph-edge-label: #c6cdda;
+  --graph-selected: #ffffff;
+  --graph-node-border: rgba(255, 255, 255, 0.22);
+  --node-news: #6ea0ff;
+  --node-sector: #8b7bff;
+  --node-edgenode: #2fb3c9;
+  --node-company: #f2a65a;
+  --accent: #6ea0ff;
+}
+
+.kg-embed .kg-embed-graph {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: var(--graph-bg);
+  border: none;
+  border-radius: inherit;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.kg-embed .kg-embed-graph canvas {
+  position: relative;
+  z-index: 1;
+}
+
+.kg-embed .kg-ring-guides,
+.kg-embed .kg-orbital-rings {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.kg-embed .kg-ring-guides svg,
+.kg-embed .kg-orbital-rings svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

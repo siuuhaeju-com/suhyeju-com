@@ -1,0 +1,364 @@
+{
+  "nodes": [
+    {
+      "id": "company-samsung",
+      "label": "Company",
+      "name": "삼성전자",
+      "props": {
+        "ticker": "005930.KS"
+      }
+    },
+    {
+      "id": "company-sk",
+      "label": "Company",
+      "name": "SK하이닉스",
+      "props": {
+        "ticker": "000660.KS"
+      }
+    },
+    {
+      "id": "company-nvidia",
+      "label": "Company",
+      "name": "NVIDIA",
+      "props": {
+        "ticker": "NVDA"
+      }
+    },
+    {
+      "id": "company-tsmc",
+      "label": "Company",
+      "name": "TSMC",
+      "props": {
+        "ticker": "2330.TW"
+      }
+    },
+    {
+      "id": "company-apple",
+      "label": "Company",
+      "name": "Apple",
+      "props": {
+        "ticker": "AAPL"
+      }
+    },
+    {
+      "id": "company-meta",
+      "label": "Company",
+      "name": "Meta",
+      "props": {
+        "ticker": "META"
+      }
+    },
+    {
+      "id": "company-tesla",
+      "label": "Company",
+      "name": "Tesla",
+      "props": {
+        "ticker": "TSLA"
+      }
+    },
+    {
+      "id": "company-lilly",
+      "label": "Company",
+      "name": "Eli Lilly",
+      "props": {
+        "ticker": "LLY"
+      }
+    },
+    {
+      "id": "company-jpm",
+      "label": "Company",
+      "name": "JPMorgan",
+      "props": {
+        "ticker": "JPM"
+      }
+    },
+    {
+      "id": "company-amazon",
+      "label": "Company",
+      "name": "Amazon",
+      "props": {
+        "ticker": "AMZN"
+      }
+    },
+    {
+      "id": "company-microsoft",
+      "label": "Company",
+      "name": "Microsoft",
+      "props": {
+        "ticker": "MSFT"
+      }
+    },
+    {
+      "id": "company-google",
+      "label": "Company",
+      "name": "Alphabet (Google)",
+      "props": {
+        "ticker": "GOOGL"
+      }
+    },
+    {
+      "id": "company-hanwhaaero",
+      "label": "Company",
+      "name": "한화에어로스페이스",
+      "props": {
+        "ticker": "012450.KS"
+      }
+    },
+    {
+      "id": "company-lignex1",
+      "label": "Company",
+      "name": "LIG넥스원",
+      "props": {
+        "ticker": "079550.KS"
+      }
+    },
+    {
+      "id": "company-rainbow",
+      "label": "Company",
+      "name": "레인보우로보틱스",
+      "props": {
+        "ticker": "277810.KQ"
+      }
+    },
+    {
+      "id": "company-boston",
+      "label": "Company",
+      "name": "Boston Dynamics",
+      "props": {
+        "ticker": "PRIVATE"
+      }
+    },
+    {
+      "id": "company-spacex",
+      "label": "Company",
+      "name": "SpaceX",
+      "props": {
+        "ticker": "PRIVATE"
+      }
+    },
+    {
+      "id": "company-kasa",
+      "label": "Company",
+      "name": "우주항공청",
+      "props": {
+        "ticker": "GOV"
+      }
+    },
+    {
+      "id": "company-hanwhasol",
+      "label": "Company",
+      "name": "한화솔루션",
+      "props": {
+        "ticker": "009830.KS"
+      }
+    },
+    {
+      "id": "company-lgensol",
+      "label": "Company",
+      "name": "LG에너지솔루션",
+      "props": {
+        "ticker": "373220.KS"
+      }
+    },
+    {
+      "id": "company-samsungsdi",
+      "label": "Company",
+      "name": "삼성SDI",
+      "props": {
+        "ticker": "006400.KS"
+      }
+    },
+    {
+      "id": "company-skon",
+      "label": "Company",
+      "name": "SK온",
+      "props": {
+        "ticker": "PRIVATE"
+      }
+    },
+    {
+      "id": "company-crowdstrike",
+      "label": "Company",
+      "name": "CrowdStrike",
+      "props": {
+        "ticker": "CRWD"
+      }
+    },
+    {
+      "id": "company-novo",
+      "label": "Company",
+      "name": "Novo Nordisk",
+      "props": {
+        "ticker": "NVO"
+      }
+    },
+    {
+      "id": "company-toss",
+      "label": "Company",
+      "name": "비바리퍼블리카(토스)",
+      "props": {
+        "ticker": "PRIVATE"
+      }
+    },
+    {
+      "id": "company-kakaopay",
+      "label": "Company",
+      "name": "카카오페이",
+      "props": {
+        "ticker": "377300.KS"
+      }
+    },
+    {
+      "id": "company-krafton",
+      "label": "Company",
+      "name": "크래프톤",
+      "props": {
+        "ticker": "259960.KS"
+      }
+    },
+    {
+      "id": "company-nexon",
+      "label": "Company",
+      "name": "넥슨게임즈",
+      "props": {
+        "ticker": "225570.KQ"
+      }
+    },
+    {
+      "id": "company-hdhyundai",
+      "label": "Company",
+      "name": "HD현대중공업",
+      "props": {
+        "ticker": "329180.KS"
+      }
+    },
+    {
+      "id": "company-hanwhaocean",
+      "label": "Company",
+      "name": "한화오션",
+      "props": {
+        "ticker": "042660.KS"
+      }
+    },
+    {
+      "id": "company-samsungheavy",
+      "label": "Company",
+      "name": "삼성중공업",
+      "props": {
+        "ticker": "010140.KS"
+      }
+    },
+    {
+      "id": "company-hybe",
+      "label": "Company",
+      "name": "하이브",
+      "props": {
+        "ticker": "352820.KS"
+      }
+    },
+    {
+      "id": "company-naver",
+      "label": "Company",
+      "name": "NAVER",
+      "props": {
+        "ticker": "035420.KS"
+      }
+    },
+    {
+      "id": "company-webtoon",
+      "label": "Company",
+      "name": "웹툰엔터테인먼트",
+      "props": {
+        "ticker": "WBTN"
+      }
+    },
+    {
+      "id": "company-skt",
+      "label": "Company",
+      "name": "SK텔레콤",
+      "props": {
+        "ticker": "017670.KS"
+      }
+    },
+    {
+      "id": "company-solbrain",
+      "label": "Company",
+      "name": "솔브레인홀딩스",
+      "props": {
+        "ticker": "036830.KQ"
+      }
+    },
+    {
+      "id": "company-asml",
+      "label": "Company",
+      "name": "ASML",
+      "props": {
+        "ticker": "ASML"
+      }
+    },
+    {
+      "id": "company-arm",
+      "label": "Company",
+      "name": "ARM Holdings",
+      "props": {
+        "ticker": "ARM"
+      }
+    },
+    {
+      "id": "company-intel",
+      "label": "Company",
+      "name": "Intel",
+      "props": {
+        "ticker": "INTC"
+      }
+    },
+    {
+      "id": "company-hyundai",
+      "label": "Company",
+      "name": "현대자동차",
+      "props": {
+        "ticker": "005380.KS"
+      }
+    },
+    {
+      "id": "company-paloalto",
+      "label": "Company",
+      "name": "Palo Alto Networks",
+      "props": {
+        "ticker": "PANW"
+      }
+    },
+    {
+      "id": "company-poscofuture",
+      "label": "Company",
+      "name": "포스코퓨처엠",
+      "props": {
+        "ticker": "003670.KS"
+      }
+    },
+    {
+      "id": "company-byd",
+      "label": "Company",
+      "name": "BYD",
+      "props": {
+        "ticker": "1211.HK"
+      }
+    },
+    {
+      "id": "company-jyp",
+      "label": "Company",
+      "name": "JYP엔터테인먼트",
+      "props": {
+        "ticker": "035900.KQ"
+      }
+    },
+    {
+      "id": "company-lgchem",
+      "label": "Company",
+      "name": "LG화학",
+      "props": {
+        "ticker": "051910.KS"
+      }
+    }
+  ]
+}

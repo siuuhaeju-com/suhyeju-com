@@ -50,7 +50,7 @@ export default async function AnalysisPage({ params }: AnalysisPageProps) {
           topStocks={result.topStocks}
         />
         <ImpactHeatmap cells={result.heatmap} topStocks={result.topStocks} />
-        <KnowledgeGraph nodes={result.knowledgeNodes} edges={result.knowledgeEdges} />
+        <KnowledgeGraph centerSector={result.sector} />
       </div>
     </main>
   );
