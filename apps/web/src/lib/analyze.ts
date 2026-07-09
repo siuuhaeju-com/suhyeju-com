@@ -76,8 +76,9 @@ export async function runAnalysis(
  * draft에 네이버 실시세를 join한다(in-place) + 종목명→StockQuote 맵을 반환한다.
  * - topStocks 종목: 종목명→실시세로 changePct 교체(매칭 실패 시 GPT 초안 유지).
  *   코드·시장은 반환 맵으로 넘겨 assemble에서 TopStock에 부여한다(#49).
- * - spreadNodes/heatmap/relatedSectors: 이름이 topStocks의 섹터와 맞으면
+ * - spreadNodes/relatedSectors: 이름이 topStocks의 섹터와 맞으면
  *   그 섹터 종목들의 실시세 평균으로 changePct 교체.
+ * - heatmap: 시세 등락률이 아니라 GPT impact → 서버 share/direction을 쓰므로 join하지 않는다.
  * 네이버가 막히거나 종목이 매칭 안 되면 조용히 GPT 초안값을 유지한다(분석 자체는 성공).
  */
 async function joinQuotes(draft: AnalysisDraft): Promise<Map<string, StockQuote | null>> {
@@ -108,13 +109,10 @@ async function joinQuotes(draft: AnalysisDraft): Promise<Map<string, StockQuote 
   }
 
   // 섹터명이 topStocks 섹터와 일치하면 평균값으로 교체(원점 등 미매칭은 GPT 초안 유지)
+  // (히트맵은 changePct가 아니라 impact 비중을 쓰므로 시세를 붙이지 않는다)
   for (const node of draft.spreadNodes) {
     const avg = sectorAvg.get(node.name);
     if (avg != null) node.changePct = avg;
-  }
-  for (const cell of draft.heatmap) {
-    const avg = sectorAvg.get(cell.sector);
-    if (avg != null) cell.changePct = avg;
   }
   for (const related of draft.relatedSectors) {
     const avg = sectorAvg.get(related.name);
@@ -183,7 +181,7 @@ function assemble(
       reason,
       sources: edgeSources[i] ?? [],
     })),
-    heatmap: deriveHeatmap(draft.spreadNodes),
+    heatmap: deriveHeatmap(draft.heatmap),
     knowledgeNodes: draft.knowledgeNodes.map((n) => ({ ...n, x: 0, y: 0 })), // 좌표는 KnowledgeGraph가 group 기반으로 자체 계산
     knowledgeEdges: draft.knowledgeEdges,
     topStocks,
@@ -209,18 +207,35 @@ function deriveRows(nodes: Omit<SpreadNode, 'row'>[]): SpreadNode[] {
 }
 
 /**
- * 히트맵 셀을 spreadNodes(tier≥1)에서 파생한다.
- * sector를 spreadNodes.name(= topStocks 키)과 일치시켜, hover 툴팁(topStocks[sector])과
- * 시세 join(섹터 평균)이 항상 맞물리게 한다. 원점(tier0 뉴스)은 섹터가 아니라 제외.
- * (GPT가 주는 별도 heatmap 필드는 topStocks와 이름이 어긋나 미사용 — 이 파생으로 대체)
+ * GPT의 heatmap 초안({sector, impact})을 히트맵 셀로 파생한다.
+ * - share: 이슈 영향 비중(%) = |impact| / Σ|impact| × 100. 전체 합이 정확히 100이 되도록
+ *   최대잔여법(largest-remainder)으로 정수 반올림.
+ * - direction: impact 부호(≥0 긍정=레드 / <0 부정=블루).
+ * impact의 절대값이 곧 "이슈가 그 섹터에 미치는 영향 강도"이고, 시세(등락률)와는 무관하다.
  */
-function deriveHeatmap(nodes: Omit<SpreadNode, 'row'>[]): HeatmapCell[] {
-  const cells = nodes.filter((n) => n.tier >= 1);
-  const max = Math.max(...cells.map((c) => Math.abs(c.changePct ?? 0)), 1);
-  return cells.map((n, i) => ({
-    sector: n.name,
-    changePct: n.changePct ?? 0,
-    area: `area${i}`,
-    weight: Math.min(1, Math.abs(n.changePct ?? 0) / max),
+function deriveHeatmap(cells: { sector: string; impact: number }[]): HeatmapCell[] {
+  if (cells.length === 0) return [];
+
+  const total = cells.reduce((sum, c) => sum + Math.abs(c.impact), 0);
+  const base = cells.map((c) => ({
+    sector: c.sector,
+    direction: (c.impact >= 0 ? 'positive' : 'negative') as HeatmapCell['direction'],
+    // total이 0이면(모두 impact 0) 균등 분배
+    raw: total > 0 ? (Math.abs(c.impact) / total) * 100 : 100 / cells.length,
   }));
+
+  // 최대잔여법: 내림 합을 100에서 뺀 만큼, 소수부가 큰 셀부터 +1
+  const floors = base.map((b) => Math.floor(b.raw));
+  let remainder = 100 - floors.reduce((a, b) => a + b, 0);
+  const order = base
+    .map((b, i) => ({ i, frac: b.raw - Math.floor(b.raw) }))
+    .sort((a, b) => b.frac - a.frac);
+  const shares = [...floors];
+  for (const { i } of order) {
+    if (remainder <= 0) break;
+    shares[i] += 1;
+    remainder -= 1;
+  }
+
+  return base.map((b, i) => ({ sector: b.sector, share: shares[i], direction: b.direction }));
 }

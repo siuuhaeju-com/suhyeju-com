@@ -15,13 +15,19 @@
  */
 import { createHash } from 'crypto';
 
-import type { AnalysisResult, RecentAnalysis } from '@/lib/types';
+import type { AnalysisResult, HeatmapCell, RecentAnalysis } from '@/lib/types';
 
 const RECENT_KEY = 'analyses:recent';
 const RECENT_MAX = 50;
 const keyOf = (id: string) => `analysis:${id}`;
 const originKeyOf = (originUrl: string) =>
   `analysis:origin:${createHash('sha256').update(originUrl).digest('hex').slice(0, 32)}`;
+
+type LegacyHeatmapCell = {
+  sector: string;
+  changePct?: number;
+  weight?: number;
+};
 
 function normalizeOriginUrl(url: string): string | null {
   const trimmed = url.trim();
@@ -34,6 +40,73 @@ function normalizeOriginUrl(url: string): string | null {
   } catch {
     return trimmed;
   }
+}
+
+function isHeatmapCell(cell: unknown): cell is HeatmapCell {
+  if (!cell || typeof cell !== 'object') return false;
+  const candidate = cell as Partial<HeatmapCell>;
+  return (
+    typeof candidate.sector === 'string' &&
+    typeof candidate.share === 'number' &&
+    Number.isFinite(candidate.share) &&
+    (candidate.direction === 'positive' || candidate.direction === 'negative')
+  );
+}
+
+function allocatePercentShares(values: number[]): number[] {
+  if (values.length === 0) return [];
+
+  const total = values.reduce((sum, value) => sum + Math.abs(value), 0);
+  const rawShares = values.map((value) =>
+    total > 0 ? (Math.abs(value) / total) * 100 : 100 / values.length,
+  );
+  const floors = rawShares.map(Math.floor);
+  let remainder = 100 - floors.reduce((sum, value) => sum + value, 0);
+  const order = rawShares
+    .map((raw, index) => ({ index, frac: raw - Math.floor(raw) }))
+    .sort((a, b) => b.frac - a.frac);
+  const shares = [...floors];
+
+  for (const { index } of order) {
+    if (remainder <= 0) break;
+    shares[index] += 1;
+    remainder -= 1;
+  }
+
+  return shares;
+}
+
+function normalizeHeatmap(cells: unknown[]): HeatmapCell[] {
+  if (cells.every(isHeatmapCell)) {
+    return cells;
+  }
+
+  const legacyCells = cells
+    .filter((cell): cell is LegacyHeatmapCell => {
+      if (!cell || typeof cell !== 'object') return false;
+      return typeof (cell as LegacyHeatmapCell).sector === 'string';
+    })
+    .map((cell) => ({
+      sector: cell.sector,
+      changePct: Number.isFinite(cell.changePct) ? Number(cell.changePct) : undefined,
+      weight: Number.isFinite(cell.weight) ? Number(cell.weight) : undefined,
+    }));
+
+  const values = legacyCells.map((cell) => cell.changePct ?? cell.weight ?? 1);
+  const shares = allocatePercentShares(values);
+
+  return legacyCells.map((cell, index) => ({
+    sector: cell.sector,
+    share: shares[index] ?? 0,
+    direction: (cell.changePct ?? 1) >= 0 ? 'positive' : 'negative',
+  }));
+}
+
+function normalizeStoredAnalysis(result: AnalysisResult): AnalysisResult {
+  return {
+    ...result,
+    heatmap: normalizeHeatmap(result.heatmap),
+  };
 }
 
 // KV 사용 여부 — 키가 모두 있으면 영속화, 아니면 인메모리 폴백.
@@ -66,11 +139,12 @@ async function getRedis() {
 }
 
 export async function saveAnalysis(result: AnalysisResult): Promise<void> {
-  const originUrl = normalizeOriginUrl(result.originUrl);
+  const normalizedResult = normalizeStoredAnalysis(result);
+  const originUrl = normalizeOriginUrl(normalizedResult.originUrl);
 
   if (useKv) {
     const kv = await getRedis();
-    await kv.set(keyOf(result.id), result);
+    await kv.set(keyOf(normalizedResult.id), normalizedResult);
 
     // 최근 내역은 같은 기사 URL이 여러 번 쌓이지 않게 기존 항목을 먼저 제거한다.
     const ids = await kv.lrange(RECENT_KEY, 0, RECENT_MAX - 1);
@@ -81,29 +155,29 @@ export async function saveAnalysis(result: AnalysisResult): Promise<void> {
           (item): item is AnalysisResult =>
             item !== null &&
             item !== undefined &&
-            item.id !== result.id &&
+            item.id !== normalizedResult.id &&
             originUrl !== null &&
             normalizeOriginUrl(item.originUrl) === originUrl,
         )
         .map((item) => item.id);
 
       await Promise.all([
-        kv.lrem(RECENT_KEY, 0, result.id),
+        kv.lrem(RECENT_KEY, 0, normalizedResult.id),
         ...duplicateIds.map((id) => kv.lrem(RECENT_KEY, 0, id)),
       ]);
     }
 
     if (originUrl) {
-      await kv.set(originKeyOf(originUrl), result.id);
+      await kv.set(originKeyOf(originUrl), normalizedResult.id);
     }
-    await kv.lpush(RECENT_KEY, result.id);
+    await kv.lpush(RECENT_KEY, normalizedResult.id);
     await kv.ltrim(RECENT_KEY, 0, RECENT_MAX - 1);
     return;
   }
 
   for (let i = memRecentIds.length - 1; i >= 0; i -= 1) {
     const existing = memStore.get(memRecentIds[i]);
-    const isSameId = memRecentIds[i] === result.id;
+    const isSameId = memRecentIds[i] === normalizedResult.id;
     const isSameOrigin =
       originUrl !== null &&
       existing !== undefined &&
@@ -114,20 +188,22 @@ export async function saveAnalysis(result: AnalysisResult): Promise<void> {
     }
   }
 
-  memStore.set(result.id, result);
+  memStore.set(normalizedResult.id, normalizedResult);
   if (originUrl) {
-    memOriginIndex.set(originUrl, result.id);
+    memOriginIndex.set(originUrl, normalizedResult.id);
   }
-  memRecentIds.unshift(result.id);
+  memRecentIds.unshift(normalizedResult.id);
   memRecentIds.splice(RECENT_MAX);
 }
 
 export async function getAnalysis(id: string): Promise<AnalysisResult | undefined> {
   if (useKv) {
     const kv = await getRedis();
-    return (await kv.get<AnalysisResult>(keyOf(id))) ?? undefined;
+    const result = (await kv.get<AnalysisResult>(keyOf(id))) ?? undefined;
+    return result ? normalizeStoredAnalysis(result) : undefined;
   }
-  return memStore.get(id);
+  const result = memStore.get(id);
+  return result ? normalizeStoredAnalysis(result) : undefined;
 }
 
 export async function getAnalysisByOriginUrl(url: string): Promise<AnalysisResult | undefined> {
@@ -140,7 +216,7 @@ export async function getAnalysisByOriginUrl(url: string): Promise<AnalysisResul
     if (indexedId) {
       const indexedResult = await getAnalysis(indexedId);
       if (indexedResult && normalizeOriginUrl(indexedResult.originUrl) === originUrl) {
-        return indexedResult;
+        return normalizeStoredAnalysis(indexedResult);
       }
     }
 
@@ -156,14 +232,14 @@ export async function getAnalysisByOriginUrl(url: string): Promise<AnalysisResul
     if (match) {
       await kv.set(originKeyOf(originUrl), match.id);
     }
-    return match;
+    return match ? normalizeStoredAnalysis(match) : undefined;
   }
 
   const indexedId = memOriginIndex.get(originUrl);
   if (indexedId) {
     const indexedResult = memStore.get(indexedId);
     if (indexedResult && normalizeOriginUrl(indexedResult.originUrl) === originUrl) {
-      return indexedResult;
+      return normalizeStoredAnalysis(indexedResult);
     }
   }
 
@@ -176,7 +252,7 @@ export async function getAnalysisByOriginUrl(url: string): Promise<AnalysisResul
   if (match) {
     memOriginIndex.set(originUrl, match.id);
   }
-  return match;
+  return match ? normalizeStoredAnalysis(match) : undefined;
 }
 
 /** 최근 분석 내역 (최신순) */

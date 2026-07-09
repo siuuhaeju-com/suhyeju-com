@@ -205,20 +205,17 @@ export const analysisResult: AnalysisResult = {
       sources: [demoSource('변압기 수출 동향 호조', '한국경제 · 06.15')],
     },
   ],
-  // 실제 파이프라인과 동일하게 spreadNodes(tier≥1)에서 파생 — sector가 topStocks 키와 일치해 hover 툴팁 동작.
+  // 이슈 영향 비중(share, 전체 합 100%) + 방향(direction) — 파급 섹터 + 추가 영향 섹터(부정 2).
+  // sector가 topStocks 키와 일치해 hover 툴팁 동작.
   heatmap: [
-    { sector: 'HBM·메모리', changePct: 8.4, area: 'area0', weight: 1 },
-    { sector: '반도체 장비', changePct: 4.9, area: 'area1', weight: 0.58 },
-    { sector: 'AI 데이터센터', changePct: 3.5, area: 'area2', weight: 0.42 },
-    { sector: '첨단 패키징·후공정', changePct: 4.8, area: 'area3', weight: 0.57 },
-    { sector: '반도체 소재', changePct: 3.4, area: 'area4', weight: 0.4 },
-    { sector: '테스트·계측', changePct: 2.6, area: 'area5', weight: 0.31 },
-    { sector: 'AI 서버·기판', changePct: 3.9, area: 'area6', weight: 0.46 },
-    { sector: '전력기기', changePct: 3.7, area: 'area7', weight: 0.44 },
-    { sector: '특수가스·케미컬', changePct: 1.8, area: 'area8', weight: 0.21 },
-    { sector: '냉각·열관리', changePct: 2.2, area: 'area9', weight: 0.26 },
-    { sector: '전력망·ESS', changePct: 2.1, area: 'area10', weight: 0.25 },
-    { sector: '변압기·전선', changePct: 2.4, area: 'area11', weight: 0.29 },
+    { sector: 'HBM·메모리', share: 26, direction: 'positive' },
+    { sector: '반도체 장비', share: 18, direction: 'positive' },
+    { sector: '첨단 패키징·후공정', share: 12, direction: 'positive' },
+    { sector: '반도체 소재', share: 10, direction: 'positive' },
+    { sector: 'AI 데이터센터', share: 9, direction: 'positive' },
+    { sector: 'AI 서버·기판', share: 8, direction: 'positive' },
+    { sector: '파운드리 경쟁', share: 9, direction: 'negative' },
+    { sector: '레거시 D램', share: 8, direction: 'negative' },
   ],
   knowledgeNodes: [
     { id: 'semi', name: '반도체', group: 'center', x: 50, y: 52 },
@@ -422,6 +419,21 @@ export const analysisResult: AnalysisResult = {
       { name: '지역난방공사', changePct: -0.6, code: '071320', market: 'KR' },
       { name: 'SK가스', changePct: -0.3, code: '018670', market: 'KR' },
       { name: 'E1', changePct: -0.2, code: '017940', market: 'KR' },
+    ],
+    // 히트맵 추가 영향 섹터(부정) — 실제 파이프라인에선 시세 join으로 code·링크가 채워진다
+    '파운드리 경쟁': [
+      { name: 'DB하이텍', changePct: -1.4 },
+      { name: '가온칩스', changePct: -2.1 },
+      { name: '에이디테크놀로지', changePct: -1.8 },
+      { name: '텔레칩스', changePct: -0.9 },
+      { name: '어보브반도체', changePct: -1.2 },
+    ],
+    '레거시 D램': [
+      { name: '제주반도체', changePct: -2.3 },
+      { name: '피델릭스', changePct: -1.7 },
+      { name: '심텍', changePct: -1.1, code: '222800', market: 'KR' },
+      { name: '티엘비', changePct: -0.8 },
+      { name: '엑시콘', changePct: -1.5 },
     ],
   },
 };

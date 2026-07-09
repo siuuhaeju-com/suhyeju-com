@@ -45,14 +45,14 @@
 - **스키마 무결성 규칙**(§4)을 프롬프트로 강제한다.
 - base_url 미확보 시 **mock 폴백**으로 동작한다([.env.example](../apps/web/.env.example) 참고). `MOCK_ANALYZE=1`로 강제 가능.
 
-### ③ 시세 join — `analyze.ts` **(⚠️ 미구현, TODO)**
+### ③ 시세 join — `analyze.ts`
 
-GPT가 준 종목·섹터명에 **실시세를 붙여 `changePct`를 교체**하는 단계. 현재는 GPT 초안값을 그대로 쓴다.
+GPT가 준 종목·섹터명에 **실시세를 붙여 `changePct`를 교체**하는 단계. 매칭 실패·시세 소스 장애 시에는 GPT 초안값을 폴백으로 유지한다.
 
 - **종목마스터**(이름 → 코드 → 시세): 네이버 `marketValue/{KOSPI|KOSDAQ}` 페이지네이션으로 종목 마스터를 빌드타임/cron 1회 캐시. 시세만 런타임 fetch.
 - **이름 매칭:** 정규화(공백 제거·우선주 접미사 `/([0-9]?우[A-Z]?)$/`) → exact → alias 테이블 → fuzzy → 실패 시 미매칭(오조인 금지).
 - **섹터 역조회:** 코드 확정 후 `m.stock.naver.com/api/stock/{code}/integration`의 `industryCode`가 이름 매칭보다 안전(예: SK하이닉스 `000660` → 반도체).
-- 대상 필드: `relatedSectors[].changePct`, `spreadNodes[].changePct`, `heatmap[].changePct`, `topStocks[][].changePct`.
+- 대상 필드: `relatedSectors[].changePct`, `spreadNodes[].changePct`, `topStocks[][].changePct`. (히트맵은 changePct가 아니라 `impact` 비중을 쓰므로 시세를 붙이지 않는다.)
 - 전제: **`lib/sectors.ts`**(섹터 taxonomy)가 있어야 매칭이 안정적이다(§4·§6).
 
 ### ④ 표현필드 파생 — `analyze.ts` `assemble()`
@@ -60,7 +60,7 @@ GPT가 준 종목·섹터명에 **실시세를 붙여 `changePct`를 교체**하
 GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 계산**해 응답에 채운다.
 
 - `SpreadNode.row`: 같은 `tier` 노드들을 세로 `0~1`로 균등 배치(`deriveRows`).
-- `HeatmapCell.area`: `area0`, `area1`… 슬롯 키. `HeatmapCell.weight`: `abs(changePct)/max`로 `0~1` 색 농도(`deriveHeatmap`).
+- `HeatmapCell.share`·`direction`: GPT `heatmap[].impact`(부호 포함 영향강도)에서 파생(`deriveHeatmap`). `share = |impact|/Σ|impact|×100`(전체 합 100%, 최대잔여법 반올림) = 이슈 영향 비중, `direction = impact 부호`(긍정=레드/부정=블루). 히트맵 숫자는 등락률이 아니라 이 비중이다.
 - `KnowledgeNode.x/y`: 서버는 `0`으로 두고 **FE가 `group` 기반으로 실제 좌표 계산**.
 - `topStocks`: GPT의 배열을 `Record<섹터명, TopStock[]>`로 변환.
 
@@ -80,18 +80,18 @@ GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 �
 
 `AnalysisResult` 기준. **한 값의 출처를 헷갈리지 않기 위한 표.**
 
-| 필드                                                                                              | 채우는 주체         | 비고                                   |
-| ------------------------------------------------------------------------------------------------- | ------------------- | -------------------------------------- |
-| `id`·`analyzedAt`·`engineVersion`                                                                 | 서버                | 메타                                   |
-| `title`·`source`·`publishedAt`·`desk`                                                             | 서버(스크래핑 메타) | 일부 TODO(현재 빈값)                   |
-| `originUrl`                                                                                       | 서버(입력)          |                                        |
-| `sector`·`verdict`·`summary`·`keywords`·`reviewedCount`                                           | **GPT**             |                                        |
-| `goodSignal`·`warnSignal`·`spreadEdges`·`knowledgeEdges`                                          | **GPT**             |                                        |
-| `spreadNodes`(id·name·tier)·`heatmap`(sector)·`knowledgeNodes`(id·name·group)·`topStocks`(종목명) | **GPT**             | 원시값                                 |
-| **모든 `changePct`**                                                                              | **시세 API**(③)     | GPT 초안 → 실시세로 교체 (현재 미구현) |
-| `spreadNodes.row`·`heatmap.area`·`heatmap.weight`                                                 | 서버 파생(④)        | GPT 스키마 제외                        |
-| `knowledgeNodes.x/y`                                                                              | **FE 계산**         | 서버는 `0`                             |
-| `NewsItem.sectorTone`                                                                             | **FE**              | 칩 색 변형(analyze 아님)               |
+| 필드                                                                                                     | 채우는 주체         | 비고                                   |
+| -------------------------------------------------------------------------------------------------------- | ------------------- | -------------------------------------- |
+| `id`·`analyzedAt`·`engineVersion`                                                                        | 서버                | 메타                                   |
+| `title`·`source`·`publishedAt`·`desk`                                                                    | 서버(스크래핑 메타) | 일부 TODO(현재 빈값)                   |
+| `originUrl`                                                                                              | 서버(입력)          |                                        |
+| `sector`·`verdict`·`summary`·`keywords`·`reviewedCount`                                                  | **GPT**             |                                        |
+| `goodSignal`·`warnSignal`·`spreadEdges`·`knowledgeEdges`                                                 | **GPT**             |                                        |
+| `spreadNodes`(id·name·tier)·`heatmap`(sector·impact)·`knowledgeNodes`(id·name·group)·`topStocks`(종목명) | **GPT**             | 원시값                                 |
+| `spreadNodes`·`relatedSectors`·`topStocks`의 `changePct`                                                 | **시세 API**(③)     | GPT 초안 → 실시세로 교체 (히트맵 제외) |
+| `spreadNodes.row`·`heatmap.share`·`heatmap.direction`                                                    | 서버 파생(④)        | GPT 스키마 제외(히트맵은 impact→share) |
+| `knowledgeNodes.x/y`                                                                                     | **FE 계산**         | 서버는 `0`                             |
+| `NewsItem.sectorTone`                                                                                    | **FE**              | 칩 색 변형(analyze 아님)               |
 
 ---
 
@@ -125,14 +125,14 @@ GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 �
 
 ## 6. 현재 상태 / 남은 일
 
-| 항목                            | 상태                                          |
-| ------------------------------- | --------------------------------------------- |
-| ① 본문 확보                     | ✅ 구현                                       |
-| ② GPT 구조 생성                 | ✅ 구현 (mock 폴백 포함)                      |
-| ③ 시세 join                     | ❌ **미구현** (`changePct`는 아직 GPT 초안값) |
-| ④ 표현필드 파생                 | ✅ 구현                                       |
-| ⑤ 저장·응답                     | ✅ 구현 (인메모리)                            |
-| `lib/sectors.ts`(섹터 taxonomy) | ❌ **미작성** — GPT enum·시세 매칭의 전제     |
-| GPT 실호출                      | ⏳ base_url 대기 중 (그동안 mock)             |
+| 항목                            | 상태                                      |
+| ------------------------------- | ----------------------------------------- |
+| ① 본문 확보                     | ✅ 구현                                   |
+| ② GPT 구조 생성                 | ✅ 구현 (mock 폴백 포함)                  |
+| ③ 시세 join                     | ✅ 구현 (매칭 실패 시 GPT 초안값 폴백)    |
+| ④ 표현필드 파생                 | ✅ 구현                                   |
+| ⑤ 저장·응답                     | ✅ 구현 (인메모리)                        |
+| `lib/sectors.ts`(섹터 taxonomy) | ❌ **미작성** — GPT enum·시세 매칭의 전제 |
+| GPT 실호출                      | ⏳ base_url 대기 중 (그동안 mock)         |
 
 **③을 완성하려면 먼저 `lib/sectors.ts` → 종목마스터 → 시세 join 순으로 작업한다.**
