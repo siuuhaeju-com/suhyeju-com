@@ -8,7 +8,14 @@ import { extractArticle } from '@/lib/extract-article';
 import { analyzeNews, type AnalysisDraft } from '@/lib/sources/gpt';
 import { searchEdgeSources } from '@/lib/sources/naver-news';
 import { fetchStockQuotes, stockPageUrl, type StockQuote } from '@/lib/sources/naver-stock';
-import type { AnalysisResult, EdgeSource, HeatmapCell, SpreadNode, TopStock } from '@/lib/types';
+import type {
+  AnalysisResult,
+  EdgeSource,
+  HeatmapCell,
+  SignalNewsItem,
+  SpreadNode,
+  TopStock,
+} from '@/lib/types';
 
 const ENGINE_VERSION = '수혜주.com AI v2.1';
 
@@ -58,18 +65,24 @@ export async function runAnalysis(
   // 3) 시세 join + 근거 뉴스 검색 — 서로 다른 필드를 채우므로 병렬로 돌려 지연을 숨긴다.
   //    시세: topStocks 실시세 교체 + 섹터 평균 파생. 근거: edge 검색어로 실제 기사 매핑.
   onProgress?.({ step: 'quote', label: '실시간 시세·근거 뉴스 확인 중' });
-  const [quotes, edgeSources] = await Promise.all([joinQuotes(draft), joinSources(draft)]);
+  const [quotes, edgeSources, goodNews, warnNews] = await Promise.all([
+    joinQuotes(draft),
+    joinSources(draft),
+    resolveSignalNews(draft.goodSignal.news),
+    resolveSignalNews(draft.warnSignal.news),
+  ]);
   console.log(
     `[analyze] GPT ${Math.round(tJoin - tGpt)}ms · join ${Math.round(performance.now() - tJoin)}ms`,
   );
 
   // 4) AnalysisResult 조립
-  return assemble(draft, quotes, edgeSources, {
-    title,
-    originUrl: input.url ?? '',
-    source,
-    publishedAt,
-  });
+  return assemble(
+    draft,
+    quotes,
+    edgeSources,
+    { goodNews, warnNews },
+    { title, originUrl: input.url ?? '', source, publishedAt },
+  );
 }
 
 /**
@@ -131,11 +144,29 @@ async function joinSources(draft: AnalysisDraft): Promise<EdgeSource[][]> {
   return Promise.all(draft.spreadEdges.map((edge) => searchEdgeSources(edge.searchQuery)));
 }
 
+/**
+ * 전망 분석 관련 뉴스에 실제 기사 링크(url)를 붙인다.
+ * 각 뉴스의 searchQuery로 네이버 뉴스를 검색해 최상위 실제 기사 URL을 첨부한다
+ * (제목·출처는 GPT 텍스트 유지 — 신호 문구는 그대로 두고 근거 링크만 단다).
+ * 검색 키(NAVER_CLIENT_ID/SECRET) 미설정·매칭 실패 시 url 없이 반환(비파괴적) → 링크 없는 기존 동작.
+ */
+async function resolveSignalNews(
+  items: { text: string; source: string; searchQuery: string }[],
+): Promise<SignalNewsItem[]> {
+  return Promise.all(
+    items.map(async ({ text, source, searchQuery }) => {
+      const [top] = await searchEdgeSources(searchQuery, 1);
+      return top ? { text, source, url: top.url } : { text, source };
+    }),
+  );
+}
+
 /** GPT 초안(draft) + 메타 → 완성 AnalysisResult (표현 필드는 여기서 파생) */
 function assemble(
   draft: AnalysisDraft,
   quotes: Map<string, StockQuote | null>,
   edgeSources: EdgeSource[][],
+  signalNews: { goodNews: SignalNewsItem[]; warnNews: SignalNewsItem[] },
   meta: { title: string; originUrl: string; source: string; publishedAt: string },
 ): AnalysisResult {
   // topStocks: 배열 → Record<섹터명, 종목[]> (매칭된 종목엔 코드·시장·네이버증권 링크 부여 #49)
@@ -171,8 +202,8 @@ function assemble(
     keywords: draft.keywords,
     relatedSectors: draft.relatedSectors,
     reviewedCount: draft.reviewedCount,
-    goodSignal: draft.goodSignal,
-    warnSignal: draft.warnSignal,
+    goodSignal: { ...draft.goodSignal, news: signalNews.goodNews },
+    warnSignal: { ...draft.warnSignal, news: signalNews.warnNews },
     spreadNodes: deriveRows(draft.spreadNodes),
     // searchQuery는 서버 내부용 — 검색으로 매핑된 실제 기사만 sources로 내보낸다
     spreadEdges: draft.spreadEdges.map(({ from, to, reason }, i) => ({

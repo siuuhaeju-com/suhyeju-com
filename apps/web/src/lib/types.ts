@@ -67,6 +67,14 @@ export interface SignalItem {
   source: string;
 }
 
+/** 전망 분석 관련 뉴스 — 검색으로 실제 기사 링크(url)를 붙인다(reports와 달리 링크 대상) */
+export interface SignalNewsItem {
+  text: string;
+  source: string;
+  /** 검색으로 매핑된 실제 기사 원문 링크 (NAVER 검색 키·매칭 성공 시에만) */
+  url?: string;
+}
+
 export interface AnalystOpinion {
   name: string;
   firm: string;
@@ -78,7 +86,7 @@ export interface SignalGroup {
   /** 비율(%) — 좋은 신호 72, 주의할 신호 28 */
   ratio: number;
   headline: string;
-  news: SignalItem[];
+  news: SignalNewsItem[];
   reports: SignalItem[];
   analyst: AnalystOpinion;
 }

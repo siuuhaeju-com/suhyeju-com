@@ -81,8 +81,16 @@ export const analysisResult: AnalysisResult = {
     ratio: 72,
     headline: '관련 뉴스와 리포트에서는 긍정적인 해석이 더 많아요.',
     news: [
-      { text: 'HBM4 공급 물량 2027년까지 사실상 확정', source: '한국경제' },
-      { text: 'AI 가속기 수요 전망 일제히 상향', source: '매경' },
+      {
+        text: 'HBM4 공급 물량 2027년까지 사실상 확정',
+        source: '한국경제',
+        url: 'https://www.hankyung.com/article/2026070912345',
+      },
+      {
+        text: 'AI 가속기 수요 전망 일제히 상향',
+        source: '매경',
+        url: 'https://www.mk.co.kr/news/stock/11223344',
+      },
     ],
     reports: [
       { text: '"AI 사이클 초입, 목표가 상향"', source: '미래에셋' },
@@ -99,8 +107,16 @@ export const analysisResult: AnalysisResult = {
     ratio: 28,
     headline: '단기 과열이나 비용 부담을 우려하는 시각도 있어요.',
     news: [
-      { text: '단기 급등 부담 지적', source: '이데일리' },
-      { text: '밸류에이션 고평가 논란', source: '서울경제' },
+      {
+        text: '단기 급등 부담 지적',
+        source: '이데일리',
+        url: 'https://www.edaily.co.kr/news/read?newsId=01234567',
+      },
+      {
+        text: '밸류에이션 고평가 논란',
+        source: '서울경제',
+        url: 'https://www.sedaily.com/NewsView/2GABCDEFGH',
+      },
     ],
     reports: [
       { text: '"단기 과열 구간 유의"', source: '하나증권' },
