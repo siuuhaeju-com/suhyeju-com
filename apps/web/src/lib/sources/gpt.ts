@@ -37,10 +37,17 @@ function resolveModel(): string {
  */
 const zSignalItem = z.object({ text: z.string(), source: z.string() });
 
+// 관련 뉴스 — searchQuery로 서버가 실제 기사를 검색해 링크(url)를 붙인다(reports엔 없음).
+const zSignalNewsItem = z.object({
+  text: z.string(),
+  source: z.string(),
+  searchQuery: z.string(),
+});
+
 const zSignalGroup = z.object({
   ratio: z.number(), // 좋은/주의 신호 비율(%)
   headline: z.string(),
-  news: z.array(zSignalItem),
+  news: z.array(zSignalNewsItem),
   reports: z.array(zSignalItem),
   analyst: z.object({ name: z.string(), firm: z.string(), quote: z.string() }),
 });
@@ -116,7 +123,8 @@ const PROMPT_A = `${COMMON}
 - sector: 뉴스의 핵심 산업 1개. verdict: "호재 분석" 또는 "악재 분석".
 - summary: 2~3문장 요약. keywords: 핵심 키워드 5개 내외. reviewedCount: 검토한 자료 수(정수).
 - relatedSectors: 관련 산업과 방향성 3개 내외.
-- goodSignal(좋은 신호)/warnSignal(주의 신호): ratio(%)·headline·news·reports·analyst(name/firm/quote).`;
+- goodSignal(좋은 신호)/warnSignal(주의 신호): ratio(%)·headline·news·reports·analyst(name/firm/quote).
+- news 각 항목의 searchQuery: 그 뉴스의 근거가 될 **실제 언론사 기사를 찾기 위한 검색어**입니다(핵심 명사 2~4개, 조사 없이. 예: "HBM 공급 계약"). 서버가 이 검색어로 네이버 뉴스를 검색해 실제 기사 링크를 붙입니다 — 제목·URL을 지어내지 마세요. reports·analyst엔 searchQuery가 없습니다.`;
 
 const PROMPT_B = `${COMMON}
 
@@ -250,8 +258,16 @@ function mockAnalysis(articleText: string): AnalysisDraft {
       ratio: 78,
       headline: 'AI 가속기 수요가 HBM·후공정 투자 확대로 직결',
       news: [
-        { text: '글로벌 클라우드 CAPEX 상향으로 HBM 주문 증가', source: '샘플뉴스' },
-        { text: '국내 장비사 수주잔고 사상 최대', source: '샘플뉴스' },
+        {
+          text: '글로벌 클라우드 CAPEX 상향으로 HBM 주문 증가',
+          source: '샘플뉴스',
+          searchQuery: '클라우드 CAPEX HBM 수요',
+        },
+        {
+          text: '국내 장비사 수주잔고 사상 최대',
+          source: '샘플뉴스',
+          searchQuery: '반도체 장비 수주잔고',
+        },
       ],
       reports: [{ text: 'HBM3E 믹스 확대로 메모리 ASP 반등 전망', source: '샘플리포트' }],
       analyst: {
@@ -263,7 +279,13 @@ function mockAnalysis(articleText: string): AnalysisDraft {
     warnSignal: {
       ratio: 22,
       headline: '단기 급등에 따른 밸류에이션 부담',
-      news: [{ text: '일부 종목 단기 과열 지표 진입', source: '샘플뉴스' }],
+      news: [
+        {
+          text: '일부 종목 단기 과열 지표 진입',
+          source: '샘플뉴스',
+          searchQuery: '반도체 단기 과열',
+        },
+      ],
       reports: [{ text: '환율·전방 수요 변동성은 리스크 요인', source: '샘플리포트' }],
       analyst: {
         name: '김철수',

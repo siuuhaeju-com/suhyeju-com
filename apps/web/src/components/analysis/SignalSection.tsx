@@ -56,7 +56,23 @@ function SignalCard({ group, tone }: { group: SignalGroup; tone: 'good' | 'warn'
       <ul className="mt-2 flex flex-col gap-1.5">
         {group.news.map((item) => (
           <li key={item.text} className={`rounded-sm px-3 py-2 text-[13px] text-ink-sub ${rowBg}`}>
-            {item.text} <span className="text-muted-foreground">({item.source})</span>
+            {item.url ? (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-sm outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring/50"
+              >
+                {item.text} <span className="text-muted-foreground">({item.source})</span>
+                <span aria-hidden className="ml-0.5 text-muted-foreground">
+                  ↗
+                </span>
+              </a>
+            ) : (
+              <>
+                {item.text} <span className="text-muted-foreground">({item.source})</span>
+              </>
+            )}
           </li>
         ))}
       </ul>
