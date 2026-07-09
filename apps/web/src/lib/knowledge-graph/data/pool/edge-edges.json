@@ -1,0 +1,868 @@
+{
+  "edges": [
+    {
+      "source": "sector-aerospace",
+      "target": "edgenode-aerospace-hanwhaaero",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-aerospace-hanwhaaero",
+      "target": "company-hanwhaaero",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-aerospace",
+      "target": "edgenode-aerospace-kasa",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-aerospace-kasa",
+      "target": "company-kasa",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-aerospace",
+      "target": "edgenode-aerospace-spacex",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-aerospace-spacex",
+      "target": "company-spacex",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-ai",
+      "target": "edgenode-ai-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-ai-apple",
+      "target": "company-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-ai",
+      "target": "edgenode-ai-google",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-ai-google",
+      "target": "company-google",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-ai",
+      "target": "edgenode-ai-meta",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-ai-meta",
+      "target": "company-meta",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-ai",
+      "target": "edgenode-ai-microsoft",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-ai-microsoft",
+      "target": "company-microsoft",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-ai",
+      "target": "edgenode-ai-nvidia",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-ai-nvidia",
+      "target": "company-nvidia",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-auto",
+      "target": "edgenode-auto-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-auto-apple",
+      "target": "company-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-auto",
+      "target": "edgenode-auto-boston",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-auto-boston",
+      "target": "company-boston",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-auto",
+      "target": "edgenode-auto-byd",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-auto-byd",
+      "target": "company-byd",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-auto",
+      "target": "edgenode-auto-hyundai",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-auto-hyundai",
+      "target": "company-hyundai",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-auto",
+      "target": "edgenode-auto-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-auto-tesla",
+      "target": "company-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-autonomous",
+      "target": "edgenode-autonomous-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-autonomous-apple",
+      "target": "company-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-autonomous",
+      "target": "edgenode-autonomous-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-autonomous-tesla",
+      "target": "company-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-battery",
+      "target": "edgenode-battery-lgchem",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-battery-lgchem",
+      "target": "company-lgchem",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-battery",
+      "target": "edgenode-battery-lgensol",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-battery-lgensol",
+      "target": "company-lgensol",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-battery",
+      "target": "edgenode-battery-poscofuture",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-battery-poscofuture",
+      "target": "company-poscofuture",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-battery",
+      "target": "edgenode-battery-samsungsdi",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-battery-samsungsdi",
+      "target": "company-samsungsdi",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-battery",
+      "target": "edgenode-battery-skon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-battery-skon",
+      "target": "company-skon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-battery",
+      "target": "edgenode-battery-solbrain",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-battery-solbrain",
+      "target": "company-solbrain",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-bio",
+      "target": "edgenode-bio-lilly",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-bio-lilly",
+      "target": "company-lilly",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-bio",
+      "target": "edgenode-bio-novo",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-bio-novo",
+      "target": "company-novo",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-cloud",
+      "target": "edgenode-cloud-amazon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-cloud-amazon",
+      "target": "company-amazon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-cloud",
+      "target": "edgenode-cloud-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-cloud-apple",
+      "target": "company-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-cloud",
+      "target": "edgenode-cloud-google",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-cloud-google",
+      "target": "company-google",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-cloud",
+      "target": "edgenode-cloud-meta",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-cloud-meta",
+      "target": "company-meta",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-cloud",
+      "target": "edgenode-cloud-microsoft",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-cloud-microsoft",
+      "target": "company-microsoft",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-cloud",
+      "target": "edgenode-cloud-nvidia",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-cloud-nvidia",
+      "target": "company-nvidia",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-cybersecurity",
+      "target": "edgenode-cybersecurity-crowdstrike",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-cybersecurity-crowdstrike",
+      "target": "company-crowdstrike",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-cybersecurity",
+      "target": "edgenode-cybersecurity-microsoft",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-cybersecurity-microsoft",
+      "target": "company-microsoft",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-cybersecurity",
+      "target": "edgenode-cybersecurity-paloalto",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-cybersecurity-paloalto",
+      "target": "company-paloalto",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-defense",
+      "target": "edgenode-defense-hanwhaaero",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-defense-hanwhaaero",
+      "target": "company-hanwhaaero",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-defense",
+      "target": "edgenode-defense-hanwhaocean",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-defense-hanwhaocean",
+      "target": "company-hanwhaocean",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-defense",
+      "target": "edgenode-defense-lignex1",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-defense-lignex1",
+      "target": "company-lignex1",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-energy",
+      "target": "edgenode-energy-hanwhasol",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-energy-hanwhasol",
+      "target": "company-hanwhasol",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-energy",
+      "target": "edgenode-energy-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-energy-tesla",
+      "target": "company-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-entertainment",
+      "target": "edgenode-entertainment-hybe",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-entertainment-hybe",
+      "target": "company-hybe",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-entertainment",
+      "target": "edgenode-entertainment-jyp",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-entertainment-jyp",
+      "target": "company-jyp",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-entertainment",
+      "target": "edgenode-entertainment-naver",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-entertainment-naver",
+      "target": "company-naver",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-entertainment",
+      "target": "edgenode-entertainment-webtoon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-entertainment-webtoon",
+      "target": "company-webtoon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-finance",
+      "target": "edgenode-finance-jpm",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-finance-jpm",
+      "target": "company-jpm",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-finance",
+      "target": "edgenode-finance-toss",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-finance-toss",
+      "target": "company-toss",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-fintech",
+      "target": "edgenode-fintech-kakaopay",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-fintech-kakaopay",
+      "target": "company-kakaopay",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-fintech",
+      "target": "edgenode-fintech-toss",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-fintech-toss",
+      "target": "company-toss",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-gaming",
+      "target": "edgenode-gaming-krafton",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-gaming-krafton",
+      "target": "company-krafton",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-gaming",
+      "target": "edgenode-gaming-nexon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-gaming-nexon",
+      "target": "company-nexon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-materials",
+      "target": "edgenode-materials-lgchem",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-materials-lgchem",
+      "target": "company-lgchem",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-materials",
+      "target": "edgenode-materials-samsung",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-materials-samsung",
+      "target": "company-samsung",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-materials",
+      "target": "edgenode-materials-solbrain",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-materials-solbrain",
+      "target": "company-solbrain",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-metaverse",
+      "target": "edgenode-metaverse-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-metaverse-apple",
+      "target": "company-apple",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-metaverse",
+      "target": "edgenode-metaverse-meta",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-metaverse-meta",
+      "target": "company-meta",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-pharma",
+      "target": "edgenode-pharma-lilly",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-pharma-lilly",
+      "target": "company-lilly",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-pharma",
+      "target": "edgenode-pharma-novo",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-pharma-novo",
+      "target": "company-novo",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-renewable",
+      "target": "edgenode-renewable-hanwhasol",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-renewable-hanwhasol",
+      "target": "company-hanwhasol",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-renewable",
+      "target": "edgenode-renewable-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-renewable-tesla",
+      "target": "company-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-retail",
+      "target": "edgenode-retail-amazon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-retail-amazon",
+      "target": "company-amazon",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-robotics",
+      "target": "edgenode-robotics-boston",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-robotics-boston",
+      "target": "company-boston",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-robotics",
+      "target": "edgenode-robotics-rainbow",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-robotics-rainbow",
+      "target": "company-rainbow",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-robotics",
+      "target": "edgenode-robotics-samsung",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-robotics-samsung",
+      "target": "company-samsung",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-robotics",
+      "target": "edgenode-robotics-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-robotics-tesla",
+      "target": "company-tesla",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-semi",
+      "target": "edgenode-semi-arm",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-semi-arm",
+      "target": "company-arm",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-semi",
+      "target": "edgenode-semi-asml",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-semi-asml",
+      "target": "company-asml",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-semi",
+      "target": "edgenode-semi-intel",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-semi-intel",
+      "target": "company-intel",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-semi",
+      "target": "edgenode-semi-nvidia",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-semi-nvidia",
+      "target": "company-nvidia",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-semi",
+      "target": "edgenode-semi-samsung",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-semi-samsung",
+      "target": "company-samsung",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-semi",
+      "target": "edgenode-semi-sk",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-semi-sk",
+      "target": "company-sk",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-semi",
+      "target": "edgenode-semi-tsmc",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-semi-tsmc",
+      "target": "company-tsmc",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-shipbuilding",
+      "target": "edgenode-shipbuilding-hanwhaocean",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-shipbuilding-hanwhaocean",
+      "target": "company-hanwhaocean",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-shipbuilding",
+      "target": "edgenode-shipbuilding-hdhyundai",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-shipbuilding-hdhyundai",
+      "target": "company-hdhyundai",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-shipbuilding",
+      "target": "edgenode-shipbuilding-samsungheavy",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-shipbuilding-samsungheavy",
+      "target": "company-samsungheavy",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-telecom",
+      "target": "edgenode-telecom-skt",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-telecom-skt",
+      "target": "company-skt",
+      "relation": "includes",
+      "weight": 1
+    }
+  ]
+}

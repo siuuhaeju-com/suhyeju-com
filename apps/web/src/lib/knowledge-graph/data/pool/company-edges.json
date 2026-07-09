@@ -1,0 +1,148 @@
+{
+  "edges": [
+    {
+      "source": "company-samsung",
+      "target": "company-sk",
+      "relation": "linked",
+      "weight": 0.65
+    },
+    {
+      "source": "company-nvidia",
+      "target": "company-tsmc",
+      "relation": "linked",
+      "weight": 0.88
+    },
+    {
+      "source": "company-nvidia",
+      "target": "company-sk",
+      "relation": "linked",
+      "weight": 0.85
+    },
+    {
+      "source": "company-nvidia",
+      "target": "company-samsung",
+      "relation": "linked",
+      "weight": 0.75
+    },
+    {
+      "source": "company-microsoft",
+      "target": "company-meta",
+      "relation": "linked",
+      "weight": 0.7
+    },
+    {
+      "source": "company-apple",
+      "target": "company-tsmc",
+      "relation": "linked",
+      "weight": 0.8
+    },
+    {
+      "source": "company-tesla",
+      "target": "company-lgensol",
+      "relation": "linked",
+      "weight": 0.78
+    },
+    {
+      "source": "company-tesla",
+      "target": "company-samsungsdi",
+      "relation": "linked",
+      "weight": 0.72
+    },
+    {
+      "source": "company-samsung",
+      "target": "company-rainbow",
+      "relation": "linked",
+      "weight": 0.9
+    },
+    {
+      "source": "company-hanwhaocean",
+      "target": "company-hdhyundai",
+      "relation": "linked",
+      "weight": 0.6
+    },
+    {
+      "source": "company-hanwhaocean",
+      "target": "company-hanwhaaero",
+      "relation": "linked",
+      "weight": 0.85
+    },
+    {
+      "source": "company-naver",
+      "target": "company-webtoon",
+      "relation": "linked",
+      "weight": 0.95
+    },
+    {
+      "source": "company-lilly",
+      "target": "company-novo",
+      "relation": "linked",
+      "weight": 0.82
+    },
+    {
+      "source": "company-lgensol",
+      "target": "company-samsungsdi",
+      "relation": "linked",
+      "weight": 0.65
+    },
+    {
+      "source": "company-skon",
+      "target": "company-lgensol",
+      "relation": "linked",
+      "weight": 0.65
+    },
+    {
+      "source": "company-apple",
+      "target": "company-meta",
+      "relation": "linked",
+      "weight": 0.6
+    },
+    {
+      "source": "company-sk",
+      "target": "company-tsmc",
+      "relation": "linked",
+      "weight": 0.8
+    },
+    {
+      "source": "company-asml",
+      "target": "company-tsmc",
+      "relation": "linked",
+      "weight": 0.85
+    },
+    {
+      "source": "company-arm",
+      "target": "company-nvidia",
+      "relation": "linked",
+      "weight": 0.78
+    },
+    {
+      "source": "company-lgchem",
+      "target": "company-lgensol",
+      "relation": "linked",
+      "weight": 0.9
+    },
+    {
+      "source": "company-poscofuture",
+      "target": "company-samsungsdi",
+      "relation": "linked",
+      "weight": 0.75
+    },
+    {
+      "source": "company-byd",
+      "target": "company-tesla",
+      "relation": "linked",
+      "weight": 0.68
+    },
+    {
+      "source": "company-kakaopay",
+      "target": "company-toss",
+      "relation": "linked",
+      "weight": 0.55
+    },
+    {
+      "source": "company-nexon",
+      "target": "company-krafton",
+      "relation": "linked",
+      "weight": 0.6
+    }
+  ]
+}

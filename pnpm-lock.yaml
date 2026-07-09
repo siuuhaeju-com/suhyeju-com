@@ -63,6 +63,39 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      cytoscape:
+        specifier: ^3.34.0
+        version: 3.34.0
+      cytoscape-anywhere-panning:
+        specifier: ^0.5.5
+        version: 0.5.5(cytoscape@3.34.0)
+      cytoscape-autopan-on-drag:
+        specifier: ^2.2.1
+        version: 2.2.1(cytoscape@3.34.0)
+      cytoscape-bubblesets:
+        specifier: ^4.1.0
+        version: 4.1.0(cytoscape-layers@3.1.0(cytoscape@3.34.0))(cytoscape@3.34.0)
+      cytoscape-edge-editing:
+        specifier: ^5.0.0
+        version: 5.0.0(cytoscape@3.34.0)(konva@10.3.0)
+      cytoscape-edgehandles:
+        specifier: ^4.0.1
+        version: 4.0.1(cytoscape@3.34.0)
+      cytoscape-layers:
+        specifier: ^3.1.0
+        version: 3.1.0(cytoscape@3.34.0)
+      d3-drag:
+        specifier: ^3.0.0
+        version: 3.0.0
+      d3-force:
+        specifier: ^3.0.0
+        version: 3.0.0
+      d3-selection:
+        specifier: ^3.0.0
+        version: 3.0.0
+      konva:
+        specifier: ^10.3.0
+        version: 10.3.0
       lucide-react:
         specifier: ^1.23.0
         version: 1.23.0(react@19.2.4)
@@ -830,6 +863,12 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
+  '@types/lodash.throttle@4.1.9':
+    resolution: {integrity: sha512-PCPVfpfueguWZQB7pJQK890F2scYKoDUL3iM522AptHWn7d5NQmeS/LTEHIcLr5PaTzl3dK2Z0xSUHHTHwaL5g==}
+
+  '@types/lodash@4.17.24':
+    resolution: {integrity: sha512-gIW7lQLZbue7lRSWEFql49QJJWThrTFFeIMJdp3eH4tKoxm1OvEPg02rm4wCCSHS0cL3/Fizimb35b7k8atwsQ==}
+
   '@types/node@20.19.43':
     resolution: {integrity: sha512-6oYBAi5ikg4Pl+kGsoYtawUMBT2zZMCvPNF7pVLnHZfd1zf38DRiWn/gT01RYCdUqkv7Fhr+C9ot4/tb+2sVvA==}
 
@@ -1191,6 +1230,9 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
+  bubblesets-js@3.0.1:
+    resolution: {integrity: sha512-EKPfysvIU5+u5RLW3mOr94wxzA3nKzqMBX0F95L95BPBDZPVgLBUnT0kJNz4UK/TXbGs8G7yEgl5MvibRBCQoQ==}
+
   bundle-name@4.1.0:
     resolution: {integrity: sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q==}
     engines: {node: '>=18'}
@@ -1380,6 +1422,66 @@ packages:
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
+
+  cytoscape-anywhere-panning@0.5.5:
+    resolution: {integrity: sha512-//p0NIp4EYZzPD9y0BFtwUxnCkGcYvBGPkc5ezDb5BZinhjtpB0U8xtOq4DRcppVXGIdwiudIcuwiJZx/vYUwA==}
+    peerDependencies:
+      cytoscape: ^3.4.2
+
+  cytoscape-autopan-on-drag@2.2.1:
+    resolution: {integrity: sha512-rocPRwXKHb683Bp/POyFsxm7oZcZ8AeFYYpV2DEaXljArtTHMTw+m0AiBht4agq9cBBfQwQ44h+dDXOBe0H+6A==}
+    peerDependencies:
+      cytoscape: ^2.7.0 || ^3.0.0
+
+  cytoscape-bubblesets@4.1.0:
+    resolution: {integrity: sha512-5ms7vbsYXWI8HSZXvEEgT1eyIQbdkMXwGCF9ZEEl3awkpcO8CG3/DAeqa5udP+6lwb5GwFf5EC5E7iat7o8CJQ==}
+    peerDependencies:
+      cytoscape: ^3.23.0
+      cytoscape-layers: ^3.0.0
+
+  cytoscape-edge-editing@5.0.0:
+    resolution: {integrity: sha512-22Lqf++4yLmwVezRVuNGzqlTrl6bwq5uKh4BlxY2Psz7B5Z4zW21RgLIPNPH/NeRSo7nSnkV5/ecgo414OFtgQ==}
+    peerDependencies:
+      cytoscape: ^3.3.0
+      konva: ^7.0.3
+
+  cytoscape-edgehandles@4.0.1:
+    resolution: {integrity: sha512-uSYshkqRZ4luCxK295bEVTg46q4ZW+fwJhcIzMrtfNR7zeAnJ38Z48kUGeu5ibtXkgLbcZAg0YE4ED2dRuaePg==}
+    peerDependencies:
+      cytoscape: ^3.2.0
+
+  cytoscape-layers@3.1.0:
+    resolution: {integrity: sha512-HhldyRPURRn4axeDsCiKdKqiZN8bcoWjclLXl3kWekDd7Wy4QHo5cntm4W4kxL/R0u8AA9VAfmNB1P7nJ9scew==}
+    peerDependencies:
+      cytoscape: ^3.23.0
+
+  cytoscape@3.34.0:
+    resolution: {integrity: sha512-62rNSrioXw93uliKFBwjukeQyeWwH2PqDrTac31r2P6464u3AUvTk0xS4LVvT251g7IgkFunrI48ZEZGjywSOg==}
+    engines: {node: '>=0.10'}
+
+  d3-dispatch@3.0.1:
+    resolution: {integrity: sha512-rzUyPU/S7rwUflMyLc1ETDeBj0NRuHKKAcvukozwhshr6g6c5d8zh4c2gQjY2bZ0dXeGLWc1PF174P2tVvKhfg==}
+    engines: {node: '>=12'}
+
+  d3-drag@3.0.0:
+    resolution: {integrity: sha512-pWbUJLdETVA8lQNJecMxoXfH6x+mO2UQo8rSmZ+QqxcbyA3hfeprFgIT//HW2nlHChWeIIMwS2Fq+gEARkhTkg==}
+    engines: {node: '>=12'}
+
+  d3-force@3.0.0:
+    resolution: {integrity: sha512-zxV/SsA+U4yte8051P4ECydjD/S+qeYtnaIyAs9tgHCqfguma/aAQDjo85A9Z6EKhBirHRJHXIgJUlffT4wdLg==}
+    engines: {node: '>=12'}
+
+  d3-quadtree@3.0.1:
+    resolution: {integrity: sha512-04xDrxQTDTCFwP5H6hRhsRcb9xxv2RzkcsygFzmkSIOJy3PeRJP7sNk3VRIbKXcog561P9oU0/rVH6vDROAgUw==}
+    engines: {node: '>=12'}
+
+  d3-selection@3.0.0:
+    resolution: {integrity: sha512-fmTRWbNMmsmWq6xJV8D19U/gw/bwrHfNXxrIN+HfZgnzqTHp9jOmKMhsTUjXOJnZOdZY9Q28y4yebKzqDKlxlQ==}
+    engines: {node: '>=12'}
+
+  d3-timer@3.0.1:
+    resolution: {integrity: sha512-ndfJ/JxxMd3nw31uyKoY2naivF+r29V+Lc0svZxe1JvvIRmi8hUsrMvdOwgS1o6uBHmiz91geQ0ylPP0aj1VUA==}
+    engines: {node: '>=12'}
 
   damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
@@ -2379,6 +2481,9 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
+  konva@10.3.0:
+    resolution: {integrity: sha512-gt19K2gzY4lHbnkvsku7eSmB+A9PTS2jG4F9coBMsdjM1UKfJNxJbDbXVpeCW1wjEGRwBD3nBamcHnqJhAeKlg==}
+
   language-subtag-registry@0.3.23:
     resolution: {integrity: sha512-0K65Lea881pHotoGEa5gDlMxt3pctLi2RplBb7Ezh4rRdLEOtgi7n4EwK9lamnUCkKBqaeKRVebTq6BAxSkpXQ==}
 
@@ -2509,6 +2614,9 @@ packages:
   lodash.kebabcase@4.1.1:
     resolution: {integrity: sha512-N8XRTIMMqqDgSy4VLKPnJ/+hpGZN+PHQiJnSenYqPaVV/NCqEogTnAdZLQiGKhxX+JCs8waWq2t1XHWKOmlY8g==}
 
+  lodash.memoize@4.1.2:
+    resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
+
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
@@ -2520,6 +2628,9 @@ packages:
 
   lodash.startcase@4.4.0:
     resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
+
+  lodash.throttle@4.1.1:
+    resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}
 
   lodash.uniq@4.5.0:
     resolution: {integrity: sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==}
@@ -4291,6 +4402,12 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
+  '@types/lodash.throttle@4.1.9':
+    dependencies:
+      '@types/lodash': 4.17.24
+
+  '@types/lodash@4.17.24': {}
+
   '@types/node@20.19.43':
     dependencies:
       undici-types: 6.21.0
@@ -4664,6 +4781,8 @@ snapshots:
       node-releases: 2.0.50
       update-browserslist-db: 1.2.3(browserslist@4.28.4)
 
+  bubblesets-js@3.0.1: {}
+
   bundle-name@4.1.0:
     dependencies:
       run-applescript: 7.1.0
@@ -4870,6 +4989,58 @@ snapshots:
   cssom@0.5.0: {}
 
   csstype@3.2.3: {}
+
+  cytoscape-anywhere-panning@0.5.5(cytoscape@3.34.0):
+    dependencies:
+      cytoscape: 3.34.0
+
+  cytoscape-autopan-on-drag@2.2.1(cytoscape@3.34.0):
+    dependencies:
+      cytoscape: 3.34.0
+
+  cytoscape-bubblesets@4.1.0(cytoscape-layers@3.1.0(cytoscape@3.34.0))(cytoscape@3.34.0):
+    dependencies:
+      '@types/lodash.throttle': 4.1.9
+      bubblesets-js: 3.0.1
+      cytoscape: 3.34.0
+      cytoscape-layers: 3.1.0(cytoscape@3.34.0)
+      lodash.throttle: 4.1.1
+
+  cytoscape-edge-editing@5.0.0(cytoscape@3.34.0)(konva@10.3.0):
+    dependencies:
+      cytoscape: 3.34.0
+      konva: 10.3.0
+
+  cytoscape-edgehandles@4.0.1(cytoscape@3.34.0):
+    dependencies:
+      cytoscape: 3.34.0
+      lodash.memoize: 4.1.2
+      lodash.throttle: 4.1.1
+
+  cytoscape-layers@3.1.0(cytoscape@3.34.0):
+    dependencies:
+      cytoscape: 3.34.0
+
+  cytoscape@3.34.0: {}
+
+  d3-dispatch@3.0.1: {}
+
+  d3-drag@3.0.0:
+    dependencies:
+      d3-dispatch: 3.0.1
+      d3-selection: 3.0.0
+
+  d3-force@3.0.0:
+    dependencies:
+      d3-dispatch: 3.0.1
+      d3-quadtree: 3.0.1
+      d3-timer: 3.0.1
+
+  d3-quadtree@3.0.1: {}
+
+  d3-selection@3.0.0: {}
+
+  d3-timer@3.0.1: {}
 
   damerau-levenshtein@1.0.8: {}
 
@@ -5979,6 +6150,8 @@ snapshots:
 
   kleur@4.1.5: {}
 
+  konva@10.3.0: {}
+
   language-subtag-registry@0.3.23: {}
 
   language-tags@1.0.9:
@@ -6098,6 +6271,8 @@ snapshots:
 
   lodash.kebabcase@4.1.1: {}
 
+  lodash.memoize@4.1.2: {}
+
   lodash.merge@4.6.2: {}
 
   lodash.mergewith@4.6.2: {}
@@ -6105,6 +6280,8 @@ snapshots:
   lodash.snakecase@4.1.1: {}
 
   lodash.startcase@4.4.0: {}
+
+  lodash.throttle@4.1.1: {}
 
   lodash.uniq@4.5.0: {}
 

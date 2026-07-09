@@ -1,0 +1,188 @@
+{
+  "nodes": [
+    {
+      "id": "sector-semi",
+      "label": "Sector",
+      "name": "반도체",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-cloud",
+      "label": "Sector",
+      "name": "클라우드",
+      "props": {
+        "market": "US"
+      }
+    },
+    {
+      "id": "sector-ai",
+      "label": "Sector",
+      "name": "AI",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-auto",
+      "label": "Sector",
+      "name": "자동차",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-energy",
+      "label": "Sector",
+      "name": "에너지",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-bio",
+      "label": "Sector",
+      "name": "바이오",
+      "props": {
+        "market": "US"
+      }
+    },
+    {
+      "id": "sector-finance",
+      "label": "Sector",
+      "name": "금융",
+      "props": {
+        "market": "US"
+      }
+    },
+    {
+      "id": "sector-retail",
+      "label": "Sector",
+      "name": "소매·유통",
+      "props": {
+        "market": "US"
+      }
+    },
+    {
+      "id": "sector-defense",
+      "label": "Sector",
+      "name": "방산",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-robotics",
+      "label": "Sector",
+      "name": "로봇",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-aerospace",
+      "label": "Sector",
+      "name": "우주항공",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-renewable",
+      "label": "Sector",
+      "name": "신재생에너지",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-battery",
+      "label": "Sector",
+      "name": "이차전지",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-autonomous",
+      "label": "Sector",
+      "name": "자율주행",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-metaverse",
+      "label": "Sector",
+      "name": "메타버스·XR",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-cybersecurity",
+      "label": "Sector",
+      "name": "사이버보안",
+      "props": {
+        "market": "US"
+      }
+    },
+    {
+      "id": "sector-pharma",
+      "label": "Sector",
+      "name": "제약·헬스케어",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-fintech",
+      "label": "Sector",
+      "name": "핀테크",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-gaming",
+      "label": "Sector",
+      "name": "게임",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-shipbuilding",
+      "label": "Sector",
+      "name": "조선·해운",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-entertainment",
+      "label": "Sector",
+      "name": "엔터테인먼트·미디어",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-telecom",
+      "label": "Sector",
+      "name": "통신·6G",
+      "props": {
+        "market": "Global"
+      }
+    },
+    {
+      "id": "sector-materials",
+      "label": "Sector",
+      "name": "화학·신소재",
+      "props": {
+        "market": "KR"
+      }
+    }
+  ]
+}

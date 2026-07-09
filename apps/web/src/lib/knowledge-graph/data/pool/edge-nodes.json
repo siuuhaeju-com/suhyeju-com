@@ -1,0 +1,2524 @@
+{
+  "nodes": [
+    {
+      "id": "edgenode-aerospace-hanwhaaero",
+      "label": "EdgeNode",
+      "name": "한화에어로스페이스",
+      "props": {
+        "sectorId": "sector-aerospace",
+        "sectorName": "우주항공",
+        "companyId": "company-hanwhaaero",
+        "companyName": "한화에어로스페이스",
+        "newsIds": ["news-23"],
+        "link": [
+          "https://www.korea.kr/news/policyNewsView.do?newsId=148959637",
+          "https://www.korea.kr/news/policyNewsView.do?newsId=148955551",
+          "https://www.korea.kr/news/policyNewsView.do?newsId=148951079"
+        ],
+        "refs": [
+          {
+            "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148959637",
+            "title": "PolicyNewsView.do",
+            "publisher": "Korea"
+          },
+          {
+            "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148955551",
+            "title": "PolicyNewsView.do",
+            "publisher": "Korea"
+          },
+          {
+            "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148951079",
+            "title": "PolicyNewsView.do",
+            "publisher": "Korea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-aerospace-kasa",
+      "label": "EdgeNode",
+      "name": "우주항공청",
+      "props": {
+        "sectorId": "sector-aerospace",
+        "sectorName": "우주항공",
+        "companyId": "company-kasa",
+        "companyName": "우주항공청",
+        "newsIds": ["news-23"],
+        "link": [
+          "https://www.korea.kr/news/policyNewsView.do?newsId=148959637",
+          "https://www.korea.kr/news/policyNewsView.do?newsId=148955551",
+          "https://www.korea.kr/news/policyNewsView.do?newsId=148951079"
+        ],
+        "refs": [
+          {
+            "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148959637",
+            "title": "PolicyNewsView.do",
+            "publisher": "Korea"
+          },
+          {
+            "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148955551",
+            "title": "PolicyNewsView.do",
+            "publisher": "Korea"
+          },
+          {
+            "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148951079",
+            "title": "PolicyNewsView.do",
+            "publisher": "Korea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-aerospace-spacex",
+      "label": "EdgeNode",
+      "name": "SpaceX",
+      "props": {
+        "sectorId": "sector-aerospace",
+        "sectorName": "우주항공",
+        "companyId": "company-spacex",
+        "companyName": "SpaceX",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-ai-apple",
+      "label": "EdgeNode",
+      "name": "Apple",
+      "props": {
+        "sectorId": "sector-ai",
+        "sectorName": "AI",
+        "companyId": "company-apple",
+        "companyName": "Apple",
+        "newsIds": ["news-28"],
+        "link": [
+          "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+          "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+          "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/"
+        ],
+        "refs": [
+          {
+            "url": "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+            "title": "Kuo vision pro successors nixed",
+            "publisher": "Macrumors"
+          },
+          {
+            "url": "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+            "title": "Short sighted john ternus behind apple vision project refocuses",
+            "publisher": "Appleinsider"
+          },
+          {
+            "url": "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/",
+            "title": "New vision pro wont arrive at least two years",
+            "publisher": "Macrumors"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-ai-google",
+      "label": "EdgeNode",
+      "name": "Alphabet (Google)",
+      "props": {
+        "sectorId": "sector-ai",
+        "sectorName": "AI",
+        "companyId": "company-google",
+        "companyName": "Alphabet (Google)",
+        "newsIds": ["news-2"],
+        "link": [
+          "https://v.daum.net/v/20260702211500718",
+          "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+          "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1"
+        ],
+        "refs": [
+          {
+            "url": "https://v.daum.net/v/20260702211500718",
+            "title": "20260702211500718",
+            "publisher": "V"
+          },
+          {
+            "url": "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+            "title": "ArticleView",
+            "publisher": "Economytribune"
+          },
+          {
+            "url": "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1",
+            "title": "202602070739591089fbbec65dfb 1",
+            "publisher": "G Enews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-ai-meta",
+      "label": "EdgeNode",
+      "name": "Meta",
+      "props": {
+        "sectorId": "sector-ai",
+        "sectorName": "AI",
+        "companyId": "company-meta",
+        "companyName": "Meta",
+        "newsIds": ["news-2"],
+        "link": [
+          "https://v.daum.net/v/20260702211500718",
+          "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+          "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1"
+        ],
+        "refs": [
+          {
+            "url": "https://v.daum.net/v/20260702211500718",
+            "title": "20260702211500718",
+            "publisher": "V"
+          },
+          {
+            "url": "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+            "title": "ArticleView",
+            "publisher": "Economytribune"
+          },
+          {
+            "url": "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1",
+            "title": "202602070739591089fbbec65dfb 1",
+            "publisher": "G Enews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-ai-microsoft",
+      "label": "EdgeNode",
+      "name": "Microsoft",
+      "props": {
+        "sectorId": "sector-ai",
+        "sectorName": "AI",
+        "companyId": "company-microsoft",
+        "companyName": "Microsoft",
+        "newsIds": ["news-2"],
+        "link": [
+          "https://v.daum.net/v/20260702211500718",
+          "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+          "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1"
+        ],
+        "refs": [
+          {
+            "url": "https://v.daum.net/v/20260702211500718",
+            "title": "20260702211500718",
+            "publisher": "V"
+          },
+          {
+            "url": "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+            "title": "ArticleView",
+            "publisher": "Economytribune"
+          },
+          {
+            "url": "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1",
+            "title": "202602070739591089fbbec65dfb 1",
+            "publisher": "G Enews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-ai-nvidia",
+      "label": "EdgeNode",
+      "name": "NVIDIA",
+      "props": {
+        "sectorId": "sector-ai",
+        "sectorName": "AI",
+        "companyId": "company-nvidia",
+        "companyName": "NVIDIA",
+        "newsIds": ["news-3"],
+        "link": [
+          "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+          "https://www.inews24.com/view/1974647",
+          "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638"
+        ],
+        "refs": [
+          {
+            "url": "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+            "title": "G5L7NRHMPZFPRM447X6ZBYHEVE",
+            "publisher": "Biz"
+          },
+          {
+            "url": "https://www.inews24.com/view/1974647",
+            "title": "1974647",
+            "publisher": "Inews24"
+          },
+          {
+            "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+            "title": "ArticleView",
+            "publisher": "Digitaltoday"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-auto-apple",
+      "label": "EdgeNode",
+      "name": "Apple",
+      "props": {
+        "sectorId": "sector-auto",
+        "sectorName": "자동차",
+        "companyId": "company-apple",
+        "companyName": "Apple",
+        "newsIds": ["news-28"],
+        "link": [
+          "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+          "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+          "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/"
+        ],
+        "refs": [
+          {
+            "url": "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+            "title": "Kuo vision pro successors nixed",
+            "publisher": "Macrumors"
+          },
+          {
+            "url": "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+            "title": "Short sighted john ternus behind apple vision project refocuses",
+            "publisher": "Appleinsider"
+          },
+          {
+            "url": "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/",
+            "title": "New vision pro wont arrive at least two years",
+            "publisher": "Macrumors"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-auto-boston",
+      "label": "EdgeNode",
+      "name": "Boston Dynamics",
+      "props": {
+        "sectorId": "sector-auto",
+        "sectorName": "자동차",
+        "companyId": "company-boston",
+        "companyName": "Boston Dynamics",
+        "newsIds": ["news-8"],
+        "link": [
+          "https://www.newsspace.kr/news/article.html?no=14657",
+          "https://www.hyundaimotorgroup.com/ko/news/hyundai-motor-company-fifa-world-cup-2026-atlas-performance-robotics",
+          "https://www.yna.co.kr/view/AKR20260708069800003"
+        ],
+        "refs": [
+          {
+            "url": "https://www.newsspace.kr/news/article.html?no=14657",
+            "title": "Article",
+            "publisher": "Newsspace"
+          },
+          {
+            "url": "https://www.hyundaimotorgroup.com/ko/news/hyundai-motor-company-fifa-world-cup-2026-atlas-performance-robotics",
+            "title": "Hyundai motor company fifa world cup 2026 atlas performance robotics",
+            "publisher": "Hyundaimotorgroup"
+          },
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260708069800003",
+            "title": "AKR20260708069800003",
+            "publisher": "연합뉴스"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-auto-byd",
+      "label": "EdgeNode",
+      "name": "BYD",
+      "props": {
+        "sectorId": "sector-auto",
+        "sectorName": "자동차",
+        "companyId": "company-byd",
+        "companyName": "BYD",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-auto-hyundai",
+      "label": "EdgeNode",
+      "name": "현대자동차",
+      "props": {
+        "sectorId": "sector-auto",
+        "sectorName": "자동차",
+        "companyId": "company-hyundai",
+        "companyName": "현대자동차",
+        "newsIds": ["news-8"],
+        "link": [
+          "https://www.newsspace.kr/news/article.html?no=14657",
+          "https://www.hyundaimotorgroup.com/ko/news/hyundai-motor-company-fifa-world-cup-2026-atlas-performance-robotics",
+          "https://www.yna.co.kr/view/AKR20260708069800003"
+        ],
+        "refs": [
+          {
+            "url": "https://www.newsspace.kr/news/article.html?no=14657",
+            "title": "Article",
+            "publisher": "Newsspace"
+          },
+          {
+            "url": "https://www.hyundaimotorgroup.com/ko/news/hyundai-motor-company-fifa-world-cup-2026-atlas-performance-robotics",
+            "title": "Hyundai motor company fifa world cup 2026 atlas performance robotics",
+            "publisher": "Hyundaimotorgroup"
+          },
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260708069800003",
+            "title": "AKR20260708069800003",
+            "publisher": "연합뉴스"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-auto-tesla",
+      "label": "EdgeNode",
+      "name": "Tesla",
+      "props": {
+        "sectorId": "sector-auto",
+        "sectorName": "자동차",
+        "companyId": "company-tesla",
+        "companyName": "Tesla",
+        "newsIds": ["news-27"],
+        "link": [
+          "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+          "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+          "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor"
+        ],
+        "refs": [
+          {
+            "url": "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+            "title": "Tesla robotaxi scores permit to run ride hailing service in texas",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+            "title": "Musk says tesla takes safety supervisors out of some austin robotaxis",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor",
+            "title": "Tesla robotaxi miami no safety monitor",
+            "publisher": "The Next Web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-autonomous-apple",
+      "label": "EdgeNode",
+      "name": "Apple",
+      "props": {
+        "sectorId": "sector-autonomous",
+        "sectorName": "자율주행",
+        "companyId": "company-apple",
+        "companyName": "Apple",
+        "newsIds": ["news-28"],
+        "link": [
+          "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+          "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+          "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/"
+        ],
+        "refs": [
+          {
+            "url": "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+            "title": "Kuo vision pro successors nixed",
+            "publisher": "Macrumors"
+          },
+          {
+            "url": "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+            "title": "Short sighted john ternus behind apple vision project refocuses",
+            "publisher": "Appleinsider"
+          },
+          {
+            "url": "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/",
+            "title": "New vision pro wont arrive at least two years",
+            "publisher": "Macrumors"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-autonomous-tesla",
+      "label": "EdgeNode",
+      "name": "Tesla",
+      "props": {
+        "sectorId": "sector-autonomous",
+        "sectorName": "자율주행",
+        "companyId": "company-tesla",
+        "companyName": "Tesla",
+        "newsIds": ["news-27"],
+        "link": [
+          "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+          "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+          "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor"
+        ],
+        "refs": [
+          {
+            "url": "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+            "title": "Tesla robotaxi scores permit to run ride hailing service in texas",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+            "title": "Musk says tesla takes safety supervisors out of some austin robotaxis",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor",
+            "title": "Tesla robotaxi miami no safety monitor",
+            "publisher": "The Next Web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-battery-lgchem",
+      "label": "EdgeNode",
+      "name": "LG화학",
+      "props": {
+        "sectorId": "sector-battery",
+        "sectorName": "이차전지",
+        "companyId": "company-lgchem",
+        "companyName": "LG화학",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-battery-lgensol",
+      "label": "EdgeNode",
+      "name": "LG에너지솔루션",
+      "props": {
+        "sectorId": "sector-battery",
+        "sectorName": "이차전지",
+        "companyId": "company-lgensol",
+        "companyName": "LG에너지솔루션",
+        "newsIds": ["news-4", "news-5"],
+        "link": [
+          "https://m.ekn.kr/view.php?key=20260707023560070",
+          "https://www.electimes.com/news/articleView.html?idxno=365914",
+          "https://www.newspim.com/news/view/20260611001100",
+          "https://www.korea.kr/news/reporterView.do?newsId=148962166",
+          "https://www.hellot.net/news/article.html?no=111341",
+          "https://www.ddaily.co.kr/page/view/2026031315105801549"
+        ],
+        "refs": [
+          {
+            "url": "https://m.ekn.kr/view.php?key=20260707023560070",
+            "title": "View",
+            "publisher": "M"
+          },
+          {
+            "url": "https://www.electimes.com/news/articleView.html?idxno=365914",
+            "title": "ArticleView",
+            "publisher": "Electimes"
+          },
+          {
+            "url": "https://www.newspim.com/news/view/20260611001100",
+            "title": "20260611001100",
+            "publisher": "Newspim"
+          },
+          {
+            "url": "https://www.korea.kr/news/reporterView.do?newsId=148962166",
+            "title": "ReporterView.do",
+            "publisher": "Korea"
+          },
+          {
+            "url": "https://www.hellot.net/news/article.html?no=111341",
+            "title": "Article",
+            "publisher": "Hellot"
+          },
+          {
+            "url": "https://www.ddaily.co.kr/page/view/2026031315105801549",
+            "title": "2026031315105801549",
+            "publisher": "Ddaily"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-battery-poscofuture",
+      "label": "EdgeNode",
+      "name": "포스코퓨처엠",
+      "props": {
+        "sectorId": "sector-battery",
+        "sectorName": "이차전지",
+        "companyId": "company-poscofuture",
+        "companyName": "포스코퓨처엠",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-battery-samsungsdi",
+      "label": "EdgeNode",
+      "name": "삼성SDI",
+      "props": {
+        "sectorId": "sector-battery",
+        "sectorName": "이차전지",
+        "companyId": "company-samsungsdi",
+        "companyName": "삼성SDI",
+        "newsIds": ["news-4", "news-5"],
+        "link": [
+          "https://m.ekn.kr/view.php?key=20260707023560070",
+          "https://www.electimes.com/news/articleView.html?idxno=365914",
+          "https://www.newspim.com/news/view/20260611001100",
+          "https://www.korea.kr/news/reporterView.do?newsId=148962166",
+          "https://www.hellot.net/news/article.html?no=111341",
+          "https://www.ddaily.co.kr/page/view/2026031315105801549"
+        ],
+        "refs": [
+          {
+            "url": "https://m.ekn.kr/view.php?key=20260707023560070",
+            "title": "View",
+            "publisher": "M"
+          },
+          {
+            "url": "https://www.electimes.com/news/articleView.html?idxno=365914",
+            "title": "ArticleView",
+            "publisher": "Electimes"
+          },
+          {
+            "url": "https://www.newspim.com/news/view/20260611001100",
+            "title": "20260611001100",
+            "publisher": "Newspim"
+          },
+          {
+            "url": "https://www.korea.kr/news/reporterView.do?newsId=148962166",
+            "title": "ReporterView.do",
+            "publisher": "Korea"
+          },
+          {
+            "url": "https://www.hellot.net/news/article.html?no=111341",
+            "title": "Article",
+            "publisher": "Hellot"
+          },
+          {
+            "url": "https://www.ddaily.co.kr/page/view/2026031315105801549",
+            "title": "2026031315105801549",
+            "publisher": "Ddaily"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-battery-skon",
+      "label": "EdgeNode",
+      "name": "SK온",
+      "props": {
+        "sectorId": "sector-battery",
+        "sectorName": "이차전지",
+        "companyId": "company-skon",
+        "companyName": "SK온",
+        "newsIds": ["news-4", "news-6"],
+        "link": [
+          "https://m.ekn.kr/view.php?key=20260707023560070",
+          "https://www.electimes.com/news/articleView.html?idxno=365914",
+          "https://www.newspim.com/news/view/20260611001100",
+          "https://www.thelec.kr/news/articleView.html?idxno=52899",
+          "https://www.ddaily.co.kr/page/view/2026031315105801549",
+          "https://m.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=04585446645382336"
+        ],
+        "refs": [
+          {
+            "url": "https://m.ekn.kr/view.php?key=20260707023560070",
+            "title": "View",
+            "publisher": "M"
+          },
+          {
+            "url": "https://www.electimes.com/news/articleView.html?idxno=365914",
+            "title": "ArticleView",
+            "publisher": "Electimes"
+          },
+          {
+            "url": "https://www.newspim.com/news/view/20260611001100",
+            "title": "20260611001100",
+            "publisher": "Newspim"
+          },
+          {
+            "url": "https://www.thelec.kr/news/articleView.html?idxno=52899",
+            "title": "ArticleView",
+            "publisher": "Thelec"
+          },
+          {
+            "url": "https://www.ddaily.co.kr/page/view/2026031315105801549",
+            "title": "2026031315105801549",
+            "publisher": "Ddaily"
+          },
+          {
+            "url": "https://m.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=04585446645382336",
+            "title": "Read",
+            "publisher": "M"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-battery-solbrain",
+      "label": "EdgeNode",
+      "name": "솔브레인홀딩스",
+      "props": {
+        "sectorId": "sector-battery",
+        "sectorName": "이차전지",
+        "companyId": "company-solbrain",
+        "companyName": "솔브레인홀딩스",
+        "newsIds": ["news-24"],
+        "link": ["https://m.joseilbo.com/news/view.htm?newsid=571320"],
+        "refs": [
+          {
+            "url": "https://m.joseilbo.com/news/view.htm?newsid=571320",
+            "title": "솔브레인홀딩스, 소재 국산화 외길…이차전지로 미래 도약",
+            "publisher": "조세일보"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-bio-lilly",
+      "label": "EdgeNode",
+      "name": "Eli Lilly",
+      "props": {
+        "sectorId": "sector-bio",
+        "sectorName": "바이오",
+        "companyId": "company-lilly",
+        "companyName": "Eli Lilly",
+        "newsIds": ["news-17"],
+        "link": [
+          "https://www.chosun.com/economy/science/2026/05/22/R7PUVN4JAFA3XOPQNPAD6AY5FI/",
+          "https://investor.lilly.com/news-releases/news-release-details/lillys-oral-glp-1-orforglipron-demonstrated-meaningful-weight",
+          "https://www.prnewswire.com/news-releases/lillys-oral-glp-1--orforglipron-delivers-weight-loss-of-up-to-an-average-of-27-3-lbs-in-first-of-two-pivotal-phase-3-trials-in-adults-with-obesity-302523649.html"
+        ],
+        "refs": [
+          {
+            "url": "https://www.chosun.com/economy/science/2026/05/22/R7PUVN4JAFA3XOPQNPAD6AY5FI/",
+            "title": "R7PUVN4JAFA3XOPQNPAD6AY5FI",
+            "publisher": "Chosun"
+          },
+          {
+            "url": "https://investor.lilly.com/news-releases/news-release-details/lillys-oral-glp-1-orforglipron-demonstrated-meaningful-weight",
+            "title": "Lillys oral glp 1 orforglipron demonstrated meaningful weight",
+            "publisher": "Investor"
+          },
+          {
+            "url": "https://www.prnewswire.com/news-releases/lillys-oral-glp-1--orforglipron-delivers-weight-loss-of-up-to-an-average-of-27-3-lbs-in-first-of-two-pivotal-phase-3-trials-in-adults-with-obesity-302523649.html",
+            "title": "Lillys oral glp 1 orforglipron delivers weight loss of up to an average of 27 3 lbs in first of two pivotal phase 3 trials in adults with obesity 302523649",
+            "publisher": "Prnewswire"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-bio-novo",
+      "label": "EdgeNode",
+      "name": "Novo Nordisk",
+      "props": {
+        "sectorId": "sector-bio",
+        "sectorName": "바이오",
+        "companyId": "company-novo",
+        "companyName": "Novo Nordisk",
+        "newsIds": ["news-18"],
+        "link": [
+          "https://www.ggmedinews.com/news/articleView.html?idxno=6385",
+          "https://www.mt.co.kr/thebio/2026/04/06/2026040615590511572",
+          "http://m.yakup.com/news/index.html?mode=view&nid=325528"
+        ],
+        "refs": [
+          {
+            "url": "https://www.ggmedinews.com/news/articleView.html?idxno=6385",
+            "title": "ArticleView",
+            "publisher": "Ggmedinews"
+          },
+          {
+            "url": "https://www.mt.co.kr/thebio/2026/04/06/2026040615590511572",
+            "title": "2026040615590511572",
+            "publisher": "Mt"
+          },
+          {
+            "url": "http://m.yakup.com/news/index.html?mode=view&nid=325528",
+            "title": "Index",
+            "publisher": "M"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-cloud-amazon",
+      "label": "EdgeNode",
+      "name": "Amazon",
+      "props": {
+        "sectorId": "sector-cloud",
+        "sectorName": "클라우드",
+        "companyId": "company-amazon",
+        "companyName": "Amazon",
+        "newsIds": ["news-2"],
+        "link": [
+          "https://v.daum.net/v/20260702211500718",
+          "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+          "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1"
+        ],
+        "refs": [
+          {
+            "url": "https://v.daum.net/v/20260702211500718",
+            "title": "20260702211500718",
+            "publisher": "V"
+          },
+          {
+            "url": "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+            "title": "ArticleView",
+            "publisher": "Economytribune"
+          },
+          {
+            "url": "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1",
+            "title": "202602070739591089fbbec65dfb 1",
+            "publisher": "G Enews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-cloud-apple",
+      "label": "EdgeNode",
+      "name": "Apple",
+      "props": {
+        "sectorId": "sector-cloud",
+        "sectorName": "클라우드",
+        "companyId": "company-apple",
+        "companyName": "Apple",
+        "newsIds": ["news-28"],
+        "link": [
+          "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+          "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+          "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/"
+        ],
+        "refs": [
+          {
+            "url": "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+            "title": "Kuo vision pro successors nixed",
+            "publisher": "Macrumors"
+          },
+          {
+            "url": "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+            "title": "Short sighted john ternus behind apple vision project refocuses",
+            "publisher": "Appleinsider"
+          },
+          {
+            "url": "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/",
+            "title": "New vision pro wont arrive at least two years",
+            "publisher": "Macrumors"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-cloud-google",
+      "label": "EdgeNode",
+      "name": "Alphabet (Google)",
+      "props": {
+        "sectorId": "sector-cloud",
+        "sectorName": "클라우드",
+        "companyId": "company-google",
+        "companyName": "Alphabet (Google)",
+        "newsIds": ["news-2"],
+        "link": [
+          "https://v.daum.net/v/20260702211500718",
+          "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+          "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1"
+        ],
+        "refs": [
+          {
+            "url": "https://v.daum.net/v/20260702211500718",
+            "title": "20260702211500718",
+            "publisher": "V"
+          },
+          {
+            "url": "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+            "title": "ArticleView",
+            "publisher": "Economytribune"
+          },
+          {
+            "url": "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1",
+            "title": "202602070739591089fbbec65dfb 1",
+            "publisher": "G Enews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-cloud-meta",
+      "label": "EdgeNode",
+      "name": "Meta",
+      "props": {
+        "sectorId": "sector-cloud",
+        "sectorName": "클라우드",
+        "companyId": "company-meta",
+        "companyName": "Meta",
+        "newsIds": ["news-2"],
+        "link": [
+          "https://v.daum.net/v/20260702211500718",
+          "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+          "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1"
+        ],
+        "refs": [
+          {
+            "url": "https://v.daum.net/v/20260702211500718",
+            "title": "20260702211500718",
+            "publisher": "V"
+          },
+          {
+            "url": "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+            "title": "ArticleView",
+            "publisher": "Economytribune"
+          },
+          {
+            "url": "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1",
+            "title": "202602070739591089fbbec65dfb 1",
+            "publisher": "G Enews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-cloud-microsoft",
+      "label": "EdgeNode",
+      "name": "Microsoft",
+      "props": {
+        "sectorId": "sector-cloud",
+        "sectorName": "클라우드",
+        "companyId": "company-microsoft",
+        "companyName": "Microsoft",
+        "newsIds": ["news-2"],
+        "link": [
+          "https://v.daum.net/v/20260702211500718",
+          "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+          "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1"
+        ],
+        "refs": [
+          {
+            "url": "https://v.daum.net/v/20260702211500718",
+            "title": "20260702211500718",
+            "publisher": "V"
+          },
+          {
+            "url": "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+            "title": "ArticleView",
+            "publisher": "Economytribune"
+          },
+          {
+            "url": "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1",
+            "title": "202602070739591089fbbec65dfb 1",
+            "publisher": "G Enews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-cloud-nvidia",
+      "label": "EdgeNode",
+      "name": "NVIDIA",
+      "props": {
+        "sectorId": "sector-cloud",
+        "sectorName": "클라우드",
+        "companyId": "company-nvidia",
+        "companyName": "NVIDIA",
+        "newsIds": ["news-3"],
+        "link": [
+          "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+          "https://www.inews24.com/view/1974647",
+          "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638"
+        ],
+        "refs": [
+          {
+            "url": "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+            "title": "G5L7NRHMPZFPRM447X6ZBYHEVE",
+            "publisher": "Biz"
+          },
+          {
+            "url": "https://www.inews24.com/view/1974647",
+            "title": "1974647",
+            "publisher": "Inews24"
+          },
+          {
+            "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+            "title": "ArticleView",
+            "publisher": "Digitaltoday"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-cybersecurity-crowdstrike",
+      "label": "EdgeNode",
+      "name": "CrowdStrike",
+      "props": {
+        "sectorId": "sector-cybersecurity",
+        "sectorName": "사이버보안",
+        "companyId": "company-crowdstrike",
+        "companyName": "CrowdStrike",
+        "newsIds": ["news-15", "news-16", "news-29"],
+        "link": [
+          "https://zdnet.co.kr/view/?no=20260316221919",
+          "https://www.crowdstrike.com/en-us/press-releases/2026-crowdstrike-global-threat-report/",
+          "https://ir.crowdstrike.com/news-releases/news-release-details/2026-crowdstrike-global-threat-report-ai-accelerates-adversaries",
+          "https://kr.benzinga.com/news/usa/trading/%ED%81%AC%EB%9D%BC%EC%9A%B0%EB%93%9C%EC%8A%A4%ED%8A%B8%EB%9D%BC%EC%9D%B4%ED%81%AC-%EC%83%88%EB%A1%9C%EC%9A%B4-ai-%EC%82%AC%EC%9D%B4%EB%B2%84-%EB%B3%B4%EC%95%88-%EC%B6%94%EC%A7%84-%EB%B0%8F-%ED%8C/",
+          "https://finance.yahoo.com/markets/stocks/articles/crowdstrike-55-surge-just-beginning-133528543.html",
+          "https://247wallst.com/investing/2026/07/06/crowdstrike-surges-5-palo-alto-and-okta-gain-4-as-cybersecurity-stocks-rally-on-analyst-upgrades/",
+          "https://investors.paloaltonetworks.com/news-releases/news-release-details/palo-alto-networks-introduces-idira-next-generation-identity",
+          "https://www.crowdstrike.com/en-us/press-releases/crowdstrike-to-acquire-pangea-to-secure-every-layer-of-enterprise-ai/",
+          "https://www.bankinfosecurity.com/crowdstrike-buys-pangea-for-260m-to-guard-enterprise-ai-use-a-29480"
+        ],
+        "refs": [
+          {
+            "url": "https://zdnet.co.kr/view/?no=20260316221919",
+            "title": "View",
+            "publisher": "Zdnet"
+          },
+          {
+            "url": "https://www.crowdstrike.com/en-us/press-releases/2026-crowdstrike-global-threat-report/",
+            "title": "2026 crowdstrike global threat report",
+            "publisher": "Crowdstrike"
+          },
+          {
+            "url": "https://ir.crowdstrike.com/news-releases/news-release-details/2026-crowdstrike-global-threat-report-ai-accelerates-adversaries",
+            "title": "2026 crowdstrike global threat report ai accelerates adversaries",
+            "publisher": "Ir"
+          },
+          {
+            "url": "https://kr.benzinga.com/news/usa/trading/%ED%81%AC%EB%9D%BC%EC%9A%B0%EB%93%9C%EC%8A%A4%ED%8A%B8%EB%9D%BC%EC%9D%B4%ED%81%AC-%EC%83%88%EB%A1%9C%EC%9A%B4-ai-%EC%82%AC%EC%9D%B4%EB%B2%84-%EB%B3%B4%EC%95%88-%EC%B6%94%EC%A7%84-%EB%B0%8F-%ED%8C/",
+            "title": "https://kr.benzinga.com/news/usa/trading/%ED%81%AC%EB%9D%BC%EC%9A%B0%EB%93%9C%EC%8A%A4%ED%8A%B8%EB%9D%BC%EC%9D%B4%ED%81%AC-%EC%83%88%EB%A1%9C%EC%9A%B4-ai-%EC%82%AC%EC%9D%B4%EB%B2%84-%EB%B3%B4%EC%95%88-%EC%B6%94%EC%A7%84-%EB%B0%8F-%ED%8C/",
+            "publisher": "Kr"
+          },
+          {
+            "url": "https://finance.yahoo.com/markets/stocks/articles/crowdstrike-55-surge-just-beginning-133528543.html",
+            "title": "Crowdstrike 55 surge just beginning 133528543",
+            "publisher": "Finance"
+          },
+          {
+            "url": "https://247wallst.com/investing/2026/07/06/crowdstrike-surges-5-palo-alto-and-okta-gain-4-as-cybersecurity-stocks-rally-on-analyst-upgrades/",
+            "title": "Crowdstrike surges 5 palo alto and okta gain 4 as cybersecurity stocks rally on analyst upgrades",
+            "publisher": "247wallst"
+          },
+          {
+            "url": "https://investors.paloaltonetworks.com/news-releases/news-release-details/palo-alto-networks-introduces-idira-next-generation-identity",
+            "title": "Palo alto networks introduces idira next generation identity",
+            "publisher": "Investors"
+          },
+          {
+            "url": "https://www.crowdstrike.com/en-us/press-releases/crowdstrike-to-acquire-pangea-to-secure-every-layer-of-enterprise-ai/",
+            "title": "Crowdstrike to acquire pangea to secure every layer of enterprise ai",
+            "publisher": "Crowdstrike"
+          },
+          {
+            "url": "https://www.bankinfosecurity.com/crowdstrike-buys-pangea-for-260m-to-guard-enterprise-ai-use-a-29480",
+            "title": "Crowdstrike buys pangea for 260m to guard enterprise ai use a 29480",
+            "publisher": "Bankinfosecurity"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-cybersecurity-microsoft",
+      "label": "EdgeNode",
+      "name": "Microsoft",
+      "props": {
+        "sectorId": "sector-cybersecurity",
+        "sectorName": "사이버보안",
+        "companyId": "company-microsoft",
+        "companyName": "Microsoft",
+        "newsIds": ["news-2"],
+        "link": [
+          "https://v.daum.net/v/20260702211500718",
+          "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+          "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1"
+        ],
+        "refs": [
+          {
+            "url": "https://v.daum.net/v/20260702211500718",
+            "title": "20260702211500718",
+            "publisher": "V"
+          },
+          {
+            "url": "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+            "title": "ArticleView",
+            "publisher": "Economytribune"
+          },
+          {
+            "url": "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1",
+            "title": "202602070739591089fbbec65dfb 1",
+            "publisher": "G Enews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-cybersecurity-paloalto",
+      "label": "EdgeNode",
+      "name": "Palo Alto Networks",
+      "props": {
+        "sectorId": "sector-cybersecurity",
+        "sectorName": "사이버보안",
+        "companyId": "company-paloalto",
+        "companyName": "Palo Alto Networks",
+        "newsIds": ["news-29"],
+        "link": [
+          "https://investors.paloaltonetworks.com/news-releases/news-release-details/palo-alto-networks-introduces-idira-next-generation-identity",
+          "https://www.crowdstrike.com/en-us/press-releases/crowdstrike-to-acquire-pangea-to-secure-every-layer-of-enterprise-ai/",
+          "https://www.bankinfosecurity.com/crowdstrike-buys-pangea-for-260m-to-guard-enterprise-ai-use-a-29480"
+        ],
+        "refs": [
+          {
+            "url": "https://investors.paloaltonetworks.com/news-releases/news-release-details/palo-alto-networks-introduces-idira-next-generation-identity",
+            "title": "Palo alto networks introduces idira next generation identity",
+            "publisher": "Investors"
+          },
+          {
+            "url": "https://www.crowdstrike.com/en-us/press-releases/crowdstrike-to-acquire-pangea-to-secure-every-layer-of-enterprise-ai/",
+            "title": "Crowdstrike to acquire pangea to secure every layer of enterprise ai",
+            "publisher": "Crowdstrike"
+          },
+          {
+            "url": "https://www.bankinfosecurity.com/crowdstrike-buys-pangea-for-260m-to-guard-enterprise-ai-use-a-29480",
+            "title": "Crowdstrike buys pangea for 260m to guard enterprise ai use a 29480",
+            "publisher": "Bankinfosecurity"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-defense-hanwhaaero",
+      "label": "EdgeNode",
+      "name": "한화에어로스페이스",
+      "props": {
+        "sectorId": "sector-defense",
+        "sectorName": "방산",
+        "companyId": "company-hanwhaaero",
+        "companyName": "한화에어로스페이스",
+        "newsIds": ["news-22"],
+        "link": [
+          "https://ygdata.kr/article/1065590790958193",
+          "https://www.hankyung.com/article/2026032693571",
+          "https://www.viva100.com/article/20260331501204"
+        ],
+        "refs": [
+          {
+            "url": "https://ygdata.kr/article/1065590790958193",
+            "title": "1065590790958193",
+            "publisher": "Ygdata"
+          },
+          {
+            "url": "https://www.hankyung.com/article/2026032693571",
+            "title": "2026032693571",
+            "publisher": "Hankyung"
+          },
+          {
+            "url": "https://www.viva100.com/article/20260331501204",
+            "title": "20260331501204",
+            "publisher": "Viva100"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-defense-hanwhaocean",
+      "label": "EdgeNode",
+      "name": "한화오션",
+      "props": {
+        "sectorId": "sector-defense",
+        "sectorName": "방산",
+        "companyId": "company-hanwhaocean",
+        "companyName": "한화오션",
+        "newsIds": ["news-9", "news-10"],
+        "link": [
+          "https://www.yna.co.kr/view/AKR20260707041551008?section=international/north-america",
+          "https://www.investchosun.com/site/data/html_dir/2026/07/07/2026070780023.html",
+          "https://www.mt.co.kr/industry/2026/07/07/2026070706140815749",
+          "https://www.donga.com/news/Economy/article/all/20260702/134222630/1",
+          "https://www.joongang.co.kr/article/25442044",
+          "https://www.inews24.com/view/1981895"
+        ],
+        "refs": [
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260707041551008?section=international/north-america",
+            "title": "AKR20260707041551008",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://www.investchosun.com/site/data/html_dir/2026/07/07/2026070780023.html",
+            "title": "2026070780023",
+            "publisher": "Investchosun"
+          },
+          {
+            "url": "https://www.mt.co.kr/industry/2026/07/07/2026070706140815749",
+            "title": "2026070706140815749",
+            "publisher": "Mt"
+          },
+          {
+            "url": "https://www.donga.com/news/Economy/article/all/20260702/134222630/1",
+            "title": "1",
+            "publisher": "Donga"
+          },
+          {
+            "url": "https://www.joongang.co.kr/article/25442044",
+            "title": "25442044",
+            "publisher": "Joongang"
+          },
+          {
+            "url": "https://www.inews24.com/view/1981895",
+            "title": "1981895",
+            "publisher": "Inews24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-defense-lignex1",
+      "label": "EdgeNode",
+      "name": "LIG넥스원",
+      "props": {
+        "sectorId": "sector-defense",
+        "sectorName": "방산",
+        "companyId": "company-lignex1",
+        "companyName": "LIG넥스원",
+        "newsIds": ["news-22"],
+        "link": [
+          "https://ygdata.kr/article/1065590790958193",
+          "https://www.hankyung.com/article/2026032693571",
+          "https://www.viva100.com/article/20260331501204"
+        ],
+        "refs": [
+          {
+            "url": "https://ygdata.kr/article/1065590790958193",
+            "title": "1065590790958193",
+            "publisher": "Ygdata"
+          },
+          {
+            "url": "https://www.hankyung.com/article/2026032693571",
+            "title": "2026032693571",
+            "publisher": "Hankyung"
+          },
+          {
+            "url": "https://www.viva100.com/article/20260331501204",
+            "title": "20260331501204",
+            "publisher": "Viva100"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-energy-hanwhasol",
+      "label": "EdgeNode",
+      "name": "한화솔루션",
+      "props": {
+        "sectorId": "sector-energy",
+        "sectorName": "에너지",
+        "companyId": "company-hanwhasol",
+        "companyName": "한화솔루션",
+        "newsIds": ["news-21"],
+        "link": [
+          "https://www.industrynews.co.kr/news/articleView.html?idxno=76473",
+          "https://www.electimes.com/news/articleView.html?idxno=363432",
+          "https://www.solnews.co.kr/news/articleView.html?idxno=84333"
+        ],
+        "refs": [
+          {
+            "url": "https://www.industrynews.co.kr/news/articleView.html?idxno=76473",
+            "title": "ArticleView",
+            "publisher": "Industrynews"
+          },
+          {
+            "url": "https://www.electimes.com/news/articleView.html?idxno=363432",
+            "title": "ArticleView",
+            "publisher": "Electimes"
+          },
+          {
+            "url": "https://www.solnews.co.kr/news/articleView.html?idxno=84333",
+            "title": "ArticleView",
+            "publisher": "Solnews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-energy-tesla",
+      "label": "EdgeNode",
+      "name": "Tesla",
+      "props": {
+        "sectorId": "sector-energy",
+        "sectorName": "에너지",
+        "companyId": "company-tesla",
+        "companyName": "Tesla",
+        "newsIds": ["news-27"],
+        "link": [
+          "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+          "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+          "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor"
+        ],
+        "refs": [
+          {
+            "url": "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+            "title": "Tesla robotaxi scores permit to run ride hailing service in texas",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+            "title": "Musk says tesla takes safety supervisors out of some austin robotaxis",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor",
+            "title": "Tesla robotaxi miami no safety monitor",
+            "publisher": "The Next Web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-entertainment-hybe",
+      "label": "EdgeNode",
+      "name": "하이브",
+      "props": {
+        "sectorId": "sector-entertainment",
+        "sectorName": "엔터테인먼트·미디어",
+        "companyId": "company-hybe",
+        "companyName": "하이브",
+        "newsIds": ["news-14"],
+        "link": [
+          "http://www.thedailymoney.com/news/articleView.html?idxno=1140693",
+          "https://www.mt.co.kr/stock/2026/03/22/2026032014421860462",
+          "https://www.mk.co.kr/news/economy/11993565"
+        ],
+        "refs": [
+          {
+            "url": "http://www.thedailymoney.com/news/articleView.html?idxno=1140693",
+            "title": "ArticleView",
+            "publisher": "Thedailymoney"
+          },
+          {
+            "url": "https://www.mt.co.kr/stock/2026/03/22/2026032014421860462",
+            "title": "2026032014421860462",
+            "publisher": "Mt"
+          },
+          {
+            "url": "https://www.mk.co.kr/news/economy/11993565",
+            "title": "11993565",
+            "publisher": "Mk"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-entertainment-jyp",
+      "label": "EdgeNode",
+      "name": "JYP엔터테인먼트",
+      "props": {
+        "sectorId": "sector-entertainment",
+        "sectorName": "엔터테인먼트·미디어",
+        "companyId": "company-jyp",
+        "companyName": "JYP엔터테인먼트",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-entertainment-naver",
+      "label": "EdgeNode",
+      "name": "NAVER",
+      "props": {
+        "sectorId": "sector-entertainment",
+        "sectorName": "엔터테인먼트·미디어",
+        "companyId": "company-naver",
+        "companyName": "NAVER",
+        "newsIds": ["news-12"],
+        "link": [
+          "https://www.yna.co.kr/view/AKR20260304016851075",
+          "https://www.mt.co.kr/tech/2026/03/04/2026030408402252143",
+          "https://www.digitaltoday.co.kr/news/articleView.html?idxno=636580"
+        ],
+        "refs": [
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260304016851075",
+            "title": "AKR20260304016851075",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://www.mt.co.kr/tech/2026/03/04/2026030408402252143",
+            "title": "2026030408402252143",
+            "publisher": "Mt"
+          },
+          {
+            "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=636580",
+            "title": "ArticleView",
+            "publisher": "Digitaltoday"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-entertainment-webtoon",
+      "label": "EdgeNode",
+      "name": "웹툰엔터테인먼트",
+      "props": {
+        "sectorId": "sector-entertainment",
+        "sectorName": "엔터테인먼트·미디어",
+        "companyId": "company-webtoon",
+        "companyName": "웹툰엔터테인먼트",
+        "newsIds": ["news-12", "news-13"],
+        "link": [
+          "https://www.yna.co.kr/view/AKR20260304016851075",
+          "https://www.mt.co.kr/tech/2026/03/04/2026030408402252143",
+          "https://www.digitaltoday.co.kr/news/articleView.html?idxno=636580",
+          "https://kr.investing.com/news/transcripts/article-93CH-1939168",
+          "https://ir.webtoon.com/news-releases/news-release-details/webtoon-entertainment-inc-reports-first-quarter-2026-financial",
+          "https://www.fool.com/earnings/call-transcripts/2026/05/11/webtoon-wbtn-q1-2026-earnings-transcript/"
+        ],
+        "refs": [
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260304016851075",
+            "title": "AKR20260304016851075",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://www.mt.co.kr/tech/2026/03/04/2026030408402252143",
+            "title": "2026030408402252143",
+            "publisher": "Mt"
+          },
+          {
+            "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=636580",
+            "title": "ArticleView",
+            "publisher": "Digitaltoday"
+          },
+          {
+            "url": "https://kr.investing.com/news/transcripts/article-93CH-1939168",
+            "title": "Article 93CH 1939168",
+            "publisher": "Kr"
+          },
+          {
+            "url": "https://ir.webtoon.com/news-releases/news-release-details/webtoon-entertainment-inc-reports-first-quarter-2026-financial",
+            "title": "Webtoon entertainment inc reports first quarter 2026 financial",
+            "publisher": "Ir"
+          },
+          {
+            "url": "https://www.fool.com/earnings/call-transcripts/2026/05/11/webtoon-wbtn-q1-2026-earnings-transcript/",
+            "title": "Webtoon wbtn q1 2026 earnings transcript",
+            "publisher": "Fool"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-finance-jpm",
+      "label": "EdgeNode",
+      "name": "JPMorgan",
+      "props": {
+        "sectorId": "sector-finance",
+        "sectorName": "금융",
+        "companyId": "company-jpm",
+        "companyName": "JPMorgan",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-finance-toss",
+      "label": "EdgeNode",
+      "name": "비바리퍼블리카(토스)",
+      "props": {
+        "sectorId": "sector-finance",
+        "sectorName": "금융",
+        "companyId": "company-toss",
+        "companyName": "비바리퍼블리카(토스)",
+        "newsIds": ["news-20"],
+        "link": [
+          "https://kr.investing.com/news/stock-market-news/article-93CH-2005796",
+          "https://m.sedaily.com/article/20064498",
+          "https://www.sedaily.com/article/20064327"
+        ],
+        "refs": [
+          {
+            "url": "https://kr.investing.com/news/stock-market-news/article-93CH-2005796",
+            "title": "Article 93CH 2005796",
+            "publisher": "Kr"
+          },
+          {
+            "url": "https://m.sedaily.com/article/20064498",
+            "title": "20064498",
+            "publisher": "M"
+          },
+          {
+            "url": "https://www.sedaily.com/article/20064327",
+            "title": "20064327",
+            "publisher": "Sedaily"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-fintech-kakaopay",
+      "label": "EdgeNode",
+      "name": "카카오페이",
+      "props": {
+        "sectorId": "sector-fintech",
+        "sectorName": "핀테크",
+        "companyId": "company-kakaopay",
+        "companyName": "카카오페이",
+        "newsIds": ["news-30"],
+        "link": [
+          "https://www.mt.co.kr/finance/2025/09/25/2025092509293825564",
+          "https://www.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=02286166642302744",
+          "https://daily.hankooki.com/news/articleView.html?idxno=1383007"
+        ],
+        "refs": [
+          {
+            "url": "https://www.mt.co.kr/finance/2025/09/25/2025092509293825564",
+            "title": "2025092509293825564",
+            "publisher": "Mt"
+          },
+          {
+            "url": "https://www.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=02286166642302744",
+            "title": "Read",
+            "publisher": "Edaily"
+          },
+          {
+            "url": "https://daily.hankooki.com/news/articleView.html?idxno=1383007",
+            "title": "ArticleView",
+            "publisher": "Daily"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-fintech-toss",
+      "label": "EdgeNode",
+      "name": "비바리퍼블리카(토스)",
+      "props": {
+        "sectorId": "sector-fintech",
+        "sectorName": "핀테크",
+        "companyId": "company-toss",
+        "companyName": "비바리퍼블리카(토스)",
+        "newsIds": ["news-20", "news-30"],
+        "link": [
+          "https://kr.investing.com/news/stock-market-news/article-93CH-2005796",
+          "https://m.sedaily.com/article/20064498",
+          "https://www.sedaily.com/article/20064327",
+          "https://www.mt.co.kr/finance/2025/09/25/2025092509293825564",
+          "https://www.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=02286166642302744",
+          "https://daily.hankooki.com/news/articleView.html?idxno=1383007"
+        ],
+        "refs": [
+          {
+            "url": "https://kr.investing.com/news/stock-market-news/article-93CH-2005796",
+            "title": "Article 93CH 2005796",
+            "publisher": "Kr"
+          },
+          {
+            "url": "https://m.sedaily.com/article/20064498",
+            "title": "20064498",
+            "publisher": "M"
+          },
+          {
+            "url": "https://www.sedaily.com/article/20064327",
+            "title": "20064327",
+            "publisher": "Sedaily"
+          },
+          {
+            "url": "https://www.mt.co.kr/finance/2025/09/25/2025092509293825564",
+            "title": "2025092509293825564",
+            "publisher": "Mt"
+          },
+          {
+            "url": "https://www.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=02286166642302744",
+            "title": "Read",
+            "publisher": "Edaily"
+          },
+          {
+            "url": "https://daily.hankooki.com/news/articleView.html?idxno=1383007",
+            "title": "ArticleView",
+            "publisher": "Daily"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-gaming-krafton",
+      "label": "EdgeNode",
+      "name": "크래프톤",
+      "props": {
+        "sectorId": "sector-gaming",
+        "sectorName": "게임",
+        "companyId": "company-krafton",
+        "companyName": "크래프톤",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-gaming-nexon",
+      "label": "EdgeNode",
+      "name": "넥슨게임즈",
+      "props": {
+        "sectorId": "sector-gaming",
+        "sectorName": "게임",
+        "companyId": "company-nexon",
+        "companyName": "넥슨게임즈",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-materials-lgchem",
+      "label": "EdgeNode",
+      "name": "LG화학",
+      "props": {
+        "sectorId": "sector-materials",
+        "sectorName": "화학·신소재",
+        "companyId": "company-lgchem",
+        "companyName": "LG화학",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-materials-samsung",
+      "label": "EdgeNode",
+      "name": "삼성전자",
+      "props": {
+        "sectorId": "sector-materials",
+        "sectorName": "화학·신소재",
+        "companyId": "company-samsung",
+        "companyName": "삼성전자",
+        "newsIds": ["news-1", "news-3", "news-7", "news-25"],
+        "link": [
+          "https://www.seoul.co.kr/news/economy/2026/07/01/20260701500266",
+          "https://imnews.imbc.com/replay/2026/nw930/article/6834438_36996.html",
+          "https://www.yna.co.kr/view/AKR20260701035100003",
+          "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+          "https://www.inews24.com/view/1974647",
+          "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+          "https://www.yonhapnewstv.co.kr/news/MYH20260612053239WXD",
+          "https://www.yna.co.kr/view/AKR20260611160100004",
+          "https://www.asiae.co.kr/article/2026061118055106834",
+          "https://www.donga.com/news/Politics/article/all/20260701/134216557/1",
+          "https://www.dtoday.co.kr/news/articleView.html?idxno=778610",
+          "https://www.donga.com/news/Economy/article/all/20260625/134177638/2"
+        ],
+        "refs": [
+          {
+            "url": "https://www.seoul.co.kr/news/economy/2026/07/01/20260701500266",
+            "title": "20260701500266",
+            "publisher": "Seoul"
+          },
+          {
+            "url": "https://imnews.imbc.com/replay/2026/nw930/article/6834438_36996.html",
+            "title": "6834438 36996",
+            "publisher": "Imnews"
+          },
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260701035100003",
+            "title": "AKR20260701035100003",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+            "title": "G5L7NRHMPZFPRM447X6ZBYHEVE",
+            "publisher": "Biz"
+          },
+          {
+            "url": "https://www.inews24.com/view/1974647",
+            "title": "1974647",
+            "publisher": "Inews24"
+          },
+          {
+            "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+            "title": "ArticleView",
+            "publisher": "Digitaltoday"
+          },
+          {
+            "url": "https://www.yonhapnewstv.co.kr/news/MYH20260612053239WXD",
+            "title": "MYH20260612053239WXD",
+            "publisher": "Yonhapnewstv"
+          },
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260611160100004",
+            "title": "AKR20260611160100004",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://www.asiae.co.kr/article/2026061118055106834",
+            "title": "2026061118055106834",
+            "publisher": "Asiae"
+          },
+          {
+            "url": "https://www.donga.com/news/Politics/article/all/20260701/134216557/1",
+            "title": "1",
+            "publisher": "Donga"
+          },
+          {
+            "url": "https://www.dtoday.co.kr/news/articleView.html?idxno=778610",
+            "title": "ArticleView",
+            "publisher": "Dtoday"
+          },
+          {
+            "url": "https://www.donga.com/news/Economy/article/all/20260625/134177638/2",
+            "title": "2",
+            "publisher": "Donga"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-materials-solbrain",
+      "label": "EdgeNode",
+      "name": "솔브레인홀딩스",
+      "props": {
+        "sectorId": "sector-materials",
+        "sectorName": "화학·신소재",
+        "companyId": "company-solbrain",
+        "companyName": "솔브레인홀딩스",
+        "newsIds": ["news-24"],
+        "link": ["https://m.joseilbo.com/news/view.htm?newsid=571320"],
+        "refs": [
+          {
+            "url": "https://m.joseilbo.com/news/view.htm?newsid=571320",
+            "title": "솔브레인홀딩스, 소재 국산화 외길…이차전지로 미래 도약",
+            "publisher": "조세일보"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-metaverse-apple",
+      "label": "EdgeNode",
+      "name": "Apple",
+      "props": {
+        "sectorId": "sector-metaverse",
+        "sectorName": "메타버스·XR",
+        "companyId": "company-apple",
+        "companyName": "Apple",
+        "newsIds": ["news-28"],
+        "link": [
+          "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+          "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+          "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/"
+        ],
+        "refs": [
+          {
+            "url": "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+            "title": "Kuo vision pro successors nixed",
+            "publisher": "Macrumors"
+          },
+          {
+            "url": "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+            "title": "Short sighted john ternus behind apple vision project refocuses",
+            "publisher": "Appleinsider"
+          },
+          {
+            "url": "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/",
+            "title": "New vision pro wont arrive at least two years",
+            "publisher": "Macrumors"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-metaverse-meta",
+      "label": "EdgeNode",
+      "name": "Meta",
+      "props": {
+        "sectorId": "sector-metaverse",
+        "sectorName": "메타버스·XR",
+        "companyId": "company-meta",
+        "companyName": "Meta",
+        "newsIds": ["news-28"],
+        "link": [
+          "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+          "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+          "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/"
+        ],
+        "refs": [
+          {
+            "url": "https://www.macrumors.com/2026/06/03/kuo-vision-pro-successors-nixed/",
+            "title": "Kuo vision pro successors nixed",
+            "publisher": "Macrumors"
+          },
+          {
+            "url": "https://appleinsider.com/articles/26/06/03/short-sighted-john-ternus-behind-apple-vision-project-refocuses",
+            "title": "Short sighted john ternus behind apple vision project refocuses",
+            "publisher": "Appleinsider"
+          },
+          {
+            "url": "https://www.macrumors.com/2026/05/11/new-vision-pro-wont-arrive-at-least-two-years/",
+            "title": "New vision pro wont arrive at least two years",
+            "publisher": "Macrumors"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-pharma-lilly",
+      "label": "EdgeNode",
+      "name": "Eli Lilly",
+      "props": {
+        "sectorId": "sector-pharma",
+        "sectorName": "제약·헬스케어",
+        "companyId": "company-lilly",
+        "companyName": "Eli Lilly",
+        "newsIds": ["news-17", "news-18", "news-19"],
+        "link": [
+          "https://www.chosun.com/economy/science/2026/05/22/R7PUVN4JAFA3XOPQNPAD6AY5FI/",
+          "https://investor.lilly.com/news-releases/news-release-details/lillys-oral-glp-1-orforglipron-demonstrated-meaningful-weight",
+          "https://www.prnewswire.com/news-releases/lillys-oral-glp-1--orforglipron-delivers-weight-loss-of-up-to-an-average-of-27-3-lbs-in-first-of-two-pivotal-phase-3-trials-in-adults-with-obesity-302523649.html",
+          "https://www.ggmedinews.com/news/articleView.html?idxno=6385",
+          "https://www.mt.co.kr/thebio/2026/04/06/2026040615590511572",
+          "http://m.yakup.com/news/index.html?mode=view&nid=325528",
+          "https://biz.chosun.com/science-chosun/bio/2026/07/06/KEDNJYLDMZAMVDGLYZHNQRXVAA/",
+          "https://www.mt.co.kr/thebio/2026/05/28/2026052720020367597",
+          "https://www.dailypharm.com/user/news/338875"
+        ],
+        "refs": [
+          {
+            "url": "https://www.chosun.com/economy/science/2026/05/22/R7PUVN4JAFA3XOPQNPAD6AY5FI/",
+            "title": "R7PUVN4JAFA3XOPQNPAD6AY5FI",
+            "publisher": "Chosun"
+          },
+          {
+            "url": "https://investor.lilly.com/news-releases/news-release-details/lillys-oral-glp-1-orforglipron-demonstrated-meaningful-weight",
+            "title": "Lillys oral glp 1 orforglipron demonstrated meaningful weight",
+            "publisher": "Investor"
+          },
+          {
+            "url": "https://www.prnewswire.com/news-releases/lillys-oral-glp-1--orforglipron-delivers-weight-loss-of-up-to-an-average-of-27-3-lbs-in-first-of-two-pivotal-phase-3-trials-in-adults-with-obesity-302523649.html",
+            "title": "Lillys oral glp 1 orforglipron delivers weight loss of up to an average of 27 3 lbs in first of two pivotal phase 3 trials in adults with obesity 302523649",
+            "publisher": "Prnewswire"
+          },
+          {
+            "url": "https://www.ggmedinews.com/news/articleView.html?idxno=6385",
+            "title": "ArticleView",
+            "publisher": "Ggmedinews"
+          },
+          {
+            "url": "https://www.mt.co.kr/thebio/2026/04/06/2026040615590511572",
+            "title": "2026040615590511572",
+            "publisher": "Mt"
+          },
+          {
+            "url": "http://m.yakup.com/news/index.html?mode=view&nid=325528",
+            "title": "Index",
+            "publisher": "M"
+          },
+          {
+            "url": "https://biz.chosun.com/science-chosun/bio/2026/07/06/KEDNJYLDMZAMVDGLYZHNQRXVAA/",
+            "title": "KEDNJYLDMZAMVDGLYZHNQRXVAA",
+            "publisher": "Biz"
+          },
+          {
+            "url": "https://www.mt.co.kr/thebio/2026/05/28/2026052720020367597",
+            "title": "2026052720020367597",
+            "publisher": "Mt"
+          },
+          {
+            "url": "https://www.dailypharm.com/user/news/338875",
+            "title": "338875",
+            "publisher": "Dailypharm"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-pharma-novo",
+      "label": "EdgeNode",
+      "name": "Novo Nordisk",
+      "props": {
+        "sectorId": "sector-pharma",
+        "sectorName": "제약·헬스케어",
+        "companyId": "company-novo",
+        "companyName": "Novo Nordisk",
+        "newsIds": ["news-18"],
+        "link": [
+          "https://www.ggmedinews.com/news/articleView.html?idxno=6385",
+          "https://www.mt.co.kr/thebio/2026/04/06/2026040615590511572",
+          "http://m.yakup.com/news/index.html?mode=view&nid=325528"
+        ],
+        "refs": [
+          {
+            "url": "https://www.ggmedinews.com/news/articleView.html?idxno=6385",
+            "title": "ArticleView",
+            "publisher": "Ggmedinews"
+          },
+          {
+            "url": "https://www.mt.co.kr/thebio/2026/04/06/2026040615590511572",
+            "title": "2026040615590511572",
+            "publisher": "Mt"
+          },
+          {
+            "url": "http://m.yakup.com/news/index.html?mode=view&nid=325528",
+            "title": "Index",
+            "publisher": "M"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-renewable-hanwhasol",
+      "label": "EdgeNode",
+      "name": "한화솔루션",
+      "props": {
+        "sectorId": "sector-renewable",
+        "sectorName": "신재생에너지",
+        "companyId": "company-hanwhasol",
+        "companyName": "한화솔루션",
+        "newsIds": ["news-21"],
+        "link": [
+          "https://www.industrynews.co.kr/news/articleView.html?idxno=76473",
+          "https://www.electimes.com/news/articleView.html?idxno=363432",
+          "https://www.solnews.co.kr/news/articleView.html?idxno=84333"
+        ],
+        "refs": [
+          {
+            "url": "https://www.industrynews.co.kr/news/articleView.html?idxno=76473",
+            "title": "ArticleView",
+            "publisher": "Industrynews"
+          },
+          {
+            "url": "https://www.electimes.com/news/articleView.html?idxno=363432",
+            "title": "ArticleView",
+            "publisher": "Electimes"
+          },
+          {
+            "url": "https://www.solnews.co.kr/news/articleView.html?idxno=84333",
+            "title": "ArticleView",
+            "publisher": "Solnews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-renewable-tesla",
+      "label": "EdgeNode",
+      "name": "Tesla",
+      "props": {
+        "sectorId": "sector-renewable",
+        "sectorName": "신재생에너지",
+        "companyId": "company-tesla",
+        "companyName": "Tesla",
+        "newsIds": ["news-27"],
+        "link": [
+          "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+          "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+          "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor"
+        ],
+        "refs": [
+          {
+            "url": "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+            "title": "Tesla robotaxi scores permit to run ride hailing service in texas",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+            "title": "Musk says tesla takes safety supervisors out of some austin robotaxis",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor",
+            "title": "Tesla robotaxi miami no safety monitor",
+            "publisher": "The Next Web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-retail-amazon",
+      "label": "EdgeNode",
+      "name": "Amazon",
+      "props": {
+        "sectorId": "sector-retail",
+        "sectorName": "소매·유통",
+        "companyId": "company-amazon",
+        "companyName": "Amazon",
+        "newsIds": ["news-2"],
+        "link": [
+          "https://v.daum.net/v/20260702211500718",
+          "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+          "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1"
+        ],
+        "refs": [
+          {
+            "url": "https://v.daum.net/v/20260702211500718",
+            "title": "20260702211500718",
+            "publisher": "V"
+          },
+          {
+            "url": "https://www.economytribune.co.kr/news/articleView.html?idxno=3901718",
+            "title": "ArticleView",
+            "publisher": "Economytribune"
+          },
+          {
+            "url": "https://www.g-enews.com/article/Global-Biz/2026/02/202602070739591089fbbec65dfb_1",
+            "title": "202602070739591089fbbec65dfb 1",
+            "publisher": "G Enews"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-robotics-boston",
+      "label": "EdgeNode",
+      "name": "Boston Dynamics",
+      "props": {
+        "sectorId": "sector-robotics",
+        "sectorName": "로봇",
+        "companyId": "company-boston",
+        "companyName": "Boston Dynamics",
+        "newsIds": ["news-8"],
+        "link": [
+          "https://www.newsspace.kr/news/article.html?no=14657",
+          "https://www.hyundaimotorgroup.com/ko/news/hyundai-motor-company-fifa-world-cup-2026-atlas-performance-robotics",
+          "https://www.yna.co.kr/view/AKR20260708069800003"
+        ],
+        "refs": [
+          {
+            "url": "https://www.newsspace.kr/news/article.html?no=14657",
+            "title": "Article",
+            "publisher": "Newsspace"
+          },
+          {
+            "url": "https://www.hyundaimotorgroup.com/ko/news/hyundai-motor-company-fifa-world-cup-2026-atlas-performance-robotics",
+            "title": "Hyundai motor company fifa world cup 2026 atlas performance robotics",
+            "publisher": "Hyundaimotorgroup"
+          },
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260708069800003",
+            "title": "AKR20260708069800003",
+            "publisher": "연합뉴스"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-robotics-rainbow",
+      "label": "EdgeNode",
+      "name": "레인보우로보틱스",
+      "props": {
+        "sectorId": "sector-robotics",
+        "sectorName": "로봇",
+        "companyId": "company-rainbow",
+        "companyName": "레인보우로보틱스",
+        "newsIds": ["news-7"],
+        "link": [
+          "https://www.yonhapnewstv.co.kr/news/MYH20260612053239WXD",
+          "https://www.yna.co.kr/view/AKR20260611160100004",
+          "https://www.asiae.co.kr/article/2026061118055106834"
+        ],
+        "refs": [
+          {
+            "url": "https://www.yonhapnewstv.co.kr/news/MYH20260612053239WXD",
+            "title": "MYH20260612053239WXD",
+            "publisher": "Yonhapnewstv"
+          },
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260611160100004",
+            "title": "AKR20260611160100004",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://www.asiae.co.kr/article/2026061118055106834",
+            "title": "2026061118055106834",
+            "publisher": "Asiae"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-robotics-samsung",
+      "label": "EdgeNode",
+      "name": "삼성전자",
+      "props": {
+        "sectorId": "sector-robotics",
+        "sectorName": "로봇",
+        "companyId": "company-samsung",
+        "companyName": "삼성전자",
+        "newsIds": ["news-7"],
+        "link": [
+          "https://www.yonhapnewstv.co.kr/news/MYH20260612053239WXD",
+          "https://www.yna.co.kr/view/AKR20260611160100004",
+          "https://www.asiae.co.kr/article/2026061118055106834"
+        ],
+        "refs": [
+          {
+            "url": "https://www.yonhapnewstv.co.kr/news/MYH20260612053239WXD",
+            "title": "MYH20260612053239WXD",
+            "publisher": "Yonhapnewstv"
+          },
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260611160100004",
+            "title": "AKR20260611160100004",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://www.asiae.co.kr/article/2026061118055106834",
+            "title": "2026061118055106834",
+            "publisher": "Asiae"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-robotics-tesla",
+      "label": "EdgeNode",
+      "name": "Tesla",
+      "props": {
+        "sectorId": "sector-robotics",
+        "sectorName": "로봇",
+        "companyId": "company-tesla",
+        "companyName": "Tesla",
+        "newsIds": ["news-27"],
+        "link": [
+          "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+          "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+          "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor"
+        ],
+        "refs": [
+          {
+            "url": "https://www.cnbc.com/2025/08/08/tesla-robotaxi-scores-permit-to-run-ride-hailing-service-in-texas.html",
+            "title": "Tesla robotaxi scores permit to run ride hailing service in texas",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://www.cnbc.com/2026/01/22/musk-says-tesla-takes-safety-supervisors-out-of-some-austin-robotaxis.html",
+            "title": "Musk says tesla takes safety supervisors out of some austin robotaxis",
+            "publisher": "CNBC"
+          },
+          {
+            "url": "https://thenextweb.com/news/tesla-robotaxi-miami-no-safety-monitor",
+            "title": "Tesla robotaxi miami no safety monitor",
+            "publisher": "The Next Web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-semi-arm",
+      "label": "EdgeNode",
+      "name": "ARM Holdings",
+      "props": {
+        "sectorId": "sector-semi",
+        "sectorName": "반도체",
+        "companyId": "company-arm",
+        "companyName": "ARM Holdings",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-semi-asml",
+      "label": "EdgeNode",
+      "name": "ASML",
+      "props": {
+        "sectorId": "sector-semi",
+        "sectorName": "반도체",
+        "companyId": "company-asml",
+        "companyName": "ASML",
+        "newsIds": ["news-26"],
+        "link": [
+          "https://www.reuters.com/business/asmls-second-quarter-bookings-beat-estimates-2025-07-16/",
+          "https://www.investing.com/news/stock-market-news/asmls-second-quarter-bookings-beat-estimates-4136835",
+          "https://www.globenewswire.com/news-release/2025/07/16/3116126/0/en/ASML-reports-7-7-billion-total-net-sales-and-2-3-billion-net-income-in-Q2-2025.html"
+        ],
+        "refs": [
+          {
+            "url": "https://www.reuters.com/business/asmls-second-quarter-bookings-beat-estimates-2025-07-16/",
+            "title": "Asmls second quarter bookings beat estimates 2025 07 16",
+            "publisher": "Reuters"
+          },
+          {
+            "url": "https://www.investing.com/news/stock-market-news/asmls-second-quarter-bookings-beat-estimates-4136835",
+            "title": "Asmls second quarter bookings beat estimates 4136835",
+            "publisher": "Investing"
+          },
+          {
+            "url": "https://www.globenewswire.com/news-release/2025/07/16/3116126/0/en/ASML-reports-7-7-billion-total-net-sales-and-2-3-billion-net-income-in-Q2-2025.html",
+            "title": "ASML reports 7 7 billion total net sales and 2 3 billion net income in Q2 2025",
+            "publisher": "Globenewswire"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-semi-intel",
+      "label": "EdgeNode",
+      "name": "Intel",
+      "props": {
+        "sectorId": "sector-semi",
+        "sectorName": "반도체",
+        "companyId": "company-intel",
+        "companyName": "Intel",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-semi-nvidia",
+      "label": "EdgeNode",
+      "name": "NVIDIA",
+      "props": {
+        "sectorId": "sector-semi",
+        "sectorName": "반도체",
+        "companyId": "company-nvidia",
+        "companyName": "NVIDIA",
+        "newsIds": ["news-3"],
+        "link": [
+          "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+          "https://www.inews24.com/view/1974647",
+          "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638"
+        ],
+        "refs": [
+          {
+            "url": "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+            "title": "G5L7NRHMPZFPRM447X6ZBYHEVE",
+            "publisher": "Biz"
+          },
+          {
+            "url": "https://www.inews24.com/view/1974647",
+            "title": "1974647",
+            "publisher": "Inews24"
+          },
+          {
+            "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+            "title": "ArticleView",
+            "publisher": "Digitaltoday"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-semi-samsung",
+      "label": "EdgeNode",
+      "name": "삼성전자",
+      "props": {
+        "sectorId": "sector-semi",
+        "sectorName": "반도체",
+        "companyId": "company-samsung",
+        "companyName": "삼성전자",
+        "newsIds": ["news-1", "news-3", "news-25"],
+        "link": [
+          "https://www.seoul.co.kr/news/economy/2026/07/01/20260701500266",
+          "https://imnews.imbc.com/replay/2026/nw930/article/6834438_36996.html",
+          "https://www.yna.co.kr/view/AKR20260701035100003",
+          "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+          "https://www.inews24.com/view/1974647",
+          "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+          "https://www.donga.com/news/Politics/article/all/20260701/134216557/1",
+          "https://www.dtoday.co.kr/news/articleView.html?idxno=778610",
+          "https://www.donga.com/news/Economy/article/all/20260625/134177638/2"
+        ],
+        "refs": [
+          {
+            "url": "https://www.seoul.co.kr/news/economy/2026/07/01/20260701500266",
+            "title": "20260701500266",
+            "publisher": "Seoul"
+          },
+          {
+            "url": "https://imnews.imbc.com/replay/2026/nw930/article/6834438_36996.html",
+            "title": "6834438 36996",
+            "publisher": "Imnews"
+          },
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260701035100003",
+            "title": "AKR20260701035100003",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+            "title": "G5L7NRHMPZFPRM447X6ZBYHEVE",
+            "publisher": "Biz"
+          },
+          {
+            "url": "https://www.inews24.com/view/1974647",
+            "title": "1974647",
+            "publisher": "Inews24"
+          },
+          {
+            "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+            "title": "ArticleView",
+            "publisher": "Digitaltoday"
+          },
+          {
+            "url": "https://www.donga.com/news/Politics/article/all/20260701/134216557/1",
+            "title": "1",
+            "publisher": "Donga"
+          },
+          {
+            "url": "https://www.dtoday.co.kr/news/articleView.html?idxno=778610",
+            "title": "ArticleView",
+            "publisher": "Dtoday"
+          },
+          {
+            "url": "https://www.donga.com/news/Economy/article/all/20260625/134177638/2",
+            "title": "2",
+            "publisher": "Donga"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-semi-sk",
+      "label": "EdgeNode",
+      "name": "SK하이닉스",
+      "props": {
+        "sectorId": "sector-semi",
+        "sectorName": "반도체",
+        "companyId": "company-sk",
+        "companyName": "SK하이닉스",
+        "newsIds": ["news-1", "news-3"],
+        "link": [
+          "https://www.seoul.co.kr/news/economy/2026/07/01/20260701500266",
+          "https://imnews.imbc.com/replay/2026/nw930/article/6834438_36996.html",
+          "https://www.yna.co.kr/view/AKR20260701035100003",
+          "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+          "https://www.inews24.com/view/1974647",
+          "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638"
+        ],
+        "refs": [
+          {
+            "url": "https://www.seoul.co.kr/news/economy/2026/07/01/20260701500266",
+            "title": "20260701500266",
+            "publisher": "Seoul"
+          },
+          {
+            "url": "https://imnews.imbc.com/replay/2026/nw930/article/6834438_36996.html",
+            "title": "6834438 36996",
+            "publisher": "Imnews"
+          },
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260701035100003",
+            "title": "AKR20260701035100003",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+            "title": "G5L7NRHMPZFPRM447X6ZBYHEVE",
+            "publisher": "Biz"
+          },
+          {
+            "url": "https://www.inews24.com/view/1974647",
+            "title": "1974647",
+            "publisher": "Inews24"
+          },
+          {
+            "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+            "title": "ArticleView",
+            "publisher": "Digitaltoday"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-semi-tsmc",
+      "label": "EdgeNode",
+      "name": "TSMC",
+      "props": {
+        "sectorId": "sector-semi",
+        "sectorName": "반도체",
+        "companyId": "company-tsmc",
+        "companyName": "TSMC",
+        "newsIds": ["news-3", "news-26"],
+        "link": [
+          "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+          "https://www.inews24.com/view/1974647",
+          "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+          "https://www.reuters.com/business/asmls-second-quarter-bookings-beat-estimates-2025-07-16/",
+          "https://www.investing.com/news/stock-market-news/asmls-second-quarter-bookings-beat-estimates-4136835",
+          "https://www.globenewswire.com/news-release/2025/07/16/3116126/0/en/ASML-reports-7-7-billion-total-net-sales-and-2-3-billion-net-income-in-Q2-2025.html"
+        ],
+        "refs": [
+          {
+            "url": "https://biz.chosun.com/it-science/ict/2026/05/07/G5L7NRHMPZFPRM447X6ZBYHEVE/",
+            "title": "G5L7NRHMPZFPRM447X6ZBYHEVE",
+            "publisher": "Biz"
+          },
+          {
+            "url": "https://www.inews24.com/view/1974647",
+            "title": "1974647",
+            "publisher": "Inews24"
+          },
+          {
+            "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=672638",
+            "title": "ArticleView",
+            "publisher": "Digitaltoday"
+          },
+          {
+            "url": "https://www.reuters.com/business/asmls-second-quarter-bookings-beat-estimates-2025-07-16/",
+            "title": "Asmls second quarter bookings beat estimates 2025 07 16",
+            "publisher": "Reuters"
+          },
+          {
+            "url": "https://www.investing.com/news/stock-market-news/asmls-second-quarter-bookings-beat-estimates-4136835",
+            "title": "Asmls second quarter bookings beat estimates 4136835",
+            "publisher": "Investing"
+          },
+          {
+            "url": "https://www.globenewswire.com/news-release/2025/07/16/3116126/0/en/ASML-reports-7-7-billion-total-net-sales-and-2-3-billion-net-income-in-Q2-2025.html",
+            "title": "ASML reports 7 7 billion total net sales and 2 3 billion net income in Q2 2025",
+            "publisher": "Globenewswire"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-shipbuilding-hanwhaocean",
+      "label": "EdgeNode",
+      "name": "한화오션",
+      "props": {
+        "sectorId": "sector-shipbuilding",
+        "sectorName": "조선·해운",
+        "companyId": "company-hanwhaocean",
+        "companyName": "한화오션",
+        "newsIds": ["news-9", "news-10", "news-11"],
+        "link": [
+          "https://www.yna.co.kr/view/AKR20260707041551008?section=international/north-america",
+          "https://www.investchosun.com/site/data/html_dir/2026/07/07/2026070780023.html",
+          "https://www.mt.co.kr/industry/2026/07/07/2026070706140815749",
+          "https://www.donga.com/news/Economy/article/all/20260702/134222630/1",
+          "https://www.joongang.co.kr/article/25442044",
+          "https://www.inews24.com/view/1981895",
+          "https://www.ddaily.co.kr/page/view/2026070616594413988",
+          "https://m.ddaily.co.kr/page/view/2025070310272816656",
+          "https://www.sisajournal-e.com/news/articleView.html?idxno=421934"
+        ],
+        "refs": [
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260707041551008?section=international/north-america",
+            "title": "AKR20260707041551008",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://www.investchosun.com/site/data/html_dir/2026/07/07/2026070780023.html",
+            "title": "2026070780023",
+            "publisher": "Investchosun"
+          },
+          {
+            "url": "https://www.mt.co.kr/industry/2026/07/07/2026070706140815749",
+            "title": "2026070706140815749",
+            "publisher": "Mt"
+          },
+          {
+            "url": "https://www.donga.com/news/Economy/article/all/20260702/134222630/1",
+            "title": "1",
+            "publisher": "Donga"
+          },
+          {
+            "url": "https://www.joongang.co.kr/article/25442044",
+            "title": "25442044",
+            "publisher": "Joongang"
+          },
+          {
+            "url": "https://www.inews24.com/view/1981895",
+            "title": "1981895",
+            "publisher": "Inews24"
+          },
+          {
+            "url": "https://www.ddaily.co.kr/page/view/2026070616594413988",
+            "title": "2026070616594413988",
+            "publisher": "Ddaily"
+          },
+          {
+            "url": "https://m.ddaily.co.kr/page/view/2025070310272816656",
+            "title": "2025070310272816656",
+            "publisher": "M"
+          },
+          {
+            "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421934",
+            "title": "ArticleView",
+            "publisher": "Sisajournal E"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-shipbuilding-hdhyundai",
+      "label": "EdgeNode",
+      "name": "HD현대중공업",
+      "props": {
+        "sectorId": "sector-shipbuilding",
+        "sectorName": "조선·해운",
+        "companyId": "company-hdhyundai",
+        "companyName": "HD현대중공업",
+        "newsIds": ["news-9", "news-11"],
+        "link": [
+          "https://www.yna.co.kr/view/AKR20260707041551008?section=international/north-america",
+          "https://www.investchosun.com/site/data/html_dir/2026/07/07/2026070780023.html",
+          "https://www.mt.co.kr/industry/2026/07/07/2026070706140815749",
+          "https://www.ddaily.co.kr/page/view/2026070616594413988",
+          "https://m.ddaily.co.kr/page/view/2025070310272816656",
+          "https://www.sisajournal-e.com/news/articleView.html?idxno=421934"
+        ],
+        "refs": [
+          {
+            "url": "https://www.yna.co.kr/view/AKR20260707041551008?section=international/north-america",
+            "title": "AKR20260707041551008",
+            "publisher": "연합뉴스"
+          },
+          {
+            "url": "https://www.investchosun.com/site/data/html_dir/2026/07/07/2026070780023.html",
+            "title": "2026070780023",
+            "publisher": "Investchosun"
+          },
+          {
+            "url": "https://www.mt.co.kr/industry/2026/07/07/2026070706140815749",
+            "title": "2026070706140815749",
+            "publisher": "Mt"
+          },
+          {
+            "url": "https://www.ddaily.co.kr/page/view/2026070616594413988",
+            "title": "2026070616594413988",
+            "publisher": "Ddaily"
+          },
+          {
+            "url": "https://m.ddaily.co.kr/page/view/2025070310272816656",
+            "title": "2025070310272816656",
+            "publisher": "M"
+          },
+          {
+            "url": "https://www.sisajournal-e.com/news/articleView.html?idxno=421934",
+            "title": "ArticleView",
+            "publisher": "Sisajournal E"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgenode-shipbuilding-samsungheavy",
+      "label": "EdgeNode",
+      "name": "삼성중공업",
+      "props": {
+        "sectorId": "sector-shipbuilding",
+        "sectorName": "조선·해운",
+        "companyId": "company-samsungheavy",
+        "companyName": "삼성중공업",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    },
+    {
+      "id": "edgenode-telecom-skt",
+      "label": "EdgeNode",
+      "name": "SK텔레콤",
+      "props": {
+        "sectorId": "sector-telecom",
+        "sectorName": "통신·6G",
+        "companyId": "company-skt",
+        "companyName": "SK텔레콤",
+        "newsIds": [],
+        "link": [],
+        "refs": []
+      }
+    }
+  ]
+}
