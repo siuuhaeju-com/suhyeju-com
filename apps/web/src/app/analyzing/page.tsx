@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { apiPostStream, ApiError } from '@/lib/api';
 import { isValidNewsLink } from '@/lib/link';
+import { saveLocalAnalysis } from '@/lib/local-analyses';
 import { cn } from '@/lib/utils';
 import { floatingChips } from '@/lib/mock-data';
 
@@ -29,7 +30,7 @@ const DONE_NAVIGATE_DELAY_MS = 400;
 
 type AnalyzeEvent =
   | { step: 'extract' | 'analyze' | 'quote'; label: string }
-  | { step: 'done'; id: string }
+  | { step: 'done'; id: string; title: string; analyzedAt: string; originUrl: string }
   | { step: 'error'; message: string };
 
 /**
@@ -58,6 +59,7 @@ export default function AnalyzingPage() {
       router.replace('/');
       return;
     }
+    const analysisUrl = url;
 
     const controller = new AbortController();
 
@@ -83,7 +85,11 @@ export default function AnalyzingPage() {
 
     async function run() {
       try {
-        const stream = apiPostStream<AnalyzeEvent>('/api/analyze', { url }, controller.signal);
+        const stream = apiPostStream<AnalyzeEvent>(
+          '/api/analyze',
+          { url: analysisUrl },
+          controller.signal,
+        );
 
         for await (const event of stream) {
           if (event.step === 'analyze') {
@@ -98,6 +104,12 @@ export default function AnalyzingPage() {
           } else if (event.step === 'done') {
             clearTimer();
             setCompleted(STEP_LABELS.length);
+            saveLocalAnalysis({
+              id: event.id,
+              title: event.title,
+              analyzedAt: event.analyzedAt,
+              originUrl: event.originUrl || analysisUrl,
+            });
             // replace: 로딩 화면을 히스토리에 남기지 않는다 — push로 두면 분석 페이지에서
             // 뒤로가기 시 이 페이지로 돌아와 재마운트되며 분석 전체가 다시 실행된다.
             setTimeout(() => router.replace(`/analysis/${event.id}`), DONE_NAVIGATE_DELAY_MS);

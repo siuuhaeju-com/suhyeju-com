@@ -8,9 +8,24 @@ import type { AnalysisResult, FloatingChip, RecentAnalysis } from '@/lib/types';
 
 /* ── 메인: 최근 분석 내역 (F-03c) ────────────────────────── */
 export const recentAnalyses: RecentAnalysis[] = [
-  { id: 'hbm4', title: '테슬라 로보택시 공개 임박…자율주행 밸류체인 재조명', analyzedAt: '어제' },
-  { id: 'hbm4', title: '메모리 반도체 가격 3분기 연속 상승', analyzedAt: '3일 전' },
-  { id: 'hbm4', title: '방산 수출 사상 최대…관련주 재평가 흐름', analyzedAt: '지난주' },
+  {
+    id: 'robotaxi',
+    title: '테슬라 로보택시 공개 임박…자율주행 밸류체인 재조명',
+    analyzedAt: '어제',
+    originUrl: 'https://example.com/news/robotaxi',
+  },
+  {
+    id: 'memory-price',
+    title: '메모리 반도체 가격 3분기 연속 상승',
+    analyzedAt: '3일 전',
+    originUrl: 'https://example.com/news/memory-price',
+  },
+  {
+    id: 'defense-export',
+    title: '방산 수출 사상 최대…관련주 재평가 흐름',
+    analyzedAt: '지난주',
+    originUrl: 'https://example.com/news/defense-export',
+  },
 ];
 
 /* ── 로딩: 부유 키워드 칩 ───────────────────────────────── */

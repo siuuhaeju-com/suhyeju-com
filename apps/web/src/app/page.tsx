@@ -1,12 +1,9 @@
-import Link from 'next/link';
-
 import { AnalyzeForm } from '@/components/main/AnalyzeForm';
+import { MyRecentAnalyses } from '@/components/main/MyRecentAnalyses';
 import { PopularNews } from '@/components/main/PopularNews';
+import { RecentAnalyses } from '@/components/main/RecentAnalyses';
 import { SectorOverview } from '@/components/main/SectorOverview';
 import { ParticleField } from '@/components/ParticleField';
-import { Card } from '@/components/ui/card';
-import { formatDateTime } from '@/lib/format';
-import { recentAnalyses } from '@/lib/mock-data';
 
 /**
  * 메인 페이지 (PAGE-1 · #30)
@@ -49,28 +46,9 @@ export default function HomePage() {
             <SectorOverview />
           </div>
 
-          {/* 최근 분석 내역 — 표시 전용 목록, 항목 클릭 시 결과 재열람 */}
-          <div>
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-              <span aria-hidden>🕐</span> 최근 분석 내역
-            </h2>
-            <Card className="divide-y divide-border">
-              {recentAnalyses.map((item) => (
-                <Link
-                  key={item.title}
-                  href={`/analysis/${item.id}`}
-                  className="flex items-center justify-between gap-4 px-4 py-3.5 transition-colors outline-none first:rounded-t-lg last:rounded-b-lg hover:bg-surface-raised/60 focus-visible:ring-3 focus-visible:ring-ring/50"
-                >
-                  <span className="truncate text-[13.5px] font-medium text-ink-sub">
-                    {item.title}
-                  </span>
-                  <span className="shrink-0 text-xs text-muted-foreground">
-                    {formatDateTime(item.analyzedAt)}
-                  </span>
-                </Link>
-              ))}
-            </Card>
-          </div>
+          <MyRecentAnalyses />
+
+          <RecentAnalyses />
         </div>
       </section>
     </main>

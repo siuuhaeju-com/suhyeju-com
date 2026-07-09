@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { apiGet } from '@/lib/api';
-import type { NewsItem, SectorChange } from '@/lib/types';
+import type { NewsItem, RecentAnalysis, SectorChange } from '@/lib/types';
+
+const RECENT_ANALYSES_FETCH_LIMIT = 10;
 
 /** 인기 뉴스 (F-03a · #15 · GET /api/news) — 10분 캐시(BE route 자체 revalidate)에 맞춰 폴링 없이 재검증만 */
 export function usePopularNews() {
@@ -22,5 +24,15 @@ export function useKrMajorSectors() {
     queryFn: () => apiGet<SectorChange[]>('/api/market/kr/major-sectors'),
     staleTime: 60_000,
     refetchInterval: 60_000,
+  });
+}
+
+/** 최근 분석 내역 (F-03c · GET /api/analyses/recent) — 없으면 메인에서 아무 것도 렌더하지 않는다 */
+export function useRecentAnalyses() {
+  return useQuery({
+    queryKey: ['analysis', 'recent'],
+    queryFn: () =>
+      apiGet<RecentAnalysis[]>(`/api/analyses/recent?limit=${RECENT_ANALYSES_FETCH_LIMIT}`),
+    staleTime: 10_000,
   });
 }

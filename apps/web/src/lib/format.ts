@@ -24,3 +24,20 @@ export function formatDateTime(value: string): string {
   const pad = (n: number) => String(n).padStart(2, '0');
   return `${date.getFullYear()}.${pad(date.getMonth() + 1)}.${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }
+
+/** ISO 일시 → '방금 전' · '3분 전' · '2시간 전' · '4일 전'. */
+export function formatRelativeDateTime(value: string): string {
+  if (!/^\d{4}-\d{2}-\d{2}T/.test(value)) return value;
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+
+  const diffMin = Math.floor((Date.now() - date.getTime()) / 60_000);
+  if (diffMin < 1) return '방금 전';
+  if (diffMin < 60) return `${diffMin}분 전`;
+
+  const diffHour = Math.floor(diffMin / 60);
+  if (diffHour < 24) return `${diffHour}시간 전`;
+
+  return `${Math.floor(diffHour / 24)}일 전`;
+}
