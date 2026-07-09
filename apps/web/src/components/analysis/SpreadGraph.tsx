@@ -281,7 +281,7 @@ export function SpreadGraph({
                             size="xs"
                             variant="secondary"
                             // 연한 보더로 버튼임을 드러낸다 — DESIGN.md 서피스+1px 보더 규칙(border 토큰)
-                            className="shrink-0 self-center border-border"
+                            className="shrink-0 cursor-pointer self-center border-border"
                             onClick={() =>
                               router.push(`/analyzing?url=${encodeURIComponent(source.url)}`)
                             }
