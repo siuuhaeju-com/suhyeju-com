@@ -145,13 +145,19 @@ export function SpreadGraph({
               style={{ left: `${(x / VIEW_W) * 100}%`, top: `${(y / VIEW_H) * 100}%` }}
               aria-label={`${node.name}${node.changePct != null ? ` ${formatPct(node.changePct)}` : ''} — Top5 종목 보기`}
             >
-              <span className="flex items-center gap-1.5 text-[12.5px] font-bold whitespace-nowrap">
+              <span
+                className={cn(
+                  'flex gap-1.5 text-[12.5px] font-bold',
+                  // 원점은 뉴스 제목이라 길 수 있음 — 가로 대신 세로(최대 2줄, 초과 시 말줄임)
+                  isOrigin ? 'max-w-[130px] items-start' : 'items-center whitespace-nowrap',
+                )}
+              >
                 <span
                   aria-hidden
-                  className="size-1.5 rounded-full"
+                  className={cn('size-1.5 shrink-0 rounded-full', isOrigin && 'mt-1.5')}
                   style={{ background: TIER_COLOR[node.tier] }}
                 />
-                {node.name}
+                <span className={cn(isOrigin && 'line-clamp-2 break-keep')}>{node.name}</span>
               </span>
               {isOrigin ? (
                 <span className="mt-0.5 block text-center text-[11px] text-muted-foreground">
