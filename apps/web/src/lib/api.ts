@@ -48,7 +48,9 @@ export async function* apiPostStream<T>(
   const decoder = new TextDecoder();
   let buffer = '';
 
-  for (;;) {
+  // 스트림이 끝나 reader.read()가 done: true를 반환하면 즉시 break — 무한 루프가 아니라
+  // NDJSON 응답 본문 길이만큼만 도는 루프다(응답 완료 = 자연 종료).
+  while (true) {
     const { done, value } = await reader.read();
     if (done) break;
     buffer += decoder.decode(value, { stream: true });
