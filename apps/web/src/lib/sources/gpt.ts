@@ -56,7 +56,9 @@ const zSpreadEdge = z.object({
   from: z.string(),
   to: z.string(),
   reason: z.string(),
-  sources: z.array(z.object({ title: z.string(), meta: z.string() })),
+  // 근거 뉴스는 LLM이 생성하지 않는다 — 서버가 이 검색어로 네이버 뉴스를 검색해
+  // 실제 기사(제목·언론사·URL)를 sources로 매핑한다(analyze.ts joinSources).
+  searchQuery: z.string(),
 });
 
 const zKnowledgeNode = z.object({
@@ -126,9 +128,10 @@ const PROMPT_B = `${COMMON}
 - spreadNodes는 **전체 최소 7개** 이상, 각 노드에 고유 id.
 - **tier N(N≥1)의 모든 노드는 tier N-1의 어떤 노드로부터 spreadEdges 연결을 최소 1개 받습니다 (고립 노드 금지).**
 - spreadEdges의 from/to는 반드시 존재하는 spreadNodes id, reason에 한 줄 근거.
-- spreadEdges.sources는 그 **연결 하나하나에 특정된** 근거 뉴스·리포트를 1~2개, 각각 title(헤드라인)·meta("언론사 · MM.DD" 형식) 필드로 담습니다.
-  실제 언론사명(한국경제·매일경제·전자신문·이데일리·서울경제·연합인포맥스 등)과 그 연결에 맞는 구체적 헤드라인을 씁니다.
-  **모든 edge에 동일한 title을 반복하지 않습니다** — edge마다 다른 헤드라인.
+- spreadEdges.searchQuery: 그 연결의 근거가 될 **실제 언론사 기사를 찾기 위한 뉴스 검색어**입니다.
+  근거 기사의 제목·URL을 직접 지어내는 것은 **절대 금지** — 서버가 이 검색어로 네이버 뉴스를 검색해 실제 기사를 연결합니다.
+  검색이 잘 되도록 조사 없이 핵심 명사 2~4개로 씁니다(예: "우주항공 부품 주가", "HBM 소재 수급").
+  뉴스 원문에만 있는 고유 표현보다 **언론이 흔히 쓰는 일반 용어**를 쓰고, **edge마다 그 연결에 특정된 서로 다른 검색어**를 씁니다.
 ## 종목 (topStocks)
 - **spreadNodes의 tier 1·2·3 노드 각각에 대해** topStocks 항목을 하나씩 만듭니다(빠짐없이 전부).
 - 각 sector 이름을 해당 spreadNodes의 name과 **일치**시키고, 대표 종목을 **정확히 5개**(Top5) 담습니다.
@@ -271,31 +274,31 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         from: 'n0',
         to: 'n1',
         reason: 'AI 가속기 수요가 HBM 주문으로 직결',
-        sources: [{ title: 'HBM 시장 규모, 2027년까지 3배 성장 전망', meta: '가트너 · 06.02' }],
+        searchQuery: 'AI 반도체 HBM 수요',
       },
       {
         from: 'n0',
         to: 'n2',
         reason: '증설 사이클로 장비 발주 확대',
-        sources: [{ title: '반도체 장비 수주잔고 사상 최대', meta: '한국경제 · 06.05' }],
+        searchQuery: '반도체 장비 수주 증가',
       },
       {
         from: 'n1',
         to: 'n3',
         reason: 'HBM 생산 확대가 소재 수요를 견인',
-        sources: [{ title: 'HBM 증산에 반도체 소재 수급 빠듯', meta: '전자신문 · 06.09' }],
+        searchQuery: 'HBM 반도체 소재 수급',
       },
       {
         from: 'n2',
         to: 'n4',
         reason: '전공정 증설이 후공정 병목을 유발',
-        sources: [{ title: '후공정 장비 발주 전망 상향', meta: '이데일리 · 06.11' }],
+        searchQuery: '반도체 후공정 패키징 투자',
       },
       {
         from: 'n1',
         to: 'n5',
         reason: '고발열 칩 확산으로 전력·냉각 수요 증가',
-        sources: [{ title: 'AI 서버 발열 대응 냉각 수요 급증', meta: '서울경제 · 06.14' }],
+        searchQuery: 'AI 데이터센터 전력 냉각 수요',
       },
     ],
     heatmap: [

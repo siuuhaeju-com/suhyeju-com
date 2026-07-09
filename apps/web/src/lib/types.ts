@@ -92,11 +92,13 @@ export interface SpreadNode {
   row: number;
 }
 
-/** 연결 근거 뉴스/리포트 한 건 — 헤드라인 + 출처·날짜 */
+/** 연결 근거 뉴스 한 건 — 네이버 뉴스 검색으로 매핑된 실제 기사(LLM 생성 아님) */
 export interface EdgeSource {
   title: string;
   /** "출처 · 날짜" 형식 (예: "한국경제 · 06.02") */
   meta: string;
+  /** 실제 기사 링크 (언론사 원문 우선) */
+  url: string;
 }
 
 /** 영향력 확산 그래프 연결선 — hover 시 근거 툴팁 (F-09) */
