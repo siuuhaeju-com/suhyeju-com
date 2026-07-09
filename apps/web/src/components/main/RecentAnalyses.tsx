@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 
 import { Card } from '@/components/ui/card';
-import { formatDateTime } from '@/lib/format';
+import { sortAnalysesByNewest } from '@/lib/analysis-time';
+import { formatRelativeDateTime } from '@/lib/format';
 import { normalizeLocalOriginUrl, useLocalAnalyses } from '@/lib/local-analyses';
 import { useRecentAnalyses } from '@/lib/queries';
 
@@ -27,7 +28,7 @@ export function RecentAnalyses() {
   }, [myAnalyses]);
 
   const communityAnalyses = useMemo(() => {
-    return (data ?? [])
+    return sortAnalysesByNewest(data ?? [])
       .filter((item) => {
         const originUrl = normalizeLocalOriginUrl(item.originUrl);
         return (
@@ -54,7 +55,7 @@ export function RecentAnalyses() {
           >
             <span className="truncate text-[13.5px] font-medium text-ink-sub">{item.title}</span>
             <span className="shrink-0 text-xs text-muted-foreground">
-              {formatDateTime(item.analyzedAt)}
+              {formatRelativeDateTime(item.analyzedAt)}
             </span>
           </Link>
         ))}

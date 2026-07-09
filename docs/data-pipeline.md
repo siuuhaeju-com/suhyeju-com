@@ -71,7 +71,7 @@ GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 �
   - `{ step: 'extract' | 'analyze' | 'quote', label }` — 각 단계 시작 시
   - `{ step: 'done', id, title, analyzedAt, originUrl }` — 저장 완료. 화면은 이 `id`로 `/analysis/[id]`로 이동하고, 브라우저 개인 최근 목록은 이 메타데이터를 `localStorage`에 저장한다.
   - `{ step: 'error', message }` — 실패 시
-- `/api/analyses/recent`는 KV/인메모리 저장소의 **전체 최근 분석 목록**을 반환한다. 로그인/DB가 없으므로 개인 최근 목록은 서버가 아니라 브라우저 `localStorage`에 `id/title/analyzedAt/originUrl`로 따로 저장한다. 이 `originUrl` 덕분에 로컬 목록의 오래된 `id`가 서버 재시작 등으로 404가 되면 같은 원문 링크로 재분석할 수 있다.
+- `/api/analyses/recent`는 KV/인메모리 저장소의 **전체 최근 분석 목록**을 반환한다. 로그인/DB가 없으므로 개인 최근 목록은 서버가 아니라 브라우저 `localStorage`에 `id/title/analyzedAt/originUrl/lastOpenedAt`로 따로 저장한다. 이 `originUrl` 덕분에 로컬 목록의 오래된 `id`가 서버 재시작 등으로 404가 되면 같은 원문 링크로 재분석할 수 있고, `lastOpenedAt` 기준으로 마지막에 열어본 분석을 위에 둔다.
 - `/analysis/[id]` 페이지는 `GET /api/analysis/[id]`를 클라이언트에서 다시 호출하지 않는다 — 서버 컴포넌트에서 `store.ts`를 직접 읽는다. `GET /api/analysis/[id]` 라우트 자체는 남아 있고 별도 API 소비처(공유 링크 등)를 위해 존재한다.
 
 ---

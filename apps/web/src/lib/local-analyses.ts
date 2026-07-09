@@ -8,7 +8,10 @@ const LOCAL_ANALYSES_KEY = 'suhyeju:my-analyses:v1';
 const LOCAL_ANALYSES_MAX = 5;
 const LOCAL_ANALYSES_CHANGED_EVENT = 'suhyeju:my-analyses:changed';
 
-export type LocalAnalysis = RecentAnalysis;
+export type LocalAnalysis = RecentAnalysis & {
+  /** 이 브라우저에서 마지막으로 열어본 시각. 내 최근 목록 정렬 기준이다. */
+  lastOpenedAt?: string;
+};
 
 type LocalAnalysesState = {
   items: LocalAnalysis[];
@@ -40,8 +43,18 @@ function isLocalAnalysis(value: unknown): value is LocalAnalysis {
     typeof item.id === 'string' &&
     typeof item.title === 'string' &&
     typeof item.analyzedAt === 'string' &&
-    typeof item.originUrl === 'string'
+    typeof item.originUrl === 'string' &&
+    (item.lastOpenedAt === undefined || typeof item.lastOpenedAt === 'string')
   );
+}
+
+function getLocalAnalysisTime(item: LocalAnalysis): number {
+  const time = Date.parse(item.lastOpenedAt ?? item.analyzedAt);
+  return Number.isNaN(time) ? 0 : time;
+}
+
+function sortLocalAnalysesByLatestOpen(items: LocalAnalysis[]): LocalAnalysis[] {
+  return [...items].sort((a, b) => getLocalAnalysisTime(b) - getLocalAnalysisTime(a));
 }
 
 function readLocalAnalyses(): LocalAnalysis[] {
@@ -54,7 +67,10 @@ function readLocalAnalyses(): LocalAnalysis[] {
     const parsed = JSON.parse(raw) as unknown;
     if (!Array.isArray(parsed)) return [];
 
-    return parsed.filter(isLocalAnalysis).slice(0, LOCAL_ANALYSES_MAX);
+    return sortLocalAnalysesByLatestOpen(parsed.filter(isLocalAnalysis)).slice(
+      0,
+      LOCAL_ANALYSES_MAX,
+    );
   } catch {
     return [];
   }
@@ -84,14 +100,25 @@ export function saveLocalAnalysis(item: LocalAnalysis) {
   if (!originUrl) return;
 
   const current = readLocalAnalyses();
-  const nextItem = { ...item, originUrl };
-  const next = [
+  const nextItem = { ...item, originUrl, lastOpenedAt: new Date().toISOString() };
+  const next = sortLocalAnalysesByLatestOpen([
     nextItem,
     ...current.filter((saved) => {
       const savedOriginUrl = normalizeLocalOriginUrl(saved.originUrl);
       return saved.id !== item.id && savedOriginUrl !== originUrl;
     }),
-  ].slice(0, LOCAL_ANALYSES_MAX);
+  ]).slice(0, LOCAL_ANALYSES_MAX);
+
+  writeLocalAnalyses(next);
+}
+
+export function touchLocalAnalysis(id: string) {
+  const current = readLocalAnalyses();
+  const next = sortLocalAnalysesByLatestOpen(
+    current.map((item) =>
+      item.id === id ? { ...item, lastOpenedAt: new Date().toISOString() } : item,
+    ),
+  ).slice(0, LOCAL_ANALYSES_MAX);
 
   writeLocalAnalyses(next);
 }
