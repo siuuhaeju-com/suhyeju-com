@@ -7,7 +7,7 @@ import { randomUUID } from 'crypto';
 import { extractArticle } from '@/lib/extract-article';
 import { analyzeNews, type AnalysisDraft } from '@/lib/sources/gpt';
 import { searchEdgeSources } from '@/lib/sources/naver-news';
-import { fetchStockQuotes, type StockQuote } from '@/lib/sources/naver-stock';
+import { fetchStockQuotes, stockPageUrl, type StockQuote } from '@/lib/sources/naver-stock';
 import type { AnalysisResult, EdgeSource, HeatmapCell, SpreadNode, TopStock } from '@/lib/types';
 
 const ENGINE_VERSION = '수혜주.com AI v2.1';
@@ -140,12 +140,21 @@ function assemble(
   edgeSources: EdgeSource[][],
   meta: { title: string; originUrl: string; source: string; publishedAt: string },
 ): AnalysisResult {
-  // topStocks: 배열 → Record<섹터명, 종목[]> (매칭된 종목엔 코드·시장 부여 #49)
+  // topStocks: 배열 → Record<섹터명, 종목[]> (매칭된 종목엔 코드·시장·네이버증권 링크 부여 #49)
+  // 표시명은 네이버 표시명으로 교체 — 티커로 조회한 미국 종목을 한글명(애플 등)으로 보여준다.
   const topStocks: Record<string, TopStock[]> = {};
   for (const group of draft.topStocks) {
     topStocks[group.sector] = group.stocks.map((s) => {
       const q = quotes.get(s.name);
-      return q ? { ...s, code: q.code, market: q.market } : { ...s };
+      return q
+        ? {
+            ...s,
+            name: q.name || s.name,
+            code: q.code,
+            market: q.market,
+            url: stockPageUrl(q.code, q.market),
+          }
+        : { ...s };
     });
   }
 

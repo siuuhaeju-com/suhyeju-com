@@ -58,6 +58,8 @@ export interface TopStock {
   code?: string;
   /** 상장 시장 — 코드와 함께 채워짐 (링크 분기용) */
   market?: 'KR' | 'US';
+  /** 네이버페이 증권 종목 페이지 — 코드·시장에서 서버가 파생(매칭 성공 시에만) */
+  url?: string;
 }
 
 export interface SignalItem {
