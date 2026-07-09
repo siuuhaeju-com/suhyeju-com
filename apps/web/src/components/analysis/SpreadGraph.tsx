@@ -10,7 +10,7 @@ import { formatPct, getPctToneClass } from '@/lib/format';
 import { cn } from '@/lib/utils';
 import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
 
-/** 영향력 확산 그래프 (F-07) — 연결선 근거 툴팁: hover 미리보기 + 클릭 고정(F-09) + 노드 hover Top5(F-10) */
+/** 영향력 확산 그래프 (F-07) — 연결선 근거 툴팁(F-09) + 노드 hover Top5(F-10) */
 
 const VIEW_W = 1100;
 const VIEW_H = 560;
@@ -32,8 +32,8 @@ function getNodePos(node: SpreadNode) {
   return { x: TIER_X[node.tier], y: 90 + node.row * (VIEW_H - 150) };
 }
 
-// 연결선 hover 후 툴팁으로 마우스가 이동할 유예 시간(ms) — 이 안에 툴팁에 들어오면 유지된다
-const EDGE_TOOLTIP_GRACE_MS = 260;
+// 그래프 요소 hover 후 툴팁으로 마우스가 이동할 유예 시간(ms) — 이 안에 툴팁에 들어오면 유지된다
+const TOOLTIP_GRACE_MS = 1000;
 
 export function SpreadGraph({
   nodes,
@@ -47,13 +47,12 @@ export function SpreadGraph({
   const router = useRouter();
   // 연결선 툴팁: hover + 유예시간(grace) — 선에서 떨어져도 잠시 유지, 그 사이 툴팁에 들어오면 계속 열려 링크 클릭 가능
   const [hoveredEdge, setHoveredEdge] = useState<number | null>(null);
-  // 노드 Top5 툴팁: 노드 옆에 떠서 클릭 고정(pin) 방식 유지
+  // 노드 Top5 툴팁: hover + 유예시간(grace) — 노드에서 떨어져도 잠시 유지, 그 사이 툴팁에 들어오면 링크 클릭 가능
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [pinnedNode, setPinnedNode] = useState<string | null>(null);
-  const nodeTooltipRef = useRef<HTMLDivElement | null>(null);
   const edgeHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const nodeHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const activeNode = pinnedNode ?? hoveredNode;
+  const activeNode = hoveredNode;
 
   const clearEdgeHideTimer = () => {
     if (edgeHideTimer.current) {
@@ -64,34 +63,39 @@ export function SpreadGraph({
   // 연결선/툴팁에 들어옴 → 즉시 표시(대기 취소)
   const showEdge = (index: number) => {
     clearEdgeHideTimer();
+    clearNodeHideTimer();
     setHoveredEdge(index);
     setHoveredNode(null);
-    setPinnedNode(null);
   };
   // 연결선/툴팁에서 나감 → 바로 닫지 않고 grace 후 닫기(그 사이 툴팁 진입 시 위 showEdge가 취소)
   const scheduleHideEdge = () => {
     clearEdgeHideTimer();
-    edgeHideTimer.current = setTimeout(() => setHoveredEdge(null), EDGE_TOOLTIP_GRACE_MS);
+    edgeHideTimer.current = setTimeout(() => setHoveredEdge(null), TOOLTIP_GRACE_MS);
   };
-  useEffect(() => clearEdgeHideTimer, []);
+
+  const clearNodeHideTimer = () => {
+    if (nodeHideTimer.current) {
+      clearTimeout(nodeHideTimer.current);
+      nodeHideTimer.current = null;
+    }
+  };
+  const showNode = (id: string) => {
+    clearEdgeHideTimer();
+    clearNodeHideTimer();
+    setHoveredNode(id);
+    setHoveredEdge(null);
+  };
+  const scheduleHideNode = () => {
+    clearNodeHideTimer();
+    nodeHideTimer.current = setTimeout(() => setHoveredNode(null), TOOLTIP_GRACE_MS);
+  };
 
   useEffect(() => {
-    if (pinnedNode == null) return;
-    // 노드 Top5 툴팁: 바깥 클릭·ESC로 닫기 (다른 노드 클릭 시 pointerdown 닫힘 후 click 재고정으로 전환)
-    const handlePointerDown = (event: PointerEvent) => {
-      if (nodeTooltipRef.current?.contains(event.target as Node)) return;
-      setPinnedNode(null);
-    };
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setPinnedNode(null);
-    };
-    document.addEventListener('pointerdown', handlePointerDown);
-    document.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.removeEventListener('pointerdown', handlePointerDown);
-      document.removeEventListener('keydown', handleKeyDown);
+      clearEdgeHideTimer();
+      clearNodeHideTimer();
     };
-  }, [pinnedNode]);
+  }, []);
 
   const byId = Object.fromEntries(nodes.map((node) => [node.id, node]));
 
@@ -101,7 +105,7 @@ export function SpreadGraph({
         <div>
           <h2 className="text-[15px] font-bold">영향력 확산 그래프</h2>
           <p className="mt-1 text-xs text-muted-foreground">
-            뉴스에서 시작되는 1·2·3차 파급 경로 · 연결선에 올리면 근거 뉴스, 노드를 클릭하면 Top5
+            뉴스에서 시작되는 1·2·3차 파급 경로 · 연결선에 올리면 근거 뉴스, 노드에 올리면 Top5
             종목이 뜹니다
           </p>
         </div>
@@ -178,21 +182,16 @@ export function SpreadGraph({
               key={node.id}
               type="button"
               onMouseEnter={() => {
-                clearEdgeHideTimer();
-                setHoveredNode(node.id);
-                setHoveredEdge(null);
+                if (hasStocks) showNode(node.id);
               }}
-              onMouseLeave={() => setHoveredNode(null)}
+              onMouseLeave={hasStocks ? scheduleHideNode : undefined}
               onFocus={() => {
-                clearEdgeHideTimer();
-                setHoveredNode(node.id);
-                setHoveredEdge(null);
+                if (hasStocks) showNode(node.id);
               }}
-              onBlur={() => setHoveredNode(null)}
+              onBlur={hasStocks ? scheduleHideNode : undefined}
               onClick={() => {
                 if (!hasStocks) return;
-                setPinnedNode(node.id);
-                setHoveredEdge(null);
+                showNode(node.id);
               }}
               className={cn(
                 'absolute -translate-x-1/2 -translate-y-1/2 rounded-md border bg-card px-3.5 py-2 text-left transition-colors outline-none',
@@ -309,33 +308,32 @@ export function SpreadGraph({
             );
           })()}
 
-        {/* 노드 Top5 툴팁 (F-10) — hover 미리보기, 클릭 시 고정되어 종목 링크 클릭 가능 */}
+        {/* 노드 Top5 툴팁 (F-10) — hover로 뜨고, grace 유예 안에 툴팁으로 들어오면 유지되어 링크 클릭 가능 */}
         {activeNode &&
           byId[activeNode].tier !== 0 &&
           topStocks[byId[activeNode].name] &&
           (() => {
             const node = byId[activeNode];
-            const isPinned = pinnedNode != null;
             const { x, y } = getNodePos(node);
             const shouldFlip = node.tier === 3;
             return (
               <div
-                ref={nodeTooltipRef}
-                className={cn(
-                  'absolute z-10',
-                  isPinned ? 'pointer-events-auto' : 'pointer-events-none',
-                )}
+                className="pointer-events-auto absolute z-10"
+                onMouseEnter={clearNodeHideTimer}
+                onMouseLeave={scheduleHideNode}
+                onFocus={clearNodeHideTimer}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                    scheduleHideNode();
+                  }
+                }}
                 style={{
                   left: `${((x + (shouldFlip ? -80 : 80)) / VIEW_W) * 100}%`,
                   top: `${(y / VIEW_H) * 100}%`,
                   transform: `translateY(-50%)${shouldFlip ? ' translateX(-100%)' : ''}`,
                 }}
               >
-                <StockTooltip
-                  sector={node.name}
-                  stocks={topStocks[node.name]}
-                  onClose={isPinned ? () => setPinnedNode(null) : undefined}
-                />
+                <StockTooltip sector={node.name} stocks={topStocks[node.name]} />
               </div>
             );
           })()}

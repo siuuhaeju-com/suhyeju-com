@@ -6,9 +6,8 @@ import type { TopStock } from '@/lib/types';
 
 /**
  * 섹터 Top5 종목 현황 툴팁 (F-10)
- * 확산 그래프 노드·히트맵 셀에서 공용 — hover 미리보기 + 클릭 고정(pin).
- * 종목에 url(네이버페이 증권)이 있으면 새 탭 링크로 렌더한다. 링크 클릭은
- * 고정 상태(onClose 제공 = 부모가 pointer-events를 살린 상태)에서만 가능하다.
+ * 확산 그래프 노드·히트맵 셀에서 공용 — 부모가 hover/grace 상태와 pointer-events를 제어한다.
+ * 종목에 url(네이버페이 증권)이 있으면 새 탭 링크로 렌더한다.
  */
 export function StockTooltip({
   sector,
