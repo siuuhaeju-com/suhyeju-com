@@ -6,8 +6,9 @@ import { randomUUID } from 'crypto';
 
 import { extractArticle } from '@/lib/extract-article';
 import { analyzeNews, type AnalysisDraft } from '@/lib/sources/gpt';
+import { searchEdgeSources } from '@/lib/sources/naver-news';
 import { fetchStockQuotes, type StockQuote } from '@/lib/sources/naver-stock';
-import type { AnalysisResult, HeatmapCell, SpreadNode, TopStock } from '@/lib/types';
+import type { AnalysisResult, EdgeSource, HeatmapCell, SpreadNode, TopStock } from '@/lib/types';
 
 const ENGINE_VERSION = '수혜주.com AI v2.1';
 
@@ -54,16 +55,16 @@ export async function runAnalysis(
   const draft = await analyzeNews({ text, title, source });
   const tJoin = performance.now();
 
-  // 3) 시세 join — topStocks 종목에 네이버 실시세를 붙이고,
-  //    섹터(spreadNodes/heatmap/relatedSectors)는 그 섹터 종목들의 실시세 평균으로 파생.
-  onProgress?.({ step: 'quote', label: '실시간 시세 확인 중' });
-  const quotes = await joinQuotes(draft);
+  // 3) 시세 join + 근거 뉴스 검색 — 서로 다른 필드를 채우므로 병렬로 돌려 지연을 숨긴다.
+  //    시세: topStocks 실시세 교체 + 섹터 평균 파생. 근거: edge 검색어로 실제 기사 매핑.
+  onProgress?.({ step: 'quote', label: '실시간 시세·근거 뉴스 확인 중' });
+  const [quotes, edgeSources] = await Promise.all([joinQuotes(draft), joinSources(draft)]);
   console.log(
     `[analyze] GPT ${Math.round(tJoin - tGpt)}ms · join ${Math.round(performance.now() - tJoin)}ms`,
   );
 
   // 4) AnalysisResult 조립
-  return assemble(draft, quotes, {
+  return assemble(draft, quotes, edgeSources, {
     title,
     originUrl: input.url ?? '',
     source,
@@ -123,10 +124,20 @@ async function joinQuotes(draft: AnalysisDraft): Promise<Map<string, StockQuote 
   return quotes;
 }
 
+/**
+ * 각 edge의 searchQuery로 네이버 뉴스를 검색해 실제 기사(EdgeSource[])를 edge 순서대로
+ * 반환한다. 근거 뉴스는 오직 이 검색 결과에서만 나온다(LLM 생성 제목·URL 유입 불가).
+ * 키 미설정·검색 실패·결과 없음 → 해당 edge는 빈 배열(툴팁에 근거문만 표시).
+ */
+async function joinSources(draft: AnalysisDraft): Promise<EdgeSource[][]> {
+  return Promise.all(draft.spreadEdges.map((edge) => searchEdgeSources(edge.searchQuery)));
+}
+
 /** GPT 초안(draft) + 메타 → 완성 AnalysisResult (표현 필드는 여기서 파생) */
 function assemble(
   draft: AnalysisDraft,
   quotes: Map<string, StockQuote | null>,
+  edgeSources: EdgeSource[][],
   meta: { title: string; originUrl: string; source: string; publishedAt: string },
 ): AnalysisResult {
   // topStocks: 배열 → Record<섹터명, 종목[]> (매칭된 종목엔 코드·시장 부여 #49)
@@ -156,7 +167,13 @@ function assemble(
     goodSignal: draft.goodSignal,
     warnSignal: draft.warnSignal,
     spreadNodes: deriveRows(draft.spreadNodes),
-    spreadEdges: draft.spreadEdges,
+    // searchQuery는 서버 내부용 — 검색으로 매핑된 실제 기사만 sources로 내보낸다
+    spreadEdges: draft.spreadEdges.map(({ from, to, reason }, i) => ({
+      from,
+      to,
+      reason,
+      sources: edgeSources[i] ?? [],
+    })),
     heatmap: deriveHeatmap(draft.spreadNodes),
     knowledgeNodes: draft.knowledgeNodes.map((n) => ({ ...n, x: 0, y: 0 })), // 좌표는 KnowledgeGraph가 group 기반으로 자체 계산
     knowledgeEdges: draft.knowledgeEdges,
