@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { X } from 'lucide-react';
 
 import { StockTooltip } from '@/components/analysis/StockTooltip';
 import { Button } from '@/components/ui/button';
@@ -33,6 +32,9 @@ function getNodePos(node: SpreadNode) {
   return { x: TIER_X[node.tier], y: 90 + node.row * (VIEW_H - 150) };
 }
 
+// 연결선 hover 후 툴팁으로 마우스가 이동할 유예 시간(ms) — 이 안에 툴팁에 들어오면 유지된다
+const EDGE_TOOLTIP_GRACE_MS = 260;
+
 export function SpreadGraph({
   nodes,
   edges,
@@ -43,31 +45,45 @@ export function SpreadGraph({
   topStocks: Record<string, TopStock[]>;
 }) {
   const router = useRouter();
+  // 연결선 툴팁: hover + 유예시간(grace) — 선에서 떨어져도 잠시 유지, 그 사이 툴팁에 들어오면 계속 열려 링크 클릭 가능
   const [hoveredEdge, setHoveredEdge] = useState<number | null>(null);
-  const [pinnedEdge, setPinnedEdge] = useState<number | null>(null);
+  // 노드 Top5 툴팁: 노드 옆에 떠서 클릭 고정(pin) 방식 유지
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [pinnedNode, setPinnedNode] = useState<string | null>(null);
-  const edgeTooltipRef = useRef<HTMLDivElement | null>(null);
   const nodeTooltipRef = useRef<HTMLDivElement | null>(null);
+  const edgeHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // 툴팁 표시 대상 — 고정(pin)이 hover보다 우선
-  const activeEdge = pinnedEdge ?? hoveredEdge;
   const activeNode = pinnedNode ?? hoveredNode;
 
+  const clearEdgeHideTimer = () => {
+    if (edgeHideTimer.current) {
+      clearTimeout(edgeHideTimer.current);
+      edgeHideTimer.current = null;
+    }
+  };
+  // 연결선/툴팁에 들어옴 → 즉시 표시(대기 취소)
+  const showEdge = (index: number) => {
+    clearEdgeHideTimer();
+    setHoveredEdge(index);
+    setHoveredNode(null);
+    setPinnedNode(null);
+  };
+  // 연결선/툴팁에서 나감 → 바로 닫지 않고 grace 후 닫기(그 사이 툴팁 진입 시 위 showEdge가 취소)
+  const scheduleHideEdge = () => {
+    clearEdgeHideTimer();
+    edgeHideTimer.current = setTimeout(() => setHoveredEdge(null), EDGE_TOOLTIP_GRACE_MS);
+  };
+  useEffect(() => clearEdgeHideTimer, []);
+
   useEffect(() => {
-    if (pinnedEdge == null && pinnedNode == null) return;
-    // 바깥 클릭으로 닫기 — 다른 연결선/노드 클릭 시엔 pointerdown(닫힘) 후 click(재고정) 순서라 자연스럽게 전환된다
+    if (pinnedNode == null) return;
+    // 노드 Top5 툴팁: 바깥 클릭·ESC로 닫기 (다른 노드 클릭 시 pointerdown 닫힘 후 click 재고정으로 전환)
     const handlePointerDown = (event: PointerEvent) => {
-      if (edgeTooltipRef.current?.contains(event.target as Node)) return;
       if (nodeTooltipRef.current?.contains(event.target as Node)) return;
-      setPinnedEdge(null);
       setPinnedNode(null);
     };
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setPinnedEdge(null);
-        setPinnedNode(null);
-      }
+      if (event.key === 'Escape') setPinnedNode(null);
     };
     document.addEventListener('pointerdown', handlePointerDown);
     document.addEventListener('keydown', handleKeyDown);
@@ -75,7 +91,7 @@ export function SpreadGraph({
       document.removeEventListener('pointerdown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [pinnedEdge, pinnedNode]);
+  }, [pinnedNode]);
 
   const byId = Object.fromEntries(nodes.map((node) => [node.id, node]));
 
@@ -85,8 +101,8 @@ export function SpreadGraph({
         <div>
           <h2 className="text-[15px] font-bold">영향력 확산 그래프</h2>
           <p className="mt-1 text-xs text-muted-foreground">
-            뉴스에서 시작되는 1·2·3차 파급 경로 · 연결선은 근거, 노드는 Top5 종목이 클릭으로
-            고정됩니다 (바깥 클릭·ESC로 닫기)
+            뉴스에서 시작되는 1·2·3차 파급 경로 · 연결선에 올리면 근거 뉴스, 노드를 클릭하면 Top5
+            종목이 뜹니다
           </p>
         </div>
         {/* 파급 단계 범례 */}
@@ -127,7 +143,7 @@ export function SpreadGraph({
             const to = getNodePos(byId[edge.to]);
             const midX = from.x + (to.x - from.x) / 2;
             const d = `M ${from.x} ${from.y} C ${midX} ${from.y}, ${midX} ${to.y}, ${to.x} ${to.y}`;
-            const isActive = activeEdge === index || hoveredEdge === index;
+            const isActive = hoveredEdge === index;
             return (
               <g key={`${edge.from}-${edge.to}`}>
                 <path
@@ -137,23 +153,15 @@ export function SpreadGraph({
                   strokeWidth={isActive ? 2.5 : 1.5}
                   className={isActive ? 'animate-dashmove' : undefined}
                 />
-                {/* 넓은 히트 영역 — hover 미리보기 + 클릭 고정 판정용 */}
+                {/* 넓은 히트 영역 — hover로 툴팁 표시, 떠나면 grace 후 닫기 */}
                 <path
                   d={d}
                   fill="none"
                   stroke="transparent"
                   strokeWidth={16}
                   className="cursor-pointer"
-                  onMouseEnter={() => {
-                    setHoveredEdge(index);
-                    setHoveredNode(null);
-                  }}
-                  onMouseLeave={() => setHoveredEdge(null)}
-                  onClick={() => {
-                    setPinnedEdge(index);
-                    setPinnedNode(null);
-                    setHoveredNode(null);
-                  }}
+                  onMouseEnter={() => showEdge(index)}
+                  onMouseLeave={scheduleHideEdge}
                 />
               </g>
             );
@@ -170,11 +178,13 @@ export function SpreadGraph({
               key={node.id}
               type="button"
               onMouseEnter={() => {
+                clearEdgeHideTimer();
                 setHoveredNode(node.id);
                 setHoveredEdge(null);
               }}
               onMouseLeave={() => setHoveredNode(null)}
               onFocus={() => {
+                clearEdgeHideTimer();
                 setHoveredNode(node.id);
                 setHoveredEdge(null);
               }}
@@ -182,7 +192,6 @@ export function SpreadGraph({
               onClick={() => {
                 if (!hasStocks) return;
                 setPinnedNode(node.id);
-                setPinnedEdge(null);
                 setHoveredEdge(null);
               }}
               className={cn(
@@ -227,41 +236,26 @@ export function SpreadGraph({
           );
         })}
 
-        {/* 연결선 근거 툴팁 (F-09) — hover 미리보기, 클릭 시 고정되어 내부 인터랙션 가능 */}
-        {activeEdge != null &&
+        {/* 연결선 근거 툴팁 (F-09) — hover로 뜨고, grace 유예 안에 툴팁으로 들어오면 유지되어 링크 클릭 가능 */}
+        {hoveredEdge != null &&
           (() => {
-            const edge = edges[activeEdge];
-            const isPinned = pinnedEdge != null;
+            const edge = edges[hoveredEdge];
             const from = getNodePos(byId[edge.from]);
             const to = getNodePos(byId[edge.to]);
             const cx = ((from.x + to.x) / 2 / VIEW_W) * 100;
             const cy = ((from.y + to.y) / 2 / VIEW_H) * 100;
             return (
               <div
-                ref={edgeTooltipRef}
-                role={isPinned ? 'dialog' : 'tooltip'}
+                role="tooltip"
                 aria-label={`연결 근거: ${byId[edge.from].name} → ${byId[edge.to].name}`}
-                className={cn(
-                  'absolute z-10 w-80 -translate-x-1/2 rounded-md border bg-popover p-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.6)]',
-                  isPinned ? 'pointer-events-auto' : 'pointer-events-none',
-                )}
+                onMouseEnter={clearEdgeHideTimer}
+                onMouseLeave={scheduleHideEdge}
+                className="pointer-events-auto absolute z-10 w-80 -translate-x-1/2 rounded-md border bg-popover p-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
                 style={{ left: `${cx}%`, top: `${cy}%` }}
               >
-                <div className="flex items-start justify-between gap-2">
-                  <p className="text-[11px] font-extrabold tracking-wide text-blue-bright">
-                    연결 근거 · {byId[edge.from].name} → {byId[edge.to].name}
-                  </p>
-                  {isPinned && (
-                    <button
-                      type="button"
-                      onClick={() => setPinnedEdge(null)}
-                      aria-label="근거 툴팁 닫기"
-                      className="-m-1 shrink-0 cursor-pointer rounded-sm p-1 text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
-                    >
-                      <X aria-hidden className="size-3.5" />
-                    </button>
-                  )}
-                </div>
+                <p className="text-[11px] font-extrabold tracking-wide text-blue-bright">
+                  연결 근거 · {byId[edge.from].name} → {byId[edge.to].name}
+                </p>
                 <p className="mt-1.5 text-[13px] leading-relaxed font-semibold text-foreground">
                   {edge.reason}
                 </p>
