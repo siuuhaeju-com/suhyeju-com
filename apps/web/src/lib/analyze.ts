@@ -7,7 +7,7 @@ import { randomUUID } from 'crypto';
 import { extractArticle } from '@/lib/extract-article';
 import { analyzeNews, type AnalysisDraft } from '@/lib/sources/gpt';
 import { fetchStockQuotes, type StockQuote } from '@/lib/sources/naver-stock';
-import type { AnalysisResult, HeatmapCell, KnowledgeNode, SpreadNode, TopStock } from '@/lib/types';
+import type { AnalysisResult, HeatmapCell, SpreadNode, TopStock } from '@/lib/types';
 
 const ENGINE_VERSION = '수혜주.com AI v2.1';
 
