@@ -46,20 +46,28 @@ export function SpreadGraph({
   const [hoveredEdge, setHoveredEdge] = useState<number | null>(null);
   const [pinnedEdge, setPinnedEdge] = useState<number | null>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [pinnedNode, setPinnedNode] = useState<string | null>(null);
   const edgeTooltipRef = useRef<HTMLDivElement | null>(null);
+  const nodeTooltipRef = useRef<HTMLDivElement | null>(null);
 
   // 툴팁 표시 대상 — 고정(pin)이 hover보다 우선
   const activeEdge = pinnedEdge ?? hoveredEdge;
+  const activeNode = pinnedNode ?? hoveredNode;
 
   useEffect(() => {
-    if (pinnedEdge == null) return;
-    // 바깥 클릭으로 닫기 — 다른 연결선 클릭 시엔 pointerdown(닫힘) 후 click(재고정) 순서라 자연스럽게 전환된다
+    if (pinnedEdge == null && pinnedNode == null) return;
+    // 바깥 클릭으로 닫기 — 다른 연결선/노드 클릭 시엔 pointerdown(닫힘) 후 click(재고정) 순서라 자연스럽게 전환된다
     const handlePointerDown = (event: PointerEvent) => {
       if (edgeTooltipRef.current?.contains(event.target as Node)) return;
+      if (nodeTooltipRef.current?.contains(event.target as Node)) return;
       setPinnedEdge(null);
+      setPinnedNode(null);
     };
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setPinnedEdge(null);
+      if (event.key === 'Escape') {
+        setPinnedEdge(null);
+        setPinnedNode(null);
+      }
     };
     document.addEventListener('pointerdown', handlePointerDown);
     document.addEventListener('keydown', handleKeyDown);
@@ -67,7 +75,7 @@ export function SpreadGraph({
       document.removeEventListener('pointerdown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [pinnedEdge]);
+  }, [pinnedEdge, pinnedNode]);
 
   const byId = Object.fromEntries(nodes.map((node) => [node.id, node]));
 
@@ -77,8 +85,8 @@ export function SpreadGraph({
         <div>
           <h2 className="text-[15px] font-bold">영향력 확산 그래프</h2>
           <p className="mt-1 text-xs text-muted-foreground">
-            뉴스에서 시작되는 1·2·3차 파급 경로 · 연결선을 클릭하면 근거가 고정됩니다 (바깥
-            클릭·ESC로 닫기)
+            뉴스에서 시작되는 1·2·3차 파급 경로 · 연결선은 근거, 노드는 Top5 종목이 클릭으로
+            고정됩니다 (바깥 클릭·ESC로 닫기)
           </p>
         </div>
         {/* 파급 단계 범례 */}
@@ -143,6 +151,7 @@ export function SpreadGraph({
                   onMouseLeave={() => setHoveredEdge(null)}
                   onClick={() => {
                     setPinnedEdge(index);
+                    setPinnedNode(null);
                     setHoveredNode(null);
                   }}
                 />
@@ -155,6 +164,7 @@ export function SpreadGraph({
         {nodes.map((node) => {
           const { x, y } = getNodePos(node);
           const isOrigin = node.tier === 0;
+          const hasStocks = !isOrigin && !!topStocks[node.name];
           return (
             <button
               key={node.id}
@@ -169,8 +179,15 @@ export function SpreadGraph({
                 setHoveredEdge(null);
               }}
               onBlur={() => setHoveredNode(null)}
+              onClick={() => {
+                if (!hasStocks) return;
+                setPinnedNode(node.id);
+                setPinnedEdge(null);
+                setHoveredEdge(null);
+              }}
               className={cn(
-                'absolute -translate-x-1/2 -translate-y-1/2 cursor-default rounded-md border bg-card px-3.5 py-2 text-left transition-colors outline-none',
+                'absolute -translate-x-1/2 -translate-y-1/2 rounded-md border bg-card px-3.5 py-2 text-left transition-colors outline-none',
+                hasStocks ? 'cursor-pointer' : 'cursor-default',
                 'hover:border-primary/50 focus-visible:ring-3 focus-visible:ring-ring/50',
                 isOrigin && 'border-primary/60 bg-primary/10',
               )}
@@ -298,24 +315,33 @@ export function SpreadGraph({
             );
           })()}
 
-        {/* 노드 Top5 툴팁 (F-10) */}
-        {hoveredNode &&
-          byId[hoveredNode].tier !== 0 &&
-          topStocks[byId[hoveredNode].name] &&
+        {/* 노드 Top5 툴팁 (F-10) — hover 미리보기, 클릭 시 고정되어 종목 링크 클릭 가능 */}
+        {activeNode &&
+          byId[activeNode].tier !== 0 &&
+          topStocks[byId[activeNode].name] &&
           (() => {
-            const node = byId[hoveredNode];
+            const node = byId[activeNode];
+            const isPinned = pinnedNode != null;
             const { x, y } = getNodePos(node);
             const shouldFlip = node.tier === 3;
             return (
               <div
-                className="pointer-events-none absolute z-10"
+                ref={nodeTooltipRef}
+                className={cn(
+                  'absolute z-10',
+                  isPinned ? 'pointer-events-auto' : 'pointer-events-none',
+                )}
                 style={{
                   left: `${((x + (shouldFlip ? -80 : 80)) / VIEW_W) * 100}%`,
                   top: `${(y / VIEW_H) * 100}%`,
                   transform: `translateY(-50%)${shouldFlip ? ' translateX(-100%)' : ''}`,
                 }}
               >
-                <StockTooltip sector={node.name} stocks={topStocks[node.name]} />
+                <StockTooltip
+                  sector={node.name}
+                  stocks={topStocks[node.name]}
+                  onClose={isPinned ? () => setPinnedNode(null) : undefined}
+                />
               </div>
             );
           })()}
