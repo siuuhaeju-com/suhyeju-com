@@ -79,7 +79,8 @@ export async function saveAnalysis(result: AnalysisResult): Promise<void> {
       const duplicateIds = results
         .filter(
           (item): item is AnalysisResult =>
-            Boolean(item) &&
+            item !== null &&
+            item !== undefined &&
             item.id !== result.id &&
             originUrl !== null &&
             normalizeOriginUrl(item.originUrl) === originUrl,
@@ -187,11 +188,21 @@ export async function recentAnalyses(limit = 10): Promise<RecentAnalysis[]> {
     const results = await kv.mget<AnalysisResult[]>(...ids.map(keyOf));
     return results
       .filter((r): r is AnalysisResult => Boolean(r))
-      .map((r) => ({ id: r.id, title: r.title, analyzedAt: r.analyzedAt }));
+      .map((r) => ({
+        id: r.id,
+        title: r.title,
+        analyzedAt: r.analyzedAt,
+        originUrl: r.originUrl,
+      }));
   }
   return memRecentIds
     .map((id) => memStore.get(id))
     .filter((r): r is AnalysisResult => Boolean(r))
     .slice(0, limit)
-    .map((r) => ({ id: r.id, title: r.title, analyzedAt: r.analyzedAt }));
+    .map((r) => ({
+      id: r.id,
+      title: r.title,
+      analyzedAt: r.analyzedAt,
+      originUrl: r.originUrl,
+    }));
 }

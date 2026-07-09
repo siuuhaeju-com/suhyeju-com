@@ -1,4 +1,5 @@
 import { AnalyzeForm } from '@/components/main/AnalyzeForm';
+import { MyRecentAnalyses } from '@/components/main/MyRecentAnalyses';
 import { PopularNews } from '@/components/main/PopularNews';
 import { RecentAnalyses } from '@/components/main/RecentAnalyses';
 import { SectorOverview } from '@/components/main/SectorOverview';
@@ -44,6 +45,8 @@ export default function HomePage() {
             <h2 className="mb-4 text-lg font-bold">주요 섹터 현황</h2>
             <SectorOverview />
           </div>
+
+          <MyRecentAnalyses />
 
           <RecentAnalyses />
         </div>

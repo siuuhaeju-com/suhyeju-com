@@ -1,26 +1,52 @@
 'use client';
 
 import Link from 'next/link';
+import { useMemo } from 'react';
 
 import { Card } from '@/components/ui/card';
 import { formatDateTime } from '@/lib/format';
+import { normalizeLocalOriginUrl, useLocalAnalyses } from '@/lib/local-analyses';
 import { useRecentAnalyses } from '@/lib/queries';
 
-/** 최근 분석 내역 (F-03c) — API에 저장된 항목이 없으면 섹션 자체를 비운다. */
+const COMMUNITY_ANALYSES_LIMIT = 5;
+
+/** 전체 사용자가 분석한 최근 뉴스. 내 localStorage 항목은 제외해서 개인 목록과 분리한다. */
 export function RecentAnalyses() {
   const { data, isError } = useRecentAnalyses();
+  const { items: myAnalyses, isLoaded } = useLocalAnalyses();
 
-  if (isError || !data?.length) {
+  const myAnalysisKeys = useMemo(() => {
+    return {
+      ids: new Set(myAnalyses.map((item) => item.id)),
+      originUrls: new Set(
+        myAnalyses
+          .map((item) => normalizeLocalOriginUrl(item.originUrl))
+          .filter((originUrl): originUrl is string => originUrl !== null),
+      ),
+    };
+  }, [myAnalyses]);
+
+  const communityAnalyses = useMemo(() => {
+    return (data ?? [])
+      .filter((item) => {
+        const originUrl = normalizeLocalOriginUrl(item.originUrl);
+        return (
+          !myAnalysisKeys.ids.has(item.id) &&
+          (originUrl === null || !myAnalysisKeys.originUrls.has(originUrl))
+        );
+      })
+      .slice(0, COMMUNITY_ANALYSES_LIMIT);
+  }, [data, myAnalysisKeys]);
+
+  if (!isLoaded || isError || !communityAnalyses.length) {
     return null;
   }
 
   return (
     <div>
-      <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-        <span aria-hidden>🕐</span> 최근 분석 내역
-      </h2>
+      <h2 className="mb-4 text-lg font-bold">다른 사람들은 이 뉴스를 분석했어요!</h2>
       <Card className="divide-y divide-border">
-        {data.map((item) => (
+        {communityAnalyses.map((item) => (
           <Link
             key={item.id}
             href={`/analysis/${item.id}`}

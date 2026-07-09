@@ -36,6 +36,7 @@ export interface RecentAnalysis {
   id: string;
   title: string;
   analyzedAt: string;
+  originUrl: string;
 }
 
 /** 로딩 화면 좌측에 부유하는 키워드 칩 */

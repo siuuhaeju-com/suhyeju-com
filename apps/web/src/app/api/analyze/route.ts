@@ -1,10 +1,21 @@
 import { runAnalysis } from '@/lib/analyze';
 import { getAnalysisByOriginUrl, saveAnalysis } from '@/lib/store';
+import type { AnalysisResult } from '@/lib/types';
+
+function doneEvent(result: AnalysisResult) {
+  return {
+    step: 'done',
+    id: result.id,
+    title: result.title,
+    analyzedAt: result.analyzedAt,
+    originUrl: result.originUrl,
+  };
+}
 
 // POST /api/analyze  { url?: string, text?: string }
 // 분석 진행을 NDJSON 스트림으로 흘린다(로딩 화면 단계 표시용, SSE 방식).
 //   각 줄 = JSON 이벤트: { step:'extract'|'analyze'|'quote', label }
-//                       … 종료: { step:'done', id } 또는 { step:'error', message }
+//                       … 종료: { step:'done', id, title, analyzedAt, originUrl } 또는 { step:'error', message }
 export async function POST(request: Request) {
   let body: { url?: string; text?: string };
   try {
@@ -27,14 +38,14 @@ export async function POST(request: Request) {
           const existing = await getAnalysisByOriginUrl(body.url);
           if (existing) {
             await saveAnalysis(existing);
-            send({ step: 'done', id: existing.id });
+            send(doneEvent(existing));
             return;
           }
         }
 
         const result = await runAnalysis(body, send);
         await saveAnalysis(result);
-        send({ step: 'done', id: result.id });
+        send(doneEvent(result));
       } catch (error) {
         console.error('[api/analyze]', error);
         const message = error instanceof Error ? error.message : '분석에 실패했습니다';
