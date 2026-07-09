@@ -56,9 +56,15 @@ async function resolveStock(name: string): Promise<ResolvedStock | null> {
 
   const data = (await res.json()) as { items?: AcItem[] };
   const target = normalize(canonical);
-  const hit = data.items?.find(
-    (i) => normalize(i.name) === target && (i.nationCode === 'KOR' || i.nationCode === 'USA'),
-  );
+  const hit = data.items?.find((i) => {
+    if (i.nationCode !== 'KOR' && i.nationCode !== 'USA') return false;
+    if (normalize(i.name) === target) return true;
+    // 미국 종목은 티커로도 매칭 — 표시명이 한글(보잉 등)이라 이름 비교가 실패하는 케이스.
+    // reutersCode의 거래소 접미사 제외부와 비교(NVDA.O→NVDA, AFL→AFL). 티커는 고유해 오조인 없음.
+    return (
+      i.nationCode === 'USA' && i.reutersCode.split('.')[0].toUpperCase() === target.toUpperCase()
+    );
+  });
   if (!hit) return null;
 
   return hit.nationCode === 'KOR'
@@ -88,6 +94,18 @@ export interface StockQuote {
   code: string; // 한국=6자리 종목코드(예: 005930), 미국=reutersCode(예: NVDA.O)
   market: 'KR' | 'US';
   changePct: number | null;
+}
+
+/**
+ * 네이버페이 증권 종목 페이지 URL — 코드·시장으로 파생한다(LLM 생성 금지).
+ * PC(stock.naver.com)는 /price 탭이 정본이며 국내·해외 경로가 다르다(2026-07 실측):
+ *   한국 → stock.naver.com/domestic/stock/{6자리코드}/price
+ *   미국 → stock.naver.com/worldstock/stock/{reutersCode}/price (NVDA.O·AFL 등)
+ */
+export function stockPageUrl(code: string, market: 'KR' | 'US'): string {
+  return market === 'KR'
+    ? `https://stock.naver.com/domestic/stock/${code}/price`
+    : `https://stock.naver.com/worldstock/stock/${code}/price`;
 }
 
 /** 종목명 → {코드, 시장, 실시세}. 종목 매칭 실패 시 null(코드도 없음). */
