@@ -1,9 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 
 import { StockTooltip } from '@/components/analysis/StockTooltip';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { formatPct, getPctToneClass } from '@/lib/format';
 import { cn } from '@/lib/utils';
@@ -40,6 +42,7 @@ export function SpreadGraph({
   edges: SpreadEdge[];
   topStocks: Record<string, TopStock[]>;
 }) {
+  const router = useRouter();
   const [hoveredEdge, setHoveredEdge] = useState<number | null>(null);
   const [pinnedEdge, setPinnedEdge] = useState<number | null>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
@@ -257,19 +260,34 @@ export function SpreadGraph({
                           <span aria-hidden className="text-[11px] leading-relaxed text-primary">
                             ▪
                           </span>
-                          <span className="min-w-0">
+                          <span className="min-w-0 flex-1">
                             <a
                               href={source.url}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="block text-xs leading-snug font-semibold text-ink-sub transition-colors outline-none hover:text-foreground hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
                             >
-                              {source.title} <span aria-hidden>↗</span>
+                              {source.title}{' '}
+                              {/* 외부 링크 표식 — 제목과 구분되게 무채색(회색) 유지 */}
+                              <span aria-hidden className="text-muted-foreground">
+                                ↗
+                              </span>
                             </a>
                             <span className="mt-0.5 block text-[11px] text-muted-foreground">
                               {source.meta}
                             </span>
                           </span>
+                          <Button
+                            size="xs"
+                            variant="secondary"
+                            className="shrink-0 self-center"
+                            onClick={() =>
+                              router.push(`/analyzing?url=${encodeURIComponent(source.url)}`)
+                            }
+                            aria-label={`${source.title} — 이 뉴스로 새 분석 시작`}
+                          >
+                            분석
+                          </Button>
                         </li>
                       ))}
                     </ul>
