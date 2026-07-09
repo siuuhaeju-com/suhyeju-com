@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { Providers } from '@/app/providers';
 import { SiteHeader } from '@/components/SiteHeader';
@@ -41,6 +42,7 @@ gtag('config', '${GA_ID}');`}
           <SiteHeader />
           {children}
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
