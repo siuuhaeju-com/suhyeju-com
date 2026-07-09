@@ -23,6 +23,7 @@ interface AcItem {
 interface ResolvedStock {
   key: string; // 시세 조회 키 (한국=종목코드, 미국=reutersCode)
   market: 'KR' | 'US';
+  name: string; // 네이버 표시명 — 미국 종목의 한글명(애플·엔비디아) 포함, 표시용
 }
 
 /** 종목명 정규화 — 공백 제거 후 비교 */
@@ -68,8 +69,8 @@ async function resolveStock(name: string): Promise<ResolvedStock | null> {
   if (!hit) return null;
 
   return hit.nationCode === 'KOR'
-    ? { key: hit.code, market: 'KR' }
-    : { key: hit.reutersCode, market: 'US' };
+    ? { key: hit.code, market: 'KR', name: hit.name }
+    : { key: hit.reutersCode, market: 'US', name: hit.name };
 }
 
 /** {시세키, 시장} → 전일대비 등락률(%). 실패 시 null */
@@ -94,6 +95,7 @@ export interface StockQuote {
   code: string; // 한국=6자리 종목코드(예: 005930), 미국=reutersCode(예: NVDA.O)
   market: 'KR' | 'US';
   changePct: number | null;
+  name: string; // 네이버 표시명 — 티커로 조회한 미국 종목도 한글명(애플 등)으로 표시하기 위함
 }
 
 /**
@@ -113,7 +115,7 @@ export async function fetchStockQuote(name: string): Promise<StockQuote | null> 
   const stock = await resolveStock(name);
   if (!stock) return null;
   const changePct = await fetchChangePct(stock);
-  return { code: stock.key, market: stock.market, changePct };
+  return { code: stock.key, market: stock.market, changePct, name: stock.name };
 }
 
 /** 여러 종목명을 병렬 조회 → Map<종목명, StockQuote|null> (중복 제거) */

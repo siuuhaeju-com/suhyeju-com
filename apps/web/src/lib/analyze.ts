@@ -141,12 +141,19 @@ function assemble(
   meta: { title: string; originUrl: string; source: string; publishedAt: string },
 ): AnalysisResult {
   // topStocks: 배열 → Record<섹터명, 종목[]> (매칭된 종목엔 코드·시장·네이버증권 링크 부여 #49)
+  // 표시명은 네이버 표시명으로 교체 — 티커로 조회한 미국 종목을 한글명(애플 등)으로 보여준다.
   const topStocks: Record<string, TopStock[]> = {};
   for (const group of draft.topStocks) {
     topStocks[group.sector] = group.stocks.map((s) => {
       const q = quotes.get(s.name);
       return q
-        ? { ...s, code: q.code, market: q.market, url: stockPageUrl(q.code, q.market) }
+        ? {
+            ...s,
+            name: q.name || s.name,
+            code: q.code,
+            market: q.market,
+            url: stockPageUrl(q.code, q.market),
+          }
         : { ...s };
     });
   }
