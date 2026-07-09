@@ -31,9 +31,9 @@ function resolveModel(): string {
 }
 
 /* ── AnalysisResult 중 "GPT가 생성"하는 부분의 스키마 ──
- * 제외(FE 파생): SpreadNode.row · HeatmapCell.area/weight · KnowledgeNode.x/y
+ * 제외(서버/FE 파생): SpreadNode.row · HeatmapCell.share/direction · KnowledgeNode.x/y
  * topStocks: 동적 키(Record) 회피 위해 배열로 받고 서버에서 Record로 변환
- * changePct: GPT 초안값. ③단계에서 네이버 실시세로 교체
+ * changePct: GPT 초안값. ③단계에서 네이버 실시세로 교체(히트맵은 impact만 사용)
  */
 const zSignalItem = z.object({ text: z.string(), source: z.string() });
 
@@ -68,7 +68,7 @@ const zKnowledgeNode = z.object({
 });
 
 // ── 3분할 스키마 (응답시간 단축: 큰 생성 1회를 3콜 병렬로) ──
-// A: 텍스트/여론 · B: 파급+종목(서로 참조) · C: 지식그래프+히트맵
+// A: 텍스트/여론 · B: 파급+히트맵+종목(서로 참조) · C: 지식그래프
 const SchemaA = z.object({
   sector: z.string(),
   verdict: z.string(), // "호재 분석" / "악재 분석"
@@ -83,6 +83,9 @@ const SchemaA = z.object({
 const SchemaB = z.object({
   spreadNodes: z.array(zSpreadNode),
   spreadEdges: z.array(zSpreadEdge),
+  // 히트맵: 이슈가 각 섹터에 미치는 영향 강도(impact). 부호=방향, |impact|=강도.
+  // topStocks·spreadNodes와 같은 콜에서 생성해 섹터명을 일관되게(툴팁·시세 join 매칭).
+  heatmap: z.array(z.object({ sector: z.string(), impact: z.number() })),
   topStocks: z.array(
     z.object({
       sector: z.string(),
@@ -94,7 +97,6 @@ const SchemaB = z.object({
 const SchemaC = z.object({
   knowledgeNodes: z.array(zKnowledgeNode),
   knowledgeEdges: z.array(z.object({ from: z.string(), to: z.string() })),
-  heatmap: z.array(z.object({ sector: z.string(), changePct: z.number() })),
 });
 
 // 전체 스키마 = 3분할 병합 (타입·mock용)
@@ -132,9 +134,15 @@ const PROMPT_B = `${COMMON}
   근거 기사의 제목·URL을 직접 지어내는 것은 **절대 금지** — 서버가 이 검색어로 네이버 뉴스를 검색해 실제 기사를 연결합니다.
   검색이 잘 되도록 조사 없이 핵심 명사 2~4개로 씁니다(예: "우주항공 부품 주가", "HBM 소재 수급").
   뉴스 원문에만 있는 고유 표현보다 **언론이 흔히 쓰는 일반 용어**를 쓰고, **edge마다 그 연결에 특정된 서로 다른 검색어**를 씁니다.
+## 섹터 히트맵 (heatmap)
+- **spreadNodes의 tier 1·2·3 섹터 전부(이름은 spreadNodes.name과 정확히 일치) + 추가 3~4개**를 담습니다.
+  - 추가 섹터 = 파급 경로엔 없지만 이 이슈로 영향받는 산업. **부정적 영향(경쟁사·대체재·비용 부담 등) 1~2개를 반드시 포함**합니다(예: 수혜 뉴스면 경쟁 진영·대체 기술).
+- impact: 이슈가 그 섹터에 미치는 **영향의 강도와 방향**입니다(등락률 아님). 부호 포함, |impact|는 1~100.
+  - 뉴스에 가까운·직접 영향일수록 크게(예: 직접 수혜 tier1 = 80~100), 먼 파급일수록 작게(tier3 = 10~30).
+  - 긍정 영향은 +, 부정 영향은 −.
 ## 종목 (topStocks)
-- **spreadNodes의 tier 1·2·3 노드 각각에 대해** topStocks 항목을 하나씩 만듭니다(빠짐없이 전부).
-- 각 sector 이름을 해당 spreadNodes의 name과 **일치**시키고, 대표 종목을 **정확히 5개**(Top5) 담습니다.
+- **heatmap의 모든 섹터 각각에 대해**(= tier 1·2·3 + 추가 섹터, 빠짐없이 전부) topStocks 항목을 하나씩 만듭니다.
+- 각 sector 이름을 해당 heatmap/spreadNodes의 name과 **일치**시키고, 대표 종목을 **정확히 5개**(Top5) 담습니다.
 - 판별한 시장 관점을 따릅니다(미국 관점이면 미국 종목).
 - name 표기 규칙(시세·링크 매칭에 직결되므로 엄수):
   - 한국 종목: 정식 상장명 (예: 삼성전자, SK하이닉스, 한미반도체)
@@ -142,9 +150,8 @@ const PROMPT_B = `${COMMON}
 
 const PROMPT_C = `${COMMON}
 
-이 뉴스와 관련된 산업 지식그래프와 섹터 히트맵을 구성합니다.
-- knowledgeNodes/knowledgeEdges: 중심 산업과 연관 산업을 group(center/tier1/tier2/etc)으로 구성하고, edge의 from/to는 존재하는 knowledgeNodes id를 참조합니다.
-- heatmap: 영향받는 주요 산업과 방향성 5개 내외. sector는 대표 산업명(반도체·HBM 등).`;
+이 뉴스와 관련된 산업 지식그래프를 구성합니다.
+- knowledgeNodes/knowledgeEdges: 중심 산업과 연관 산업을 group(center/tier1/tier2/etc)으로 구성하고, edge의 from/to는 존재하는 knowledgeNodes id를 참조합니다.`;
 
 /** GPT에게 넘길 기사 메타 — 있으면 원문 제목·출처를 근거 인용에 그대로 쓰게 한다. */
 export interface ArticleInput {
@@ -304,12 +311,16 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         searchQuery: 'AI 데이터센터 전력 냉각 수요',
       },
     ],
+    // 파급 섹터(tier1~3) + 추가 3개(부정 2 포함). impact 부호=방향, |impact|=강도.
     heatmap: [
-      { sector: 'HBM', changePct: 4.1 },
-      { sector: '반도체 장비', changePct: 2.8 },
-      { sector: '반도체 소재', changePct: 1.9 },
-      { sector: '후공정(OSAT)', changePct: 1.5 },
-      { sector: '전력·냉각', changePct: 1.1 },
+      { sector: 'HBM', impact: 90 },
+      { sector: '반도체 장비', impact: 60 },
+      { sector: '반도체 소재', impact: 40 },
+      { sector: '후공정(OSAT)', impact: 35 },
+      { sector: '전력·냉각', impact: 25 },
+      { sector: '파운드리 경쟁', impact: -20 },
+      { sector: '레거시 D램', impact: -15 },
+      { sector: 'AI 데이터센터', impact: 15 },
     ],
     knowledgeNodes: [
       { id: 'k0', name: 'AI 반도체', group: 'center' },
@@ -375,6 +386,36 @@ function mockAnalysis(articleText: string): AnalysisDraft {
           { name: '효성중공업', changePct: 1.4 },
           { name: '한전KPS', changePct: 1.0 },
           { name: '비앤비성원', changePct: 0.8 },
+        ],
+      },
+      {
+        sector: '파운드리 경쟁',
+        stocks: [
+          { name: 'DB하이텍', changePct: -1.4 },
+          { name: '가온칩스', changePct: -2.1 },
+          { name: '에이디테크놀로지', changePct: -1.8 },
+          { name: '텔레칩스', changePct: -0.9 },
+          { name: '어보브반도체', changePct: -1.2 },
+        ],
+      },
+      {
+        sector: '레거시 D램',
+        stocks: [
+          { name: '제주반도체', changePct: -2.3 },
+          { name: '피델릭스', changePct: -1.7 },
+          { name: '심텍', changePct: -1.1 },
+          { name: '티엘비', changePct: -0.8 },
+          { name: '엑시콘', changePct: -1.5 },
+        ],
+      },
+      {
+        sector: 'AI 데이터센터',
+        stocks: [
+          { name: '케이아이엔엑스', changePct: 1.8 },
+          { name: '가비아', changePct: 1.3 },
+          { name: '더존비즈온', changePct: 0.9 },
+          { name: '삼성에스디에스', changePct: 1.1 },
+          { name: '효성ITX', changePct: 0.7 },
         ],
       },
     ],

@@ -113,14 +113,13 @@ export interface SpreadEdge {
   sources: EdgeSource[];
 }
 
-/** 섹터별 영향도 히트맵 셀 */
+/** 섹터별 영향도 히트맵 셀 — 이슈가 미치는 영향 비중(트리맵) */
 export interface HeatmapCell {
   sector: string;
-  changePct: number;
-  /** 트리맵 배치 영역 키 (grid-area) */
-  area: string;
-  /** 영향도 크기(0~1) — 색 진하기 */
-  weight: number;
+  /** 이슈 영향 비중(%) — 히트맵 전체 합 = 100. 표시 숫자·면적 기준 */
+  share: number;
+  /** 영향 방향 — 색 기준(긍정=레드/부정=블루) */
+  direction: 'positive' | 'negative';
 }
 
 /** 산업 연결 지식그래프 노드 */
