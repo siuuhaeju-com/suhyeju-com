@@ -1,5 +1,5 @@
 import { runAnalysis } from '@/lib/analyze';
-import { saveAnalysis } from '@/lib/store';
+import { getAnalysisByOriginUrl, saveAnalysis } from '@/lib/store';
 
 // POST /api/analyze  { url?: string, text?: string }
 // 분석 진행을 NDJSON 스트림으로 흘린다(로딩 화면 단계 표시용, SSE 방식).
@@ -23,6 +23,15 @@ export async function POST(request: Request) {
       const send = (event: object) =>
         controller.enqueue(encoder.encode(JSON.stringify(event) + '\n'));
       try {
+        if (body.url) {
+          const existing = await getAnalysisByOriginUrl(body.url);
+          if (existing) {
+            await saveAnalysis(existing);
+            send({ step: 'done', id: existing.id });
+            return;
+          }
+        }
+
         const result = await runAnalysis(body, send);
         await saveAnalysis(result);
         send({ step: 'done', id: result.id });
