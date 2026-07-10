@@ -97,6 +97,13 @@ export interface SpreadNode {
   name: string;
   /** 0=원점(뉴스), 1·2·3=파급 단계 */
   tier: 0 | 1 | 2 | 3;
+  /**
+   * 이슈가 이 섹터에 미치는 영향 — 부호=방향(+긍정/−부정), |값|=강도(1~100).
+   * 노드의 영향도 bar(강함/보통/약함)와 방향색의 근거 (F-16, 구 히트맵 impact 이관).
+   * tier 0(원점)과 F-16 이전 저장 데이터에는 없다.
+   */
+  impact?: number;
+  /** @deprecated 전일대비 등락률 — F-16에서 표시 제거. 구 저장 데이터 호환용으로만 남음 */
   changePct?: number;
   /** 같은 열 안에서의 세로 위치 (0~1) */
   row: number;
@@ -121,13 +128,24 @@ export interface SpreadEdge {
   sources: EdgeSource[];
 }
 
-/** 섹터별 영향도 히트맵 셀 — 이슈가 미치는 영향 비중(트리맵) */
+/**
+ * @deprecated 섹터별 영향도 히트맵 셀 — F-16에서 히트맵 섹션 폐지(영향도는 SpreadNode.impact로
+ * 이관). 구 저장 데이터(KV)에 남아 있어 타입만 유지한다.
+ */
 export interface HeatmapCell {
   sector: string;
   /** 이슈 영향 비중(%) — 히트맵 전체 합 = 100. 표시 숫자·면적 기준 */
   share: number;
   /** 영향 방향 — 색 기준(긍정=레드/부정=블루) */
   direction: 'positive' | 'negative';
+}
+
+/** 시각화 섹션별 한 문단 해설 — "이 시각 자료가 말하는 것" (F-16, GPT 생성) */
+export interface SectionNotes {
+  /** 영향력 확산 그래프 해설 */
+  spread?: string;
+  /** 산업 연결 지식그래프 해설 */
+  knowledge?: string;
 }
 
 /** 산업 연결 지식그래프 노드 */
@@ -165,11 +183,28 @@ export interface AnalysisResult {
   warnSignal: SignalGroup;
   spreadNodes: SpreadNode[];
   spreadEdges: SpreadEdge[];
-  heatmap: HeatmapCell[];
+  /** @deprecated 히트맵 폐지(F-16) — 구 저장 데이터에만 존재, 렌더하지 않는다 */
+  heatmap?: HeatmapCell[];
+  /** 시각화 섹션별 한 문단 해설 (F-16) — 구 저장 데이터에는 없다 */
+  sectionNotes?: SectionNotes;
   knowledgeNodes: KnowledgeNode[];
   knowledgeEdges: KnowledgeEdge[];
   /** 섹터명 → Top5 종목 현황 (F-10 툴팁) */
   topStocks: Record<string, TopStock[]>;
+}
+
+/** 종목 일봉 시세 한 점 — GET /api/stocks/[code]/history 응답 (F-16 주가 추이 차트) */
+export interface StockPricePoint {
+  /** YYYY-MM-DD */
+  date: string;
+  /** 시가 */
+  open: number;
+  /** 고가 */
+  high: number;
+  /** 저가 */
+  low: number;
+  /** 종가 — 차트 라인 기준 */
+  close: number;
 }
 
 /** ─ 시장 히트맵 (Finviz식 트리맵) — 분석용 HeatmapCell과 무관 ─ */

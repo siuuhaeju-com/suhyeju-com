@@ -41,9 +41,21 @@ function readMeta($: cheerio.CheerioAPI): { source: string; publishedAt: string 
   const publishedAt =
     $('meta[property="article:published_time"]').attr('content') ??
     $('meta[property="og:regDate"]').attr('content') ??
+    // 네이버 뉴스 템플릿은 발행시각을 meta가 아니라 본문 상단 span의 data 속성에 담는다
+    // (예: <span class="_ARTICLE_DATE_TIME" data-date-time="2026-07-10 16:04:31">)
+    $('span._ARTICLE_DATE_TIME').attr('data-date-time') ??
     '';
   const source = $('meta[property="og:site_name"]').attr('content') ?? '';
-  return { source: source.trim(), publishedAt: publishedAt.trim() };
+  return { source: source.trim(), publishedAt: normalizePublishedAt(publishedAt.trim()) };
+}
+
+/**
+ * 'YYYY-MM-DD HH:mm(:ss)' 표기를 ISO(KST +09:00)로 정규화한다 — 네이버 발행시각은 KST.
+ * 이미 ISO거나 다른 표기면 그대로 둔다(FE formatDateTime이 ISO만 포맷).
+ */
+function normalizePublishedAt(value: string): string {
+  const match = value.match(/^(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}(?::\d{2})?)$/);
+  return match ? `${match[1]}T${match[2]}+09:00` : value;
 }
 
 const MIN_LENGTH = 200; // 이보다 짧으면 추출 실패로 간주

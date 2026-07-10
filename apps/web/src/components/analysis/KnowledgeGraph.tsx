@@ -24,7 +24,14 @@ const GROUP_LEGEND = [
 /**
  * 산업 연결 지식그래프 (F-12) — 그래프 + 섹터 정보 사이드바.
  */
-export function KnowledgeGraph({ centerSector }: { centerSector: string }) {
+export function KnowledgeGraph({
+  centerSector,
+  sectionNote,
+}: {
+  centerSector: string;
+  /** "이 지식그래프가 말하는 것" 한 문단 해설 (F-16) — 구 저장 데이터에는 없다 */
+  sectionNote?: string;
+}) {
   const sectorCount = getPoolSectorCount();
   const nodeCount = getPoolMaxNodeCount();
 
@@ -66,6 +73,13 @@ export function KnowledgeGraph({ centerSector }: { centerSector: string }) {
           ))}
         </ul>
       </div>
+
+      {/* 섹션 해설 (F-16) — 이 지식그래프가 말하는 것 한 문단 */}
+      {sectionNote && (
+        <p className="mt-4 rounded-md bg-secondary/40 px-4 py-3 text-[13px] leading-relaxed text-ink-sub">
+          {sectionNote}
+        </p>
+      )}
 
       <div className="relative mt-4 h-[520px] overflow-hidden rounded-md border border-border bg-card lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(240px,280px)]">
         <KnowledgeGraphCanvas
