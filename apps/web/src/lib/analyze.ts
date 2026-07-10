@@ -47,7 +47,7 @@ export async function runAnalysis(
   if (!text && input.url) {
     const article = await extractArticle(input.url);
     if (!article) {
-      throw new Error('본문을 추출하지 못했습니다. 본문을 직접 붙여넣어 주세요.');
+      throw new Error('뉴스 본문을 불러오지 못했습니다.');
     }
     text = article.text;
     title = article.title;

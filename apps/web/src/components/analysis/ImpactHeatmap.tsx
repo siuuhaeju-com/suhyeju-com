@@ -111,6 +111,10 @@ function getCellBackground(cell: HeatmapCell, maxShare: number): string {
   return `color-mix(in oklab, ${base} ${strength}%, var(--card))`;
 }
 
+function formatShare(cell: HeatmapCell) {
+  return `${cell.direction === 'negative' ? '-' : ''}${cell.share}%`;
+}
+
 function HeatCell({
   cell,
   stocks,
@@ -141,11 +145,11 @@ function HeatCell({
           'hover:opacity-90 focus-visible:ring-3 focus-visible:ring-ring/60',
         )}
         style={{ background: getCellBackground(cell, maxShare) }}
-        aria-label={`${cell.sector} 영향 비중 ${cell.share}% — Top5 종목 보기`}
+        aria-label={`${cell.sector} 영향 비중 ${formatShare(cell)} — Top5 종목 보기`}
       >
         <span className="text-[15px] leading-tight font-bold text-white">{cell.sector}</span>
-        {/* 숫자 = 이슈 영향 비중(%), 방향은 셀 색으로 전달 */}
-        <span className="text-[15px] font-extrabold text-white">{cell.share}%</span>
+        {/* 숫자 = 이슈 영향 비중(%), 방향은 색과 부호로 전달 */}
+        <span className="text-[15px] font-extrabold text-white">{formatShare(cell)}</span>
       </button>
       {isActive && stocks && (
         // pointer-events-auto — 셀 위에 뜬 툴팁의 종목 링크를 hover 상태 그대로 클릭 가능

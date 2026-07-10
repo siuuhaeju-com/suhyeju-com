@@ -40,8 +40,8 @@ type AnalyzeEvent =
  * - analyze 수신 → ① 완료, ② 진행 중 시작 + 타이머로 ②→③→④ 순차 진행(④에서 대기)
  * - quote 수신 → ②③④ 즉시 완료 처리(타이머 캐치업 점프) + ⑤ 진행 중
  * - done 수신 → ⑤까지 완료 표시 후 /analysis/[id]로 라우팅
- * - error 수신(또는 스트림이 done/error 없이 끊김) → 서버가 준 문구(or 기본 문구) + 재시도 버튼
- * 언마운트되거나 url/retryKey가 바뀌면 AbortController로 진행 중이던 요청을 취소한다 —
+ * - error 수신(또는 스트림이 done/error 없이 끊김) → 서버가 준 문구(or 기본 문구) + 홈 이동 버튼
+ * 언마운트되거나 url이 바뀌면 AbortController로 진행 중이던 요청을 취소한다 —
  * 그러지 않으면 화면을 떠난 뒤에도 늦게 도착한 done 이벤트가 엉뚱하게 라우팅을 일으킨다.
  */
 export default function AnalyzingPage() {
@@ -51,7 +51,6 @@ export default function AnalyzingPage() {
 
   const [completed, setCompleted] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [retryKey, setRetryKey] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -123,7 +122,7 @@ export default function AnalyzingPage() {
 
         // 루프가 done/error 이벤트 없이 끝났다 = 서버가 스트림을 예기치 않게 닫음
         clearTimer();
-        setErrorMessage('분석 서버 연결이 끊겼습니다. 다시 시도해주세요');
+        setErrorMessage('분석 서버 연결이 끊겼습니다. 처음 화면에서 다시 시작해주세요.');
       } catch (err) {
         if (controller.signal.aborted) {
           return; // 언마운트/재시도로 인한 의도된 취소 — 에러 아님
@@ -142,21 +141,13 @@ export default function AnalyzingPage() {
       clearTimer();
       controller.abort();
     };
-  }, [url, router, retryKey]);
+  }, [url, router]);
 
   if (errorMessage) {
     return (
       <main className="mx-auto flex w-full max-w-xl flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center">
         <p className="text-sm text-muted-foreground">{errorMessage}</p>
-        <Button
-          onClick={() => {
-            setCompleted(0);
-            setErrorMessage(null);
-            setRetryKey((key) => key + 1);
-          }}
-        >
-          다시 시도
-        </Button>
+        <Button onClick={() => router.replace('/')}>메인 화면으로</Button>
       </main>
     );
   }

@@ -71,7 +71,7 @@ export function AnalyzeForm() {
             ref={inputRef}
             value={link}
             onChange={handleChange}
-            placeholder="뉴스·블로그 등 웹 링크를 붙여넣으세요"
+            placeholder="뉴스 링크를 붙여넣으세요"
             aria-label="뉴스 링크 입력"
             className="pl-11"
             disabled={isSubmitting}
