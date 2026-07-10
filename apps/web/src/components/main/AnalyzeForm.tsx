@@ -59,7 +59,7 @@ export function AnalyzeForm() {
       className="animate-fade-up mx-auto w-full max-w-3xl rounded-lg border bg-card/70 p-4"
       aria-label="뉴스 링크 분석 폼"
     >
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1">
           <span
             aria-hidden
@@ -71,7 +71,7 @@ export function AnalyzeForm() {
             ref={inputRef}
             value={link}
             onChange={handleChange}
-            placeholder="뉴스 링크를 붙여넣으세요"
+            placeholder="뉴스 링크 붙여넣기"
             aria-label="뉴스 링크 입력"
             className="pl-11"
             disabled={isSubmitting}
@@ -80,7 +80,7 @@ export function AnalyzeForm() {
         <Button
           type="submit"
           size="lg"
-          className="h-12 px-6 text-sm font-bold"
+          className="h-12 w-full px-6 text-sm font-bold sm:w-auto"
           disabled={isSubmitting}
           aria-busy={isSubmitting}
         >
