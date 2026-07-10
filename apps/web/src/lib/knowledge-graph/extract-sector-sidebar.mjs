@@ -20,6 +20,15 @@ export function extractSectorSidebarFromNode(node, documentSector = '') {
     newsCount: Array.isArray(bridge.data('newsIds')) ? bridge.data('newsIds').length : 0,
   }));
 
+  const uniqueBridgeCompanies = [];
+  const seenCompanyKeys = new Set();
+  for (const item of bridgeCompanies) {
+    const key = item.companyId || item.companyName;
+    if (seenCompanyKeys.has(key)) continue;
+    seenCompanyKeys.add(key);
+    uniqueBridgeCompanies.push(item);
+  }
+
   const neighborhood = node.closedNeighborhood();
 
   const outgoing = node
@@ -58,16 +67,16 @@ export function extractSectorSidebarFromNode(node, documentSector = '') {
     .filter((item) => item.title);
 
   const companyIds = new Set(
-    bridgeCompanies.map((bridge) => bridge.companyId).filter((companyId) => companyId),
+    uniqueBridgeCompanies.map((bridge) => bridge.companyId).filter((companyId) => companyId),
   );
 
   return {
     name,
     market: node.data('market') ? String(node.data('market')) : undefined,
     isDocumentSector,
-    bridgeCompanies,
+    bridgeCompanies: uniqueBridgeCompanies,
     relatedNews,
-    companyCount: companyIds.size,
+    companyCount: companyIds.size || uniqueBridgeCompanies.length,
     newsCount: relatedNews.length,
     edgeNodeCount: bridges.length,
     outgoing,

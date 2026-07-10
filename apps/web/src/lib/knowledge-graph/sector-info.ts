@@ -96,17 +96,22 @@ export function getSectorSidebarFromPool(
 
   const bridges = edgeNodes.nodes.filter((node) => edgeNodeIds.includes(node.id));
 
-  const bridgeCompanies = bridges.map((bridge) => ({
+  const bridgeCompaniesRaw = bridges.map((bridge) => ({
     companyId: String(bridge.props?.companyId ?? ''),
     companyName: String(bridge.props?.companyName ?? bridge.props?.companyId ?? '—'),
     newsCount: Array.isArray(bridge.props?.newsIds) ? bridge.props.newsIds.length : 0,
   }));
 
-  const companyIds = new Set(
-    edgeEdges.edges
-      .filter((edge) => edgeNodeIds.includes(edge.source) && edge.relation === 'includes')
-      .map((edge) => edge.target),
-  );
+  const bridgeCompanies: SectorBridgeCompany[] = [];
+  const seenCompanyKeys = new Set<string>();
+  for (const item of bridgeCompaniesRaw) {
+    const key = item.companyId || item.companyName;
+    if (seenCompanyKeys.has(key)) continue;
+    seenCompanyKeys.add(key);
+    bridgeCompanies.push(item);
+  }
+
+  const companyIds = new Set(bridgeCompanies.map((item) => item.companyId).filter(Boolean));
 
   const doc = documentSector.trim();
   const isDocumentSector =
@@ -120,7 +125,7 @@ export function getSectorSidebarFromPool(
     isDocumentSector,
     bridgeCompanies,
     relatedNews,
-    companyCount: companyIds.size,
+    companyCount: companyIds.size || bridgeCompanies.length,
     newsCount: relatedNews.length,
     edgeNodeCount: bridges.length,
     outgoing: [],
