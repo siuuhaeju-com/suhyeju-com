@@ -57,13 +57,17 @@ export function extractSectorSidebarFromNode(node, documentSector = '') {
     })
     .filter((item) => item.title);
 
+  const companyIds = new Set(
+    bridgeCompanies.map((bridge) => bridge.companyId).filter((companyId) => companyId),
+  );
+
   return {
     name,
     market: node.data('market') ? String(node.data('market')) : undefined,
     isDocumentSector,
     bridgeCompanies,
     relatedNews,
-    companyCount: neighborhood.nodes('[type = "Company"]').length,
+    companyCount: companyIds.size,
     newsCount: relatedNews.length,
     edgeNodeCount: bridges.length,
     outgoing,
