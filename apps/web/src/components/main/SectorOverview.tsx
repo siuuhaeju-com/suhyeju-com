@@ -1,7 +1,10 @@
 'use client';
 
+import Link from 'next/link';
+
 import { Card } from '@/components/ui/card';
 import { GICS_SECTOR_DESCRIPTIONS } from '@/lib/gics-sectors';
+import { knowledgeGraphSectorHref } from '@/lib/knowledge-graph/sector-map';
 import { useKrMajorSectors } from '@/lib/queries';
 import { formatPct, getPctArrow, getPctToneClass } from '@/lib/format';
 
@@ -39,24 +42,28 @@ export function SectorOverview() {
   return (
     <div className="grid grid-cols-2 gap-3">
       {data.slice(0, SECTOR_COUNT).map((sector) => (
-        <Card
+        <Link
           key={sector.name}
-          className="p-4 transition-colors hover:border-primary/40 hover:bg-surface-raised/60"
+          href={knowledgeGraphSectorHref(sector.name)}
+          className="block rounded-lg outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+          aria-label={`${sector.name} 산업 지식그래프에서 보기`}
         >
-          <div className="flex items-start justify-between gap-2">
-            <span className="text-sm font-bold">{sector.name}</span>
-            <span
-              className={`text-[13px] font-bold whitespace-nowrap ${getPctToneClass(sector.changePct)}`}
-            >
-              {getPctArrow(sector.changePct)} {formatPct(sector.changePct)}
-            </span>
-          </div>
-          {GICS_SECTOR_DESCRIPTIONS[sector.name] && (
-            <p className="mt-2 text-xs leading-5 text-muted-foreground">
-              {GICS_SECTOR_DESCRIPTIONS[sector.name]}
-            </p>
-          )}
-        </Card>
+          <Card className="h-full p-4 transition-colors hover:border-primary/40 hover:bg-surface-raised/60">
+            <div className="flex items-start justify-between gap-2">
+              <span className="text-sm font-bold">{sector.name}</span>
+              <span
+                className={`text-[13px] font-bold whitespace-nowrap ${getPctToneClass(sector.changePct)}`}
+              >
+                {getPctArrow(sector.changePct)} {formatPct(sector.changePct)}
+              </span>
+            </div>
+            {GICS_SECTOR_DESCRIPTIONS[sector.name] && (
+              <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                {GICS_SECTOR_DESCRIPTIONS[sector.name]}
+              </p>
+            )}
+          </Card>
+        </Link>
       ))}
     </div>
   );
