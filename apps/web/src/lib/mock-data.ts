@@ -4,7 +4,7 @@
  *   - 메인:   GET /api/news (✅완료), GET /api/market/kr/major-sectors (✅완료), /api/analysis/recent
  *   - 분석:   GET /api/analysis/:id  →  AnalysisResult
  */
-import type { AnalysisResult, EdgeSource, FloatingChip, RecentAnalysis } from '@/lib/types';
+import type { AnalysisResult, EdgeSource, RecentAnalysis } from '@/lib/types';
 
 /** 데모 근거 뉴스 — 실제 기사 URL이 없어 제목의 네이버 뉴스 검색으로 연결한다 */
 function demoSource(title: string, meta: string): EdgeSource {
@@ -35,17 +35,6 @@ export const recentAnalyses: RecentAnalysis[] = [
     analyzedAt: '지난주',
     originUrl: 'https://example.com/news/defense-export',
   },
-];
-
-/* ── 로딩: 부유 키워드 칩 ───────────────────────────────── */
-export const floatingChips: FloatingChip[] = [
-  { label: '# HBM4', tone: 'neutral', x: 22, y: 12, delay: 0 },
-  { label: '# 엔비디아', tone: 'neutral', x: 58, y: 20, delay: 0.8 },
-  { label: '전기장비', tone: 'teal', x: 8, y: 32, delay: 1.6 },
-  { label: '반도체', tone: 'positive', x: 78, y: 44, delay: 0.4 },
-  { label: '# TC본더', tone: 'neutral', x: 6, y: 62, delay: 2.0 },
-  { label: '# AI 데이터센터', tone: 'neutral', x: 60, y: 76, delay: 1.2 },
-  { label: 'IT하드웨어', tone: 'blue', x: 30, y: 86, delay: 0.6 },
 ];
 
 /* ── 분석 결과 (GET /api/analysis/:id) ──────────────────── */

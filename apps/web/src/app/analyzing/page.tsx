@@ -4,14 +4,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import { NetworkSphere } from '@/components/loading/NetworkSphere';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { apiPostStream, ApiError } from '@/lib/api';
 import { isValidNewsLink } from '@/lib/link';
 import { saveLocalAnalysis } from '@/lib/local-analyses';
+import { useKrMajorSectors } from '@/lib/queries';
 import { cn } from '@/lib/utils';
-import { floatingChips } from '@/lib/mock-data';
 
 const STEP_LABELS = [
   '뉴스 읽는 중',
@@ -52,6 +51,7 @@ export default function AnalyzingPage() {
   const [completed, setCompleted] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { data: sectors } = useKrMajorSectors();
 
   useEffect(() => {
     if (!url || !isValidNewsLink(url)) {
@@ -156,25 +156,13 @@ export default function AnalyzingPage() {
   const progress = Math.min((completed / total) * 100, 100);
 
   return (
-    <main className="mx-auto grid w-full max-w-[1400px] flex-1 items-center gap-16 px-6 py-12 lg:grid-cols-2">
-      {/* 좌: 구체 + 부유 칩 */}
-      <div className="relative hidden lg:block">
-        <NetworkSphere />
-        {floatingChips.map((chip) => (
-          <span
-            key={chip.label}
-            aria-hidden
-            className="animate-float-y absolute"
-            style={{ left: `${chip.x}%`, top: `${chip.y}%`, animationDelay: `${chip.delay}s` }}
-          >
-            <Badge
-              tone={chip.tone === 'neutral' ? 'neutral' : chip.tone}
-              className="px-3 py-1.5 text-[13px]"
-            >
-              {chip.label}
-            </Badge>
-          </span>
-        ))}
+    // -translate-y: items-center는 <main>(헤더 아래 영역) 안에서만 중앙정렬하므로,
+    // 위에만 있는 SiteHeader(h-16+border=65px) 때문에 뷰포트 전체 기준으로는 살짝 아래로 치우친다.
+    // 헤더 높이의 절반만큼 위로 당겨서 뷰포트 전체 기준 정중앙에 오도록 보정한다.
+    <main className="mx-auto grid w-full max-w-[1400px] flex-1 -translate-y-[32.5px] items-center gap-16 px-6 py-12 lg:grid-cols-2">
+      {/* 좌: 구체 + 주요 섹터 칩(메인 화면과 같은 실데이터) */}
+      <div className="hidden lg:block">
+        <NetworkSphere sectors={sectors} />
       </div>
 
       {/* 우: 진행 상태 */}
