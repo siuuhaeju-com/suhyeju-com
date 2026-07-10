@@ -863,6 +863,5502 @@
       "target": "company-skt",
       "relation": "includes",
       "weight": 1
+    },
+    {
+      "source": "sector-가구",
+      "target": "edgenode-가구-009240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가구-009240",
+      "target": "company-009240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가구",
+      "target": "edgenode-가구-003800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가구-003800",
+      "target": "company-003800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가구",
+      "target": "edgenode-가구-016800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가구-016800",
+      "target": "company-016800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가구",
+      "target": "edgenode-가구-013890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가구-013890",
+      "target": "company-013890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가구",
+      "target": "edgenode-가구-079430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가구-079430",
+      "target": "company-079430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가스유틸리티",
+      "target": "edgenode-가스유틸리티-036460",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가스유틸리티-036460",
+      "target": "company-036460",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가스유틸리티",
+      "target": "edgenode-가스유틸리티-018670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가스유틸리티-018670",
+      "target": "company-018670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가스유틸리티",
+      "target": "edgenode-가스유틸리티-017940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가스유틸리티-017940",
+      "target": "company-017940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가스유틸리티",
+      "target": "edgenode-가스유틸리티-004690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가스유틸리티-004690",
+      "target": "company-004690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가스유틸리티",
+      "target": "edgenode-가스유틸리티-015360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가스유틸리티-015360",
+      "target": "company-015360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용기기와용품",
+      "target": "edgenode-가정용기기와용품-021240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용기기와용품-021240",
+      "target": "company-021240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용기기와용품",
+      "target": "edgenode-가정용기기와용품-009450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용기기와용품-009450",
+      "target": "company-009450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용기기와용품",
+      "target": "edgenode-가정용기기와용품-192400",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용기기와용품-192400",
+      "target": "company-192400",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용기기와용품",
+      "target": "edgenode-가정용기기와용품-065350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용기기와용품-065350",
+      "target": "company-065350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용기기와용품",
+      "target": "edgenode-가정용기기와용품-284740",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용기기와용품-284740",
+      "target": "company-284740",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용품",
+      "target": "edgenode-가정용품-009770",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용품-009770",
+      "target": "company-009770",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용품",
+      "target": "edgenode-가정용품-053620",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용품-053620",
+      "target": "company-053620",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용품",
+      "target": "edgenode-가정용품-012690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용품-012690",
+      "target": "company-012690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용품",
+      "target": "edgenode-가정용품-318410",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용품-318410",
+      "target": "company-318410",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-가정용품",
+      "target": "edgenode-가정용품-033050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-가정용품-033050",
+      "target": "company-033050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리기술",
+      "target": "edgenode-건강관리기술-458870",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리기술-458870",
+      "target": "company-458870",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리기술",
+      "target": "edgenode-건강관리기술-328130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리기술-328130",
+      "target": "company-328130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리기술",
+      "target": "edgenode-건강관리기술-071200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리기술-071200",
+      "target": "company-071200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리기술",
+      "target": "edgenode-건강관리기술-394800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리기술-394800",
+      "target": "company-394800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리기술",
+      "target": "edgenode-건강관리기술-032620",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리기술-032620",
+      "target": "company-032620",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리업체및서비스",
+      "target": "edgenode-건강관리업체및서비스-214370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리업체및서비스-214370",
+      "target": "company-214370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리업체및서비스",
+      "target": "edgenode-건강관리업체및서비스-085660",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리업체및서비스-085660",
+      "target": "company-085660",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리업체및서비스",
+      "target": "edgenode-건강관리업체및서비스-376270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리업체및서비스-376270",
+      "target": "company-376270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리업체및서비스",
+      "target": "edgenode-건강관리업체및서비스-194700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리업체및서비스-194700",
+      "target": "company-194700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리업체및서비스",
+      "target": "edgenode-건강관리업체및서비스-200130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리업체및서비스-200130",
+      "target": "company-200130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리장비와용품",
+      "target": "edgenode-건강관리장비와용품-028300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리장비와용품-028300",
+      "target": "company-028300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리장비와용품",
+      "target": "edgenode-건강관리장비와용품-214450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리장비와용품-214450",
+      "target": "company-214450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리장비와용품",
+      "target": "edgenode-건강관리장비와용품-214150",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리장비와용품-214150",
+      "target": "company-214150",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리장비와용품",
+      "target": "edgenode-건강관리장비와용품-290650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리장비와용품-290650",
+      "target": "company-290650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건강관리장비와용품",
+      "target": "edgenode-건강관리장비와용품-491000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건강관리장비와용품-491000",
+      "target": "company-491000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건설",
+      "target": "edgenode-건설-000720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건설-000720",
+      "target": "company-000720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건설",
+      "target": "edgenode-건설-028050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건설-028050",
+      "target": "company-028050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건설",
+      "target": "edgenode-건설-047040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건설-047040",
+      "target": "company-047040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건설",
+      "target": "edgenode-건설-006360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건설-006360",
+      "target": "company-006360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건설",
+      "target": "edgenode-건설-375500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건설-375500",
+      "target": "company-375500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축자재",
+      "target": "edgenode-건축자재-002380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축자재-002380",
+      "target": "company-002380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축자재",
+      "target": "edgenode-건축자재-300720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축자재-300720",
+      "target": "company-300720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축자재",
+      "target": "edgenode-건축자재-038500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축자재-038500",
+      "target": "company-038500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축자재",
+      "target": "edgenode-건축자재-003300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축자재-003300",
+      "target": "company-003300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축자재",
+      "target": "edgenode-건축자재-002030",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축자재-002030",
+      "target": "company-002030",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축제품",
+      "target": "edgenode-건축제품-018310",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축제품-018310",
+      "target": "company-018310",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축제품",
+      "target": "edgenode-건축제품-014280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축제품-014280",
+      "target": "company-014280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축제품",
+      "target": "edgenode-건축제품-005750",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축제품-005750",
+      "target": "company-005750",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축제품",
+      "target": "edgenode-건축제품-079000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축제품-079000",
+      "target": "company-079000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-건축제품",
+      "target": "edgenode-건축제품-006570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-건축제품-006570",
+      "target": "company-006570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-게임엔터테인먼트",
+      "target": "edgenode-게임엔터테인먼트-036570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-게임엔터테인먼트-036570",
+      "target": "company-036570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-게임엔터테인먼트",
+      "target": "edgenode-게임엔터테인먼트-251270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-게임엔터테인먼트-251270",
+      "target": "company-251270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-게임엔터테인먼트",
+      "target": "edgenode-게임엔터테인먼트-263750",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-게임엔터테인먼트-263750",
+      "target": "company-263750",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-게임엔터테인먼트",
+      "target": "edgenode-게임엔터테인먼트-462870",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-게임엔터테인먼트-462870",
+      "target": "company-462870",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-광고",
+      "target": "edgenode-광고-030000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-광고-030000",
+      "target": "company-030000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-광고",
+      "target": "edgenode-광고-214320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-광고-214320",
+      "target": "company-214320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-광고",
+      "target": "edgenode-광고-0039P0",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-광고-0039P0",
+      "target": "company-0039P0",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-광고",
+      "target": "edgenode-광고-048550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-광고-048550",
+      "target": "company-048550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-광고",
+      "target": "edgenode-광고-089600",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-광고-089600",
+      "target": "company-089600",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-교육서비스",
+      "target": "edgenode-교육서비스-215200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-교육서비스-215200",
+      "target": "company-215200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-교육서비스",
+      "target": "edgenode-교육서비스-461300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-교육서비스-461300",
+      "target": "company-461300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-교육서비스",
+      "target": "edgenode-교육서비스-068930",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-교육서비스-068930",
+      "target": "company-068930",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-교육서비스",
+      "target": "edgenode-교육서비스-072870",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-교육서비스-072870",
+      "target": "company-072870",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-교육서비스",
+      "target": "edgenode-교육서비스-067280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-교육서비스-067280",
+      "target": "company-067280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기계",
+      "target": "edgenode-기계-034020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기계-034020",
+      "target": "company-034020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기계",
+      "target": "edgenode-기계-267270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기계-267270",
+      "target": "company-267270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기계",
+      "target": "edgenode-기계-241560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기계-241560",
+      "target": "company-241560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기계",
+      "target": "edgenode-기계-454910",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기계-454910",
+      "target": "company-454910",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타",
+      "target": "edgenode-기타-069500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타-069500",
+      "target": "company-069500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타",
+      "target": "edgenode-기타-360750",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타-360750",
+      "target": "company-360750",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타",
+      "target": "edgenode-기타-133690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타-133690",
+      "target": "company-133690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타",
+      "target": "edgenode-기타-102110",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타-102110",
+      "target": "company-102110",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타",
+      "target": "edgenode-기타-396500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타-396500",
+      "target": "company-396500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타금융",
+      "target": "edgenode-기타금융-204620",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타금융-204620",
+      "target": "company-204620",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타금융",
+      "target": "edgenode-기타금융-023760",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타금융-023760",
+      "target": "company-023760",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타금융",
+      "target": "edgenode-기타금융-007330",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타금융-007330",
+      "target": "company-007330",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타금융",
+      "target": "edgenode-기타금융-038540",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타금융-038540",
+      "target": "company-038540",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-기타금융",
+      "target": "edgenode-기타금융-021880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-기타금융-021880",
+      "target": "company-021880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-다각화된소비자서비스",
+      "target": "edgenode-다각화된소비자서비스-080010",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-다각화된소비자서비스-080010",
+      "target": "company-080010",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-다각화된통신서비스",
+      "target": "edgenode-다각화된통신서비스-030200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-다각화된통신서비스-030200",
+      "target": "company-030200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-다각화된통신서비스",
+      "target": "edgenode-다각화된통신서비스-036630",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-다각화된통신서비스-036630",
+      "target": "company-036630",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-다각화된통신서비스",
+      "target": "edgenode-다각화된통신서비스-122830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-다각화된통신서비스-122830",
+      "target": "company-122830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-담배",
+      "target": "edgenode-담배-033780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-담배-033780",
+      "target": "company-033780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-도로와철도운송",
+      "target": "edgenode-도로와철도운송-089860",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-도로와철도운송-089860",
+      "target": "company-089860",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-도로와철도운송",
+      "target": "edgenode-도로와철도운송-403550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-도로와철도운송-403550",
+      "target": "company-403550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-도로와철도운송",
+      "target": "edgenode-도로와철도운송-000650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-도로와철도운송-000650",
+      "target": "company-000650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-도로와철도운송",
+      "target": "edgenode-도로와철도운송-095570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-도로와철도운송-095570",
+      "target": "company-095570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-도로와철도운송",
+      "target": "edgenode-도로와철도운송-045390",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-도로와철도운송-045390",
+      "target": "company-045390",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이장비및부품",
+      "target": "edgenode-디스플레이장비및부품-213420",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이장비및부품-213420",
+      "target": "company-213420",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이장비및부품",
+      "target": "edgenode-디스플레이장비및부품-108320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이장비및부품-108320",
+      "target": "company-108320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이장비및부품",
+      "target": "edgenode-디스플레이장비및부품-046890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이장비및부품-046890",
+      "target": "company-046890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이장비및부품",
+      "target": "edgenode-디스플레이장비및부품-171090",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이장비및부품-171090",
+      "target": "company-171090",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이장비및부품",
+      "target": "edgenode-디스플레이장비및부품-272290",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이장비및부품-272290",
+      "target": "company-272290",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이패널",
+      "target": "edgenode-디스플레이패널-034220",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이패널-034220",
+      "target": "company-034220",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이패널",
+      "target": "edgenode-디스플레이패널-121800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이패널-121800",
+      "target": "company-121800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이패널",
+      "target": "edgenode-디스플레이패널-052330",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이패널-052330",
+      "target": "company-052330",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이패널",
+      "target": "edgenode-디스플레이패널-020760",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이패널-020760",
+      "target": "company-020760",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-디스플레이패널",
+      "target": "edgenode-디스플레이패널-440320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-디스플레이패널-440320",
+      "target": "company-440320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-레저용장비와제품",
+      "target": "edgenode-레저용장비와제품-121440",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-레저용장비와제품-121440",
+      "target": "company-121440",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-레저용장비와제품",
+      "target": "edgenode-레저용장비와제품-039830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-레저용장비와제품-039830",
+      "target": "company-039830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-레저용장비와제품",
+      "target": "edgenode-레저용장비와제품-002450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-레저용장비와제품-002450",
+      "target": "company-002450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-레저용장비와제품",
+      "target": "edgenode-레저용장비와제품-088390",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-레저용장비와제품-088390",
+      "target": "company-088390",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-레저용장비와제품",
+      "target": "edgenode-레저용장비와제품-011420",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-레저용장비와제품-011420",
+      "target": "company-011420",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-무선통신서비스",
+      "target": "edgenode-무선통신서비스-032640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-무선통신서비스-032640",
+      "target": "company-032640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-무선통신서비스",
+      "target": "edgenode-무선통신서비스-065530",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-무선통신서비스-065530",
+      "target": "company-065530",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-무선통신서비스",
+      "target": "edgenode-무선통신서비스-006490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-무선통신서비스-006490",
+      "target": "company-006490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-무역회사와판매업체",
+      "target": "edgenode-무역회사와판매업체-047050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-무역회사와판매업체-047050",
+      "target": "company-047050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-무역회사와판매업체",
+      "target": "edgenode-무역회사와판매업체-001120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-무역회사와판매업체-001120",
+      "target": "company-001120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-무역회사와판매업체",
+      "target": "edgenode-무역회사와판매업체-298020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-무역회사와판매업체-298020",
+      "target": "company-298020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-무역회사와판매업체",
+      "target": "edgenode-무역회사와판매업체-383800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-무역회사와판매업체-383800",
+      "target": "company-383800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-무역회사와판매업체",
+      "target": "edgenode-무역회사와판매업체-011760",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-무역회사와판매업체-011760",
+      "target": "company-011760",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-문구류",
+      "target": "edgenode-문구류-005360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-문구류-005360",
+      "target": "company-005360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-반도체와반도체장비",
+      "target": "edgenode-반도체와반도체장비-402340",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-반도체와반도체장비-402340",
+      "target": "company-402340",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-반도체와반도체장비",
+      "target": "edgenode-반도체와반도체장비-005935",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-반도체와반도체장비-005935",
+      "target": "company-005935",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-반도체와반도체장비",
+      "target": "edgenode-반도체와반도체장비-042700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-반도체와반도체장비-042700",
+      "target": "company-042700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-방송과엔터테인먼트",
+      "target": "edgenode-방송과엔터테인먼트-jypent",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-방송과엔터테인먼트-jypent",
+      "target": "company-jypent",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-방송과엔터테인먼트",
+      "target": "edgenode-방송과엔터테인먼트-041510",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-방송과엔터테인먼트-041510",
+      "target": "company-041510",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-방송과엔터테인먼트",
+      "target": "edgenode-방송과엔터테인먼트-122870",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-방송과엔터테인먼트-122870",
+      "target": "company-122870",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-방송과엔터테인먼트",
+      "target": "edgenode-방송과엔터테인먼트-cjcgv",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-방송과엔터테인먼트-cjcgv",
+      "target": "company-cjcgv",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-방송과엔터테인먼트",
+      "target": "edgenode-방송과엔터테인먼트-cjenm",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-방송과엔터테인먼트-cjenm",
+      "target": "company-cjenm",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-백화점과일반상점",
+      "target": "edgenode-백화점과일반상점-004170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-백화점과일반상점-004170",
+      "target": "company-004170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-백화점과일반상점",
+      "target": "edgenode-백화점과일반상점-023530",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-백화점과일반상점-023530",
+      "target": "company-023530",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-백화점과일반상점",
+      "target": "edgenode-백화점과일반상점-069960",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-백화점과일반상점-069960",
+      "target": "company-069960",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-백화점과일반상점",
+      "target": "edgenode-백화점과일반상점-139480",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-백화점과일반상점-139480",
+      "target": "company-139480",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-백화점과일반상점",
+      "target": "edgenode-백화점과일반상점-gs",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-백화점과일반상점-gs",
+      "target": "company-gs",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-복합기업",
+      "target": "edgenode-복합기업-028260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-복합기업-028260",
+      "target": "company-028260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-복합기업",
+      "target": "edgenode-복합기업-000150",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-복합기업-000150",
+      "target": "company-000150",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-복합기업",
+      "target": "edgenode-복합기업-lg",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-복합기업-lg",
+      "target": "company-lg",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-복합기업",
+      "target": "edgenode-복합기업-000880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-복합기업-000880",
+      "target": "company-000880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-복합기업",
+      "target": "edgenode-복합기업-cj",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-복합기업-cj",
+      "target": "company-cj",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-복합유틸리티",
+      "target": "edgenode-복합유틸리티-071320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-복합유틸리티-071320",
+      "target": "company-071320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-부동산",
+      "target": "edgenode-부동산-sk",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-부동산-sk",
+      "target": "company-sk-2",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-부동산",
+      "target": "edgenode-부동산-330590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-부동산-330590",
+      "target": "company-330590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-부동산",
+      "target": "edgenode-부동산-451800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-부동산-451800",
+      "target": "company-451800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-부동산",
+      "target": "edgenode-부동산-esr",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-부동산-esr",
+      "target": "company-esr",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-부동산",
+      "target": "edgenode-부동산-293940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-부동산-293940",
+      "target": "company-293940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-비철금속",
+      "target": "edgenode-비철금속-010130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-비철금속-010130",
+      "target": "company-010130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-비철금속",
+      "target": "edgenode-비철금속-103140",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-비철금속-103140",
+      "target": "company-103140",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-비철금속",
+      "target": "edgenode-비철금속-295310",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-비철금속-295310",
+      "target": "company-295310",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-비철금속",
+      "target": "edgenode-비철금속-006110",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-비철금속-006110",
+      "target": "company-006110",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-비철금속",
+      "target": "edgenode-비철금속-005810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-비철금속-005810",
+      "target": "company-005810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-사무용전자제품",
+      "target": "edgenode-사무용전자제품-029530",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-사무용전자제품-029530",
+      "target": "company-029530",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-상업서비스와공급품",
+      "target": "edgenode-상업서비스와공급품-012750",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-상업서비스와공급품-012750",
+      "target": "company-012750",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-상업서비스와공급품",
+      "target": "edgenode-상업서비스와공급품-nice",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-상업서비스와공급품-nice",
+      "target": "company-nice",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-상업서비스와공급품",
+      "target": "edgenode-상업서비스와공급품-383310",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-상업서비스와공급품-383310",
+      "target": "company-383310",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-상업서비스와공급품",
+      "target": "edgenode-상업서비스와공급품-034950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-상업서비스와공급품-034950",
+      "target": "company-034950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-상업서비스와공급품",
+      "target": "edgenode-상업서비스와공급품-036800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-상업서비스와공급품-036800",
+      "target": "company-036800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생명과학도구및서비스",
+      "target": "edgenode-생명과학도구및서비스-226950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생명과학도구및서비스-226950",
+      "target": "company-226950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생명과학도구및서비스",
+      "target": "edgenode-생명과학도구및서비스-096530",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생명과학도구및서비스-096530",
+      "target": "company-096530",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생명과학도구및서비스",
+      "target": "edgenode-생명과학도구및서비스-127120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생명과학도구및서비스-127120",
+      "target": "company-127120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생명과학도구및서비스",
+      "target": "edgenode-생명과학도구및서비스-445680",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생명과학도구및서비스-445680",
+      "target": "company-445680",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생명과학도구및서비스",
+      "target": "edgenode-생명과학도구및서비스-475960",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생명과학도구및서비스-475960",
+      "target": "company-475960",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생명보험",
+      "target": "edgenode-생명보험-032830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생명보험-032830",
+      "target": "company-032830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생명보험",
+      "target": "edgenode-생명보험-088350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생명보험-088350",
+      "target": "company-088350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생명보험",
+      "target": "edgenode-생명보험-085620",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생명보험-085620",
+      "target": "company-085620",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생명보험",
+      "target": "edgenode-생명보험-082640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생명보험-082640",
+      "target": "company-082640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생물공학",
+      "target": "edgenode-생물공학-196170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생물공학-196170",
+      "target": "company-196170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생물공학",
+      "target": "edgenode-생물공학-950160",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생물공학-950160",
+      "target": "company-950160",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생물공학",
+      "target": "edgenode-생물공학-298380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생물공학-298380",
+      "target": "company-298380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생물공학",
+      "target": "edgenode-생물공학-347850",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생물공학-347850",
+      "target": "company-347850",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-생물공학",
+      "target": "edgenode-생물공학-145020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-생물공학-145020",
+      "target": "company-145020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-석유와가스",
+      "target": "edgenode-석유와가스-sk",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-석유와가스-sk",
+      "target": "company-sk-3",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-석유와가스",
+      "target": "edgenode-석유와가스-soil",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-석유와가스-soil",
+      "target": "company-soil",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-석유와가스",
+      "target": "edgenode-석유와가스-gs",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-석유와가스-gs",
+      "target": "company-gs-2",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-섬유-의류-신발-호화품",
+      "target": "edgenode-섬유-의류-신발-호화품-111770",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-섬유-의류-신발-호화품-111770",
+      "target": "company-111770",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-섬유-의류-신발-호화품",
+      "target": "edgenode-섬유-의류-신발-호화품-ff",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-섬유-의류-신발-호화품-ff",
+      "target": "company-ff",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-섬유-의류-신발-호화품",
+      "target": "edgenode-섬유-의류-신발-호화품-009970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-섬유-의류-신발-호화품-009970",
+      "target": "company-009970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-섬유-의류-신발-호화품",
+      "target": "edgenode-섬유-의류-신발-호화품-081660",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-섬유-의류-신발-호화품-081660",
+      "target": "company-081660",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-섬유-의류-신발-호화품",
+      "target": "edgenode-섬유-의류-신발-호화품-lf",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-섬유-의류-신발-호화품-lf",
+      "target": "company-lf",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-소프트웨어",
+      "target": "edgenode-소프트웨어-012510",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-소프트웨어-012510",
+      "target": "company-012510",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-소프트웨어",
+      "target": "edgenode-소프트웨어-053800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-소프트웨어-053800",
+      "target": "company-053800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-소프트웨어",
+      "target": "edgenode-소프트웨어-477850",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-소프트웨어-477850",
+      "target": "company-477850",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-소프트웨어",
+      "target": "edgenode-소프트웨어-030520",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-소프트웨어-030520",
+      "target": "company-030520",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-소프트웨어",
+      "target": "edgenode-소프트웨어-356680",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-소프트웨어-356680",
+      "target": "company-356680",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-손해보험",
+      "target": "edgenode-손해보험-000810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-손해보험-000810",
+      "target": "company-000810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-손해보험",
+      "target": "edgenode-손해보험-db",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-손해보험-db",
+      "target": "company-db",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-손해보험",
+      "target": "edgenode-손해보험-001450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-손해보험-001450",
+      "target": "company-001450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-손해보험",
+      "target": "edgenode-손해보험-031210",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-손해보험-031210",
+      "target": "company-031210",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-손해보험",
+      "target": "edgenode-손해보험-003690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-손해보험-003690",
+      "target": "company-003690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품",
+      "target": "edgenode-식품-003230",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품-003230",
+      "target": "company-003230",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품",
+      "target": "edgenode-식품-271560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품-271560",
+      "target": "company-271560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품",
+      "target": "edgenode-식품-cj",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품-cj",
+      "target": "company-cj-2",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품",
+      "target": "edgenode-식품-026960",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품-026960",
+      "target": "company-026960",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품",
+      "target": "edgenode-식품-004370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품-004370",
+      "target": "company-004370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품과기본식료품소매",
+      "target": "edgenode-식품과기본식료품소매-cj",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품과기본식료품소매-cj",
+      "target": "company-cj-3",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품과기본식료품소매",
+      "target": "edgenode-식품과기본식료품소매-227840",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품과기본식료품소매-227840",
+      "target": "company-227840",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품과기본식료품소매",
+      "target": "edgenode-식품과기본식료품소매-004590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품과기본식료품소매-004590",
+      "target": "company-004590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품과기본식료품소매",
+      "target": "edgenode-식품과기본식료품소매-006880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품과기본식료품소매-006880",
+      "target": "company-006880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품과기본식료품소매",
+      "target": "edgenode-식품과기본식료품소매-250000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품과기본식료품소매-250000",
+      "target": "company-250000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-양방향미디어와서비스",
+      "target": "edgenode-양방향미디어와서비스-035720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-양방향미디어와서비스-035720",
+      "target": "company-035720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-양방향미디어와서비스",
+      "target": "edgenode-양방향미디어와서비스-soop",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-양방향미디어와서비스-soop",
+      "target": "company-soop",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-양방향미디어와서비스",
+      "target": "edgenode-양방향미디어와서비스-376300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-양방향미디어와서비스-376300",
+      "target": "company-376300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-양방향미디어와서비스",
+      "target": "edgenode-양방향미디어와서비스-020120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-양방향미디어와서비스-020120",
+      "target": "company-020120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-양방향미디어와서비스",
+      "target": "edgenode-양방향미디어와서비스-408920",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-양방향미디어와서비스-408920",
+      "target": "company-408920",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-에너지장비및서비스",
+      "target": "edgenode-에너지장비및서비스-336260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-에너지장비및서비스-336260",
+      "target": "company-336260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-에너지장비및서비스",
+      "target": "edgenode-에너지장비및서비스-112610",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-에너지장비및서비스-112610",
+      "target": "company-112610",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-에너지장비및서비스",
+      "target": "edgenode-에너지장비및서비스-083650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-에너지장비및서비스-083650",
+      "target": "company-083650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-에너지장비및서비스",
+      "target": "edgenode-에너지장비및서비스-sk",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-에너지장비및서비스-sk",
+      "target": "company-sk-4",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-에너지장비및서비스",
+      "target": "edgenode-에너지장비및서비스-hd",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-에너지장비및서비스-hd",
+      "target": "company-hd",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-우주항공과국방",
+      "target": "edgenode-우주항공과국방-064350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-우주항공과국방-064350",
+      "target": "company-064350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-우주항공과국방",
+      "target": "edgenode-우주항공과국방-lig",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-우주항공과국방-lig",
+      "target": "company-lig",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-우주항공과국방",
+      "target": "edgenode-우주항공과국방-047810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-우주항공과국방-047810",
+      "target": "company-047810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-우주항공과국방",
+      "target": "edgenode-우주항공과국방-272210",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-우주항공과국방-272210",
+      "target": "company-272210",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-우주항공과국방",
+      "target": "edgenode-우주항공과국방-032820",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-우주항공과국방-032820",
+      "target": "company-032820",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-운송인프라",
+      "target": "edgenode-운송인프라-088980",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-운송인프라-088980",
+      "target": "company-088980",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-운송인프라",
+      "target": "edgenode-운송인프라-kb",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-운송인프라-kb",
+      "target": "company-kb",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-운송인프라",
+      "target": "edgenode-운송인프라-005430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-운송인프라-005430",
+      "target": "company-005430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-운송인프라",
+      "target": "edgenode-운송인프라-065710",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-운송인프라-065710",
+      "target": "company-065710",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-운송인프라",
+      "target": "edgenode-운송인프라-003100",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-운송인프라-003100",
+      "target": "company-003100",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-은행",
+      "target": "edgenode-은행-kb",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-은행-kb",
+      "target": "company-kb-2",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-은행",
+      "target": "edgenode-은행-055550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-은행-055550",
+      "target": "company-055550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-은행",
+      "target": "edgenode-은행-086790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-은행-086790",
+      "target": "company-086790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-은행",
+      "target": "edgenode-은행-316140",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-은행-316140",
+      "target": "company-316140",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-은행",
+      "target": "edgenode-은행-024110",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-은행-024110",
+      "target": "company-024110",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-음료",
+      "target": "edgenode-음료-000080",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-음료-000080",
+      "target": "company-000080",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-음료",
+      "target": "edgenode-음료-005300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-음료-005300",
+      "target": "company-005300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-음료",
+      "target": "edgenode-음료-033920",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-음료-033920",
+      "target": "company-033920",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-음료",
+      "target": "edgenode-음료-000140",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-음료-000140",
+      "target": "company-000140",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-음료",
+      "target": "edgenode-음료-018120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-음료-018120",
+      "target": "company-018120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-인터넷과카탈로그소매",
+      "target": "edgenode-인터넷과카탈로그소매-257720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-인터넷과카탈로그소매-257720",
+      "target": "company-257720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-인터넷과카탈로그소매",
+      "target": "edgenode-인터넷과카탈로그소매-057050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-인터넷과카탈로그소매-057050",
+      "target": "company-057050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-인터넷과카탈로그소매",
+      "target": "edgenode-인터넷과카탈로그소매-036030",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-인터넷과카탈로그소매-036030",
+      "target": "company-036030",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-인터넷과카탈로그소매",
+      "target": "edgenode-인터넷과카탈로그소매-035080",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-인터넷과카탈로그소매-035080",
+      "target": "company-035080",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-인터넷과카탈로그소매",
+      "target": "edgenode-인터넷과카탈로그소매-362320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-인터넷과카탈로그소매-362320",
+      "target": "company-362320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차",
+      "target": "edgenode-자동차-005380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차-005380",
+      "target": "company-005380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차",
+      "target": "edgenode-자동차-000270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차-000270",
+      "target": "company-000270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차",
+      "target": "edgenode-자동차-2b",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차-2b",
+      "target": "company-2b",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차",
+      "target": "edgenode-자동차-005385",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차-005385",
+      "target": "company-005385",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차",
+      "target": "edgenode-자동차-kg",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차-kg",
+      "target": "company-kg",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차부품",
+      "target": "edgenode-자동차부품-012330",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차부품-012330",
+      "target": "company-012330",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차부품",
+      "target": "edgenode-자동차부품-161390",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차부품-161390",
+      "target": "company-161390",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차부품",
+      "target": "edgenode-자동차부품-018880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차부품-018880",
+      "target": "company-018880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차부품",
+      "target": "edgenode-자동차부품-005850",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차부품-005850",
+      "target": "company-005850",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-자동차부품",
+      "target": "edgenode-자동차부품-000240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-자동차부품-000240",
+      "target": "company-000240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기유틸리티",
+      "target": "edgenode-전기유틸리티-015760",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기유틸리티-015760",
+      "target": "company-015760",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기유틸리티",
+      "target": "edgenode-전기유틸리티-052690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기유틸리티-052690",
+      "target": "company-052690",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기유틸리티",
+      "target": "edgenode-전기유틸리티-kps",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기유틸리티-kps",
+      "target": "company-kps",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기유틸리티",
+      "target": "edgenode-전기유틸리티-130660",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기유틸리티-130660",
+      "target": "company-130660",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기유틸리티",
+      "target": "edgenode-전기유틸리티-453450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기유틸리티-453450",
+      "target": "company-453450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "edgenode-전기장비-kr267260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기장비-kr267260",
+      "target": "company-kr267260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "edgenode-전기장비-kr010120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기장비-kr010120",
+      "target": "company-kr010120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "edgenode-전기장비-kr298040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기장비-kr298040",
+      "target": "company-kr298040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "edgenode-전기장비-kr006260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기장비-kr006260",
+      "target": "company-kr006260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "edgenode-전기장비-kr001440",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기장비-kr001440",
+      "target": "company-kr001440",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기제품",
+      "target": "edgenode-전기제품-kr373220",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기제품-kr373220",
+      "target": "company-lgensol",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기제품",
+      "target": "edgenode-전기제품-kr006400",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기제품-kr006400",
+      "target": "company-samsungsdi",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기제품",
+      "target": "edgenode-전기제품-kr247540",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기제품-kr247540",
+      "target": "company-kr247540",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기제품",
+      "target": "edgenode-전기제품-kr066970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기제품-kr066970",
+      "target": "company-kr066970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기제품",
+      "target": "edgenode-전기제품-kr450080",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기제품-kr450080",
+      "target": "company-kr450080",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전문소매",
+      "target": "edgenode-전문소매-kr071840",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전문소매-kr071840",
+      "target": "company-kr071840",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전문소매",
+      "target": "edgenode-전문소매-kr080420",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전문소매-kr080420",
+      "target": "company-kr080420",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전문소매",
+      "target": "edgenode-전문소매-kr064800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전문소매-kr064800",
+      "target": "company-kr064800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전문소매",
+      "target": "edgenode-전문소매-kr064240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전문소매-kr064240",
+      "target": "company-kr064240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전문소매",
+      "target": "edgenode-전문소매-kr178780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전문소매-kr178780",
+      "target": "company-kr178780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자장비와기기",
+      "target": "edgenode-전자장비와기기-kr009150",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자장비와기기-kr009150",
+      "target": "company-kr009150",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자장비와기기",
+      "target": "edgenode-전자장비와기기-kr011070",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자장비와기기-kr011070",
+      "target": "company-kr011070",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자장비와기기",
+      "target": "edgenode-전자장비와기기-kr353200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자장비와기기-kr353200",
+      "target": "company-kr353200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자장비와기기",
+      "target": "edgenode-전자장비와기기-kr222800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자장비와기기-kr222800",
+      "target": "company-kr222800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자장비와기기",
+      "target": "edgenode-전자장비와기기-kr098460",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자장비와기기-kr098460",
+      "target": "company-kr098460",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자제품",
+      "target": "edgenode-전자제품-kr066570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자제품-kr066570",
+      "target": "company-kr066570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자제품",
+      "target": "edgenode-전자제품-kr066575",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자제품-kr066575",
+      "target": "company-kr066575",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자제품",
+      "target": "edgenode-전자제품-kr008700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자제품-kr008700",
+      "target": "company-kr008700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자제품",
+      "target": "edgenode-전자제품-kr078890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자제품-kr078890",
+      "target": "company-kr078890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자제품",
+      "target": "edgenode-전자제품-kr084730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자제품-kr084730",
+      "target": "company-kr084730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-제약",
+      "target": "edgenode-제약-kr207940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-제약-kr207940",
+      "target": "company-kr207940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-제약",
+      "target": "edgenode-제약-kr068270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-제약-kr068270",
+      "target": "company-kr068270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-제약",
+      "target": "edgenode-제약-kr0126Z0",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-제약-kr0126Z0",
+      "target": "company-kr0126Z0",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-제약",
+      "target": "edgenode-제약-kr326030",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-제약-kr326030",
+      "target": "company-kr326030",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-제약",
+      "target": "edgenode-제약-kr000100",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-제약-kr000100",
+      "target": "company-kr000100",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-조선",
+      "target": "edgenode-조선-kr009540",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-조선-kr009540",
+      "target": "company-kr009540",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-조선",
+      "target": "edgenode-조선-kr267250",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-조선-kr267250",
+      "target": "company-kr267250",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-조선",
+      "target": "edgenode-조선-kr443060",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-조선-kr443060",
+      "target": "company-kr443060",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-조선",
+      "target": "edgenode-조선-kr082740",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-조선-kr082740",
+      "target": "company-kr082740",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-조선",
+      "target": "edgenode-조선-kr071970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-조선-kr071970",
+      "target": "company-kr071970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-종이와목재",
+      "target": "edgenode-종이와목재-kr078130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-종이와목재-kr078130",
+      "target": "company-kr078130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-종이와목재",
+      "target": "edgenode-종이와목재-kr034810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-종이와목재-kr034810",
+      "target": "company-kr034810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-종이와목재",
+      "target": "edgenode-종이와목재-kr213500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-종이와목재-kr213500",
+      "target": "company-kr213500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-종이와목재",
+      "target": "edgenode-종이와목재-kr027970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-종이와목재-kr027970",
+      "target": "company-kr027970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-종이와목재",
+      "target": "edgenode-종이와목재-kr009580",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-종이와목재-kr009580",
+      "target": "company-kr009580",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-증권",
+      "target": "edgenode-증권-kr006800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-증권-kr006800",
+      "target": "company-kr006800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-증권",
+      "target": "edgenode-증권-kr138040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-증권-kr138040",
+      "target": "company-kr138040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-증권",
+      "target": "edgenode-증권-kr071050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-증권-kr071050",
+      "target": "company-kr071050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-증권",
+      "target": "edgenode-증권-kr005940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-증권-kr005940",
+      "target": "company-kr005940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-증권",
+      "target": "edgenode-증권-kr016360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-증권-kr016360",
+      "target": "company-kr016360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "edgenode-창업투자-kr100790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-창업투자-kr100790",
+      "target": "company-kr100790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "edgenode-창업투자-kr027360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-창업투자-kr027360",
+      "target": "company-kr027360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "edgenode-창업투자-kr041190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-창업투자-kr041190",
+      "target": "company-kr041190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "edgenode-창업투자-kr026890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-창업투자-kr026890",
+      "target": "company-kr026890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "edgenode-창업투자-kr241520",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-창업투자-kr241520",
+      "target": "company-kr241520",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-철강",
+      "target": "edgenode-철강-kr005490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-철강-kr005490",
+      "target": "company-kr005490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-철강",
+      "target": "edgenode-철강-kr004020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-철강-kr004020",
+      "target": "company-kr004020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-철강",
+      "target": "edgenode-철강-kr001430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-철강-kr001430",
+      "target": "company-kr001430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-철강",
+      "target": "edgenode-철강-kr016380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-철강-kr016380",
+      "target": "company-kr016380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-철강",
+      "target": "edgenode-철강-kr058650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-철강-kr058650",
+      "target": "company-kr058650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-출판",
+      "target": "edgenode-출판-kr016880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-출판-kr016880",
+      "target": "company-kr016880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-출판",
+      "target": "edgenode-출판-kr418470",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-출판-kr418470",
+      "target": "company-kr418470",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-출판",
+      "target": "edgenode-출판-kr263720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-출판-kr263720",
+      "target": "company-kr263720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-출판",
+      "target": "edgenode-출판-kr036000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-출판-kr036000",
+      "target": "company-kr036000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-출판",
+      "target": "edgenode-출판-kr068290",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-출판-kr068290",
+      "target": "company-kr068290",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-카드",
+      "target": "edgenode-카드-kr029780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-카드-kr029780",
+      "target": "company-kr029780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-컴퓨터와주변기기",
+      "target": "edgenode-컴퓨터와주변기기-kr046970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-컴퓨터와주변기기-kr046970",
+      "target": "company-kr046970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-컴퓨터와주변기기",
+      "target": "edgenode-컴퓨터와주변기기-kr093190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-컴퓨터와주변기기-kr093190",
+      "target": "company-kr093190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-컴퓨터와주변기기",
+      "target": "edgenode-컴퓨터와주변기기-kr054800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-컴퓨터와주변기기-kr054800",
+      "target": "company-kr054800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-컴퓨터와주변기기",
+      "target": "edgenode-컴퓨터와주변기기-kr332370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-컴퓨터와주변기기-kr332370",
+      "target": "company-kr332370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-컴퓨터와주변기기",
+      "target": "edgenode-컴퓨터와주변기기-kr045660",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-컴퓨터와주변기기-kr045660",
+      "target": "company-kr045660",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "edgenode-통신장비-kr489790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-통신장비-kr489790",
+      "target": "company-kr489790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "edgenode-통신장비-kr010170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-통신장비-kr010170",
+      "target": "company-kr010170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "edgenode-통신장비-kr218410",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-통신장비-kr218410",
+      "target": "company-kr218410",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "edgenode-통신장비-kr189300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-통신장비-kr189300",
+      "target": "company-kr189300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "edgenode-통신장비-kr032500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-통신장비-kr032500",
+      "target": "company-kr032500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-판매업체",
+      "target": "edgenode-판매업체-kr052020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-판매업체-kr052020",
+      "target": "company-kr052020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-판매업체",
+      "target": "edgenode-판매업체-kr051160",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-판매업체-kr051160",
+      "target": "company-kr051160",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-판매업체",
+      "target": "edgenode-판매업체-kr063170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-판매업체-kr063170",
+      "target": "company-kr063170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-판매업체",
+      "target": "edgenode-판매업체-kr102370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-판매업체-kr102370",
+      "target": "company-kr102370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-판매업체",
+      "target": "edgenode-판매업체-kr003580",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-판매업체-kr003580",
+      "target": "company-kr003580",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-포장재",
+      "target": "edgenode-포장재-kr014820",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-포장재-kr014820",
+      "target": "company-kr014820",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-포장재",
+      "target": "edgenode-포장재-kr251970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-포장재-kr251970",
+      "target": "company-kr251970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-포장재",
+      "target": "edgenode-포장재-kr016590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-포장재-kr016590",
+      "target": "company-kr016590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-포장재",
+      "target": "edgenode-포장재-kr008730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-포장재-kr008730",
+      "target": "company-kr008730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-포장재",
+      "target": "edgenode-포장재-kr002310",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-포장재-kr002310",
+      "target": "company-kr002310",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공사",
+      "target": "edgenode-항공사-kr003490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공사-kr003490",
+      "target": "company-kr003490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공사",
+      "target": "edgenode-항공사-kr180640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공사-kr180640",
+      "target": "company-kr180640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공사",
+      "target": "edgenode-항공사-kr020560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공사-kr020560",
+      "target": "company-kr020560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공사",
+      "target": "edgenode-항공사-kr089590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공사-kr089590",
+      "target": "company-kr089590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공사",
+      "target": "edgenode-항공사-kr272450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공사-kr272450",
+      "target": "company-kr272450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공화물운송과물류",
+      "target": "edgenode-항공화물운송과물류-kr086280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공화물운송과물류-kr086280",
+      "target": "company-kr086280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공화물운송과물류",
+      "target": "edgenode-항공화물운송과물류-kr000120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공화물운송과물류-kr000120",
+      "target": "company-kr000120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공화물운송과물류",
+      "target": "edgenode-항공화물운송과물류-kr004360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공화물운송과물류-kr004360",
+      "target": "company-kr004360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공화물운송과물류",
+      "target": "edgenode-항공화물운송과물류-kr002320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공화물운송과물류-kr002320",
+      "target": "company-kr002320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공화물운송과물류",
+      "target": "edgenode-항공화물운송과물류-kr000700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공화물운송과물류-kr000700",
+      "target": "company-kr000700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-해운사",
+      "target": "edgenode-해운사-kr011200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-해운사-kr011200",
+      "target": "company-kr011200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-해운사",
+      "target": "edgenode-해운사-kr028670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-해운사-kr028670",
+      "target": "company-kr028670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-해운사",
+      "target": "edgenode-해운사-kr005880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-해운사-kr005880",
+      "target": "company-kr005880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-해운사",
+      "target": "edgenode-해운사-kr003280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-해운사-kr003280",
+      "target": "company-kr003280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-해운사",
+      "target": "edgenode-해운사-kr044450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-해운사-kr044450",
+      "target": "company-kr044450",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "edgenode-핸드셋-kr204270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-핸드셋-kr204270",
+      "target": "company-kr204270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "edgenode-핸드셋-kr000670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-핸드셋-kr000670",
+      "target": "company-kr000670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "edgenode-핸드셋-kr290550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-핸드셋-kr290550",
+      "target": "company-kr290550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "edgenode-핸드셋-kr025320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-핸드셋-kr025320",
+      "target": "company-kr025320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "edgenode-핸드셋-kr097520",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-핸드셋-kr097520",
+      "target": "company-kr097520",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-호텔-레스토랑-레저",
+      "target": "edgenode-호텔-레스토랑-레저-kr035250",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-호텔-레스토랑-레저-kr035250",
+      "target": "company-kr035250",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-호텔-레스토랑-레저",
+      "target": "edgenode-호텔-레스토랑-레저-kr032350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-호텔-레스토랑-레저-kr032350",
+      "target": "company-kr032350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-호텔-레스토랑-레저",
+      "target": "edgenode-호텔-레스토랑-레저-kr034230",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-호텔-레스토랑-레저-kr034230",
+      "target": "company-kr034230",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-호텔-레스토랑-레저",
+      "target": "edgenode-호텔-레스토랑-레저-kr499790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-호텔-레스토랑-레저-kr499790",
+      "target": "company-kr499790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-호텔-레스토랑-레저",
+      "target": "edgenode-호텔-레스토랑-레저-kr006730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-호텔-레스토랑-레저-kr006730",
+      "target": "company-kr006730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화장품",
+      "target": "edgenode-화장품-kr278470",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화장품-kr278470",
+      "target": "company-kr278470",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화장품",
+      "target": "edgenode-화장품-kr090430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화장품-kr090430",
+      "target": "company-kr090430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화장품",
+      "target": "edgenode-화장품-kr051900",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화장품-kr051900",
+      "target": "company-kr051900",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화장품",
+      "target": "edgenode-화장품-kr161890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화장품-kr161890",
+      "target": "company-kr161890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화장품",
+      "target": "edgenode-화장품-kr483650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화장품-kr483650",
+      "target": "company-kr483650",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화학",
+      "target": "edgenode-화학-kr086520",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화학-kr086520",
+      "target": "company-kr086520",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화학",
+      "target": "edgenode-화학-kr011790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화학-kr011790",
+      "target": "company-kr011790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화학",
+      "target": "edgenode-화학-kr010060",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화학-kr010060",
+      "target": "company-kr010060",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화학",
+      "target": "edgenode-화학-kr011780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화학-kr011780",
+      "target": "company-kr011780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화학",
+      "target": "edgenode-화학-kr014680",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화학-kr014680",
+      "target": "company-kr014680",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-IT서비스",
+      "target": "edgenode-IT서비스-kr018260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-IT서비스-kr018260",
+      "target": "company-kr018260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-IT서비스",
+      "target": "edgenode-IT서비스-kr307950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-IT서비스-kr307950",
+      "target": "company-kr307950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-IT서비스",
+      "target": "edgenode-IT서비스-kr064400",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-IT서비스-kr064400",
+      "target": "company-kr064400",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-IT서비스",
+      "target": "edgenode-IT서비스-kr022100",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-IT서비스-kr022100",
+      "target": "company-kr022100",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-IT서비스",
+      "target": "edgenode-IT서비스-kr181710",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-IT서비스-kr181710",
+      "target": "company-kr181710",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-게임엔터테인먼트",
+      "target": "edgenode-게임엔터테인먼트-259960",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-게임엔터테인먼트-259960",
+      "target": "company-259960",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-무선통신서비스",
+      "target": "edgenode-무선통신서비스-017670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-무선통신서비스-017670",
+      "target": "company-017670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-복합기업",
+      "target": "edgenode-복합기업-003550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-복합기업-003550",
+      "target": "company-003550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-부동산",
+      "target": "edgenode-부동산-395400",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-부동산-395400",
+      "target": "company-395400",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-부동산",
+      "target": "edgenode-부동산-365550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-부동산-365550",
+      "target": "company-365550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-상업서비스와공급품",
+      "target": "edgenode-상업서비스와공급품-030190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-상업서비스와공급품-030190",
+      "target": "company-030190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-석유와가스",
+      "target": "edgenode-석유와가스-034730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-석유와가스-034730",
+      "target": "company-034730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-석유와가스",
+      "target": "edgenode-석유와가스-096770",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-석유와가스-096770",
+      "target": "company-096770",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-석유와가스",
+      "target": "edgenode-석유와가스-010950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-석유와가스-010950",
+      "target": "company-010950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-석유와가스",
+      "target": "edgenode-석유와가스-078930",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-석유와가스-078930",
+      "target": "company-078930",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-섬유-의류-신발-호화품",
+      "target": "edgenode-섬유-의류-신발-호화품-383220",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-섬유-의류-신발-호화품-383220",
+      "target": "company-383220",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-손해보험",
+      "target": "edgenode-손해보험-005830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-손해보험-005830",
+      "target": "company-005830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품",
+      "target": "edgenode-식품-097950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품-097950",
+      "target": "company-097950",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-식품과기본식료품소매",
+      "target": "edgenode-식품과기본식료품소매-051500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-식품과기본식료품소매-051500",
+      "target": "company-051500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-에너지장비및서비스",
+      "target": "edgenode-에너지장비및서비스-009830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-에너지장비및서비스-009830",
+      "target": "company-009830",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-운송인프라",
+      "target": "edgenode-운송인프라-415640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-운송인프라-415640",
+      "target": "company-415640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-은행",
+      "target": "edgenode-은행-105560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-은행-105560",
+      "target": "company-105560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기유틸리티",
+      "target": "edgenode-전기유틸리티-051600",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기유틸리티-051600",
+      "target": "company-051600",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "edgenode-전기장비-267260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기장비-267260",
+      "target": "company-267260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "edgenode-전기장비-010120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기장비-010120",
+      "target": "company-010120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "edgenode-전기장비-298040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기장비-298040",
+      "target": "company-298040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "edgenode-전기장비-006260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기장비-006260",
+      "target": "company-006260",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기제품",
+      "target": "edgenode-전기제품-373220",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기제품-373220",
+      "target": "company-373220",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기제품",
+      "target": "edgenode-전기제품-006400",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기제품-006400",
+      "target": "company-006400",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기제품",
+      "target": "edgenode-전기제품-247540",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기제품-247540",
+      "target": "company-247540",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전기제품",
+      "target": "edgenode-전기제품-066970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전기제품-066970",
+      "target": "company-066970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전문소매",
+      "target": "edgenode-전문소매-071840",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전문소매-071840",
+      "target": "company-071840",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전문소매",
+      "target": "edgenode-전문소매-080420",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전문소매-080420",
+      "target": "company-080420",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전문소매",
+      "target": "edgenode-전문소매-064800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전문소매-064800",
+      "target": "company-064800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전문소매",
+      "target": "edgenode-전문소매-064240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전문소매-064240",
+      "target": "company-064240",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자장비와기기",
+      "target": "edgenode-전자장비와기기-009150",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자장비와기기-009150",
+      "target": "company-009150",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자장비와기기",
+      "target": "edgenode-전자장비와기기-011070",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자장비와기기-011070",
+      "target": "company-011070",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자장비와기기",
+      "target": "edgenode-전자장비와기기-353200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자장비와기기-353200",
+      "target": "company-353200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자장비와기기",
+      "target": "edgenode-전자장비와기기-222800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자장비와기기-222800",
+      "target": "company-222800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자제품",
+      "target": "edgenode-전자제품-066570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자제품-066570",
+      "target": "company-066570",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자제품",
+      "target": "edgenode-전자제품-066575",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자제품-066575",
+      "target": "company-066575",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-전자제품",
+      "target": "edgenode-전자제품-008700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-전자제품-008700",
+      "target": "company-008700",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-종이와목재",
+      "target": "edgenode-종이와목재-078130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-종이와목재-078130",
+      "target": "company-078130",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-종이와목재",
+      "target": "edgenode-종이와목재-034810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-종이와목재-034810",
+      "target": "company-034810",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-종이와목재",
+      "target": "edgenode-종이와목재-213500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-종이와목재-213500",
+      "target": "company-213500",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-종이와목재",
+      "target": "edgenode-종이와목재-027970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-종이와목재-027970",
+      "target": "company-027970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-증권",
+      "target": "edgenode-증권-006800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-증권-006800",
+      "target": "company-006800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-증권",
+      "target": "edgenode-증권-138040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-증권-138040",
+      "target": "company-138040",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-증권",
+      "target": "edgenode-증권-071050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-증권-071050",
+      "target": "company-071050",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-증권",
+      "target": "edgenode-증권-005940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-증권-005940",
+      "target": "company-005940",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "edgenode-창업투자-100790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-창업투자-100790",
+      "target": "company-100790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "edgenode-창업투자-027360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-창업투자-027360",
+      "target": "company-027360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "edgenode-창업투자-041190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-창업투자-041190",
+      "target": "company-041190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "edgenode-창업투자-026890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-창업투자-026890",
+      "target": "company-026890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-철강",
+      "target": "edgenode-철강-005490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-철강-005490",
+      "target": "company-005490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-철강",
+      "target": "edgenode-철강-004020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-철강-004020",
+      "target": "company-004020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-철강",
+      "target": "edgenode-철강-001430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-철강-001430",
+      "target": "company-001430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-철강",
+      "target": "edgenode-철강-016380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-철강-016380",
+      "target": "company-016380",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-출판",
+      "target": "edgenode-출판-016880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-출판-016880",
+      "target": "company-016880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-출판",
+      "target": "edgenode-출판-418470",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-출판-418470",
+      "target": "company-418470",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-출판",
+      "target": "edgenode-출판-263720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-출판-263720",
+      "target": "company-263720",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-출판",
+      "target": "edgenode-출판-036000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-출판-036000",
+      "target": "company-036000",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-카드",
+      "target": "edgenode-카드-029780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-카드-029780",
+      "target": "company-029780",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-컴퓨터와주변기기",
+      "target": "edgenode-컴퓨터와주변기기-046970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-컴퓨터와주변기기-046970",
+      "target": "company-046970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-컴퓨터와주변기기",
+      "target": "edgenode-컴퓨터와주변기기-093190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-컴퓨터와주변기기-093190",
+      "target": "company-093190",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-컴퓨터와주변기기",
+      "target": "edgenode-컴퓨터와주변기기-054800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-컴퓨터와주변기기-054800",
+      "target": "company-054800",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-컴퓨터와주변기기",
+      "target": "edgenode-컴퓨터와주변기기-332370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-컴퓨터와주변기기-332370",
+      "target": "company-332370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "edgenode-통신장비-489790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-통신장비-489790",
+      "target": "company-489790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "edgenode-통신장비-010170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-통신장비-010170",
+      "target": "company-010170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "edgenode-통신장비-218410",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-통신장비-218410",
+      "target": "company-218410",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "edgenode-통신장비-189300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-통신장비-189300",
+      "target": "company-189300",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-판매업체",
+      "target": "edgenode-판매업체-052020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-판매업체-052020",
+      "target": "company-052020",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-판매업체",
+      "target": "edgenode-판매업체-051160",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-판매업체-051160",
+      "target": "company-051160",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-판매업체",
+      "target": "edgenode-판매업체-063170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-판매업체-063170",
+      "target": "company-063170",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-판매업체",
+      "target": "edgenode-판매업체-102370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-판매업체-102370",
+      "target": "company-102370",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-포장재",
+      "target": "edgenode-포장재-014820",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-포장재-014820",
+      "target": "company-014820",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-포장재",
+      "target": "edgenode-포장재-251970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-포장재-251970",
+      "target": "company-251970",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-포장재",
+      "target": "edgenode-포장재-016590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-포장재-016590",
+      "target": "company-016590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-포장재",
+      "target": "edgenode-포장재-008730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-포장재-008730",
+      "target": "company-008730",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공사",
+      "target": "edgenode-항공사-003490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공사-003490",
+      "target": "company-003490",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공사",
+      "target": "edgenode-항공사-180640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공사-180640",
+      "target": "company-180640",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공사",
+      "target": "edgenode-항공사-020560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공사-020560",
+      "target": "company-020560",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공사",
+      "target": "edgenode-항공사-089590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공사-089590",
+      "target": "company-089590",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공화물운송과물류",
+      "target": "edgenode-항공화물운송과물류-086280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공화물운송과물류-086280",
+      "target": "company-086280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공화물운송과물류",
+      "target": "edgenode-항공화물운송과물류-000120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공화물운송과물류-000120",
+      "target": "company-000120",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공화물운송과물류",
+      "target": "edgenode-항공화물운송과물류-004360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공화물운송과물류-004360",
+      "target": "company-004360",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-항공화물운송과물류",
+      "target": "edgenode-항공화물운송과물류-002320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-항공화물운송과물류-002320",
+      "target": "company-002320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-해운사",
+      "target": "edgenode-해운사-011200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-해운사-011200",
+      "target": "company-011200",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-해운사",
+      "target": "edgenode-해운사-028670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-해운사-028670",
+      "target": "company-028670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-해운사",
+      "target": "edgenode-해운사-005880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-해운사-005880",
+      "target": "company-005880",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-해운사",
+      "target": "edgenode-해운사-003280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-해운사-003280",
+      "target": "company-003280",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "edgenode-핸드셋-204270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-핸드셋-204270",
+      "target": "company-204270",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "edgenode-핸드셋-000670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-핸드셋-000670",
+      "target": "company-000670",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "edgenode-핸드셋-290550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-핸드셋-290550",
+      "target": "company-290550",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "edgenode-핸드셋-025320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-핸드셋-025320",
+      "target": "company-025320",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-호텔-레스토랑-레저",
+      "target": "edgenode-호텔-레스토랑-레저-035250",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-호텔-레스토랑-레저-035250",
+      "target": "company-035250",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-호텔-레스토랑-레저",
+      "target": "edgenode-호텔-레스토랑-레저-032350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-호텔-레스토랑-레저-032350",
+      "target": "company-032350",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-호텔-레스토랑-레저",
+      "target": "edgenode-호텔-레스토랑-레저-034230",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-호텔-레스토랑-레저-034230",
+      "target": "company-034230",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-호텔-레스토랑-레저",
+      "target": "edgenode-호텔-레스토랑-레저-499790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-호텔-레스토랑-레저-499790",
+      "target": "company-499790",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화장품",
+      "target": "edgenode-화장품-278470",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화장품-278470",
+      "target": "company-278470",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화장품",
+      "target": "edgenode-화장품-090430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화장품-090430",
+      "target": "company-090430",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화장품",
+      "target": "edgenode-화장품-051900",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화장품-051900",
+      "target": "company-051900",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "sector-화장품",
+      "target": "edgenode-화장품-161890",
+      "relation": "includes",
+      "weight": 1
+    },
+    {
+      "source": "edgenode-화장품-161890",
+      "target": "company-161890",
+      "relation": "includes",
+      "weight": 1
     }
   ]
 }

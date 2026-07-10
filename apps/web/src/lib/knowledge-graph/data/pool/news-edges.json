@@ -581,6 +581,3510 @@
       "target": "company-toss",
       "relation": "mentions",
       "weight": 0.87
+    },
+    {
+      "source": "news-31",
+      "target": "sector-가구",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-32",
+      "target": "sector-가구",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-33",
+      "target": "sector-가구",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-34",
+      "target": "sector-가구",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-35",
+      "target": "sector-가구",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-36",
+      "target": "sector-가스유틸리티",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-37",
+      "target": "sector-가스유틸리티",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-38",
+      "target": "sector-가스유틸리티",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-39",
+      "target": "sector-가스유틸리티",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-40",
+      "target": "sector-가스유틸리티",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-41",
+      "target": "sector-가정용기기와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-42",
+      "target": "sector-가정용기기와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-43",
+      "target": "sector-가정용기기와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-44",
+      "target": "sector-가정용기기와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-45",
+      "target": "sector-가정용기기와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-46",
+      "target": "sector-가정용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-47",
+      "target": "sector-가정용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-48",
+      "target": "sector-가정용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-49",
+      "target": "sector-가정용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-50",
+      "target": "sector-가정용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-51",
+      "target": "sector-건강관리기술",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-52",
+      "target": "sector-건강관리기술",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-53",
+      "target": "sector-건강관리기술",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-54",
+      "target": "sector-건강관리기술",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-55",
+      "target": "sector-건강관리기술",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-56",
+      "target": "sector-건강관리업체및서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-57",
+      "target": "sector-건강관리업체및서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-58",
+      "target": "sector-건강관리업체및서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-59",
+      "target": "sector-건강관리업체및서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-60",
+      "target": "sector-건강관리업체및서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-61",
+      "target": "sector-건강관리장비와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-62",
+      "target": "sector-건강관리장비와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-63",
+      "target": "sector-건강관리장비와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-64",
+      "target": "sector-건강관리장비와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-65",
+      "target": "sector-건강관리장비와용품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-66",
+      "target": "sector-건설",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-67",
+      "target": "sector-건설",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-68",
+      "target": "sector-건설",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-69",
+      "target": "sector-건설",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-70",
+      "target": "sector-건설",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-71",
+      "target": "sector-건축자재",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-72",
+      "target": "sector-건축자재",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-73",
+      "target": "sector-건축자재",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-74",
+      "target": "sector-건축자재",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-75",
+      "target": "sector-건축자재",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-76",
+      "target": "sector-건축제품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-77",
+      "target": "sector-건축제품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-78",
+      "target": "sector-건축제품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-79",
+      "target": "sector-건축제품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-80",
+      "target": "sector-게임엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-81",
+      "target": "sector-게임엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-82",
+      "target": "sector-게임엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-83",
+      "target": "sector-게임엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-84",
+      "target": "sector-게임엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-85",
+      "target": "sector-광고",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-86",
+      "target": "sector-광고",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-87",
+      "target": "sector-광고",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-88",
+      "target": "sector-교육서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-89",
+      "target": "sector-교육서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-90",
+      "target": "sector-교육서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-91",
+      "target": "sector-교육서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-92",
+      "target": "sector-교육서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-93",
+      "target": "sector-기계",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-94",
+      "target": "sector-기계",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-95",
+      "target": "sector-기타",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-96",
+      "target": "sector-기타",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-97",
+      "target": "sector-기타",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-98",
+      "target": "sector-기타",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-99",
+      "target": "sector-기타",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-100",
+      "target": "sector-기타금융",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-101",
+      "target": "sector-기타금융",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-102",
+      "target": "sector-기타금융",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-103",
+      "target": "sector-기타금융",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-104",
+      "target": "sector-기타금융",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-105",
+      "target": "sector-다각화된소비자서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-106",
+      "target": "sector-다각화된소비자서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-107",
+      "target": "sector-다각화된통신서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-108",
+      "target": "sector-다각화된통신서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-109",
+      "target": "sector-다각화된통신서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-110",
+      "target": "sector-담배",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-111",
+      "target": "sector-담배",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-112",
+      "target": "sector-담배",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-113",
+      "target": "sector-도로와철도운송",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-114",
+      "target": "sector-도로와철도운송",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-115",
+      "target": "sector-도로와철도운송",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-116",
+      "target": "sector-도로와철도운송",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-117",
+      "target": "sector-도로와철도운송",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-118",
+      "target": "sector-디스플레이장비및부품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-119",
+      "target": "sector-디스플레이장비및부품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-120",
+      "target": "sector-디스플레이장비및부품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-121",
+      "target": "sector-디스플레이장비및부품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-122",
+      "target": "sector-디스플레이장비및부품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-123",
+      "target": "sector-디스플레이패널",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-124",
+      "target": "sector-디스플레이패널",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-125",
+      "target": "sector-디스플레이패널",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-126",
+      "target": "sector-디스플레이패널",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-127",
+      "target": "sector-디스플레이패널",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-128",
+      "target": "sector-레저용장비와제품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-129",
+      "target": "sector-레저용장비와제품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-130",
+      "target": "sector-레저용장비와제품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-131",
+      "target": "sector-레저용장비와제품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-132",
+      "target": "sector-레저용장비와제품",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-133",
+      "target": "sector-무선통신서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-134",
+      "target": "sector-무선통신서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-135",
+      "target": "sector-무선통신서비스",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-136",
+      "target": "sector-무역회사와판매업체",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-137",
+      "target": "sector-무역회사와판매업체",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-138",
+      "target": "sector-무역회사와판매업체",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-139",
+      "target": "sector-무역회사와판매업체",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-140",
+      "target": "sector-무역회사와판매업체",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-141",
+      "target": "sector-문구류",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-142",
+      "target": "sector-문구류",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-143",
+      "target": "sector-반도체와반도체장비",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-144",
+      "target": "sector-반도체와반도체장비",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-145",
+      "target": "sector-반도체와반도체장비",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-146",
+      "target": "sector-반도체와반도체장비",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-147",
+      "target": "sector-반도체와반도체장비",
+      "relation": "mentions",
+      "weight": 0.85
+    },
+    {
+      "source": "news-31",
+      "target": "sector-방송과엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-32",
+      "target": "sector-방송과엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-33",
+      "target": "sector-방송과엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-34",
+      "target": "sector-방송과엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-35",
+      "target": "sector-방송과엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-36",
+      "target": "sector-백화점과일반상점",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-37",
+      "target": "sector-백화점과일반상점",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-38",
+      "target": "sector-백화점과일반상점",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-39",
+      "target": "sector-백화점과일반상점",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-40",
+      "target": "sector-백화점과일반상점",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-41",
+      "target": "sector-복합기업",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-42",
+      "target": "sector-복합기업",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-43",
+      "target": "sector-복합기업",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-44",
+      "target": "sector-복합기업",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-45",
+      "target": "sector-복합기업",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-46",
+      "target": "sector-복합유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-47",
+      "target": "sector-복합유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-48",
+      "target": "sector-복합유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-49",
+      "target": "sector-부동산",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-50",
+      "target": "sector-부동산",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-51",
+      "target": "sector-부동산",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-52",
+      "target": "sector-부동산",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-53",
+      "target": "sector-부동산",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-54",
+      "target": "sector-비철금속",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-55",
+      "target": "sector-비철금속",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-56",
+      "target": "sector-비철금속",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-57",
+      "target": "sector-비철금속",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-58",
+      "target": "sector-비철금속",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-59",
+      "target": "sector-사무용전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-60",
+      "target": "sector-사무용전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-61",
+      "target": "sector-사무용전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-62",
+      "target": "sector-상업서비스와공급품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-63",
+      "target": "sector-상업서비스와공급품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-64",
+      "target": "sector-상업서비스와공급품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-65",
+      "target": "sector-상업서비스와공급품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-66",
+      "target": "sector-상업서비스와공급품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-67",
+      "target": "sector-생명과학도구및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-68",
+      "target": "sector-생명과학도구및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-69",
+      "target": "sector-생명과학도구및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-70",
+      "target": "sector-생명과학도구및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-71",
+      "target": "sector-생명과학도구및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-72",
+      "target": "sector-생명보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-73",
+      "target": "sector-생명보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-74",
+      "target": "sector-생명보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-75",
+      "target": "sector-생명보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-76",
+      "target": "sector-생명보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-77",
+      "target": "sector-생물공학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-78",
+      "target": "sector-생물공학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-79",
+      "target": "sector-생물공학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-80",
+      "target": "sector-생물공학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-81",
+      "target": "sector-석유와가스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-82",
+      "target": "sector-석유와가스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-83",
+      "target": "sector-석유와가스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-84",
+      "target": "sector-석유와가스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-85",
+      "target": "sector-석유와가스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-86",
+      "target": "sector-섬유-의류-신발-호화품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-87",
+      "target": "sector-섬유-의류-신발-호화품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-88",
+      "target": "sector-섬유-의류-신발-호화품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-89",
+      "target": "sector-섬유-의류-신발-호화품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-90",
+      "target": "sector-섬유-의류-신발-호화품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-91",
+      "target": "sector-소프트웨어",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-92",
+      "target": "sector-소프트웨어",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-93",
+      "target": "sector-소프트웨어",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-94",
+      "target": "sector-소프트웨어",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-95",
+      "target": "sector-소프트웨어",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-96",
+      "target": "sector-손해보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-97",
+      "target": "sector-손해보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-98",
+      "target": "sector-손해보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-99",
+      "target": "sector-식품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-100",
+      "target": "sector-식품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-101",
+      "target": "sector-식품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-102",
+      "target": "sector-식품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-103",
+      "target": "sector-식품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-104",
+      "target": "sector-식품과기본식료품소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-105",
+      "target": "sector-식품과기본식료품소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-106",
+      "target": "sector-식품과기본식료품소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-107",
+      "target": "sector-식품과기본식료품소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-108",
+      "target": "sector-식품과기본식료품소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-109",
+      "target": "sector-양방향미디어와서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-110",
+      "target": "sector-양방향미디어와서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-111",
+      "target": "sector-양방향미디어와서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-112",
+      "target": "sector-양방향미디어와서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-113",
+      "target": "sector-양방향미디어와서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-114",
+      "target": "sector-에너지장비및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-115",
+      "target": "sector-에너지장비및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-116",
+      "target": "sector-에너지장비및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-117",
+      "target": "sector-에너지장비및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-118",
+      "target": "sector-에너지장비및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-119",
+      "target": "sector-우주항공과국방",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-120",
+      "target": "sector-우주항공과국방",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-121",
+      "target": "sector-우주항공과국방",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-122",
+      "target": "sector-우주항공과국방",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-123",
+      "target": "sector-운송인프라",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-124",
+      "target": "sector-운송인프라",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-125",
+      "target": "sector-운송인프라",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-126",
+      "target": "sector-운송인프라",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-127",
+      "target": "sector-운송인프라",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-128",
+      "target": "sector-은행",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-129",
+      "target": "sector-은행",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-130",
+      "target": "sector-은행",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-131",
+      "target": "sector-음료",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-132",
+      "target": "sector-음료",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-133",
+      "target": "sector-음료",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-134",
+      "target": "sector-음료",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-135",
+      "target": "sector-음료",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-136",
+      "target": "sector-인터넷과카탈로그소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-137",
+      "target": "sector-인터넷과카탈로그소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-138",
+      "target": "sector-인터넷과카탈로그소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-139",
+      "target": "sector-인터넷과카탈로그소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-140",
+      "target": "sector-인터넷과카탈로그소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-141",
+      "target": "sector-자동차",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-142",
+      "target": "sector-자동차",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-143",
+      "target": "sector-자동차",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-144",
+      "target": "sector-자동차",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-145",
+      "target": "sector-자동차부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-146",
+      "target": "sector-자동차부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-147",
+      "target": "sector-자동차부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-148",
+      "target": "sector-자동차부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-149",
+      "target": "sector-전기유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-150",
+      "target": "sector-전기유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-151",
+      "target": "sector-전기유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-152",
+      "target": "sector-전기유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-153",
+      "target": "sector-전기유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-008-0005384489",
+      "target": "sector-전기장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-005-0001860278",
+      "target": "sector-전기장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-079-0004167269",
+      "target": "sector-전기장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-011-0004640451",
+      "target": "sector-전기장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-018-0006327162",
+      "target": "sector-전기장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-353-0000056024",
+      "target": "sector-전기제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-023-0003987015",
+      "target": "sector-전기제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-353-0000055988",
+      "target": "sector-전기제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-003-0014059963",
+      "target": "sector-전기제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-003-0014059963",
+      "target": "company-samsungsdi",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-055-0001371508",
+      "target": "sector-전기제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-052-0002377627",
+      "target": "sector-전문소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-144-0001125455",
+      "target": "sector-전문소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-020-0003732841",
+      "target": "sector-전문소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005299548",
+      "target": "sector-전문소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-047-0002517207",
+      "target": "sector-전문소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005308772",
+      "target": "sector-전자장비와기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-374-0000521063",
+      "target": "sector-전자장비와기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-037-0000038484",
+      "target": "sector-전자장비와기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005308731",
+      "target": "sector-전자장비와기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005308731",
+      "target": "company-kr011070",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-015-0005308731",
+      "target": "company-kr353200",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-014-0005546659",
+      "target": "sector-전자장비와기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-001-0016188029",
+      "target": "sector-전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-081-0003660215",
+      "target": "sector-전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-366-0001178313",
+      "target": "sector-전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-366-0001178313",
+      "target": "company-kr066570",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-015-0005302902",
+      "target": "sector-전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-001-0016156853",
+      "target": "sector-전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005308738",
+      "target": "sector-제약",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-138-0002233864",
+      "target": "sector-제약",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-008-0005384415",
+      "target": "sector-제약",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-029-0003036397",
+      "target": "sector-제약",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-024-0000106801",
+      "target": "sector-제약",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-082-0001389254",
+      "target": "sector-조선",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-138-0002233873",
+      "target": "sector-조선",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-011-0004640344",
+      "target": "sector-조선",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005705874",
+      "target": "sector-조선",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005705874",
+      "target": "company-kr267250",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-009-0005705874",
+      "target": "company-kr443060",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-421-0009053129",
+      "target": "sector-조선",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-003-0014040279",
+      "target": "sector-종이와목재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-003-0014040279",
+      "target": "company-kr078130",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-088-0001016970",
+      "target": "sector-종이와목재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-008-0005379107",
+      "target": "sector-종이와목재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-018-0006314659",
+      "target": "sector-종이와목재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-016-0002659660",
+      "target": "sector-종이와목재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-214-0001510950",
+      "target": "sector-증권",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-374-0000521068",
+      "target": "sector-증권",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-011-0004640399",
+      "target": "sector-증권",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-629-0000515175",
+      "target": "sector-증권",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-016-0002668830",
+      "target": "sector-증권",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-016-0002668608",
+      "target": "sector-창업투자",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-277-0005788045",
+      "target": "sector-창업투자",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-018-0006326363",
+      "target": "sector-창업투자",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-008-0005383648",
+      "target": "sector-창업투자",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-293-0000087091",
+      "target": "sector-창업투자",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-020-0003733078",
+      "target": "sector-철강",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005308730",
+      "target": "sector-철강",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005308671",
+      "target": "sector-철강",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-031-0001041364",
+      "target": "sector-철강",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-031-0001041364",
+      "target": "company-kr004020",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-009-0005705725",
+      "target": "sector-철강",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-421-0009028644",
+      "target": "sector-출판",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-018-0006317252",
+      "target": "sector-출판",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-011-0004634175",
+      "target": "sector-출판",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-011-0004634175",
+      "target": "company-kr016880",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-293-0000087502",
+      "target": "sector-출판",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-021-0002803841",
+      "target": "sector-출판",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005705822",
+      "target": "sector-카드",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-293-0000087492",
+      "target": "sector-카드",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-648-0000048806",
+      "target": "sector-카드",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-081-0003660156",
+      "target": "sector-컴퓨터와주변기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-660-0000112390",
+      "target": "sector-컴퓨터와주변기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-014-0005543181",
+      "target": "sector-컴퓨터와주변기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-014-0005543181",
+      "target": "company-kr046970",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-011-0004586667",
+      "target": "sector-컴퓨터와주변기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-277-0005716771",
+      "target": "sector-컴퓨터와주변기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-277-0005716771",
+      "target": "company-kr093190",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-009-0005705784",
+      "target": "sector-통신장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-001-0016186876",
+      "target": "sector-통신장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-629-0000514818",
+      "target": "sector-통신장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-374-0000520944",
+      "target": "sector-통신장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-018-0006305796",
+      "target": "sector-통신장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-003-0014016967",
+      "target": "sector-판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-003-0014016967",
+      "target": "company-kr052020",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-008-0005366337",
+      "target": "sector-판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-008-0005366337",
+      "target": "company-kr052020",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-215-0001253740",
+      "target": "sector-판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-138-0002232149",
+      "target": "sector-판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-020-0003727109",
+      "target": "sector-판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-021-0002801031",
+      "target": "sector-포장재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-586-0000132565",
+      "target": "sector-포장재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005696568",
+      "target": "sector-포장재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-008-0005368998",
+      "target": "sector-포장재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-008-0005368998",
+      "target": "company-kr251970",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-018-0006276097",
+      "target": "sector-포장재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-018-0006276097",
+      "target": "company-kr251970",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-016-0002668783",
+      "target": "sector-항공사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-016-0002668783",
+      "target": "company-kr180640",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-421-0009053143",
+      "target": "sector-항공사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-421-0009053143",
+      "target": "company-kr003490",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-243-0000100292",
+      "target": "sector-항공사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-243-0000100292",
+      "target": "company-kr003490",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-028-0002812637",
+      "target": "sector-항공사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-014-0005543358",
+      "target": "sector-항공사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-293-0000087465",
+      "target": "sector-항공화물운송과물류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005705333",
+      "target": "sector-항공화물운송과물류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-016-0002668252",
+      "target": "sector-항공화물운송과물류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-016-0002668252",
+      "target": "company-kr086280",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-422-0000883908",
+      "target": "sector-항공화물운송과물류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-023-0003986921",
+      "target": "sector-항공화물운송과물류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-018-0006327156",
+      "target": "sector-해운사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-123-0002386254",
+      "target": "sector-해운사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-123-0002386254",
+      "target": "company-kr011200",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-009-0005704736",
+      "target": "sector-해운사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005704736",
+      "target": "company-kr011200",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-008-0005384471",
+      "target": "sector-해운사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-138-0002233841",
+      "target": "sector-해운사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-138-0002233841",
+      "target": "company-kr011200",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-374-0000520734",
+      "target": "sector-핸드셋",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-123-0002385495",
+      "target": "sector-핸드셋",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-018-0006312970",
+      "target": "sector-핸드셋",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-018-0006312970",
+      "target": "company-kr204270",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-029-0003036267",
+      "target": "sector-핸드셋",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-029-0003036267",
+      "target": "company-kr000670",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-029-0003036185",
+      "target": "sector-핸드셋",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-029-0003036185",
+      "target": "company-kr000670",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-016-0002668729",
+      "target": "sector-호텔-레스토랑-레저",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-138-0002233835",
+      "target": "sector-호텔-레스토랑-레저",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-001-0016185893",
+      "target": "sector-호텔-레스토랑-레저",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-025-0003536676",
+      "target": "sector-호텔-레스토랑-레저",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-025-0003536676",
+      "target": "company-kr032350",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-009-0005705344",
+      "target": "sector-호텔-레스토랑-레저",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005705344",
+      "target": "company-kr032350",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-015-0005308758",
+      "target": "sector-화장품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-417-0001151197",
+      "target": "sector-화장품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-008-0005384085",
+      "target": "sector-화장품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-014-0005546239",
+      "target": "sector-화장품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-421-0009051091",
+      "target": "sector-화장품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-366-0001176934",
+      "target": "sector-화학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005306050",
+      "target": "sector-화학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-014-0005542358",
+      "target": "sector-화학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-014-0005542358",
+      "target": "company-kr011790",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-293-0000087468",
+      "target": "sector-화학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-293-0000087468",
+      "target": "company-kr010060",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-018-0006326810",
+      "target": "sector-화학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005705754",
+      "target": "sector-IT서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-022-0004142025",
+      "target": "sector-IT서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005308430",
+      "target": "sector-IT서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-015-0005308437",
+      "target": "sector-IT서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005705410",
+      "target": "sector-IT서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-009-0005705410",
+      "target": "company-kr307950",
+      "relation": "mentions",
+      "weight": 0.82
+    },
+    {
+      "source": "news-34",
+      "target": "sector-가스유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-35",
+      "target": "sector-가스유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-37",
+      "target": "sector-가정용기기와용품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-38",
+      "target": "sector-가정용기기와용품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-39",
+      "target": "sector-가정용기기와용품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-40",
+      "target": "sector-가정용품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-41",
+      "target": "sector-가정용품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-42",
+      "target": "sector-가정용품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-43",
+      "target": "sector-건강관리기술",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-44",
+      "target": "sector-건강관리기술",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-45",
+      "target": "sector-건강관리기술",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-46",
+      "target": "sector-건강관리업체및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-47",
+      "target": "sector-건강관리업체및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-48",
+      "target": "sector-건강관리업체및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-49",
+      "target": "sector-건강관리장비와용품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-50",
+      "target": "sector-건강관리장비와용품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-51",
+      "target": "sector-건강관리장비와용품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-52",
+      "target": "sector-건설",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-53",
+      "target": "sector-건설",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-54",
+      "target": "sector-건설",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-55",
+      "target": "sector-건축자재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-56",
+      "target": "sector-건축자재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-57",
+      "target": "sector-건축자재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-58",
+      "target": "sector-건축제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-59",
+      "target": "sector-건축제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-60",
+      "target": "sector-건축제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-61",
+      "target": "sector-게임엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-62",
+      "target": "sector-게임엔터테인먼트",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-63",
+      "target": "sector-광고",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-64",
+      "target": "sector-광고",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-65",
+      "target": "sector-광고",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-66",
+      "target": "sector-교육서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-67",
+      "target": "sector-교육서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-68",
+      "target": "sector-교육서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-69",
+      "target": "sector-기타",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-70",
+      "target": "sector-기타",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-71",
+      "target": "sector-기타",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-72",
+      "target": "sector-기타금융",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-73",
+      "target": "sector-다각화된소비자서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-74",
+      "target": "sector-다각화된소비자서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-75",
+      "target": "sector-다각화된소비자서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-76",
+      "target": "sector-다각화된통신서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-77",
+      "target": "sector-다각화된통신서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-78",
+      "target": "sector-다각화된통신서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-79",
+      "target": "sector-담배",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-80",
+      "target": "sector-담배",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-81",
+      "target": "sector-담배",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-82",
+      "target": "sector-도로와철도운송",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-83",
+      "target": "sector-도로와철도운송",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-84",
+      "target": "sector-도로와철도운송",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-85",
+      "target": "sector-디스플레이장비및부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-86",
+      "target": "sector-디스플레이장비및부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-87",
+      "target": "sector-디스플레이장비및부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-88",
+      "target": "sector-디스플레이패널",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-89",
+      "target": "sector-디스플레이패널",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-90",
+      "target": "sector-디스플레이패널",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-91",
+      "target": "sector-레저용장비와제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-92",
+      "target": "sector-레저용장비와제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-93",
+      "target": "sector-레저용장비와제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-94",
+      "target": "sector-무선통신서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-95",
+      "target": "sector-무선통신서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-96",
+      "target": "sector-무선통신서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-97",
+      "target": "sector-무역회사와판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-98",
+      "target": "sector-무역회사와판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-99",
+      "target": "sector-무역회사와판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-100",
+      "target": "sector-문구류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-101",
+      "target": "sector-문구류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-102",
+      "target": "sector-문구류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-103",
+      "target": "sector-백화점과일반상점",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-104",
+      "target": "sector-백화점과일반상점",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-105",
+      "target": "sector-백화점과일반상점",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-106",
+      "target": "sector-복합기업",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-107",
+      "target": "sector-복합기업",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-108",
+      "target": "sector-복합기업",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-109",
+      "target": "sector-복합유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-110",
+      "target": "sector-복합유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-111",
+      "target": "sector-복합유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-112",
+      "target": "sector-부동산",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-113",
+      "target": "sector-부동산",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-114",
+      "target": "sector-부동산",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-115",
+      "target": "sector-비철금속",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-116",
+      "target": "sector-비철금속",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-117",
+      "target": "sector-비철금속",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-118",
+      "target": "sector-사무용전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-119",
+      "target": "sector-사무용전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-120",
+      "target": "sector-사무용전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-121",
+      "target": "sector-상업서비스와공급품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-122",
+      "target": "sector-상업서비스와공급품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-123",
+      "target": "sector-상업서비스와공급품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-124",
+      "target": "sector-생명과학도구및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-125",
+      "target": "sector-생명과학도구및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-126",
+      "target": "sector-생명과학도구및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-127",
+      "target": "sector-생명보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-128",
+      "target": "sector-생명보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-129",
+      "target": "sector-생명보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-130",
+      "target": "sector-생물공학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-131",
+      "target": "sector-생물공학",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-132",
+      "target": "sector-석유와가스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-133",
+      "target": "sector-섬유-의류-신발-호화품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-134",
+      "target": "sector-섬유-의류-신발-호화품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-135",
+      "target": "sector-섬유-의류-신발-호화품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-136",
+      "target": "sector-손해보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-137",
+      "target": "sector-손해보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-138",
+      "target": "sector-손해보험",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-139",
+      "target": "sector-식품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-140",
+      "target": "sector-식품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-141",
+      "target": "sector-식품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-142",
+      "target": "sector-식품과기본식료품소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-143",
+      "target": "sector-식품과기본식료품소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-144",
+      "target": "sector-식품과기본식료품소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-145",
+      "target": "sector-에너지장비및서비스",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-146",
+      "target": "sector-운송인프라",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-147",
+      "target": "sector-운송인프라",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-148",
+      "target": "sector-운송인프라",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-149",
+      "target": "sector-은행",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-150",
+      "target": "sector-은행",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-151",
+      "target": "sector-음료",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-152",
+      "target": "sector-음료",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-153",
+      "target": "sector-음료",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-154",
+      "target": "sector-인터넷과카탈로그소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-155",
+      "target": "sector-인터넷과카탈로그소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-156",
+      "target": "sector-인터넷과카탈로그소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-157",
+      "target": "sector-자동차부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-158",
+      "target": "sector-자동차부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-159",
+      "target": "sector-자동차부품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-160",
+      "target": "sector-전기유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-161",
+      "target": "sector-전기유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-162",
+      "target": "sector-전기유틸리티",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-163",
+      "target": "sector-전기장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-164",
+      "target": "sector-전기장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-165",
+      "target": "sector-전기장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-166",
+      "target": "sector-전기제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-167",
+      "target": "sector-전기제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-168",
+      "target": "sector-전기제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-169",
+      "target": "sector-전문소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-170",
+      "target": "sector-전문소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-171",
+      "target": "sector-전문소매",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-172",
+      "target": "sector-전자장비와기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-173",
+      "target": "sector-전자장비와기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-174",
+      "target": "sector-전자장비와기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-175",
+      "target": "sector-전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-176",
+      "target": "sector-전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-177",
+      "target": "sector-전자제품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-178",
+      "target": "sector-종이와목재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-179",
+      "target": "sector-종이와목재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-180",
+      "target": "sector-종이와목재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-181",
+      "target": "sector-증권",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-182",
+      "target": "sector-증권",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-183",
+      "target": "sector-증권",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-184",
+      "target": "sector-창업투자",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-185",
+      "target": "sector-창업투자",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-186",
+      "target": "sector-창업투자",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-187",
+      "target": "sector-철강",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-188",
+      "target": "sector-철강",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-189",
+      "target": "sector-철강",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-190",
+      "target": "sector-출판",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-191",
+      "target": "sector-출판",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-192",
+      "target": "sector-출판",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-193",
+      "target": "sector-카드",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-194",
+      "target": "sector-카드",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-195",
+      "target": "sector-카드",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-196",
+      "target": "sector-컴퓨터와주변기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-197",
+      "target": "sector-컴퓨터와주변기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-198",
+      "target": "sector-컴퓨터와주변기기",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-199",
+      "target": "sector-통신장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-200",
+      "target": "sector-통신장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-201",
+      "target": "sector-통신장비",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-202",
+      "target": "sector-판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-203",
+      "target": "sector-판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-204",
+      "target": "sector-판매업체",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-205",
+      "target": "sector-포장재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-206",
+      "target": "sector-포장재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-207",
+      "target": "sector-포장재",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-208",
+      "target": "sector-항공사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-209",
+      "target": "sector-항공사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-210",
+      "target": "sector-항공사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-211",
+      "target": "sector-항공화물운송과물류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-212",
+      "target": "sector-항공화물운송과물류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-213",
+      "target": "sector-항공화물운송과물류",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-214",
+      "target": "sector-해운사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-215",
+      "target": "sector-해운사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-216",
+      "target": "sector-해운사",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-217",
+      "target": "sector-핸드셋",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-218",
+      "target": "sector-핸드셋",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-219",
+      "target": "sector-핸드셋",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-220",
+      "target": "sector-호텔-레스토랑-레저",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-221",
+      "target": "sector-호텔-레스토랑-레저",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-222",
+      "target": "sector-호텔-레스토랑-레저",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-223",
+      "target": "sector-화장품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-224",
+      "target": "sector-화장품",
+      "relation": "mentions",
+      "weight": 0.9
+    },
+    {
+      "source": "news-225",
+      "target": "sector-화장품",
+      "relation": "mentions",
+      "weight": 0.9
     }
   ]
 }
