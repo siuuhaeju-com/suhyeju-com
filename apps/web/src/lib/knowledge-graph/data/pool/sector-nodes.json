@@ -1,185 +1,633 @@
 {
   "nodes": [
     {
-      "id": "sector-semi",
+      "id": "sector-문구류",
       "label": "Sector",
-      "name": "반도체",
+      "name": "문구류",
       "props": {
         "market": "KR"
       }
     },
     {
-      "id": "sector-cloud",
+      "id": "sector-통신장비",
       "label": "Sector",
-      "name": "클라우드",
+      "name": "통신장비",
       "props": {
-        "market": "US"
+        "market": "KR"
       }
     },
     {
-      "id": "sector-ai",
+      "id": "sector-핸드셋",
       "label": "Sector",
-      "name": "AI",
+      "name": "핸드셋",
       "props": {
-        "market": "Global"
+        "market": "KR"
       }
     },
     {
-      "id": "sector-auto",
+      "id": "sector-건강관리기술",
+      "label": "Sector",
+      "name": "건강관리기술",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-건설",
+      "label": "Sector",
+      "name": "건설",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-전기장비",
+      "label": "Sector",
+      "name": "전기장비",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-디스플레이장비및부품",
+      "label": "Sector",
+      "name": "디스플레이장비및부품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-기계",
+      "label": "Sector",
+      "name": "기계",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-창업투자",
+      "label": "Sector",
+      "name": "창업투자",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-전기제품",
+      "label": "Sector",
+      "name": "전기제품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-전자장비와기기",
+      "label": "Sector",
+      "name": "전자장비와기기",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-은행",
+      "label": "Sector",
+      "name": "은행",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-증권",
+      "label": "Sector",
+      "name": "증권",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-석유와가스",
+      "label": "Sector",
+      "name": "석유와가스",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-에너지장비및서비스",
+      "label": "Sector",
+      "name": "에너지장비및서비스",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-복합기업",
+      "label": "Sector",
+      "name": "복합기업",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-우주항공과국방",
+      "label": "Sector",
+      "name": "우주항공과국방",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-가정용기기와용품",
+      "label": "Sector",
+      "name": "가정용기기와용품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-생명보험",
+      "label": "Sector",
+      "name": "생명보험",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-철강",
+      "label": "Sector",
+      "name": "철강",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-손해보험",
+      "label": "Sector",
+      "name": "손해보험",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-화학",
+      "label": "Sector",
+      "name": "화학",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-IT서비스",
+      "label": "Sector",
+      "name": "IT서비스",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-자동차부품",
+      "label": "Sector",
+      "name": "자동차부품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-사무용전자제품",
+      "label": "Sector",
+      "name": "사무용전자제품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-비철금속",
+      "label": "Sector",
+      "name": "비철금속",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-양방향미디어와서비스",
+      "label": "Sector",
+      "name": "양방향미디어와서비스",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-다각화된소비자서비스",
+      "label": "Sector",
+      "name": "다각화된소비자서비스",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-컴퓨터와주변기기",
+      "label": "Sector",
+      "name": "컴퓨터와주변기기",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-항공화물운송과물류",
+      "label": "Sector",
+      "name": "항공화물운송과물류",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-종이와목재",
+      "label": "Sector",
+      "name": "종이와목재",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-인터넷과카탈로그소매",
+      "label": "Sector",
+      "name": "인터넷과카탈로그소매",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-생명과학도구및서비스",
+      "label": "Sector",
+      "name": "생명과학도구및서비스",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-건강관리업체및서비스",
+      "label": "Sector",
+      "name": "건강관리업체및서비스",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-전기유틸리티",
+      "label": "Sector",
+      "name": "전기유틸리티",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-조선",
+      "label": "Sector",
+      "name": "조선",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-항공사",
+      "label": "Sector",
+      "name": "항공사",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-제약",
+      "label": "Sector",
+      "name": "제약",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-디스플레이패널",
+      "label": "Sector",
+      "name": "디스플레이패널",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-판매업체",
+      "label": "Sector",
+      "name": "판매업체",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-도로와철도운송",
+      "label": "Sector",
+      "name": "도로와철도운송",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-화장품",
+      "label": "Sector",
+      "name": "화장품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-건축자재",
+      "label": "Sector",
+      "name": "건축자재",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-해운사",
+      "label": "Sector",
+      "name": "해운사",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-출판",
+      "label": "Sector",
+      "name": "출판",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-건축제품",
+      "label": "Sector",
+      "name": "건축제품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-전자제품",
+      "label": "Sector",
+      "name": "전자제품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-가정용품",
+      "label": "Sector",
+      "name": "가정용품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-소프트웨어",
+      "label": "Sector",
+      "name": "소프트웨어",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-자동차",
       "label": "Sector",
       "name": "자동차",
       "props": {
-        "market": "Global"
+        "market": "KR"
       }
     },
     {
-      "id": "sector-energy",
+      "id": "sector-생물공학",
       "label": "Sector",
-      "name": "에너지",
-      "props": {
-        "market": "Global"
-      }
-    },
-    {
-      "id": "sector-bio",
-      "label": "Sector",
-      "name": "바이오",
-      "props": {
-        "market": "US"
-      }
-    },
-    {
-      "id": "sector-finance",
-      "label": "Sector",
-      "name": "금융",
-      "props": {
-        "market": "US"
-      }
-    },
-    {
-      "id": "sector-retail",
-      "label": "Sector",
-      "name": "소매·유통",
-      "props": {
-        "market": "US"
-      }
-    },
-    {
-      "id": "sector-defense",
-      "label": "Sector",
-      "name": "방산",
+      "name": "생물공학",
       "props": {
         "market": "KR"
       }
     },
     {
-      "id": "sector-robotics",
+      "id": "sector-교육서비스",
       "label": "Sector",
-      "name": "로봇",
-      "props": {
-        "market": "Global"
-      }
-    },
-    {
-      "id": "sector-aerospace",
-      "label": "Sector",
-      "name": "우주항공",
-      "props": {
-        "market": "Global"
-      }
-    },
-    {
-      "id": "sector-renewable",
-      "label": "Sector",
-      "name": "신재생에너지",
-      "props": {
-        "market": "Global"
-      }
-    },
-    {
-      "id": "sector-battery",
-      "label": "Sector",
-      "name": "이차전지",
+      "name": "교육서비스",
       "props": {
         "market": "KR"
       }
     },
     {
-      "id": "sector-autonomous",
+      "id": "sector-백화점과일반상점",
       "label": "Sector",
-      "name": "자율주행",
-      "props": {
-        "market": "Global"
-      }
-    },
-    {
-      "id": "sector-metaverse",
-      "label": "Sector",
-      "name": "메타버스·XR",
-      "props": {
-        "market": "Global"
-      }
-    },
-    {
-      "id": "sector-cybersecurity",
-      "label": "Sector",
-      "name": "사이버보안",
-      "props": {
-        "market": "US"
-      }
-    },
-    {
-      "id": "sector-pharma",
-      "label": "Sector",
-      "name": "제약·헬스케어",
-      "props": {
-        "market": "Global"
-      }
-    },
-    {
-      "id": "sector-fintech",
-      "label": "Sector",
-      "name": "핀테크",
-      "props": {
-        "market": "Global"
-      }
-    },
-    {
-      "id": "sector-gaming",
-      "label": "Sector",
-      "name": "게임",
-      "props": {
-        "market": "Global"
-      }
-    },
-    {
-      "id": "sector-shipbuilding",
-      "label": "Sector",
-      "name": "조선·해운",
+      "name": "백화점과일반상점",
       "props": {
         "market": "KR"
       }
     },
     {
-      "id": "sector-entertainment",
+      "id": "sector-식품",
       "label": "Sector",
-      "name": "엔터테인먼트·미디어",
+      "name": "식품",
       "props": {
         "market": "KR"
       }
     },
     {
-      "id": "sector-telecom",
+      "id": "sector-가스유틸리티",
       "label": "Sector",
-      "name": "통신·6G",
+      "name": "가스유틸리티",
       "props": {
-        "market": "Global"
+        "market": "KR"
       }
     },
     {
-      "id": "sector-materials",
+      "id": "sector-방송과엔터테인먼트",
       "label": "Sector",
-      "name": "화학·신소재",
+      "name": "방송과엔터테인먼트",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-운송인프라",
+      "label": "Sector",
+      "name": "운송인프라",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-반도체와반도체장비",
+      "label": "Sector",
+      "name": "반도체와반도체장비",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-호텔-레스토랑-레저",
+      "label": "Sector",
+      "name": "호텔,레스토랑,레저",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-식품과기본식료품소매",
+      "label": "Sector",
+      "name": "식품과기본식료품소매",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-무역회사와판매업체",
+      "label": "Sector",
+      "name": "무역회사와판매업체",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-기타",
+      "label": "Sector",
+      "name": "기타",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-복합유틸리티",
+      "label": "Sector",
+      "name": "복합유틸리티",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-전문소매",
+      "label": "Sector",
+      "name": "전문소매",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-레저용장비와제품",
+      "label": "Sector",
+      "name": "레저용장비와제품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-무선통신서비스",
+      "label": "Sector",
+      "name": "무선통신서비스",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-부동산",
+      "label": "Sector",
+      "name": "부동산",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-포장재",
+      "label": "Sector",
+      "name": "포장재",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-섬유-의류-신발-호화품",
+      "label": "Sector",
+      "name": "섬유,의류,신발,호화품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-음료",
+      "label": "Sector",
+      "name": "음료",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-기타금융",
+      "label": "Sector",
+      "name": "기타금융",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-게임엔터테인먼트",
+      "label": "Sector",
+      "name": "게임엔터테인먼트",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-가구",
+      "label": "Sector",
+      "name": "가구",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-상업서비스와공급품",
+      "label": "Sector",
+      "name": "상업서비스와공급품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-담배",
+      "label": "Sector",
+      "name": "담배",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-광고",
+      "label": "Sector",
+      "name": "광고",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-건강관리장비와용품",
+      "label": "Sector",
+      "name": "건강관리장비와용품",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-카드",
+      "label": "Sector",
+      "name": "카드",
+      "props": {
+        "market": "KR"
+      }
+    },
+    {
+      "id": "sector-다각화된통신서비스",
+      "label": "Sector",
+      "name": "다각화된통신서비스",
       "props": {
         "market": "KR"
       }

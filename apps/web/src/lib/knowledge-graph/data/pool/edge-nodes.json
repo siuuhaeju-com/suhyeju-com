@@ -1,12 +1,12 @@
 {
   "nodes": [
     {
-      "id": "edgenode-aerospace-hanwhaaero",
+      "id": "edgenode-우주항공과국방-hanwhaaero",
       "label": "EdgeNode",
       "name": "한화에어로스페이스",
       "props": {
-        "sectorId": "sector-aerospace",
-        "sectorName": "우주항공",
+        "sectorId": "sector-우주항공과국방",
+        "sectorName": "우주항공과국방",
         "companyId": "company-hanwhaaero",
         "companyName": "한화에어로스페이스",
         "newsIds": ["news-23"],
@@ -35,12 +35,12 @@
       }
     },
     {
-      "id": "edgenode-aerospace-kasa",
+      "id": "edgenode-우주항공과국방-kasa",
       "label": "EdgeNode",
       "name": "우주항공청",
       "props": {
-        "sectorId": "sector-aerospace",
-        "sectorName": "우주항공",
+        "sectorId": "sector-우주항공과국방",
+        "sectorName": "우주항공과국방",
         "companyId": "company-kasa",
         "companyName": "우주항공청",
         "newsIds": ["news-23"],
@@ -69,12 +69,12 @@
       }
     },
     {
-      "id": "edgenode-aerospace-spacex",
+      "id": "edgenode-우주항공과국방-spacex",
       "label": "EdgeNode",
       "name": "SpaceX",
       "props": {
-        "sectorId": "sector-aerospace",
-        "sectorName": "우주항공",
+        "sectorId": "sector-우주항공과국방",
+        "sectorName": "우주항공과국방",
         "companyId": "company-spacex",
         "companyName": "SpaceX",
         "newsIds": [],
@@ -83,12 +83,12 @@
       }
     },
     {
-      "id": "edgenode-ai-apple",
+      "id": "edgenode-소프트웨어-apple",
       "label": "EdgeNode",
       "name": "Apple",
       "props": {
-        "sectorId": "sector-ai",
-        "sectorName": "AI",
+        "sectorId": "sector-소프트웨어",
+        "sectorName": "소프트웨어",
         "companyId": "company-apple",
         "companyName": "Apple",
         "newsIds": ["news-28"],
@@ -117,12 +117,12 @@
       }
     },
     {
-      "id": "edgenode-ai-google",
+      "id": "edgenode-양방향미디어와서비스-google",
       "label": "EdgeNode",
       "name": "Alphabet (Google)",
       "props": {
-        "sectorId": "sector-ai",
-        "sectorName": "AI",
+        "sectorId": "sector-양방향미디어와서비스",
+        "sectorName": "양방향미디어와서비스",
         "companyId": "company-google",
         "companyName": "Alphabet (Google)",
         "newsIds": ["news-2"],
@@ -151,12 +151,12 @@
       }
     },
     {
-      "id": "edgenode-ai-meta",
+      "id": "edgenode-양방향미디어와서비스-meta",
       "label": "EdgeNode",
       "name": "Meta",
       "props": {
-        "sectorId": "sector-ai",
-        "sectorName": "AI",
+        "sectorId": "sector-양방향미디어와서비스",
+        "sectorName": "양방향미디어와서비스",
         "companyId": "company-meta",
         "companyName": "Meta",
         "newsIds": ["news-2"],
@@ -185,12 +185,12 @@
       }
     },
     {
-      "id": "edgenode-ai-microsoft",
+      "id": "edgenode-소프트웨어-microsoft",
       "label": "EdgeNode",
       "name": "Microsoft",
       "props": {
-        "sectorId": "sector-ai",
-        "sectorName": "AI",
+        "sectorId": "sector-소프트웨어",
+        "sectorName": "소프트웨어",
         "companyId": "company-microsoft",
         "companyName": "Microsoft",
         "newsIds": ["news-2"],
@@ -219,12 +219,12 @@
       }
     },
     {
-      "id": "edgenode-ai-nvidia",
+      "id": "edgenode-반도체와반도체장비-nvidia",
       "label": "EdgeNode",
       "name": "NVIDIA",
       "props": {
-        "sectorId": "sector-ai",
-        "sectorName": "AI",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-nvidia",
         "companyName": "NVIDIA",
         "newsIds": ["news-3"],
@@ -253,11 +253,11 @@
       }
     },
     {
-      "id": "edgenode-auto-apple",
+      "id": "edgenode-자동차-apple",
       "label": "EdgeNode",
       "name": "Apple",
       "props": {
-        "sectorId": "sector-auto",
+        "sectorId": "sector-자동차",
         "sectorName": "자동차",
         "companyId": "company-apple",
         "companyName": "Apple",
@@ -287,12 +287,12 @@
       }
     },
     {
-      "id": "edgenode-auto-boston",
+      "id": "edgenode-기계-boston",
       "label": "EdgeNode",
       "name": "Boston Dynamics",
       "props": {
-        "sectorId": "sector-auto",
-        "sectorName": "자동차",
+        "sectorId": "sector-기계",
+        "sectorName": "기계",
         "companyId": "company-boston",
         "companyName": "Boston Dynamics",
         "newsIds": ["news-8"],
@@ -321,11 +321,11 @@
       }
     },
     {
-      "id": "edgenode-auto-byd",
+      "id": "edgenode-자동차-byd",
       "label": "EdgeNode",
       "name": "BYD",
       "props": {
-        "sectorId": "sector-auto",
+        "sectorId": "sector-자동차",
         "sectorName": "자동차",
         "companyId": "company-byd",
         "companyName": "BYD",
@@ -335,11 +335,11 @@
       }
     },
     {
-      "id": "edgenode-auto-hyundai",
+      "id": "edgenode-자동차-hyundai",
       "label": "EdgeNode",
       "name": "현대자동차",
       "props": {
-        "sectorId": "sector-auto",
+        "sectorId": "sector-자동차",
         "sectorName": "자동차",
         "companyId": "company-hyundai",
         "companyName": "현대자동차",
@@ -369,11 +369,11 @@
       }
     },
     {
-      "id": "edgenode-auto-tesla",
+      "id": "edgenode-자동차-tesla",
       "label": "EdgeNode",
       "name": "Tesla",
       "props": {
-        "sectorId": "sector-auto",
+        "sectorId": "sector-자동차",
         "sectorName": "자동차",
         "companyId": "company-tesla",
         "companyName": "Tesla",
@@ -403,12 +403,12 @@
       }
     },
     {
-      "id": "edgenode-autonomous-apple",
+      "id": "edgenode-소프트웨어-apple",
       "label": "EdgeNode",
       "name": "Apple",
       "props": {
-        "sectorId": "sector-autonomous",
-        "sectorName": "자율주행",
+        "sectorId": "sector-소프트웨어",
+        "sectorName": "소프트웨어",
         "companyId": "company-apple",
         "companyName": "Apple",
         "newsIds": ["news-28"],
@@ -437,12 +437,12 @@
       }
     },
     {
-      "id": "edgenode-autonomous-tesla",
+      "id": "edgenode-자동차-tesla",
       "label": "EdgeNode",
       "name": "Tesla",
       "props": {
-        "sectorId": "sector-autonomous",
-        "sectorName": "자율주행",
+        "sectorId": "sector-자동차",
+        "sectorName": "자동차",
         "companyId": "company-tesla",
         "companyName": "Tesla",
         "newsIds": ["news-27"],
@@ -471,12 +471,12 @@
       }
     },
     {
-      "id": "edgenode-battery-lgchem",
+      "id": "edgenode-화학-lgchem",
       "label": "EdgeNode",
       "name": "LG화학",
       "props": {
-        "sectorId": "sector-battery",
-        "sectorName": "이차전지",
+        "sectorId": "sector-화학",
+        "sectorName": "화학",
         "companyId": "company-lgchem",
         "companyName": "LG화학",
         "newsIds": [],
@@ -485,12 +485,12 @@
       }
     },
     {
-      "id": "edgenode-battery-lgensol",
+      "id": "edgenode-화학-lgensol",
       "label": "EdgeNode",
       "name": "LG에너지솔루션",
       "props": {
-        "sectorId": "sector-battery",
-        "sectorName": "이차전지",
+        "sectorId": "sector-화학",
+        "sectorName": "화학",
         "companyId": "company-lgensol",
         "companyName": "LG에너지솔루션",
         "newsIds": ["news-4", "news-5"],
@@ -537,12 +537,12 @@
       }
     },
     {
-      "id": "edgenode-battery-poscofuture",
+      "id": "edgenode-화학-poscofuture",
       "label": "EdgeNode",
       "name": "포스코퓨처엠",
       "props": {
-        "sectorId": "sector-battery",
-        "sectorName": "이차전지",
+        "sectorId": "sector-화학",
+        "sectorName": "화학",
         "companyId": "company-poscofuture",
         "companyName": "포스코퓨처엠",
         "newsIds": [],
@@ -551,12 +551,12 @@
       }
     },
     {
-      "id": "edgenode-battery-samsungsdi",
+      "id": "edgenode-화학-samsungsdi",
       "label": "EdgeNode",
       "name": "삼성SDI",
       "props": {
-        "sectorId": "sector-battery",
-        "sectorName": "이차전지",
+        "sectorId": "sector-화학",
+        "sectorName": "화학",
         "companyId": "company-samsungsdi",
         "companyName": "삼성SDI",
         "newsIds": ["news-4", "news-5"],
@@ -603,12 +603,12 @@
       }
     },
     {
-      "id": "edgenode-battery-skon",
+      "id": "edgenode-화학-skon",
       "label": "EdgeNode",
       "name": "SK온",
       "props": {
-        "sectorId": "sector-battery",
-        "sectorName": "이차전지",
+        "sectorId": "sector-화학",
+        "sectorName": "화학",
         "companyId": "company-skon",
         "companyName": "SK온",
         "newsIds": ["news-4", "news-6"],
@@ -655,12 +655,12 @@
       }
     },
     {
-      "id": "edgenode-battery-solbrain",
+      "id": "edgenode-화학-solbrain",
       "label": "EdgeNode",
       "name": "솔브레인홀딩스",
       "props": {
-        "sectorId": "sector-battery",
-        "sectorName": "이차전지",
+        "sectorId": "sector-화학",
+        "sectorName": "화학",
         "companyId": "company-solbrain",
         "companyName": "솔브레인홀딩스",
         "newsIds": ["news-24"],
@@ -675,12 +675,12 @@
       }
     },
     {
-      "id": "edgenode-bio-lilly",
+      "id": "edgenode-제약-lilly",
       "label": "EdgeNode",
       "name": "Eli Lilly",
       "props": {
-        "sectorId": "sector-bio",
-        "sectorName": "바이오",
+        "sectorId": "sector-제약",
+        "sectorName": "제약",
         "companyId": "company-lilly",
         "companyName": "Eli Lilly",
         "newsIds": ["news-17"],
@@ -709,12 +709,12 @@
       }
     },
     {
-      "id": "edgenode-bio-novo",
+      "id": "edgenode-제약-novo",
       "label": "EdgeNode",
       "name": "Novo Nordisk",
       "props": {
-        "sectorId": "sector-bio",
-        "sectorName": "바이오",
+        "sectorId": "sector-제약",
+        "sectorName": "제약",
         "companyId": "company-novo",
         "companyName": "Novo Nordisk",
         "newsIds": ["news-18"],
@@ -743,12 +743,12 @@
       }
     },
     {
-      "id": "edgenode-cloud-amazon",
+      "id": "edgenode-IT서비스-amazon",
       "label": "EdgeNode",
       "name": "Amazon",
       "props": {
-        "sectorId": "sector-cloud",
-        "sectorName": "클라우드",
+        "sectorId": "sector-IT서비스",
+        "sectorName": "IT서비스",
         "companyId": "company-amazon",
         "companyName": "Amazon",
         "newsIds": ["news-2"],
@@ -777,12 +777,12 @@
       }
     },
     {
-      "id": "edgenode-cloud-apple",
+      "id": "edgenode-IT서비스-apple",
       "label": "EdgeNode",
       "name": "Apple",
       "props": {
-        "sectorId": "sector-cloud",
-        "sectorName": "클라우드",
+        "sectorId": "sector-IT서비스",
+        "sectorName": "IT서비스",
         "companyId": "company-apple",
         "companyName": "Apple",
         "newsIds": ["news-28"],
@@ -811,12 +811,12 @@
       }
     },
     {
-      "id": "edgenode-cloud-google",
+      "id": "edgenode-IT서비스-google",
       "label": "EdgeNode",
       "name": "Alphabet (Google)",
       "props": {
-        "sectorId": "sector-cloud",
-        "sectorName": "클라우드",
+        "sectorId": "sector-IT서비스",
+        "sectorName": "IT서비스",
         "companyId": "company-google",
         "companyName": "Alphabet (Google)",
         "newsIds": ["news-2"],
@@ -845,12 +845,12 @@
       }
     },
     {
-      "id": "edgenode-cloud-meta",
+      "id": "edgenode-IT서비스-meta",
       "label": "EdgeNode",
       "name": "Meta",
       "props": {
-        "sectorId": "sector-cloud",
-        "sectorName": "클라우드",
+        "sectorId": "sector-IT서비스",
+        "sectorName": "IT서비스",
         "companyId": "company-meta",
         "companyName": "Meta",
         "newsIds": ["news-2"],
@@ -879,12 +879,12 @@
       }
     },
     {
-      "id": "edgenode-cloud-microsoft",
+      "id": "edgenode-IT서비스-microsoft",
       "label": "EdgeNode",
       "name": "Microsoft",
       "props": {
-        "sectorId": "sector-cloud",
-        "sectorName": "클라우드",
+        "sectorId": "sector-IT서비스",
+        "sectorName": "IT서비스",
         "companyId": "company-microsoft",
         "companyName": "Microsoft",
         "newsIds": ["news-2"],
@@ -913,12 +913,12 @@
       }
     },
     {
-      "id": "edgenode-cloud-nvidia",
+      "id": "edgenode-반도체와반도체장비-nvidia",
       "label": "EdgeNode",
       "name": "NVIDIA",
       "props": {
-        "sectorId": "sector-cloud",
-        "sectorName": "클라우드",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-nvidia",
         "companyName": "NVIDIA",
         "newsIds": ["news-3"],
@@ -947,12 +947,12 @@
       }
     },
     {
-      "id": "edgenode-cybersecurity-crowdstrike",
+      "id": "edgenode-소프트웨어-crowdstrike",
       "label": "EdgeNode",
       "name": "CrowdStrike",
       "props": {
-        "sectorId": "sector-cybersecurity",
-        "sectorName": "사이버보안",
+        "sectorId": "sector-소프트웨어",
+        "sectorName": "소프트웨어",
         "companyId": "company-crowdstrike",
         "companyName": "CrowdStrike",
         "newsIds": ["news-15", "news-16", "news-29"],
@@ -1017,12 +1017,12 @@
       }
     },
     {
-      "id": "edgenode-cybersecurity-microsoft",
+      "id": "edgenode-소프트웨어-microsoft",
       "label": "EdgeNode",
       "name": "Microsoft",
       "props": {
-        "sectorId": "sector-cybersecurity",
-        "sectorName": "사이버보안",
+        "sectorId": "sector-소프트웨어",
+        "sectorName": "소프트웨어",
         "companyId": "company-microsoft",
         "companyName": "Microsoft",
         "newsIds": ["news-2"],
@@ -1051,12 +1051,12 @@
       }
     },
     {
-      "id": "edgenode-cybersecurity-paloalto",
+      "id": "edgenode-소프트웨어-paloalto",
       "label": "EdgeNode",
       "name": "Palo Alto Networks",
       "props": {
-        "sectorId": "sector-cybersecurity",
-        "sectorName": "사이버보안",
+        "sectorId": "sector-소프트웨어",
+        "sectorName": "소프트웨어",
         "companyId": "company-paloalto",
         "companyName": "Palo Alto Networks",
         "newsIds": ["news-29"],
@@ -1085,12 +1085,12 @@
       }
     },
     {
-      "id": "edgenode-defense-hanwhaaero",
+      "id": "edgenode-우주항공과국방-hanwhaaero",
       "label": "EdgeNode",
       "name": "한화에어로스페이스",
       "props": {
-        "sectorId": "sector-defense",
-        "sectorName": "방산",
+        "sectorId": "sector-우주항공과국방",
+        "sectorName": "우주항공과국방",
         "companyId": "company-hanwhaaero",
         "companyName": "한화에어로스페이스",
         "newsIds": ["news-22"],
@@ -1119,12 +1119,12 @@
       }
     },
     {
-      "id": "edgenode-defense-hanwhaocean",
+      "id": "edgenode-조선-hanwhaocean",
       "label": "EdgeNode",
       "name": "한화오션",
       "props": {
-        "sectorId": "sector-defense",
-        "sectorName": "방산",
+        "sectorId": "sector-조선",
+        "sectorName": "조선",
         "companyId": "company-hanwhaocean",
         "companyName": "한화오션",
         "newsIds": ["news-9", "news-10"],
@@ -1171,12 +1171,12 @@
       }
     },
     {
-      "id": "edgenode-defense-lignex1",
+      "id": "edgenode-우주항공과국방-lignex1",
       "label": "EdgeNode",
       "name": "LIG넥스원",
       "props": {
-        "sectorId": "sector-defense",
-        "sectorName": "방산",
+        "sectorId": "sector-우주항공과국방",
+        "sectorName": "우주항공과국방",
         "companyId": "company-lignex1",
         "companyName": "LIG넥스원",
         "newsIds": ["news-22"],
@@ -1205,12 +1205,12 @@
       }
     },
     {
-      "id": "edgenode-energy-hanwhasol",
+      "id": "edgenode-화학-hanwhasol",
       "label": "EdgeNode",
       "name": "한화솔루션",
       "props": {
-        "sectorId": "sector-energy",
-        "sectorName": "에너지",
+        "sectorId": "sector-화학",
+        "sectorName": "화학",
         "companyId": "company-hanwhasol",
         "companyName": "한화솔루션",
         "newsIds": ["news-21"],
@@ -1239,12 +1239,12 @@
       }
     },
     {
-      "id": "edgenode-energy-tesla",
+      "id": "edgenode-자동차-tesla",
       "label": "EdgeNode",
       "name": "Tesla",
       "props": {
-        "sectorId": "sector-energy",
-        "sectorName": "에너지",
+        "sectorId": "sector-자동차",
+        "sectorName": "자동차",
         "companyId": "company-tesla",
         "companyName": "Tesla",
         "newsIds": ["news-27"],
@@ -1273,12 +1273,12 @@
       }
     },
     {
-      "id": "edgenode-entertainment-hybe",
+      "id": "edgenode-방송과엔터테인먼트-hybe",
       "label": "EdgeNode",
       "name": "하이브",
       "props": {
-        "sectorId": "sector-entertainment",
-        "sectorName": "엔터테인먼트·미디어",
+        "sectorId": "sector-방송과엔터테인먼트",
+        "sectorName": "방송과엔터테인먼트",
         "companyId": "company-hybe",
         "companyName": "하이브",
         "newsIds": ["news-14"],
@@ -1307,12 +1307,12 @@
       }
     },
     {
-      "id": "edgenode-entertainment-jyp",
+      "id": "edgenode-방송과엔터테인먼트-jyp",
       "label": "EdgeNode",
       "name": "JYP엔터테인먼트",
       "props": {
-        "sectorId": "sector-entertainment",
-        "sectorName": "엔터테인먼트·미디어",
+        "sectorId": "sector-방송과엔터테인먼트",
+        "sectorName": "방송과엔터테인먼트",
         "companyId": "company-jyp",
         "companyName": "JYP엔터테인먼트",
         "newsIds": [],
@@ -1321,12 +1321,12 @@
       }
     },
     {
-      "id": "edgenode-entertainment-naver",
+      "id": "edgenode-양방향미디어와서비스-naver",
       "label": "EdgeNode",
       "name": "NAVER",
       "props": {
-        "sectorId": "sector-entertainment",
-        "sectorName": "엔터테인먼트·미디어",
+        "sectorId": "sector-양방향미디어와서비스",
+        "sectorName": "양방향미디어와서비스",
         "companyId": "company-naver",
         "companyName": "NAVER",
         "newsIds": ["news-12"],
@@ -1355,12 +1355,12 @@
       }
     },
     {
-      "id": "edgenode-entertainment-webtoon",
+      "id": "edgenode-방송과엔터테인먼트-webtoon",
       "label": "EdgeNode",
       "name": "웹툰엔터테인먼트",
       "props": {
-        "sectorId": "sector-entertainment",
-        "sectorName": "엔터테인먼트·미디어",
+        "sectorId": "sector-방송과엔터테인먼트",
+        "sectorName": "방송과엔터테인먼트",
         "companyId": "company-webtoon",
         "companyName": "웹툰엔터테인먼트",
         "newsIds": ["news-12", "news-13"],
@@ -1407,12 +1407,12 @@
       }
     },
     {
-      "id": "edgenode-finance-jpm",
+      "id": "edgenode-은행-jpm",
       "label": "EdgeNode",
       "name": "JPMorgan",
       "props": {
-        "sectorId": "sector-finance",
-        "sectorName": "금융",
+        "sectorId": "sector-은행",
+        "sectorName": "은행",
         "companyId": "company-jpm",
         "companyName": "JPMorgan",
         "newsIds": [],
@@ -1421,12 +1421,12 @@
       }
     },
     {
-      "id": "edgenode-finance-toss",
+      "id": "edgenode-기타금융-toss",
       "label": "EdgeNode",
       "name": "비바리퍼블리카(토스)",
       "props": {
-        "sectorId": "sector-finance",
-        "sectorName": "금융",
+        "sectorId": "sector-기타금융",
+        "sectorName": "기타금융",
         "companyId": "company-toss",
         "companyName": "비바리퍼블리카(토스)",
         "newsIds": ["news-20"],
@@ -1455,12 +1455,12 @@
       }
     },
     {
-      "id": "edgenode-fintech-kakaopay",
+      "id": "edgenode-IT서비스-kakaopay",
       "label": "EdgeNode",
       "name": "카카오페이",
       "props": {
-        "sectorId": "sector-fintech",
-        "sectorName": "핀테크",
+        "sectorId": "sector-IT서비스",
+        "sectorName": "IT서비스",
         "companyId": "company-kakaopay",
         "companyName": "카카오페이",
         "newsIds": ["news-30"],
@@ -1489,12 +1489,12 @@
       }
     },
     {
-      "id": "edgenode-fintech-toss",
+      "id": "edgenode-기타금융-toss",
       "label": "EdgeNode",
       "name": "비바리퍼블리카(토스)",
       "props": {
-        "sectorId": "sector-fintech",
-        "sectorName": "핀테크",
+        "sectorId": "sector-기타금융",
+        "sectorName": "기타금융",
         "companyId": "company-toss",
         "companyName": "비바리퍼블리카(토스)",
         "newsIds": ["news-20", "news-30"],
@@ -1541,12 +1541,12 @@
       }
     },
     {
-      "id": "edgenode-gaming-krafton",
+      "id": "edgenode-게임엔터테인먼트-krafton",
       "label": "EdgeNode",
       "name": "크래프톤",
       "props": {
-        "sectorId": "sector-gaming",
-        "sectorName": "게임",
+        "sectorId": "sector-게임엔터테인먼트",
+        "sectorName": "게임엔터테인먼트",
         "companyId": "company-krafton",
         "companyName": "크래프톤",
         "newsIds": [],
@@ -1555,12 +1555,12 @@
       }
     },
     {
-      "id": "edgenode-gaming-nexon",
+      "id": "edgenode-게임엔터테인먼트-nexon",
       "label": "EdgeNode",
       "name": "넥슨게임즈",
       "props": {
-        "sectorId": "sector-gaming",
-        "sectorName": "게임",
+        "sectorId": "sector-게임엔터테인먼트",
+        "sectorName": "게임엔터테인먼트",
         "companyId": "company-nexon",
         "companyName": "넥슨게임즈",
         "newsIds": [],
@@ -1569,12 +1569,12 @@
       }
     },
     {
-      "id": "edgenode-materials-lgchem",
+      "id": "edgenode-화학-lgchem",
       "label": "EdgeNode",
       "name": "LG화학",
       "props": {
-        "sectorId": "sector-materials",
-        "sectorName": "화학·신소재",
+        "sectorId": "sector-화학",
+        "sectorName": "화학",
         "companyId": "company-lgchem",
         "companyName": "LG화학",
         "newsIds": [],
@@ -1583,12 +1583,12 @@
       }
     },
     {
-      "id": "edgenode-materials-samsung",
+      "id": "edgenode-반도체와반도체장비-samsung",
       "label": "EdgeNode",
       "name": "삼성전자",
       "props": {
-        "sectorId": "sector-materials",
-        "sectorName": "화학·신소재",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-samsung",
         "companyName": "삼성전자",
         "newsIds": ["news-1", "news-3", "news-7", "news-25"],
@@ -1671,12 +1671,12 @@
       }
     },
     {
-      "id": "edgenode-materials-solbrain",
+      "id": "edgenode-화학-solbrain",
       "label": "EdgeNode",
       "name": "솔브레인홀딩스",
       "props": {
-        "sectorId": "sector-materials",
-        "sectorName": "화학·신소재",
+        "sectorId": "sector-화학",
+        "sectorName": "화학",
         "companyId": "company-solbrain",
         "companyName": "솔브레인홀딩스",
         "newsIds": ["news-24"],
@@ -1691,12 +1691,12 @@
       }
     },
     {
-      "id": "edgenode-metaverse-apple",
+      "id": "edgenode-게임엔터테인먼트-apple",
       "label": "EdgeNode",
       "name": "Apple",
       "props": {
-        "sectorId": "sector-metaverse",
-        "sectorName": "메타버스·XR",
+        "sectorId": "sector-게임엔터테인먼트",
+        "sectorName": "게임엔터테인먼트",
         "companyId": "company-apple",
         "companyName": "Apple",
         "newsIds": ["news-28"],
@@ -1725,12 +1725,12 @@
       }
     },
     {
-      "id": "edgenode-metaverse-meta",
+      "id": "edgenode-양방향미디어와서비스-meta",
       "label": "EdgeNode",
       "name": "Meta",
       "props": {
-        "sectorId": "sector-metaverse",
-        "sectorName": "메타버스·XR",
+        "sectorId": "sector-양방향미디어와서비스",
+        "sectorName": "양방향미디어와서비스",
         "companyId": "company-meta",
         "companyName": "Meta",
         "newsIds": ["news-28"],
@@ -1759,12 +1759,12 @@
       }
     },
     {
-      "id": "edgenode-pharma-lilly",
+      "id": "edgenode-제약-lilly",
       "label": "EdgeNode",
       "name": "Eli Lilly",
       "props": {
-        "sectorId": "sector-pharma",
-        "sectorName": "제약·헬스케어",
+        "sectorId": "sector-제약",
+        "sectorName": "제약",
         "companyId": "company-lilly",
         "companyName": "Eli Lilly",
         "newsIds": ["news-17", "news-18", "news-19"],
@@ -1829,12 +1829,12 @@
       }
     },
     {
-      "id": "edgenode-pharma-novo",
+      "id": "edgenode-제약-novo",
       "label": "EdgeNode",
       "name": "Novo Nordisk",
       "props": {
-        "sectorId": "sector-pharma",
-        "sectorName": "제약·헬스케어",
+        "sectorId": "sector-제약",
+        "sectorName": "제약",
         "companyId": "company-novo",
         "companyName": "Novo Nordisk",
         "newsIds": ["news-18"],
@@ -1863,12 +1863,12 @@
       }
     },
     {
-      "id": "edgenode-renewable-hanwhasol",
+      "id": "edgenode-에너지장비및서비스-hanwhasol",
       "label": "EdgeNode",
       "name": "한화솔루션",
       "props": {
-        "sectorId": "sector-renewable",
-        "sectorName": "신재생에너지",
+        "sectorId": "sector-에너지장비및서비스",
+        "sectorName": "에너지장비및서비스",
         "companyId": "company-hanwhasol",
         "companyName": "한화솔루션",
         "newsIds": ["news-21"],
@@ -1897,12 +1897,12 @@
       }
     },
     {
-      "id": "edgenode-renewable-tesla",
+      "id": "edgenode-에너지장비및서비스-tesla",
       "label": "EdgeNode",
       "name": "Tesla",
       "props": {
-        "sectorId": "sector-renewable",
-        "sectorName": "신재생에너지",
+        "sectorId": "sector-에너지장비및서비스",
+        "sectorName": "에너지장비및서비스",
         "companyId": "company-tesla",
         "companyName": "Tesla",
         "newsIds": ["news-27"],
@@ -1931,12 +1931,12 @@
       }
     },
     {
-      "id": "edgenode-retail-amazon",
+      "id": "edgenode-인터넷과카탈로그소매-amazon",
       "label": "EdgeNode",
       "name": "Amazon",
       "props": {
-        "sectorId": "sector-retail",
-        "sectorName": "소매·유통",
+        "sectorId": "sector-인터넷과카탈로그소매",
+        "sectorName": "인터넷과카탈로그소매",
         "companyId": "company-amazon",
         "companyName": "Amazon",
         "newsIds": ["news-2"],
@@ -1965,12 +1965,12 @@
       }
     },
     {
-      "id": "edgenode-robotics-boston",
+      "id": "edgenode-기계-boston",
       "label": "EdgeNode",
       "name": "Boston Dynamics",
       "props": {
-        "sectorId": "sector-robotics",
-        "sectorName": "로봇",
+        "sectorId": "sector-기계",
+        "sectorName": "기계",
         "companyId": "company-boston",
         "companyName": "Boston Dynamics",
         "newsIds": ["news-8"],
@@ -1999,12 +1999,12 @@
       }
     },
     {
-      "id": "edgenode-robotics-rainbow",
+      "id": "edgenode-기계-rainbow",
       "label": "EdgeNode",
       "name": "레인보우로보틱스",
       "props": {
-        "sectorId": "sector-robotics",
-        "sectorName": "로봇",
+        "sectorId": "sector-기계",
+        "sectorName": "기계",
         "companyId": "company-rainbow",
         "companyName": "레인보우로보틱스",
         "newsIds": ["news-7"],
@@ -2033,12 +2033,12 @@
       }
     },
     {
-      "id": "edgenode-robotics-samsung",
+      "id": "edgenode-전자제품-samsung",
       "label": "EdgeNode",
       "name": "삼성전자",
       "props": {
-        "sectorId": "sector-robotics",
-        "sectorName": "로봇",
+        "sectorId": "sector-전자제품",
+        "sectorName": "전자제품",
         "companyId": "company-samsung",
         "companyName": "삼성전자",
         "newsIds": ["news-7"],
@@ -2067,12 +2067,12 @@
       }
     },
     {
-      "id": "edgenode-robotics-tesla",
+      "id": "edgenode-자동차-tesla",
       "label": "EdgeNode",
       "name": "Tesla",
       "props": {
-        "sectorId": "sector-robotics",
-        "sectorName": "로봇",
+        "sectorId": "sector-자동차",
+        "sectorName": "자동차",
         "companyId": "company-tesla",
         "companyName": "Tesla",
         "newsIds": ["news-27"],
@@ -2101,12 +2101,12 @@
       }
     },
     {
-      "id": "edgenode-semi-arm",
+      "id": "edgenode-반도체와반도체장비-arm",
       "label": "EdgeNode",
       "name": "ARM Holdings",
       "props": {
-        "sectorId": "sector-semi",
-        "sectorName": "반도체",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-arm",
         "companyName": "ARM Holdings",
         "newsIds": [],
@@ -2115,12 +2115,12 @@
       }
     },
     {
-      "id": "edgenode-semi-asml",
+      "id": "edgenode-반도체와반도체장비-asml",
       "label": "EdgeNode",
       "name": "ASML",
       "props": {
-        "sectorId": "sector-semi",
-        "sectorName": "반도체",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-asml",
         "companyName": "ASML",
         "newsIds": ["news-26"],
@@ -2149,12 +2149,12 @@
       }
     },
     {
-      "id": "edgenode-semi-intel",
+      "id": "edgenode-반도체와반도체장비-intel",
       "label": "EdgeNode",
       "name": "Intel",
       "props": {
-        "sectorId": "sector-semi",
-        "sectorName": "반도체",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-intel",
         "companyName": "Intel",
         "newsIds": [],
@@ -2163,12 +2163,12 @@
       }
     },
     {
-      "id": "edgenode-semi-nvidia",
+      "id": "edgenode-반도체와반도체장비-nvidia",
       "label": "EdgeNode",
       "name": "NVIDIA",
       "props": {
-        "sectorId": "sector-semi",
-        "sectorName": "반도체",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-nvidia",
         "companyName": "NVIDIA",
         "newsIds": ["news-3"],
@@ -2197,12 +2197,12 @@
       }
     },
     {
-      "id": "edgenode-semi-samsung",
+      "id": "edgenode-반도체와반도체장비-samsung",
       "label": "EdgeNode",
       "name": "삼성전자",
       "props": {
-        "sectorId": "sector-semi",
-        "sectorName": "반도체",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-samsung",
         "companyName": "삼성전자",
         "newsIds": ["news-1", "news-3", "news-25"],
@@ -2267,12 +2267,12 @@
       }
     },
     {
-      "id": "edgenode-semi-sk",
+      "id": "edgenode-반도체와반도체장비-sk",
       "label": "EdgeNode",
       "name": "SK하이닉스",
       "props": {
-        "sectorId": "sector-semi",
-        "sectorName": "반도체",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-sk",
         "companyName": "SK하이닉스",
         "newsIds": ["news-1", "news-3"],
@@ -2319,12 +2319,12 @@
       }
     },
     {
-      "id": "edgenode-semi-tsmc",
+      "id": "edgenode-반도체와반도체장비-tsmc",
       "label": "EdgeNode",
       "name": "TSMC",
       "props": {
-        "sectorId": "sector-semi",
-        "sectorName": "반도체",
+        "sectorId": "sector-반도체와반도체장비",
+        "sectorName": "반도체와반도체장비",
         "companyId": "company-tsmc",
         "companyName": "TSMC",
         "newsIds": ["news-3", "news-26"],
@@ -2371,12 +2371,12 @@
       }
     },
     {
-      "id": "edgenode-shipbuilding-hanwhaocean",
+      "id": "edgenode-조선-hanwhaocean",
       "label": "EdgeNode",
       "name": "한화오션",
       "props": {
-        "sectorId": "sector-shipbuilding",
-        "sectorName": "조선·해운",
+        "sectorId": "sector-조선",
+        "sectorName": "조선",
         "companyId": "company-hanwhaocean",
         "companyName": "한화오션",
         "newsIds": ["news-9", "news-10", "news-11"],
@@ -2441,12 +2441,12 @@
       }
     },
     {
-      "id": "edgenode-shipbuilding-hdhyundai",
+      "id": "edgenode-조선-hdhyundai",
       "label": "EdgeNode",
       "name": "HD현대중공업",
       "props": {
-        "sectorId": "sector-shipbuilding",
-        "sectorName": "조선·해운",
+        "sectorId": "sector-조선",
+        "sectorName": "조선",
         "companyId": "company-hdhyundai",
         "companyName": "HD현대중공업",
         "newsIds": ["news-9", "news-11"],
@@ -2493,12 +2493,12 @@
       }
     },
     {
-      "id": "edgenode-shipbuilding-samsungheavy",
+      "id": "edgenode-조선-samsungheavy",
       "label": "EdgeNode",
       "name": "삼성중공업",
       "props": {
-        "sectorId": "sector-shipbuilding",
-        "sectorName": "조선·해운",
+        "sectorId": "sector-조선",
+        "sectorName": "조선",
         "companyId": "company-samsungheavy",
         "companyName": "삼성중공업",
         "newsIds": [],
@@ -2507,12 +2507,12 @@
       }
     },
     {
-      "id": "edgenode-telecom-skt",
+      "id": "edgenode-무선통신서비스-skt",
       "label": "EdgeNode",
       "name": "SK텔레콤",
       "props": {
-        "sectorId": "sector-telecom",
-        "sectorName": "통신·6G",
+        "sectorId": "sector-무선통신서비스",
+        "sectorName": "무선통신서비스",
         "companyId": "company-skt",
         "companyName": "SK텔레콤",
         "newsIds": [],

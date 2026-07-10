@@ -1,130 +1,291 @@
 {
   "edges": [
     {
-      "source": "sector-semi",
-      "target": "sector-cloud",
+      "source": "sector-반도체와반도체장비",
+      "target": "sector-IT서비스",
       "relation": "impacts",
       "weight": 0.85,
       "explain": "반도체 칩 공급 속도와 수율은 글로벌 클라우드 데이터센터 인프라 확장 속도와 단가에 직접적인 영향을 미침."
     },
     {
-      "source": "sector-ai",
-      "target": "sector-semi",
+      "source": "sector-소프트웨어",
+      "target": "sector-반도체와반도체장비",
       "relation": "impacts",
       "weight": 0.92,
       "explain": "초거대 AI 모델 고도화에 따라 HBM, 가속기 등 최첨단 AI 반도체 수요가 폭증하며 반도체 산업 전체의 슈퍼 사이클을 견인함."
     },
     {
-      "source": "sector-ai",
-      "target": "sector-cloud",
+      "source": "sector-소프트웨어",
+      "target": "sector-IT서비스",
       "relation": "impacts",
       "weight": 0.9,
       "explain": "생성형 AI 모델의 연산 처리를 위해 클라우드 기반 인프라 수요가 급증하며 하이퍼스케일러의 CapEx 증가로 직접 연계됨."
     },
     {
-      "source": "sector-robotics",
-      "target": "sector-ai",
+      "source": "sector-기계",
+      "target": "sector-소프트웨어",
       "relation": "impacts",
       "weight": 0.88,
       "explain": "피지컬 AI(Physical AI)의 대두로 로봇의 인지 및 제어 시스템에 거대언어모델(LLM)과 비전 AI 기술 적용이 가속화됨."
     },
     {
-      "source": "sector-robotics",
-      "target": "sector-battery",
+      "source": "sector-기계",
+      "target": "sector-화학",
       "relation": "impacts",
       "weight": 0.8,
       "explain": "휴머노이드 및 AMR 로봇의 구동 시간을 확보하기 위해 고신뢰성, 고효율 및 초급속 충전이 가능한 로봇 전용 배터리 수요가 신규 창출됨."
     },
     {
-      "source": "sector-auto",
-      "target": "sector-battery",
+      "source": "sector-자동차",
+      "target": "sector-화학",
       "relation": "impacts",
       "weight": 0.95,
       "explain": "전기차 시장의 캐즘(수요 둔화) 현상과 대량 생산에 따른 배터리 가격 하락세가 이차전지 기업들의 실적 재정렬과 단기 수익성에 타격을 줌."
     },
     {
-      "source": "sector-auto",
-      "target": "sector-autonomous",
+      "source": "sector-자동차",
+      "target": "sector-소프트웨어",
       "relation": "impacts",
       "weight": 0.9,
       "explain": "자율주행 소프트웨어(예: 테슬라 FSD)의 고도화와 규제 완화는 미래 전기차의 상품 가치와 플랫폼 비즈니스로의 전환을 주도함."
     },
     {
-      "source": "sector-energy",
-      "target": "sector-renewable",
+      "source": "sector-석유와가스",
+      "target": "sector-에너지장비및서비스",
       "relation": "impacts",
       "weight": 0.85,
       "explain": "글로벌 탄소중립 흐름과 국가 에너지 안보 강화 목적에 따라 재생에너지 비중이 가파르게 확대됨."
     },
     {
-      "source": "sector-cloud",
-      "target": "sector-cybersecurity",
+      "source": "sector-IT서비스",
+      "target": "sector-소프트웨어",
       "relation": "impacts",
       "weight": 0.87,
       "explain": "빅테크 및 일반 기업들의 하이브리드 클라우드 인프라 확대에 따라 클라우드 네이티브 환경에 특화된 엔드포인트 보안 및 위협 탐지 시장이 동반 성장함."
     },
     {
-      "source": "sector-ai",
-      "target": "sector-cybersecurity",
-      "relation": "impacts",
-      "weight": 0.82,
-      "explain": "AI가 해커들의 고도화된 해킹 수단으로 무기화되는 동시에, 보안 기업들이 실시간 탐지율 향상을 위해 AI 기반 위협 수색 기술을 필수 도입하게 됨."
-    },
-    {
-      "source": "sector-fintech",
-      "target": "sector-finance",
+      "source": "sector-기타금융",
+      "target": "sector-은행",
       "relation": "impacts",
       "weight": 0.8,
       "explain": "모바일 금융 플랫폼 유니콘들의 등장과 간편결제, 오픈뱅킹 인프라 혁신이 전통 시중은행의 결제 인프라를 기술적으로 대체 및 재정의함."
     },
     {
-      "source": "sector-aerospace",
-      "target": "sector-defense",
-      "relation": "impacts",
-      "weight": 0.85,
-      "explain": "저궤도 위성망 구축 사업과 군용 정찰 위성, 장거리 타격 미사일 기술이 융합되면서 우주항공과 국가 안보 방산 산업의 경계가 무너짐."
-    },
-    {
-      "source": "sector-entertainment",
-      "target": "sector-gaming",
+      "source": "sector-방송과엔터테인먼트",
+      "target": "sector-게임엔터테인먼트",
       "relation": "impacts",
       "weight": 0.75,
       "explain": "웹툰, 음악, 게임 등 핵심 K-콘텐츠 IP가 크로스오버 형태로 융합되며 다변화된 수익 창출 구조(OSMU)를 정착시킴."
     },
     {
-      "source": "sector-materials",
-      "target": "sector-semi",
+      "source": "sector-화학",
+      "target": "sector-반도체와반도체장비",
       "relation": "impacts",
       "weight": 0.85,
       "explain": "반도체 미세 공정(CVD, CMP 등) 진화에 필요한 핵심 소재 국산화와 특수 가스 등의 정밀 화학 신소재 기술 경쟁력이 칩 제조 수율을 좌우함."
     },
     {
-      "source": "sector-materials",
-      "target": "sector-battery",
-      "relation": "impacts",
-      "weight": 0.88,
-      "explain": "이차전지 양극재, 음극재, 전고체 전해질 및 고순도 동박 등 첨단 소재 연구개발 성과가 배터리 에너지 밀도와 안전성 극대화를 실현함."
-    },
-    {
-      "source": "sector-renewable",
-      "target": "sector-energy",
+      "source": "sector-에너지장비및서비스",
+      "target": "sector-석유와가스",
       "relation": "impacts",
       "weight": 0.9,
       "explain": "태양광, 풍력 등 기상 변동성이 큰 재생에너지 보급 확대는 심야 전력 부족 문제를 야기하며 그리드 안정화를 위한 대형 ESS 설치 수요를 강제함."
     },
     {
-      "source": "sector-bio",
-      "target": "sector-pharma",
+      "source": "sector-생물공학",
+      "target": "sector-제약",
       "relation": "impacts",
       "weight": 0.95,
       "explain": "생물학적 기초 연구 및 유전자 분석 기술의 발전이 비만치료제, 타겟 항암제 등 혁신적인 신약 및 제약 임상 연구 개발 속도를 단축시킴."
     },
     {
-      "source": "sector-defense",
-      "target": "sector-shipbuilding",
+      "source": "sector-우주항공과국방",
+      "target": "sector-조선",
       "relation": "impacts",
       "weight": 0.82,
       "explain": "글로벌 지정학적 분쟁 확대로 각국의 특수선(잠수함, 이지스 구축함 등) 군함 발주 수요가 급증하며 고부가 해양 방산 분야가 조선소의 핵심 수익원으로 부상함."
+    },
+    {
+      "source": "sector-문구류",
+      "target": "sector-건설",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 산업재 대분류 내 설비·인프라 수요 연동"
+    },
+    {
+      "source": "sector-건설",
+      "target": "sector-전기장비",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 산업재 대분류 내 설비·인프라 수요 연동"
+    },
+    {
+      "source": "sector-전기장비",
+      "target": "sector-기계",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 산업재 대분류 내 설비·인프라 수요 연동"
+    },
+    {
+      "source": "sector-통신장비",
+      "target": "sector-핸드셋",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 정보기술 대분류 내 밸류체인 연동"
+    },
+    {
+      "source": "sector-핸드셋",
+      "target": "sector-디스플레이장비및부품",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 정보기술 대분류 내 밸류체인 연동"
+    },
+    {
+      "source": "sector-디스플레이장비및부품",
+      "target": "sector-전자장비와기기",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 정보기술 대분류 내 밸류체인 연동"
+    },
+    {
+      "source": "sector-건강관리기술",
+      "target": "sector-생명과학도구및서비스",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 건강관리 대분류 내 R&D·임상 연동"
+    },
+    {
+      "source": "sector-생명과학도구및서비스",
+      "target": "sector-건강관리업체및서비스",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 건강관리 대분류 내 R&D·임상 연동"
+    },
+    {
+      "source": "sector-건강관리업체및서비스",
+      "target": "sector-제약",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 건강관리 대분류 내 R&D·임상 연동"
+    },
+    {
+      "source": "sector-창업투자",
+      "target": "sector-은행",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 금융 대분류 내 자금·결제 흐름 연동"
+    },
+    {
+      "source": "sector-은행",
+      "target": "sector-증권",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 금융 대분류 내 자금·결제 흐름 연동"
+    },
+    {
+      "source": "sector-증권",
+      "target": "sector-생명보험",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 금융 대분류 내 자금·결제 흐름 연동"
+    },
+    {
+      "source": "sector-가정용기기와용품",
+      "target": "sector-자동차부품",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 경기소비재 대분류 내 소비 심리 연동"
+    },
+    {
+      "source": "sector-자동차부품",
+      "target": "sector-다각화된소비자서비스",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 경기소비재 대분류 내 소비 심리 연동"
+    },
+    {
+      "source": "sector-다각화된소비자서비스",
+      "target": "sector-인터넷과카탈로그소매",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 경기소비재 대분류 내 소비 심리 연동"
+    },
+    {
+      "source": "sector-철강",
+      "target": "sector-화학",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 소재 대분류 내 원자재·소재 수요 연동"
+    },
+    {
+      "source": "sector-화학",
+      "target": "sector-비철금속",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 소재 대분류 내 원자재·소재 수요 연동"
+    },
+    {
+      "source": "sector-비철금속",
+      "target": "sector-종이와목재",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 소재 대분류 내 원자재·소재 수요 연동"
+    },
+    {
+      "source": "sector-양방향미디어와서비스",
+      "target": "sector-출판",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 커뮤니케이션서비스 대분류 내 콘텐츠·플랫폼 연동"
+    },
+    {
+      "source": "sector-출판",
+      "target": "sector-방송과엔터테인먼트",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 커뮤니케이션서비스 대분류 내 콘텐츠·플랫폼 연동"
+    },
+    {
+      "source": "sector-방송과엔터테인먼트",
+      "target": "sector-무선통신서비스",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 커뮤니케이션서비스 대분류 내 콘텐츠·플랫폼 연동"
+    },
+    {
+      "source": "sector-전기유틸리티",
+      "target": "sector-가스유틸리티",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 유틸리티 대분류 내 전력·가스 인프라 연동"
+    },
+    {
+      "source": "sector-가스유틸리티",
+      "target": "sector-복합유틸리티",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 유틸리티 대분류 내 전력·가스 인프라 연동"
+    },
+    {
+      "source": "sector-화장품",
+      "target": "sector-가정용품",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 필수소비재 대분류 내 내수 수요 연동"
+    },
+    {
+      "source": "sector-가정용품",
+      "target": "sector-식품",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 필수소비재 대분류 내 내수 수요 연동"
+    },
+    {
+      "source": "sector-식품",
+      "target": "sector-식품과기본식료품소매",
+      "relation": "impacts",
+      "weight": 0.65,
+      "explain": "동일 GICS 필수소비재 대분류 내 내수 수요 연동"
     }
   ]
 }

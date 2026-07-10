@@ -2,7 +2,7 @@
   "edges": [
     {
       "source": "news-1",
-      "target": "sector-semi",
+      "target": "sector-반도체와반도체장비",
       "relation": "mentions",
       "weight": 0.95
     },
@@ -20,13 +20,13 @@
     },
     {
       "source": "news-2",
-      "target": "sector-cloud",
+      "target": "sector-IT서비스",
       "relation": "mentions",
       "weight": 0.92
     },
     {
       "source": "news-2",
-      "target": "sector-ai",
+      "target": "sector-소프트웨어",
       "relation": "mentions",
       "weight": 0.88
     },
@@ -56,13 +56,13 @@
     },
     {
       "source": "news-3",
-      "target": "sector-semi",
+      "target": "sector-반도체와반도체장비",
       "relation": "mentions",
       "weight": 0.9
     },
     {
       "source": "news-3",
-      "target": "sector-ai",
+      "target": "sector-소프트웨어",
       "relation": "mentions",
       "weight": 0.92
     },
@@ -92,13 +92,13 @@
     },
     {
       "source": "news-4",
-      "target": "sector-battery",
+      "target": "sector-화학",
       "relation": "mentions",
       "weight": 0.94
     },
     {
       "source": "news-4",
-      "target": "sector-energy",
+      "target": "sector-석유와가스",
       "relation": "mentions",
       "weight": 0.88
     },
@@ -122,13 +122,13 @@
     },
     {
       "source": "news-5",
-      "target": "sector-battery",
+      "target": "sector-화학",
       "relation": "mentions",
       "weight": 0.95
     },
     {
       "source": "news-5",
-      "target": "sector-auto",
+      "target": "sector-자동차",
       "relation": "mentions",
       "weight": 0.75
     },
@@ -146,13 +146,13 @@
     },
     {
       "source": "news-6",
-      "target": "sector-battery",
+      "target": "sector-화학",
       "relation": "mentions",
       "weight": 0.9
     },
     {
       "source": "news-6",
-      "target": "sector-robotics",
+      "target": "sector-기계",
       "relation": "mentions",
       "weight": 0.92
     },
@@ -164,7 +164,7 @@
     },
     {
       "source": "news-7",
-      "target": "sector-robotics",
+      "target": "sector-기계",
       "relation": "mentions",
       "weight": 0.88
     },
@@ -182,13 +182,13 @@
     },
     {
       "source": "news-8",
-      "target": "sector-robotics",
+      "target": "sector-기계",
       "relation": "mentions",
       "weight": 0.91
     },
     {
       "source": "news-8",
-      "target": "sector-auto",
+      "target": "sector-자동차",
       "relation": "mentions",
       "weight": 0.8
     },
@@ -206,13 +206,13 @@
     },
     {
       "source": "news-9",
-      "target": "sector-shipbuilding",
+      "target": "sector-조선",
       "relation": "mentions",
       "weight": 0.95
     },
     {
       "source": "news-9",
-      "target": "sector-defense",
+      "target": "sector-우주항공과국방",
       "relation": "mentions",
       "weight": 0.9
     },
@@ -230,13 +230,13 @@
     },
     {
       "source": "news-10",
-      "target": "sector-shipbuilding",
+      "target": "sector-조선",
       "relation": "mentions",
       "weight": 0.9
     },
     {
       "source": "news-10",
-      "target": "sector-defense",
+      "target": "sector-우주항공과국방",
       "relation": "mentions",
       "weight": 0.92
     },
@@ -248,13 +248,13 @@
     },
     {
       "source": "news-11",
-      "target": "sector-shipbuilding",
+      "target": "sector-조선",
       "relation": "mentions",
       "weight": 0.85
     },
     {
       "source": "news-11",
-      "target": "sector-cybersecurity",
+      "target": "sector-소프트웨어",
       "relation": "mentions",
       "weight": 0.88
     },
@@ -272,7 +272,7 @@
     },
     {
       "source": "news-12",
-      "target": "sector-entertainment",
+      "target": "sector-방송과엔터테인먼트",
       "relation": "mentions",
       "weight": 0.9
     },
@@ -290,7 +290,7 @@
     },
     {
       "source": "news-13",
-      "target": "sector-entertainment",
+      "target": "sector-방송과엔터테인먼트",
       "relation": "mentions",
       "weight": 0.85
     },
@@ -302,7 +302,7 @@
     },
     {
       "source": "news-14",
-      "target": "sector-entertainment",
+      "target": "sector-방송과엔터테인먼트",
       "relation": "mentions",
       "weight": 0.92
     },
@@ -314,13 +314,13 @@
     },
     {
       "source": "news-15",
-      "target": "sector-cybersecurity",
+      "target": "sector-소프트웨어",
       "relation": "mentions",
       "weight": 0.95
     },
     {
       "source": "news-15",
-      "target": "sector-ai",
+      "target": "sector-소프트웨어",
       "relation": "mentions",
       "weight": 0.75
     },
@@ -332,7 +332,7 @@
     },
     {
       "source": "news-16",
-      "target": "sector-cybersecurity",
+      "target": "sector-소프트웨어",
       "relation": "mentions",
       "weight": 0.92
     },
@@ -344,13 +344,13 @@
     },
     {
       "source": "news-17",
-      "target": "sector-pharma",
+      "target": "sector-제약",
       "relation": "mentions",
       "weight": 0.95
     },
     {
       "source": "news-17",
-      "target": "sector-bio",
+      "target": "sector-생물공학",
       "relation": "mentions",
       "weight": 0.9
     },
@@ -362,7 +362,7 @@
     },
     {
       "source": "news-18",
-      "target": "sector-pharma",
+      "target": "sector-제약",
       "relation": "mentions",
       "weight": 0.9
     },
@@ -380,7 +380,7 @@
     },
     {
       "source": "news-19",
-      "target": "sector-pharma",
+      "target": "sector-제약",
       "relation": "mentions",
       "weight": 0.85
     },
@@ -392,13 +392,13 @@
     },
     {
       "source": "news-20",
-      "target": "sector-fintech",
+      "target": "sector-기타금융",
       "relation": "mentions",
       "weight": 0.95
     },
     {
       "source": "news-20",
-      "target": "sector-finance",
+      "target": "sector-은행",
       "relation": "mentions",
       "weight": 0.85
     },
@@ -410,13 +410,13 @@
     },
     {
       "source": "news-21",
-      "target": "sector-renewable",
+      "target": "sector-에너지장비및서비스",
       "relation": "mentions",
       "weight": 0.95
     },
     {
       "source": "news-21",
-      "target": "sector-energy",
+      "target": "sector-석유와가스",
       "relation": "mentions",
       "weight": 0.9
     },
@@ -428,7 +428,7 @@
     },
     {
       "source": "news-22",
-      "target": "sector-defense",
+      "target": "sector-우주항공과국방",
       "relation": "mentions",
       "weight": 0.95
     },
@@ -446,7 +446,7 @@
     },
     {
       "source": "news-23",
-      "target": "sector-aerospace",
+      "target": "sector-우주항공과국방",
       "relation": "mentions",
       "weight": 0.95
     },
@@ -464,13 +464,13 @@
     },
     {
       "source": "news-24",
-      "target": "sector-materials",
+      "target": "sector-화학",
       "relation": "mentions",
       "weight": 0.9
     },
     {
       "source": "news-24",
-      "target": "sector-battery",
+      "target": "sector-화학",
       "relation": "mentions",
       "weight": 0.8
     },
@@ -482,13 +482,13 @@
     },
     {
       "source": "news-25",
-      "target": "sector-semi",
+      "target": "sector-반도체와반도체장비",
       "relation": "mentions",
       "weight": 0.9
     },
     {
       "source": "news-25",
-      "target": "sector-renewable",
+      "target": "sector-에너지장비및서비스",
       "relation": "mentions",
       "weight": 0.92
     },
@@ -500,7 +500,7 @@
     },
     {
       "source": "news-26",
-      "target": "sector-semi",
+      "target": "sector-반도체와반도체장비",
       "relation": "mentions",
       "weight": 0.92
     },
@@ -518,7 +518,7 @@
     },
     {
       "source": "news-27",
-      "target": "sector-autonomous",
+      "target": "sector-소프트웨어",
       "relation": "mentions",
       "weight": 0.95
     },
@@ -530,7 +530,7 @@
     },
     {
       "source": "news-28",
-      "target": "sector-metaverse",
+      "target": "sector-게임엔터테인먼트",
       "relation": "mentions",
       "weight": 0.9
     },
@@ -548,7 +548,7 @@
     },
     {
       "source": "news-29",
-      "target": "sector-cybersecurity",
+      "target": "sector-소프트웨어",
       "relation": "mentions",
       "weight": 0.93
     },
@@ -566,7 +566,7 @@
     },
     {
       "source": "news-30",
-      "target": "sector-fintech",
+      "target": "sector-기타금융",
       "relation": "mentions",
       "weight": 0.92
     },
