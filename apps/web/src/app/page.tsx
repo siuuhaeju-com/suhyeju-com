@@ -33,7 +33,7 @@ export default function HomePage() {
       </section>
 
       {/* 인기 뉴스 + 우측 현황 */}
-      <section className="grid gap-10 lg:grid-cols-[1fr_400px]">
+      <section className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_400px]">
         <div>
           <h2 className="mb-4 text-lg font-bold">🔥 인기 뉴스</h2>
           <PopularNews />
