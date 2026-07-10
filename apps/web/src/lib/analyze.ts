@@ -8,14 +8,7 @@ import { extractArticle } from '@/lib/extract-article';
 import { analyzeNews, type AnalysisDraft } from '@/lib/sources/gpt';
 import { searchEdgeSources } from '@/lib/sources/naver-news';
 import { fetchStockQuotes, stockPageUrl, type StockQuote } from '@/lib/sources/naver-stock';
-import type {
-  AnalysisResult,
-  EdgeSource,
-  HeatmapCell,
-  SignalNewsItem,
-  SpreadNode,
-  TopStock,
-} from '@/lib/types';
+import type { AnalysisResult, EdgeSource, SignalNewsItem, SpreadNode, TopStock } from '@/lib/types';
 
 const ENGINE_VERSION = '수혜주.com AI v2.1';
 
@@ -88,10 +81,10 @@ export async function runAnalysis(
 /**
  * draft에 네이버 실시세를 join한다(in-place) + 종목명→StockQuote 맵을 반환한다.
  * - topStocks 종목: 종목명→실시세로 changePct 교체(매칭 실패 시 GPT 초안 유지).
- *   코드·시장은 반환 맵으로 넘겨 assemble에서 TopStock에 부여한다(#49).
- * - spreadNodes/relatedSectors: 이름이 topStocks의 섹터와 맞으면
- *   그 섹터 종목들의 실시세 평균으로 changePct 교체.
- * - heatmap: 시세 등락률이 아니라 GPT impact → 서버 share/direction을 쓰므로 join하지 않는다.
+ *   코드·시장은 반환 맵으로 넘겨 assemble에서 TopStock에 부여한다(#49) —
+ *   주가 추이 차트(F-16)의 시세 조회 키가 이 코드·시장이다.
+ * - relatedSectors: 이름이 topStocks의 섹터와 맞으면 그 섹터 종목들의 실시세 평균으로 교체.
+ * - spreadNodes: F-16부터 등락률 대신 GPT impact(영향도)를 쓰므로 join하지 않는다.
  * 네이버가 막히거나 종목이 매칭 안 되면 조용히 GPT 초안값을 유지한다(분석 자체는 성공).
  */
 async function joinQuotes(draft: AnalysisDraft): Promise<Map<string, StockQuote | null>> {
@@ -121,12 +114,7 @@ async function joinQuotes(draft: AnalysisDraft): Promise<Map<string, StockQuote 
     }
   }
 
-  // 섹터명이 topStocks 섹터와 일치하면 평균값으로 교체(원점 등 미매칭은 GPT 초안 유지)
-  // (히트맵은 changePct가 아니라 impact 비중을 쓰므로 시세를 붙이지 않는다)
-  for (const node of draft.spreadNodes) {
-    const avg = sectorAvg.get(node.name);
-    if (avg != null) node.changePct = avg;
-  }
+  // 섹터명이 topStocks 섹터와 일치하면 평균값으로 교체(미매칭은 GPT 초안 유지)
   for (const related of draft.relatedSectors) {
     const avg = sectorAvg.get(related.name);
     if (avg != null) related.changePct = avg;
@@ -212,7 +200,8 @@ function assemble(
       reason,
       sources: edgeSources[i] ?? [],
     })),
-    heatmap: deriveHeatmap(draft.heatmap),
+    // 히트맵 폐지(F-16) — 영향도는 spreadNodes.impact가 담는다
+    sectionNotes: { spread: draft.spreadNote, knowledge: draft.knowledgeNote },
     knowledgeNodes: draft.knowledgeNodes.map((n) => ({ ...n, x: 0, y: 0 })), // 좌표는 KnowledgeGraph가 group 기반으로 자체 계산
     knowledgeEdges: draft.knowledgeEdges,
     topStocks,
@@ -235,38 +224,4 @@ function deriveRows(nodes: Omit<SpreadNode, 'row'>[]): SpreadNode[] {
     });
   }
   return result;
-}
-
-/**
- * GPT의 heatmap 초안({sector, impact})을 히트맵 셀로 파생한다.
- * - share: 이슈 영향 비중(%) = |impact| / Σ|impact| × 100. 전체 합이 정확히 100이 되도록
- *   최대잔여법(largest-remainder)으로 정수 반올림.
- * - direction: impact 부호(≥0 긍정=레드 / <0 부정=블루).
- * impact의 절대값이 곧 "이슈가 그 섹터에 미치는 영향 강도"이고, 시세(등락률)와는 무관하다.
- */
-function deriveHeatmap(cells: { sector: string; impact: number }[]): HeatmapCell[] {
-  if (cells.length === 0) return [];
-
-  const total = cells.reduce((sum, c) => sum + Math.abs(c.impact), 0);
-  const base = cells.map((c) => ({
-    sector: c.sector,
-    direction: (c.impact >= 0 ? 'positive' : 'negative') as HeatmapCell['direction'],
-    // total이 0이면(모두 impact 0) 균등 분배
-    raw: total > 0 ? (Math.abs(c.impact) / total) * 100 : 100 / cells.length,
-  }));
-
-  // 최대잔여법: 내림 합을 100에서 뺀 만큼, 소수부가 큰 셀부터 +1
-  const floors = base.map((b) => Math.floor(b.raw));
-  let remainder = 100 - floors.reduce((a, b) => a + b, 0);
-  const order = base
-    .map((b, i) => ({ i, frac: b.raw - Math.floor(b.raw) }))
-    .sort((a, b) => b.frac - a.frac);
-  const shares = [...floors];
-  for (const { i } of order) {
-    if (remainder <= 0) break;
-    shares[i] += 1;
-    remainder -= 1;
-  }
-
-  return base.map((b, i) => ({ sector: b.sector, share: shares[i], direction: b.direction }));
 }

@@ -41,7 +41,8 @@
 ### ② GPT 구조 생성 — `sources/gpt.ts`
 
 - 본문을 `SYSTEM_PROMPT` + `AnalysisSchema`(zod)로 넣어 **구조화 출력**을 강제한다.
-- GPT가 만드는 것: `sector`, `verdict`, `summary`, `keywords`, `relatedSectors`, `goodSignal`/`warnSignal`, `spreadNodes`(원시), `spreadEdges`, `heatmap`(원시), `knowledgeNodes`(원시), `knowledgeEdges`, `topStocks`(배열).
+- GPT가 만드는 것: `sector`, `verdict`, `summary`, `keywords`, `relatedSectors`, `goodSignal`/`warnSignal`, `spreadNodes`(원시 — **`impact` 포함**), `spreadEdges`, `spreadNote`/`knowledgeNote`(섹션 해설), `knowledgeNodes`(원시), `knowledgeEdges`, `topStocks`(배열).
+- `SpreadNode.impact`: 부호=방향(+긍정/−부정), |값|=강도(1~100). **시세가 아니라 분석값**이라 ③에서 교체하지 않는다. (구 `heatmap[].impact`의 역할을 노드로 이관 — F-16 #86)
 - **스키마 무결성 규칙**(§4)을 프롬프트로 강제한다.
 - base_url 미확보 시 **mock 폴백**으로 동작한다([.env.example](../apps/web/.env.example) 참고). `MOCK_ANALYZE=1`로 강제 가능.
 
@@ -52,7 +53,7 @@ GPT가 준 종목·섹터명에 **실시세를 붙여 `changePct`를 교체**하
 - **종목마스터**(이름 → 코드 → 시세): 네이버 `marketValue/{KOSPI|KOSDAQ}` 페이지네이션으로 종목 마스터를 빌드타임/cron 1회 캐시. 시세만 런타임 fetch.
 - **이름 매칭:** 정규화(공백 제거·우선주 접미사 `/([0-9]?우[A-Z]?)$/`) → exact → alias 테이블 → fuzzy → 실패 시 미매칭(오조인 금지).
 - **섹터 역조회:** 코드 확정 후 `m.stock.naver.com/api/stock/{code}/integration`의 `industryCode`가 이름 매칭보다 안전(예: SK하이닉스 `000660` → 반도체).
-- 대상 필드: `relatedSectors[].changePct`, `spreadNodes[].changePct`, `topStocks[][].changePct`. (히트맵은 changePct가 아니라 `impact` 비중을 쓰므로 시세를 붙이지 않는다.)
+- 대상 필드: `relatedSectors[].changePct`, `topStocks[][].changePct`. (spreadNodes는 F-16부터 등락률 대신 GPT `impact`를 쓰므로 join하지 않는다. topStocks join이 채우는 `code`·`market`이 주가 추이 차트의 시세 조회 키가 된다.)
 - 전제: **`lib/sectors.ts`**(섹터 taxonomy)가 있어야 매칭이 안정적이다(§4·§6).
 
 ### ④ 표현필드 파생 — `analyze.ts` `assemble()`
@@ -60,9 +61,11 @@ GPT가 준 종목·섹터명에 **실시세를 붙여 `changePct`를 교체**하
 GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 계산**해 응답에 채운다.
 
 - `SpreadNode.row`: 같은 `tier` 노드들을 세로 `0~1`로 균등 배치(`deriveRows`).
-- `HeatmapCell.share`·`direction`: GPT `heatmap[].impact`(부호 포함 영향강도)에서 파생(`deriveHeatmap`). `share = |impact|/Σ|impact|×100`(전체 합 100%, 최대잔여법 반올림) = 이슈 영향 비중, `direction = impact 부호`(긍정=레드/부정=블루). 히트맵 숫자는 등락률이 아니라 이 비중이다.
+- 노드 영향도 표현(강한/보통/약한 라벨·방향색·채도)은 **FE가 `impact`에서 파생**(`lib/impact.ts` — 강함 ≥60 · 보통 30~59 · 약함 <30, 방향=부호, 채도=잉크 혼합 비율).
 - `KnowledgeNode.x/y`: 서버는 `0`으로 두고 **FE가 `group` 기반으로 실제 좌표 계산**.
 - `topStocks`: GPT의 배열을 `Record<섹터명, TopStock[]>`로 변환.
+- `sectionNotes`: GPT `spreadNote`/`knowledgeNote`를 `{ spread, knowledge }`로 묶는다.
+- ~~`HeatmapCell.share/direction` 파생(`deriveHeatmap`)~~ — **히트맵 폐지(F-16 #86)로 제거.** 구 저장 데이터의 `heatmap` 필드는 무시된 채 남는다(타입은 optional·deprecated).
 
 ### ⑤ 저장·응답 — `store.ts`
 

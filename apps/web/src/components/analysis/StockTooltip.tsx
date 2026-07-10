@@ -1,21 +1,23 @@
-import { X } from 'lucide-react';
+import { ChartLine, X } from 'lucide-react';
 
-import { formatPct, getPctToneClass } from '@/lib/format';
-import { cn } from '@/lib/utils';
 import type { TopStock } from '@/lib/types';
 
 /**
- * 섹터 Top5 종목 현황 툴팁 (F-10)
- * 확산 그래프 노드·히트맵 셀에서 공용 — 부모가 hover/grace 상태와 pointer-events를 제어한다.
- * 종목에 url(네이버페이 증권)이 있으면 새 탭 링크로 렌더한다.
+ * 섹터 Top5 종목 현황 툴팁 (F-10) — 확산 그래프 노드에서 사용.
+ * 부모가 hover/grace 상태와 pointer-events를 제어한다.
+ * 전일대비 등락률은 표시하지 않는다(F-16) — 대신 종목 클릭 시 주가 추이 차트
+ * (StockHistoryDialog)를 연다. 시세 매칭 실패(code 없음) 종목은 이름만 보여준다.
  */
 export function StockTooltip({
   sector,
   stocks,
+  onSelectStock,
   onClose,
 }: {
   sector: string;
   stocks: TopStock[];
+  /** 종목 클릭 → 주가 추이 차트 열기 (code 있는 종목만 클릭 가능) */
+  onSelectStock?: (stock: TopStock) => void;
   /** 고정(pin) 모드일 때만 전달 — 닫기 버튼이 생기고 role이 dialog가 된다 */
   onClose?: () => void;
 }) {
@@ -50,35 +52,33 @@ export function StockTooltip({
             <span className="w-3.5 flex-none text-[11px] font-extrabold tabular-nums text-muted-foreground">
               {index + 1}
             </span>
-            {stock.url ? (
-              <a
-                href={stock.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-w-0 flex-1 truncate text-[12.5px] font-semibold text-ink-sub transition-colors outline-none hover:text-foreground hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+            {stock.code && onSelectStock ? (
+              <button
+                type="button"
+                onClick={() => onSelectStock(stock)}
+                aria-label={`${stock.name} — 주가 추이 차트 보기`}
+                className="group flex min-w-0 flex-1 cursor-pointer items-center justify-between gap-1.5 rounded-sm text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
-                {stock.name} {/* 외부 링크 표식 — 종목명과 구분되게 무채색 유지 */}
-                <span aria-hidden className="text-muted-foreground">
-                  ↗
+                <span className="truncate text-[12.5px] font-semibold text-ink-sub transition-colors group-hover:text-foreground group-hover:underline">
+                  {stock.name}
                 </span>
-              </a>
+                {/* 차트 열림 표식 — 색만으로 구분하지 않게 아이콘 병기 */}
+                <ChartLine aria-hidden className="size-3.5 shrink-0 text-muted-foreground" />
+              </button>
             ) : (
-              // 시세 매칭 실패 종목은 링크 없이 이름만 (오조인 방지)
+              // 시세 매칭 실패 종목은 차트를 열 수 없다 — 이름만 (오조인 방지)
               <span className="min-w-0 flex-1 truncate text-[12.5px] font-semibold text-ink-sub">
                 {stock.name}
               </span>
             )}
-            <span
-              className={cn(
-                'flex-none text-[12.5px] font-extrabold tabular-nums',
-                getPctToneClass(stock.changePct),
-              )}
-            >
-              {formatPct(stock.changePct)}
-            </span>
           </li>
         ))}
       </ul>
+      {onSelectStock && (
+        <p className="mt-2.5 border-t border-border pt-2 text-[10.5px] text-muted-foreground">
+          종목을 클릭하면 주가 추이 차트가 열립니다
+        </p>
+      )}
     </div>
   );
 }

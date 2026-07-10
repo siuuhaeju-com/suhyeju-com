@@ -28,6 +28,8 @@ type KnowledgeGraphViewProps = {
   graphHeightClass?: string;
   headerExtra?: React.ReactNode;
   description?: string;
+  /** 섹션 해설 한 문단 (F-16, 분석 임베드용) — 헤더와 그래프 사이에 표시 */
+  note?: string;
 };
 
 /**
@@ -39,6 +41,7 @@ export function KnowledgeGraphView({
   graphHeightClass = 'h-[520px]',
   headerExtra,
   description,
+  note,
 }: KnowledgeGraphViewProps) {
   const sectorCount = getPoolSectorCount();
   const nodeCount = getPoolMaxNodeCount();
@@ -86,6 +89,13 @@ export function KnowledgeGraphView({
           {headerExtra}
         </div>
       </div>
+
+      {/* 섹션 해설 (F-16) — 이 지식그래프가 말하는 것 한 문단 */}
+      {note && (
+        <p className="mt-4 rounded-md bg-secondary/40 px-4 py-3 text-[13px] leading-relaxed text-ink-sub">
+          {note}
+        </p>
+      )}
 
       <div
         className={`relative mt-4 overflow-hidden rounded-md border border-border bg-card lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(240px,280px)] ${graphHeightClass}`}

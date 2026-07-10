@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { ImpactHeatmap } from '@/components/analysis/ImpactHeatmap';
 import { KnowledgeGraph } from '@/components/analysis/KnowledgeGraph';
 import { SignalSection } from '@/components/analysis/SignalSection';
 import { SpreadGraph } from '@/components/analysis/SpreadGraph';
@@ -14,9 +13,10 @@ type AnalysisPageProps = {
 };
 
 /**
- * 분석 페이지 (PAGE-3 · #32)
- * AI 요약(F-05) → 전망 분석(F-06) → 영향력 확산 그래프(F-07) →
- * 섹터별 영향도 히트맵(F-08) → 산업 연결 지식그래프(F-12)
+ * 분석 페이지 (PAGE-3 · #32 · F-16 개편)
+ * AI 요약(F-05) → 영향력 확산 그래프(F-07, 히트맵 F-08 역할 통합) →
+ * 전망 분석(F-06) → 산업 연결 지식그래프(F-12)
+ * 그래프가 이 서비스의 핵심 산출물이라 요약 바로 아래 1순위로 배치한다(#86).
  */
 export default async function AnalysisPage({ params }: AnalysisPageProps) {
   const { id } = await params;
@@ -43,14 +43,16 @@ export default async function AnalysisPage({ params }: AnalysisPageProps) {
 
       <div className="mt-6 flex flex-col gap-12">
         <SummarySection result={result} />
-        <SignalSection result={result} />
         <SpreadGraph
           nodes={result.spreadNodes}
           edges={result.spreadEdges}
           topStocks={result.topStocks}
+          sectionNote={result.sectionNotes?.spread}
+          publishedAt={result.publishedAt}
+          analyzedAt={result.analyzedAt}
         />
-        <ImpactHeatmap cells={result.heatmap} topStocks={result.topStocks} />
-        <KnowledgeGraph centerSector={result.sector} />
+        <SignalSection result={result} />
+        <KnowledgeGraph centerSector={result.sector} sectionNote={result.sectionNotes?.knowledge} />
       </div>
     </main>
   );

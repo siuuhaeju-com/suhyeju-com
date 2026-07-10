@@ -31,9 +31,10 @@ function resolveModel(): string {
 }
 
 /* ── AnalysisResult 중 "GPT가 생성"하는 부분의 스키마 ──
- * 제외(서버/FE 파생): SpreadNode.row · HeatmapCell.share/direction · KnowledgeNode.x/y
+ * 제외(서버/FE 파생): SpreadNode.row · KnowledgeNode.x/y
  * topStocks: 동적 키(Record) 회피 위해 배열로 받고 서버에서 Record로 변환
- * changePct: GPT 초안값. ③단계에서 네이버 실시세로 교체(히트맵은 impact만 사용)
+ * changePct: GPT 초안값. ③단계에서 네이버 실시세로 교체
+ * impact: 노드별 영향도(부호=방향, |1~100|=강도) — 시세가 아니라 GPT의 분석값 (F-16)
  */
 const zSignalItem = z.object({ text: z.string(), source: z.string() });
 
@@ -56,7 +57,8 @@ const zSpreadNode = z.object({
   id: z.string(),
   name: z.string(),
   tier: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]), // 0=뉴스 원점, 1·2·3=파급 단계
-  changePct: z.number(),
+  // 이슈가 이 섹터에 미치는 영향 — 부호=방향(+긍정/−부정), |값|=강도(1~100). tier 0은 0.
+  impact: z.number(),
 });
 
 const zSpreadEdge = z.object({
@@ -90,9 +92,9 @@ const SchemaA = z.object({
 const SchemaB = z.object({
   spreadNodes: z.array(zSpreadNode),
   spreadEdges: z.array(zSpreadEdge),
-  // 히트맵: 이슈가 각 섹터에 미치는 영향 강도(impact). 부호=방향, |impact|=강도.
-  // topStocks·spreadNodes와 같은 콜에서 생성해 섹터명을 일관되게(툴팁·시세 join 매칭).
-  heatmap: z.array(z.object({ sector: z.string(), impact: z.number() })),
+  // 그래프 섹션 해설 — "이 그림이 말하는 것" 한 문단 (F-16, sectionNotes.spread로 전달)
+  spreadNote: z.string(),
+  // topStocks는 spreadNodes와 같은 콜에서 생성해 섹터명을 일관되게(툴팁·시세 join 매칭).
   topStocks: z.array(
     z.object({
       sector: z.string(),
@@ -104,6 +106,8 @@ const SchemaB = z.object({
 const SchemaC = z.object({
   knowledgeNodes: z.array(zKnowledgeNode),
   knowledgeEdges: z.array(z.object({ from: z.string(), to: z.string() })),
+  // 지식그래프 섹션 해설 — 한 문단 (F-16, sectionNotes.knowledge로 전달)
+  knowledgeNote: z.string(),
 });
 
 // 전체 스키마 = 3분할 병합 (타입·mock용)
@@ -114,7 +118,7 @@ export type AnalysisDraft = z.infer<typeof AnalysisSchema>;
 const COMMON = `당신은 증시 전문 애널리스트입니다. 먼저 뉴스의 **핵심 시장을 판별**합니다:
 - 핵심 주체가 한국 기업·한국 경제 이슈면 → **한국 시장 관점**(한국 산업·종목).
 - 핵심 주체가 미국·글로벌 기업(예: 엔비디아·애플·테슬라)이면 → **미국 시장 관점**(미국 산업·종목).
-판별한 관점을 sector·spreadNodes·relatedSectors·heatmap·topStocks **전체에 일관되게** 적용합니다(두 시장을 한 분석에 섞지 않음). 모든 텍스트는 한국어로 작성하되, 종목명은 시세 조회가 되도록 널리 쓰이는 표기를 씁니다(한국: 종목명, 미국: 엔비디아·애플 등 한글 표기 또는 티커). changePct는 부호 포함(상승 +, 하락 −)으로 방향성만 추정합니다(실제 시세는 서버가 교체).
+판별한 관점을 sector·spreadNodes·relatedSectors·topStocks **전체에 일관되게** 적용합니다(두 시장을 한 분석에 섞지 않음). 모든 텍스트는 한국어로 작성하되, 종목명은 시세 조회가 되도록 널리 쓰이는 표기를 씁니다(한국: 종목명, 미국: 엔비디아·애플 등 한글 표기 또는 티커). changePct는 부호 포함(상승 +, 하락 −)으로 방향성만 추정합니다(실제 시세는 서버가 교체).
 사용자 메시지 맨 앞에 "제목: …"·"출처: …" 줄이 주어지면 그것이 분석 대상 원문 기사입니다(맥락 참고용).`;
 
 const PROMPT_A = `${COMMON}
@@ -132,25 +136,25 @@ const PROMPT_B = `${COMMON}
 ## 파급 그래프 (spreadNodes/spreadEdges)
 - **반드시 tier 0·1·2·3을 모두 채웁니다. tier 2·3을 생략하면 안 됩니다.**
   - tier 0: 뉴스의 원점 (정확히 1개)
-  - tier 1: 뉴스에서 **직접** 수혜/타격받는 산업 (2~3개)
+  - tier 1: 뉴스에서 **직접** 수혜/타격받는 산업 (수혜 2~3개 + **부정 영향(경쟁사·대체재·비용 부담 등) 1~2개** — 뉴스 성격상 부정 파급이 정말 없으면 0개 허용)
   - tier 2: tier 1 산업의 **공급망(전방·후방)**으로 번지는 산업 (2~3개)
   - tier 3: tier 2에서 **한 단계 더** 확산되는 산업 (1~2개)
 - spreadNodes는 **전체 최소 7개** 이상, 각 노드에 고유 id.
-- **tier N(N≥1)의 모든 노드는 tier N-1의 어떤 노드로부터 spreadEdges 연결을 최소 1개 받습니다 (고립 노드 금지).**
+- impact: 이슈가 그 섹터에 미치는 **영향의 강도와 방향**입니다(등락률·시세 아님). 부호 포함, |impact|는 1~100.
+  - 긍정(수혜) 영향은 +, 부정(타격) 영향은 −. tier 0(원점)은 0.
+  - 뉴스에 가까운·직접 영향일수록 크게: tier1 = 60~100, tier2 = 30~60, tier3 = 10~30.
+- **tier N(N≥1)의 모든 노드는 tier N-1의 어떤 노드로부터 spreadEdges 연결을 최소 1개 받습니다 (고립 노드 금지).** 부정 노드도 동일하며, reason에 왜 타격인지 씁니다.
 - spreadEdges의 from/to는 반드시 존재하는 spreadNodes id, reason에 한 줄 근거.
 - spreadEdges.searchQuery: 그 연결의 근거가 될 **실제 언론사 기사를 찾기 위한 뉴스 검색어**입니다.
   근거 기사의 제목·URL을 직접 지어내는 것은 **절대 금지** — 서버가 이 검색어로 네이버 뉴스를 검색해 실제 기사를 연결합니다.
   검색이 잘 되도록 조사 없이 핵심 명사 2~4개로 씁니다(예: "우주항공 부품 주가", "HBM 소재 수급").
   뉴스 원문에만 있는 고유 표현보다 **언론이 흔히 쓰는 일반 용어**를 쓰고, **edge마다 그 연결에 특정된 서로 다른 검색어**를 씁니다.
-## 섹터 히트맵 (heatmap)
-- **spreadNodes의 tier 1·2·3 섹터 전부(이름은 spreadNodes.name과 정확히 일치) + 추가 3~4개**를 담습니다.
-  - 추가 섹터 = 파급 경로엔 없지만 이 이슈로 영향받는 산업. **부정적 영향(경쟁사·대체재·비용 부담 등) 1~2개를 반드시 포함**합니다(예: 수혜 뉴스면 경쟁 진영·대체 기술).
-- impact: 이슈가 그 섹터에 미치는 **영향의 강도와 방향**입니다(등락률 아님). 부호 포함, |impact|는 1~100.
-  - 뉴스에 가까운·직접 영향일수록 크게(예: 직접 수혜 tier1 = 80~100), 먼 파급일수록 작게(tier3 = 10~30).
-  - 긍정 영향은 +, 부정 영향은 −.
+## 그래프 해설 (spreadNote)
+- 이 그래프가 보여주는 파급 흐름의 의미를 **투자 초보도 이해할 한 문단(2~3문장)**으로 요약합니다.
+  어떤 이슈가 어느 산업으로 번지고, 어디가 가장 강한 수혜/타격인지를 짚습니다. 과장 없이 중립 톤.
 ## 종목 (topStocks)
-- **heatmap의 모든 섹터 각각에 대해**(= tier 1·2·3 + 추가 섹터, 빠짐없이 전부) topStocks 항목을 하나씩 만듭니다.
-- 각 sector 이름을 해당 heatmap/spreadNodes의 name과 **일치**시키고, 대표 종목을 **정확히 5개**(Top5) 담습니다.
+- **spreadNodes의 tier 1·2·3 섹터 각각에 대해**(빠짐없이 전부) topStocks 항목을 하나씩 만듭니다.
+- 각 sector 이름을 해당 spreadNodes의 name과 **일치**시키고, 대표 종목을 **정확히 5개**(Top5) 담습니다.
 - 판별한 시장 관점을 따릅니다(미국 관점이면 미국 종목).
 - name 표기 규칙(시세·링크 매칭에 직결되므로 엄수):
   - 한국 종목: 정식 상장명 (예: 삼성전자, SK하이닉스, 한미반도체)
@@ -159,7 +163,8 @@ const PROMPT_B = `${COMMON}
 const PROMPT_C = `${COMMON}
 
 이 뉴스와 관련된 산업 지식그래프를 구성합니다.
-- knowledgeNodes/knowledgeEdges: 중심 산업과 연관 산업을 group(center/tier1/tier2/etc)으로 구성하고, edge의 from/to는 존재하는 knowledgeNodes id를 참조합니다.`;
+- knowledgeNodes/knowledgeEdges: 중심 산업과 연관 산업을 group(center/tier1/tier2/etc)으로 구성하고, edge의 from/to는 존재하는 knowledgeNodes id를 참조합니다.
+- knowledgeNote: 이 지식그래프가 보여주는 산업 연결 구조의 의미를 **투자 초보도 이해할 한 문단(2~3문장)**으로 요약합니다. 과장 없이 중립 톤.`;
 
 /** GPT에게 넘길 기사 메타 — 있으면 원문 제목·출처를 근거 인용에 그대로 쓰게 한다. */
 export interface ArticleInput {
@@ -237,7 +242,7 @@ export async function analyzeNews(article: ArticleInput): Promise<AnalysisDraft>
  * base_url 미확보 동안 파이프라인·FE 데모를 굴리기 위한 샘플 초안.
  * 시나리오: "AI 반도체 수요 급증" 호재가 한국 반도체 밸류체인으로 번지는 케이스.
  * 스키마 참조 무결성(tier0 1개 · edge가 존재하는 id 참조 · topStocks.sector↔spreadNodes.name)을
- * 지켜서 assemble/deriveRows/deriveHeatmap과 FE 렌더가 깨지지 않게 구성.
+ * 지켜서 assemble/deriveRows와 FE 렌더가 깨지지 않게 구성.
  */
 function mockAnalysis(articleText: string): AnalysisDraft {
   // 본문 일부를 요약 말미에 녹여 "이 기사를 읽은" 느낌만 살린다(고정 시나리오는 유지).
@@ -293,13 +298,16 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         quote: '실적 확인 전까지는 변동성 확대에 유의.',
       },
     },
+    // impact: 부호=방향(+수혜/−타격), |값|=강도. 부정 파급(tier1)도 포함 (F-16).
     spreadNodes: [
-      { id: 'n0', name: 'AI 반도체 수요 급증', tier: 0, changePct: 0 },
-      { id: 'n1', name: 'HBM', tier: 1, changePct: 4.1 },
-      { id: 'n2', name: '반도체 장비', tier: 1, changePct: 2.8 },
-      { id: 'n3', name: '반도체 소재', tier: 2, changePct: 1.9 },
-      { id: 'n4', name: '후공정(OSAT)', tier: 2, changePct: 1.5 },
-      { id: 'n5', name: '전력·냉각', tier: 3, changePct: 1.1 },
+      { id: 'n0', name: 'AI 반도체 수요 급증', tier: 0, impact: 0 },
+      { id: 'n1', name: 'HBM', tier: 1, impact: 90 },
+      { id: 'n2', name: '반도체 장비', tier: 1, impact: 65 },
+      { id: 'n6', name: '레거시 D램', tier: 1, impact: -35 },
+      { id: 'n3', name: '반도체 소재', tier: 2, impact: 45 },
+      { id: 'n4', name: '후공정(OSAT)', tier: 2, impact: 40 },
+      { id: 'n7', name: '파운드리 경쟁', tier: 2, impact: -30 },
+      { id: 'n5', name: '전력·냉각', tier: 3, impact: 25 },
     ],
     spreadEdges: [
       {
@@ -315,6 +323,12 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         searchQuery: '반도체 장비 수주 증가',
       },
       {
+        from: 'n0',
+        to: 'n6',
+        reason: 'AI 메모리로 캐파·수요가 이동해 범용 D램 비중 축소',
+        searchQuery: '레거시 D램 수요 둔화',
+      },
+      {
         from: 'n1',
         to: 'n3',
         reason: 'HBM 생산 확대가 소재 수요를 견인',
@@ -328,22 +342,19 @@ function mockAnalysis(articleText: string): AnalysisDraft {
       },
       {
         from: 'n1',
+        to: 'n7',
+        reason: '선단 공정 캐파 선점 경쟁 심화로 중소 파운드리 원가 부담',
+        searchQuery: '파운드리 경쟁 심화',
+      },
+      {
+        from: 'n1',
         to: 'n5',
         reason: '고발열 칩 확산으로 전력·냉각 수요 증가',
         searchQuery: 'AI 데이터센터 전력 냉각 수요',
       },
     ],
-    // 파급 섹터(tier1~3) + 추가 3개(부정 2 포함). impact 부호=방향, |impact|=강도.
-    heatmap: [
-      { sector: 'HBM', impact: 90 },
-      { sector: '반도체 장비', impact: 60 },
-      { sector: '반도체 소재', impact: 40 },
-      { sector: '후공정(OSAT)', impact: 35 },
-      { sector: '전력·냉각', impact: 25 },
-      { sector: '파운드리 경쟁', impact: -20 },
-      { sector: '레거시 D램', impact: -15 },
-      { sector: 'AI 데이터센터', impact: 15 },
-    ],
+    spreadNote:
+      'AI 반도체 수요 급증이 HBM과 반도체 장비에 가장 강한 수혜로 작용하고, 그 여파가 소재·후공정을 거쳐 전력·냉각 산업까지 번지는 흐름입니다. 반면 수요와 생산 능력이 AI 쪽으로 쏠리면서 레거시 D램과 중소 파운드리는 상대적으로 타격을 받을 수 있습니다.',
     knowledgeNodes: [
       { id: 'k0', name: 'AI 반도체', group: 'center' },
       { id: 'k1', name: 'HBM', group: 'tier1' },
@@ -359,6 +370,8 @@ function mockAnalysis(articleText: string): AnalysisDraft {
       { from: 'k2', to: 'k4' },
       { from: 'k1', to: 'k5' },
     ],
+    knowledgeNote:
+      'AI 반도체를 중심으로 HBM·장비가 1차로 연결되고, 그 아래로 소재·후공정·전력 인프라가 이어지는 밸류체인 구조입니다. 중심 산업의 업황 변화가 연결된 산업들로 순차적으로 전달되는 경로를 보여줍니다.',
     topStocks: [
       {
         sector: 'HBM',
@@ -428,16 +441,6 @@ function mockAnalysis(articleText: string): AnalysisDraft {
           { name: '심텍', changePct: -1.1 },
           { name: '티엘비', changePct: -0.8 },
           { name: '엑시콘', changePct: -1.5 },
-        ],
-      },
-      {
-        sector: 'AI 데이터센터',
-        stocks: [
-          { name: '케이아이엔엑스', changePct: 1.8 },
-          { name: '가비아', changePct: 1.3 },
-          { name: '더존비즈온', changePct: 0.9 },
-          { name: '삼성에스디에스', changePct: 1.1 },
-          { name: '효성ITX', changePct: 0.7 },
         ],
       },
     ],

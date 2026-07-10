@@ -3,14 +3,19 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
+import { StockHistoryDialog } from '@/components/analysis/StockHistoryDialog';
 import { StockTooltip } from '@/components/analysis/StockTooltip';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { formatPct, getPctToneClass } from '@/lib/format';
+import { getImpactStrength, IMPACT_STRENGTH_INK_MIX, IMPACT_STRENGTH_LABEL } from '@/lib/impact';
 import { cn } from '@/lib/utils';
 import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
 
-/** 영향력 확산 그래프 (F-07) — 연결선 근거 툴팁(F-09) + 노드 hover Top5(F-10) */
+/**
+ * 영향력 확산 그래프 (F-07) — 연결선 근거 툴팁(F-09) + 노드 hover Top5(F-10).
+ * F-16: 노드에 등락률 대신 영향도 라벨(강한/보통/약한 영향 × 긍정=레드/부정=블루, 채도=강도)을
+ * 표시하고(구 히트맵 F-08의 역할 통합), 툴팁 종목 클릭 시 뉴스 발행일 기준 주가 추이 차트를 연다.
+ */
 
 const VIEW_W = 1100;
 const VIEW_H = 560;
@@ -39,16 +44,26 @@ export function SpreadGraph({
   nodes,
   edges,
   topStocks,
+  sectionNote,
+  publishedAt,
+  analyzedAt,
 }: {
   nodes: SpreadNode[];
   edges: SpreadEdge[];
   topStocks: Record<string, TopStock[]>;
+  /** "이 그래프가 말하는 것" 한 문단 해설 (F-16) — 구 저장 데이터에는 없다 */
+  sectionNote?: string;
+  /** 뉴스 발행일 — 주가 추이 차트의 고정 기준선·조회 구간 기준(빈값이면 분석일 폴백) */
+  publishedAt: string;
+  analyzedAt: string;
 }) {
   const router = useRouter();
   // 연결선 툴팁: hover + 유예시간(grace) — 선에서 떨어져도 잠시 유지, 그 사이 툴팁에 들어오면 계속 열려 링크 클릭 가능
   const [hoveredEdge, setHoveredEdge] = useState<number | null>(null);
   // 노드 Top5 툴팁: hover + 유예시간(grace) — 노드에서 떨어져도 잠시 유지, 그 사이 툴팁에 들어오면 링크 클릭 가능
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  // 주가 추이 차트 모달 (F-16) — 툴팁에서 종목 클릭 시 열림
+  const [chartStock, setChartStock] = useState<TopStock | null>(null);
   const edgeHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const nodeHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -105,12 +120,12 @@ export function SpreadGraph({
         <div>
           <h2 className="text-[15px] font-bold">영향력 확산 그래프</h2>
           <p className="mt-1 text-xs text-muted-foreground">
-            뉴스에서 시작되는 1·2·3차 파급 경로 · 연결선에 올리면 근거 뉴스, 노드에 올리면 Top5
-            종목이 뜹니다
+            뉴스에서 시작되는 1·2·3차 파급 경로와 섹터별 영향도 · 연결선에 올리면 근거 뉴스, 노드에
+            올리면 Top5 종목, 종목을 클릭하면 주가 추이가 뜹니다
           </p>
         </div>
-        {/* 파급 단계 범례 */}
-        <ul className="flex items-center gap-4 text-xs text-muted-foreground">
+        {/* 범례: 파급 단계(점) + 영향 방향(사각 — 의미색 필수 병기, DESIGN.md) */}
+        <ul className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
           {COLUMN_LABELS.slice(1).map(({ tier, label }) => (
             <li key={tier} className="flex items-center gap-1.5">
               <span
@@ -121,8 +136,21 @@ export function SpreadGraph({
               {label}
             </li>
           ))}
+          <li className="flex items-center gap-1.5">
+            <span aria-hidden className="size-2.5 rounded-[3px] bg-positive" /> 긍정 영향
+          </li>
+          <li className="flex items-center gap-1.5">
+            <span aria-hidden className="size-2.5 rounded-[3px] bg-negative" /> 부정 영향
+          </li>
         </ul>
       </div>
+
+      {/* 섹션 해설 (F-16) — 이 그래프가 말하는 것 한 문단 */}
+      {sectionNote && (
+        <p className="mt-4 rounded-md bg-secondary/40 px-4 py-3 text-[13px] leading-relaxed text-ink-sub">
+          {sectionNote}
+        </p>
+      )}
 
       <div className="relative mt-6 w-full" style={{ aspectRatio: `${VIEW_W}/${VIEW_H}` }}>
         {/* 열 헤더 */}
@@ -172,11 +200,13 @@ export function SpreadGraph({
           })}
         </svg>
 
-        {/* 노드 */}
+        {/* 노드 — 섹터명 + 영향도 라벨(방향=색·화살표, 강도=문구·채도). 구 데이터(impact 없음)는 이름만 */}
         {nodes.map((node) => {
           const { x, y } = getNodePos(node);
           const isOrigin = node.tier === 0;
           const hasStocks = !isOrigin && !!topStocks[node.name];
+          const strength = !isOrigin && node.impact != null ? getImpactStrength(node.impact) : null;
+          const isImpactPositive = (node.impact ?? 0) >= 0;
           return (
             <button
               key={node.id}
@@ -200,7 +230,11 @@ export function SpreadGraph({
                 isOrigin && 'border-primary/60 bg-primary/10',
               )}
               style={{ left: `${(x / VIEW_W) * 100}%`, top: `${(y / VIEW_H) * 100}%` }}
-              aria-label={`${node.name}${node.changePct != null ? ` ${formatPct(node.changePct)}` : ''} — Top5 종목 보기`}
+              aria-label={`${node.name}${
+                strength
+                  ? ` — ${isImpactPositive ? '긍정적으로' : '부정적으로'} ${IMPACT_STRENGTH_LABEL[strength]}`
+                  : ''
+              } — Top5 종목 보기`}
             >
               <span
                 className={cn(
@@ -221,15 +255,18 @@ export function SpreadGraph({
                   원점
                 </span>
               ) : (
-                // 등락 색은 부호 기준 — 하락(음수)은 negative 토큰 (색 하드코딩 금지)
-                <span
-                  className={cn(
-                    'mt-0.5 block text-[13px] font-extrabold',
-                    getPctToneClass(node.changePct ?? 0),
-                  )}
-                >
-                  {node.changePct != null ? formatPct(node.changePct) : ''}
-                </span>
+                strength && (
+                  // 영향도 — 방향은 의미색+화살표 병기(색만으로 전달 금지),
+                  // 강도는 라벨 문구 + 채도(강할수록 원색, 약할수록 잉크 혼합)로 구분
+                  <span
+                    className="mt-1 block text-center text-[11px] font-bold whitespace-nowrap"
+                    style={{
+                      color: `color-mix(in oklab, var(--${isImpactPositive ? 'positive' : 'negative'}) ${100 - IMPACT_STRENGTH_INK_MIX[strength]}%, var(--foreground))`,
+                    }}
+                  >
+                    {isImpactPositive ? '↗' : '↘'} {IMPACT_STRENGTH_LABEL[strength]}
+                  </span>
+                )
               )}
             </button>
           );
@@ -333,11 +370,25 @@ export function SpreadGraph({
                   transform: `translateY(-50%)${shouldFlip ? ' translateX(-100%)' : ''}`,
                 }}
               >
-                <StockTooltip sector={node.name} stocks={topStocks[node.name]} />
+                <StockTooltip
+                  sector={node.name}
+                  stocks={topStocks[node.name]}
+                  onSelectStock={setChartStock}
+                />
               </div>
             );
           })()}
       </div>
+
+      {/* 주가 추이 차트 모달 (F-16) — 뉴스 발행일 기준점 */}
+      {chartStock && (
+        <StockHistoryDialog
+          stock={chartStock}
+          publishedAt={publishedAt}
+          analyzedAt={analyzedAt}
+          onClose={() => setChartStock(null)}
+        />
+      )}
     </Card>
   );
 }
