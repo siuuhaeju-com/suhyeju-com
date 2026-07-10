@@ -39,17 +39,6 @@ export interface RecentAnalysis {
   originUrl: string;
 }
 
-/** 로딩 화면 좌측에 부유하는 키워드 칩 */
-export interface FloatingChip {
-  label: string;
-  tone: 'neutral' | 'positive' | 'negative' | 'teal' | 'blue';
-  /** 구체 주위 배치 (% 단위 좌표) */
-  x: number;
-  y: number;
-  /** 부유 애니메이션 지연(초) */
-  delay: number;
-}
-
 /** Top5 종목 현황 (노드·히트맵 hover 툴팁 — F-10) */
 export interface TopStock {
   name: string;

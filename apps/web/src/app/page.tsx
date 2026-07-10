@@ -25,7 +25,7 @@ export default function HomePage() {
           파장을 추적하세요
         </h1>
         <p className="max-w-xl text-[15px] leading-7 text-muted-foreground">
-          링크를 입력하면 AI가 핵심 키워드와 관련 산업을 추출하고,
+          링크를 입력하면 AI가 핵심 키워드와 관련 산업을 추출하고,{' '}
           <br className="hidden md:block" />
           섹터별 영향도 히트맵과 1·2·3차 파급 경로를 그려드립니다.
         </p>
@@ -33,7 +33,7 @@ export default function HomePage() {
       </section>
 
       {/* 인기 뉴스 + 우측 현황 */}
-      <section className="grid gap-10 lg:grid-cols-[1fr_400px]">
+      <section className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_400px]">
         <div>
           <h2 className="mb-4 text-lg font-bold">🔥 인기 뉴스</h2>
           <PopularNews />
