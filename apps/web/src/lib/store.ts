@@ -2,7 +2,8 @@
  * 분석 결과 저장소 (analyze 파이프라인 ④단계).
  *
  * 저장 위치는 환경변수로 자동 전환한다(GPT mock 폴백과 동일한 패턴):
- *   - UPSTASH_REDIS_REST_URL(+TOKEN) 있음 → Upstash Redis(KV)에 영속 저장.
+ *   - UPSTASH_REDIS_REST_URL(+TOKEN) 또는 Vercel Storage 연동 시 KV_REST_API_URL(+TOKEN) 있음
+ *     → Upstash Redis(KV)에 영속 저장.
  *       배포(서버리스)에서도 인스턴스 간 공유되고, 재배포·재시작에도 안 날아감.
  *   - 없음 → 인메모리 Map 폴백. 개발·로컬 데모에는 충분하지만 프로세스별 휘발.
  *
@@ -37,8 +38,17 @@ function normalizeOriginUrl(url: string): string | null {
 }
 
 // 히트맵 정규화는 F-16(히트맵 폐지)에서 제거 — 구 데이터의 heatmap 필드는 무시된 채 저장만 유지된다.
+
+function getKvConfig(): { url: string; token: string } | null {
+  const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
+  if (!url || !token) return null;
+  return { url, token };
+}
+
 // KV 사용 여부 — 키가 모두 있으면 영속화, 아니면 인메모리 폴백.
-const useKv = Boolean(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);
+const kvConfig = getKvConfig();
+const useKv = Boolean(kvConfig);
 
 // ── 인메모리 폴백(개발·로컬 데모) — globalThis에 고정(위 dev 번들 분리 이슈 회피) ──
 const globalForStore = globalThis as unknown as {
@@ -57,10 +67,11 @@ globalForStore.__analysisOriginIndex = memOriginIndex;
 let redis: import('@upstash/redis').Redis | null = null;
 async function getRedis() {
   if (!redis) {
+    if (!kvConfig) throw new Error('KV config is missing');
     const { Redis } = await import('@upstash/redis');
     redis = new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL!,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+      url: kvConfig.url,
+      token: kvConfig.token,
     });
   }
   return redis;
