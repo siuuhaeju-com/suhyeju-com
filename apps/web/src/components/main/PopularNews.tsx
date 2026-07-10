@@ -50,7 +50,7 @@ export function PopularNews() {
             aria-label={`${news.title} 분석 보기`}
           >
             <Card className="p-5 transition-colors group-hover:border-primary/40 group-hover:bg-surface-raised/60">
-              <div className="flex items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
                 <Badge tone={news.sectorTone}>{news.sector}</Badge>
                 {news.subTag && <Badge tone="neutral">{news.subTag}</Badge>}
                 <span className="text-xs text-muted-foreground">
