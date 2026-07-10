@@ -283,8 +283,14 @@ function collectEdgeNodeNewsRefs(node) {
     }
   };
 
-  if (companyId && cy.$('#' + companyId).length) addFrom(cy.$('#' + companyId));
-  if (sectorId && cy.$('#' + sectorId).length) addFrom(cy.$('#' + sectorId));
+  if (companyId) {
+    const companyNode = cy.getElementById(companyId);
+    if (companyNode.length) addFrom(companyNode);
+  }
+  if (sectorId) {
+    const sectorNode = cy.getElementById(sectorId);
+    if (sectorNode.length) addFrom(sectorNode);
+  }
 
   return refs;
 }

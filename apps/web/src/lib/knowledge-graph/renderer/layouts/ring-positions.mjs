@@ -182,7 +182,7 @@ export function computeRingLayout(cy) {
 export function applyRingPositions(cy) {
   const { positions, radii } = computeRingLayout(cy);
   positions.forEach((pos, id) => {
-    const node = cy.$('#' + id);
+    const node = cy.getElementById(id);
     if (!node.empty()) node.position(pos);
   });
   cy._kgRingRadii = radii;

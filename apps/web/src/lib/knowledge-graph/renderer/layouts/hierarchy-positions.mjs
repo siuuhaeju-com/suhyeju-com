@@ -54,7 +54,7 @@ export function computeHierarchyLayout(cy) {
 export function applyHierarchyPositions(cy) {
   const { positions } = computeHierarchyLayout(cy);
   positions.forEach((pos, id) => {
-    const node = cy.$('#' + id);
+    const node = cy.getElementById(id);
     if (!node.empty()) node.position(pos);
   });
 }
