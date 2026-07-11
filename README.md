@@ -14,6 +14,11 @@ https://suhyeju-com.vercel.app
 
 메인 화면에 뉴스 링크를 입력하거나 목록의 뉴스를 클릭하면 **본문 추출 → AI 분석 → 파급 효과 분석 결과 제공**의 파이프라인이 실행돼요.<br>
 
+| 메인 페이지 | 로딩 페이지 | 분석 페이지 |
+| :---: | :---: | :---: |
+| <img width="1512" height="826" alt="2026-07-11_12-00-09" src="https://github.com/user-attachments/assets/75e5e367-4cbd-4f45-821c-15283005c1b7" /> | <img width="1512" height="826" alt="2026-07-11_12-01-16" src="https://github.com/user-attachments/assets/cbf6bd7a-1acf-44ad-8d5e-a9a1784cdd1b" /> | <img width="1512" height="826" alt="2026-07-11_12-02-16" src="https://github.com/user-attachments/assets/ee0d02d6-4a93-4e33-98da-33c5f7ea665e" /> |
+
+
 ### 2. 영향력 확산 그래프
 
 뉴스에서 이야기하는 이슈가 **1·2·3차 파급 산업으로 번지는 경로**를 그래프로 표시해 줘요.
@@ -22,13 +27,25 @@ https://suhyeju-com.vercel.app
 <br>
 또한, 산업 노드에 마우스를 올리면 해당 산업의 TOP 5 종목과, 뉴스 발행일 기준 특정 종목이 최대 얼마나 오르고 내렸는지 실제 추이를 확인할 수 있어요.
 
+| 그래프 | 근거/관련뉴스 | 종목 추이 |
+| :---: | :---: | :---: |
+| <img width="1512" height="826" alt="image" src="https://github.com/user-attachments/assets/8f2f87ff-c36e-47aa-a0ab-5e320b61f2c8" /> | <img width="1512" height="826" alt="image" src="https://github.com/user-attachments/assets/063afb63-fb4c-4836-ab61-5c760bf0d20d" /> | <img width="1512" height="826" alt="image" src="https://github.com/user-attachments/assets/8f8e9e90-043a-447d-a23e-a57a94c7d6b0" /> |
+
 ### 3. 산업 지식그래프
 
 이슈와 관련된 **섹터·기업의 관계망**을 인터랙티브 그래프로 탐색할 수 있어요. 사이드바에서 노드별 연결 관계를 확인하고, 전체 보기 페이지에서 관계망 전체를 크게 볼 수 있어요.
 
+| 섹터 관계망 | 전체 관계망 |
+| :---: | :---: |
+| <img width="1512" height="826" alt="image" src="https://github.com/user-attachments/assets/3fad7e37-7ae2-45ef-b879-b5dadd6fe70a" /> | <img width="1512" height="826" alt="2026-07-11_12-09-22" src="https://github.com/user-attachments/assets/bfc96b94-7ed6-4ffe-90d3-e679f7c12015" /> |
+
+
 ### 4. 전망 분석
 
 분석한 뉴스와 관련 기사/리포트/애널리스트 자료들을 종합해 **긍정 신호와 주의 신호**를 중립적인 관점에서 제시해요.
+
+<img width="1512" height="826" alt="image" src="https://github.com/user-attachments/assets/a61db49d-581c-43e2-9043-1ad356a0cf63" />
+
 
 ## 🧩 시스템 아키텍처
 
