@@ -1,5 +1,5 @@
 import { finishLayout } from '../layout-utils.mjs';
-import { buildThemedGraphStyleFromVars, getThemeId } from '../themes/index.mjs';
+import { buildThemedGraphStyleFromVars } from '../themes/index.mjs';
 import { LAYOUT_KIND, setLayoutKind } from './layout-mode.mjs';
 import { applyRingPositions } from './ring-positions.mjs';
 import { mountRingGuides, unmountRingGuides } from './ring-guides.mjs';
@@ -24,9 +24,10 @@ export function resetRingVisibility(cy) {
  * @param {import("cytoscape").Core} cy
  * @param {import("../versions/types.js").GraphVersion} version
  * @param {ReturnType<import("../themes/index.mjs").getGraphThemeVars>} themeVars
+ * @param {string} themeId
  */
-export function applyRingLayout(cy, version, themeVars) {
-  const styles = buildThemedGraphStyleFromVars(version.style, getThemeId(), themeVars);
+export function applyRingLayout(cy, version, themeVars, themeId) {
+  const styles = buildThemedGraphStyleFromVars(version.style, themeId, themeVars);
   cy.style(styles);
 
   applyRingPositions(cy);

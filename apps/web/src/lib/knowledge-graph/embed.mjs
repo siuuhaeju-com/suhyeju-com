@@ -200,7 +200,7 @@ export function mountKnowledgeGraph(container, options = {}) {
   function applyGraphLayout() {
     if (!cy) return;
     const layoutVersion = getVersion(activeVersionId);
-    applyVersion(cy, layoutVersion, themeVars());
+    applyVersion(cy, layoutVersion, themeVars(), themeId);
   }
 
   function applyExtensions() {

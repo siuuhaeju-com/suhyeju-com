@@ -1,5 +1,5 @@
 import { finishLayout } from '../layout-utils.mjs';
-import { buildThemedGraphStyle, getThemeId } from '../themes/index.mjs';
+import { buildThemedGraphStyleFromVars } from '../themes/index.mjs';
 import { LAYOUT_KIND, setLayoutKind } from './layout-mode.mjs';
 import { applyHierarchyPositions } from './hierarchy-positions.mjs';
 
@@ -14,9 +14,10 @@ export function isHierarchyLayoutVersion(version) {
  * @param {import("cytoscape").Core} cy
  * @param {import("../versions/types.js").GraphVersion} version
  * @param {ReturnType<import("../themes/index.mjs").getGraphThemeVars>} themeVars
+ * @param {string} themeId
  */
-export function applyHierarchyLayout(cy, version) {
-  const styles = buildThemedGraphStyle(version.style, getThemeId());
+export function applyHierarchyLayout(cy, version, themeVars, themeId) {
+  const styles = buildThemedGraphStyleFromVars(version.style, themeId, themeVars);
   cy.style(styles);
 
   applyHierarchyPositions(cy);
