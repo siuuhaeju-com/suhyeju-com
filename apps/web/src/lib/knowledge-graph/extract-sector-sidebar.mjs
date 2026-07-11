@@ -3,6 +3,17 @@
  * @param {import("cytoscape").NodeSingular} node
  * @param {string} [documentSector]
  */
+function uniqueRelationLabels(items) {
+  const seen = new Set();
+  const unique = [];
+  for (const item of items) {
+    if (seen.has(item)) continue;
+    seen.add(item);
+    unique.push(item);
+  }
+  return unique;
+}
+
 export function extractSectorSidebarFromNode(node, documentSector = '') {
   if (!node || node.empty() || node.data('type') !== 'Sector') return null;
 
@@ -79,7 +90,7 @@ export function extractSectorSidebarFromNode(node, documentSector = '') {
     companyCount: companyIds.size || uniqueBridgeCompanies.length,
     newsCount: relatedNews.length,
     edgeNodeCount: bridges.length,
-    outgoing,
-    incoming,
+    outgoing: uniqueRelationLabels(outgoing),
+    incoming: uniqueRelationLabels(incoming),
   };
 }

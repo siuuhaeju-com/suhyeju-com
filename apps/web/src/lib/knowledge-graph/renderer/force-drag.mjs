@@ -147,7 +147,7 @@ function collectNodeDepths(cy, rootId, maxDepth) {
     const d = depths.get(id) ?? 0;
     if (!unlimited && d >= maxDepth) continue;
 
-    cy.$('#' + id)
+    cy.getElementById(id)
       .connectedEdges()
       .forEach((edge) => {
         const other = edge.source().id() === id ? edge.target() : edge.source();
@@ -182,7 +182,7 @@ function buildSimulation(cy, opts) {
 
   /** @type {{ id: string; x: number; y: number; depth: number; degree?: number; fx?: number | null; fy?: number | null; cyNode: import("cytoscape").NodeSingular }[]} */
   const nodes = nodeIds.map((id) => {
-    const cyNode = cy.$('#' + id);
+    const cyNode = cy.getElementById(id);
     const p = cyNode.position();
     return {
       id,

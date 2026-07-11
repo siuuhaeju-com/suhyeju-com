@@ -1,9 +1,12 @@
 /**
  * 원형배치 — Sector (r₀) · EdgeNode (r₁) · Company (r₂) · News (r₃).
  */
+import { DEFAULT_NODE_SIZE } from '../graph-settings.mjs';
 import { getLayoutSettings } from '../layout-settings.mjs';
 
 const TAU = Math.PI * 2;
+/** 섹터 링 인접 노드 중심 사이 최소 호 길이 (px) — 노드 크기 + 라벨 여백 */
+const SECTOR_MIN_ARC = DEFAULT_NODE_SIZE + 20;
 
 /**
  * @param {number} baseAngle
@@ -48,7 +51,9 @@ function polarToXY(angle, radius) {
 export function computeRingLayout(cy) {
   const { ringScale, ringGap, fanSpread } = getLayoutSettings(3);
 
-  const sectors = cy.nodes('[type = "Sector"]');
+  const sectors = cy
+    .nodes('[type = "Sector"]')
+    .sort((a, b) => String(a.data('label')).localeCompare(String(b.data('label')), 'ko'));
   const edgeNodes = cy.nodes('[type = "EdgeNode"]');
   const companies = cy.nodes('[type = "Company"]');
   const newsNodes = cy.nodes('[type = "News"]');
@@ -58,7 +63,8 @@ export function computeRingLayout(cy) {
   const companyCount = companies.length;
   const newsCount = newsNodes.length;
 
-  const baseR0 = Math.max(56, Math.min(110, 36 + sectorCount * 4));
+  const minBaseR0 = sectorCount > 0 ? (SECTOR_MIN_ARC * sectorCount) / (TAU * ringScale) : 56;
+  const baseR0 = Math.max(56, Math.min(110, 36 + sectorCount * 4), minBaseR0);
   const baseGap1 = Math.max(90, 70 + edgeCount * 0.55);
   const baseGap2 = Math.max(85, 65 + companyCount * 2.4);
   const baseGap3 = Math.max(100, 80 + newsCount * 2.2);
@@ -176,7 +182,7 @@ export function computeRingLayout(cy) {
 export function applyRingPositions(cy) {
   const { positions, radii } = computeRingLayout(cy);
   positions.forEach((pos, id) => {
-    const node = cy.$('#' + id);
+    const node = cy.getElementById(id);
     if (!node.empty()) node.position(pos);
   });
   cy._kgRingRadii = radii;

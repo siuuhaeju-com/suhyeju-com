@@ -20,8 +20,8 @@ function RelationList({ items, emptyText }: { items: string[]; emptyText: string
 
   return (
     <ul className="space-y-1.5 text-xs text-ink-sub">
-      {items.map((item) => (
-        <li key={item} className="leading-5">
+      {items.map((item, index) => (
+        <li key={`${index}:${item}`} className="leading-5">
           {item}
         </li>
       ))}
