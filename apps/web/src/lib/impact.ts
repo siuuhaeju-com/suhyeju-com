@@ -32,3 +32,10 @@ export const IMPACT_STRENGTH_INK_MIX: Record<ImpactStrength, number> = {
   medium: 30,
   weak: 55,
 };
+
+/** impact → 영향도 라벨 색 — 방향색(positive/negative)에 강도별 잉크를 섞은 color-mix 문자열 */
+export function getImpactColor(impact: number): string {
+  const direction = impact >= 0 ? 'positive' : 'negative';
+  const inkMix = IMPACT_STRENGTH_INK_MIX[getImpactStrength(impact)];
+  return `color-mix(in oklab, var(--${direction}) ${100 - inkMix}%, var(--foreground))`;
+}

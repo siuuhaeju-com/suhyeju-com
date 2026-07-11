@@ -3,11 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
+import { SpreadPathList } from '@/components/analysis/SpreadPathList';
 import { StockHistoryDialog } from '@/components/analysis/StockHistoryDialog';
 import { StockTooltip } from '@/components/analysis/StockTooltip';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { getImpactStrength, IMPACT_STRENGTH_INK_MIX, IMPACT_STRENGTH_LABEL } from '@/lib/impact';
+import { getImpactColor, getImpactStrength, IMPACT_STRENGTH_LABEL } from '@/lib/impact';
 import { cn } from '@/lib/utils';
 import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
 
@@ -15,6 +16,7 @@ import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
  * 영향력 확산 그래프 (F-07) — 연결선 근거 툴팁(F-09) + 노드 hover Top5(F-10).
  * F-16: 노드에 등락률 대신 영향도 라벨(강한/보통/약한 영향 × 긍정=레드/부정=블루, 채도=강도)을
  * 표시하고(구 히트맵 F-08의 역할 통합), 툴팁 종목 클릭 시 뉴스 발행일 기준 주가 추이 차트를 연다.
+ * #98: 좌표 그래프는 좁은 폭에서 노드가 겹치므로 ≤748px에서는 SpreadPathList(티어 리스트)로 대체.
  */
 
 const VIEW_W = 1100;
@@ -115,19 +117,27 @@ export function SpreadGraph({
   const byId = Object.fromEntries(nodes.map((node) => [node.id, node]));
 
   return (
-    <Card className="p-6">
+    <Card className="p-4 min-[749px]:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h2 className="text-[15px] font-bold">영향력 확산 그래프</h2>
           <p className="mt-1 text-xs text-muted-foreground">
-            뉴스에서 시작되는 1·2·3차 파급 경로와 섹터별 영향도 · 연결선에 올리면 근거 뉴스, 노드에
-            올리면 Top5 종목, 종목을 클릭하면 주가 추이가 뜹니다
+            <span className="max-[748px]:hidden">
+              뉴스에서 시작되는 1·2·3차 파급 경로와 섹터별 영향도 · 연결선에 올리면 근거 뉴스,
+              노드에 올리면 Top5 종목, 종목을 클릭하면 주가 추이가 뜹니다
+            </span>
+            {/* 모바일 리스트 뷰(#98)는 hover가 없다 — 탭 안내로 교체 */}
+            <span className="min-[749px]:hidden">
+              뉴스에서 시작되는 1·2·3차 파급 경로와 섹터별 영향도 · 행을 탭하면 연결 근거와 Top5
+              종목이 열립니다
+            </span>
           </p>
         </div>
         {/* 범례: 파급 단계(점) + 영향 방향(사각 — 의미색 필수 병기, DESIGN.md) */}
-        <ul className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+        <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
+          {/* 단계 점 범례는 모바일 리스트에선 티어 헤더가 대신한다 — 중복이라 숨김 */}
           {COLUMN_LABELS.slice(1).map(({ tier, label }) => (
-            <li key={tier} className="flex items-center gap-1.5">
+            <li key={tier} className="flex items-center gap-1.5 max-[748px]:hidden">
               <span
                 aria-hidden
                 className="size-2 rounded-full"
@@ -142,6 +152,7 @@ export function SpreadGraph({
           <li className="flex items-center gap-1.5">
             <span aria-hidden className="size-2.5 rounded-[3px] bg-negative" /> 부정 영향
           </li>
+          <li className="min-[749px]:hidden">채도가 진할수록 강한 영향</li>
         </ul>
       </div>
 
@@ -152,7 +163,12 @@ export function SpreadGraph({
         </p>
       )}
 
-      <div className="relative mt-6 w-full" style={{ aspectRatio: `${VIEW_W}/${VIEW_H}` }}>
+      {/* 데스크톱(>748px) — 좌표 기반 4열 그래프. 고정 좌표계를 %로 축소하는 구조라
+          좁은 폭에서는 노드가 겹친다(#98) — 모바일은 아래 SpreadPathList가 대신한다 */}
+      <div
+        className="relative mt-6 hidden w-full min-[749px]:block"
+        style={{ aspectRatio: `${VIEW_W}/${VIEW_H}` }}
+      >
         {/* 열 헤더 */}
         {COLUMN_LABELS.map(({ tier, label }) => (
           <span
@@ -260,9 +276,7 @@ export function SpreadGraph({
                   // 강도는 라벨 문구 + 채도(강할수록 원색, 약할수록 잉크 혼합)로 구분
                   <span
                     className="mt-1 block text-center text-[11px] font-bold whitespace-nowrap"
-                    style={{
-                      color: `color-mix(in oklab, var(--${isImpactPositive ? 'positive' : 'negative'}) ${100 - IMPACT_STRENGTH_INK_MIX[strength]}%, var(--foreground))`,
-                    }}
+                    style={{ color: getImpactColor(node.impact ?? 0) }}
                   >
                     {isImpactPositive ? '↗' : '↘'} {IMPACT_STRENGTH_LABEL[strength]}
                   </span>
@@ -379,6 +393,15 @@ export function SpreadGraph({
             );
           })()}
       </div>
+
+      {/* 모바일(≤748px) — 파급 경로 리스트 (#98): 티어 섹션 + 행 인라인 확장 */}
+      <SpreadPathList
+        nodes={nodes}
+        edges={edges}
+        topStocks={topStocks}
+        onSelectStock={setChartStock}
+        className="mt-4 min-[749px]:hidden"
+      />
 
       {/* 주가 추이 차트 모달 (F-16) — 뉴스 발행일 기준점 */}
       {chartStock && (
