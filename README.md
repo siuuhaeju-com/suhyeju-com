@@ -52,8 +52,8 @@ https://suhyeju-com.vercel.app
     <th><a href="https://github.com/minsuhan1">한민수</a></th>
     <th><a href="https://github.com/wogus216">권재현</a></th>
     <th><a href="https://github.com/joshmoon827">문주호</a></th>
-    <th><a href="https://github.com/laneyson">laneyson</a></th>
-    <th><a href="https://github.com/h1un">h1un</a></th>
+    <th><a href="https://github.com/laneyson">손미연</a></th>
+    <th><a href="https://github.com/h1un">정하은</a></th>
   </tr>
   <tr>
     <td><img src="https://avatars.githubusercontent.com/u/50696567?v=4" width="120" height="120"></td>
