@@ -17,12 +17,14 @@ import {
   registerExtensions,
 } from './renderer/extensions/index.mjs';
 import { extractSectorSidebarFromNode } from './extract-sector-sidebar.mjs';
+import { buildSectorHighlightSubgraph } from './build-sector-subgraph.mjs';
 import { buildHighlightNeighborhood } from './highlight-neighborhood.mjs';
 import { findCompanyNode, findSectorNode } from './sector-match.mjs';
 import { buildThemedGraphStyleFromVars } from './renderer/themes/index.mjs';
 import { applyVersion, getVersion } from './renderer/versions/index.mjs';
 
 const DEFAULT_VERSION_ID = 3;
+const ANALYSIS_VERSION_ID = 1;
 const DEFAULT_THEME_ID = 'midnight';
 
 /** 문서 섹터 초기 포커스 — 하이라이트 노드 중심 고정 줌 */
@@ -57,6 +59,7 @@ function readThemeVars(themeRoot) {
  *   themeId?: string;
  *   nodeCount?: number;
  *   highlightSector?: string;
+ *   mode?: "full" | "analysis";
  *   onSectorFocus?: (info: import("./extract-sector-sidebar.mjs").SectorSidebarPayload | null) => void;
  * }} [options]
  */
@@ -66,8 +69,12 @@ export function mountKnowledgeGraph(container, options = {}) {
     themeId = DEFAULT_THEME_ID,
     nodeCount = DEFAULT_NODE_COUNT,
     highlightSector,
+    mode = 'full',
     onSectorFocus,
   } = options;
+
+  const isAnalysisMode = mode === 'analysis';
+  const activeVersionId = isAnalysisMode ? ANALYSIS_VERSION_ID : versionId;
 
   registerExtensions();
 
@@ -87,6 +94,9 @@ export function mountKnowledgeGraph(container, options = {}) {
   const themeVars = () => readThemeVars(shell);
 
   function currentGraphData() {
+    if (isAnalysisMode && highlightSector?.trim()) {
+      return buildSectorHighlightSubgraph(highlightSector);
+    }
     return buildGraphSlice(nodeCount);
   }
 
@@ -189,8 +199,8 @@ export function mountKnowledgeGraph(container, options = {}) {
 
   function applyGraphLayout() {
     if (!cy) return;
-    const version = getVersion(versionId);
-    applyVersion(cy, version, themeVars());
+    const layoutVersion = getVersion(activeVersionId);
+    applyVersion(cy, layoutVersion, themeVars());
   }
 
   function applyExtensions() {
@@ -205,7 +215,7 @@ export function mountKnowledgeGraph(container, options = {}) {
     });
   }
 
-  const version = getVersion(versionId);
+  const version = getVersion(activeVersionId);
 
   cy = cytoscape({
     container: graphEl,

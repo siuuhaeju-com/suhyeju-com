@@ -25,6 +25,8 @@ type KnowledgeGraphViewProps = {
   centerSector?: string;
   /** 사이드바 "이 분석 핵심" 배지 기준 (분석 페이지용) */
   documentSector?: string;
+  /** full: 79섹터 링 배치 · analysis: 중심 섹터 이웃만 유기 배치 */
+  mode?: 'full' | 'analysis';
   graphHeightClass?: string;
   headerExtra?: React.ReactNode;
   description?: string;
@@ -38,13 +40,14 @@ type KnowledgeGraphViewProps = {
 export function KnowledgeGraphView({
   centerSector,
   documentSector = '',
+  mode = 'full',
   graphHeightClass = 'h-[520px]',
   headerExtra,
   description,
   note,
 }: KnowledgeGraphViewProps) {
   const sectorCount = getPoolSectorCount();
-  const nodeCount = getPoolMaxNodeCount();
+  const nodeCount = mode === 'analysis' ? undefined : getPoolMaxNodeCount();
 
   const initialInfo = useMemo(
     () =>
@@ -66,9 +69,12 @@ export function KnowledgeGraphView({
     setSelectedCompanyId(null);
   };
 
-  const defaultDescription = centerSector
-    ? `금융시장 ${sectorCount}개 산업 네트워크 · 중심 산업 ‘${centerSector}’ 기준 · 드래그하여 노드를 이동하고 스크롤로 확대·축소할 수 있습니다`
-    : `금융시장 ${sectorCount}개 산업 네트워크 · 노드를 클릭해 연결 관계를 탐색하고 드래그·스크롤로 확대·축소할 수 있습니다`;
+  const defaultDescription =
+    mode === 'analysis' && centerSector
+      ? `‘${centerSector}’ 산업과 직접 연결된 기업·뉴스 네트워크 · 드래그하여 노드를 이동하고 스크롤로 확대·축소할 수 있습니다`
+      : centerSector
+        ? `금융시장 ${sectorCount}개 산업 네트워크 · 중심 산업 ‘${centerSector}’ 기준 · 드래그하여 노드를 이동하고 스크롤로 확대·축소할 수 있습니다`
+        : `금융시장 ${sectorCount}개 산업 네트워크 · 노드를 클릭해 연결 관계를 탐색하고 드래그·스크롤로 확대·축소할 수 있습니다`;
 
   return (
     <>
@@ -104,6 +110,7 @@ export function KnowledgeGraphView({
           ref={canvasRef}
           nodeCount={nodeCount}
           highlightSector={centerSector}
+          mode={mode}
           onSectorInfoChange={handleSectorInfoChange}
           className={`${graphHeightClass} w-full cursor-grab touch-none active:cursor-grabbing`}
         />

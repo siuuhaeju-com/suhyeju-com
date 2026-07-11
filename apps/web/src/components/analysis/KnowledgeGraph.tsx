@@ -21,6 +21,7 @@ export function KnowledgeGraph({
       <KnowledgeGraphView
         centerSector={centerSector}
         documentSector={centerSector}
+        mode="analysis"
         note={sectionNote}
         headerExtra={
           <Link
