@@ -28,6 +28,13 @@
 
 분석 기능은 **Next.js App Router 기반 도메인 중심 레이어드 아키텍처 + 파이프라인/어댑터 패턴**으로 정리한다. 사용자에게 보이는 `AnalysisResult` 응답 계약은 유지하고, 내부 책임만 아래처럼 나눈다.
 
+### 적용한 리팩토링 기준과 스킬
+
+- `next-best-practices`: App Router 구조, Server Component/Client Component 경계, Route Handler 책임 분리 기준으로 사용했다. `/analysis/[id]`는 서버 컴포넌트에서 저장소를 직접 읽고, `/api/analyze`는 외부/스트리밍 API 경계로 유지한다.
+- `vercel-react-best-practices`: 독립 비동기 작업 병렬화, 클라이언트 컴포넌트의 계산 책임 축소, 반복 lookup의 `Map` 기반 정리 기준으로 사용했다. 분석 join 단계는 `Promise.all`로 병렬 실행하고, 확산 그래프 좌표/edge 계산은 view-model로 분리한다.
+- `native-data-fetching`: `fetch` 기반 외부 API adapter의 실패 처리와 응답 검증 기준으로 사용했다. 네이버 뉴스/시세 응답은 zod로 최소 구조를 검증하고, 실패 시 분석 전체를 깨지 않도록 폴백한다.
+- 프로젝트 기준 문서: 데이터/API 변경은 `docs/data-pipeline.md`, 디자인 영향이 있는 컴포넌트 변경은 `apps/web/DESIGN.md`와 `apps/web/PRODUCT.md`를 기준으로 확인한다.
+
 ### 1. App / Route Layer
 
 - 위치: `apps/web/src/app`
