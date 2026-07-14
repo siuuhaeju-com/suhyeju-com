@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { apiGet } from '@/lib/api';
 import { formatPct, getPctArrow, getPctToneClass } from '@/lib/format';
+import { queryKeys } from '@/lib/query-keys';
 import { cn } from '@/lib/utils';
 import type { StockPricePoint, TopStock } from '@/lib/types';
 
@@ -75,11 +76,13 @@ export function StockHistoryDialog({
   const anchorLabel = isPublishedAnchor ? '발행일' : '분석일';
 
   const market = stock.market ?? 'KR';
+  const rangeStartParam = toParam(rangeStart);
+  const todayParam = toParam(today);
   const { data: points, isPending } = useQuery({
-    queryKey: ['stock-history', stock.code, market, toParam(rangeStart)],
+    queryKey: queryKeys.stockHistory(stock.code, market, rangeStartParam, todayParam),
     queryFn: ({ signal }) =>
       apiGet<StockPricePoint[]>(
-        `/api/stocks/${stock.code}/history?market=${market}&start=${toParam(rangeStart)}&end=${toParam(today)}`,
+        `/api/stocks/${stock.code}/history?market=${market}&start=${rangeStartParam}&end=${todayParam}`,
         { signal },
       ),
     staleTime: 60 * 60_000, // 일봉 과거 데이터 — BE 캐시(1h)와 동일
