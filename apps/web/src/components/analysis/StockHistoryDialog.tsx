@@ -77,9 +77,10 @@ export function StockHistoryDialog({
   const market = stock.market ?? 'KR';
   const { data: points, isPending } = useQuery({
     queryKey: ['stock-history', stock.code, market, toParam(rangeStart)],
-    queryFn: () =>
+    queryFn: ({ signal }) =>
       apiGet<StockPricePoint[]>(
         `/api/stocks/${stock.code}/history?market=${market}&start=${toParam(rangeStart)}&end=${toParam(today)}`,
+        { signal },
       ),
     staleTime: 60 * 60_000, // 일봉 과거 데이터 — BE 캐시(1h)와 동일
     enabled: !!stock.code,

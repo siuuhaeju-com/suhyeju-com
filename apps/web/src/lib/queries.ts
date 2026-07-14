@@ -9,7 +9,7 @@ const RECENT_ANALYSES_FETCH_LIMIT = 10;
 export function usePopularNews() {
   return useQuery({
     queryKey: ['news', 'popular'],
-    queryFn: () => apiGet<NewsItem[]>('/api/news'),
+    queryFn: ({ signal }) => apiGet<NewsItem[]>('/api/news', { signal }),
     staleTime: 60_000,
   });
 }
@@ -21,7 +21,7 @@ export function usePopularNews() {
 export function useKrMajorSectors() {
   return useQuery({
     queryKey: ['market', 'kr', 'major-sectors'],
-    queryFn: () => apiGet<SectorChange[]>('/api/market/kr/major-sectors'),
+    queryFn: ({ signal }) => apiGet<SectorChange[]>('/api/market/kr/major-sectors', { signal }),
     staleTime: 60_000,
     refetchInterval: 60_000,
   });
@@ -31,8 +31,10 @@ export function useKrMajorSectors() {
 export function useRecentAnalyses() {
   return useQuery({
     queryKey: ['analysis', 'recent'],
-    queryFn: () =>
-      apiGet<RecentAnalysis[]>(`/api/analyses/recent?limit=${RECENT_ANALYSES_FETCH_LIMIT}`),
+    queryFn: ({ signal }) =>
+      apiGet<RecentAnalysis[]>(`/api/analyses/recent?limit=${RECENT_ANALYSES_FETCH_LIMIT}`, {
+        signal,
+      }),
     staleTime: 10_000,
   });
 }
