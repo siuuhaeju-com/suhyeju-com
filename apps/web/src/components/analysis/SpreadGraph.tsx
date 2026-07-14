@@ -1,13 +1,22 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { SpreadPathList } from '@/components/analysis/SpreadPathList';
 import { StockHistoryDialog } from '@/components/analysis/StockHistoryDialog';
 import { StockTooltip } from '@/components/analysis/StockTooltip';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import {
+  buildSpreadNodeMap,
+  filterRenderableSpreadEdges,
+  getSpreadNodePosition,
+  SPREAD_COLUMN_LABELS,
+  SPREAD_TIER_COLOR,
+  SPREAD_TIER_X,
+  SPREAD_VIEWBOX,
+} from '@/lib/analysis/spread-graph-view-model';
 import { getImpactColor, getImpactStrength, IMPACT_STRENGTH_LABEL } from '@/lib/impact';
 import { cn } from '@/lib/utils';
 import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
@@ -18,26 +27,6 @@ import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
  * 표시하고(구 히트맵 F-08의 역할 통합), 툴팁 종목 클릭 시 뉴스 발행일 기준 주가 추이 차트를 연다.
  * #98: 좌표 그래프는 좁은 폭에서 노드가 겹치므로 ≤748px에서는 SpreadPathList(티어 리스트)로 대체.
  */
-
-const VIEW_W = 1100;
-const VIEW_H = 560;
-const TIER_X: Record<number, number> = { 0: 100, 1: 380, 2: 660, 3: 940 };
-const TIER_COLOR: Record<number, string> = {
-  0: 'var(--primary)',
-  1: 'var(--tier1)',
-  2: 'var(--tier2)',
-  3: 'var(--tier3)',
-};
-const COLUMN_LABELS: Array<{ tier: 0 | 1 | 2 | 3; label: string }> = [
-  { tier: 0, label: '뉴스 원점' },
-  { tier: 1, label: '1차 파급' },
-  { tier: 2, label: '2차 파급' },
-  { tier: 3, label: '3차 파급' },
-];
-
-function getNodePos(node: SpreadNode) {
-  return { x: TIER_X[node.tier], y: 90 + node.row * (VIEW_H - 150) };
-}
 
 // 그래프 요소 hover 후 툴팁으로 마우스가 이동할 유예 시간(ms) — 이 안에 툴팁에 들어오면 유지된다
 const TOOLTIP_GRACE_MS = 1000;
@@ -70,6 +59,11 @@ export function SpreadGraph({
   const nodeHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const activeNode = hoveredNode;
+  const nodesById = useMemo(() => buildSpreadNodeMap(nodes), [nodes]);
+  const renderableEdges = useMemo(
+    () => filterRenderableSpreadEdges(edges, nodesById),
+    [edges, nodesById],
+  );
 
   const clearEdgeHideTimer = () => {
     if (edgeHideTimer.current) {
@@ -114,8 +108,6 @@ export function SpreadGraph({
     };
   }, []);
 
-  const byId = Object.fromEntries(nodes.map((node) => [node.id, node]));
-
   return (
     <Card className="p-4 min-[749px]:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -136,12 +128,12 @@ export function SpreadGraph({
         {/* 범례: 파급 단계(점) + 영향 방향(사각 — 의미색 필수 병기, DESIGN.md) */}
         <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
           {/* 단계 점 범례는 모바일 리스트에선 티어 헤더가 대신한다 — 중복이라 숨김 */}
-          {COLUMN_LABELS.slice(1).map(({ tier, label }) => (
+          {SPREAD_COLUMN_LABELS.slice(1).map(({ tier, label }) => (
             <li key={tier} className="flex items-center gap-1.5 max-[748px]:hidden">
               <span
                 aria-hidden
                 className="size-2 rounded-full"
-                style={{ background: TIER_COLOR[tier] }}
+                style={{ background: SPREAD_TIER_COLOR[tier] }}
               />
               {label}
             </li>
@@ -167,17 +159,17 @@ export function SpreadGraph({
           좁은 폭에서는 노드가 겹친다(#98) — 모바일은 아래 SpreadPathList가 대신한다 */}
       <div
         className="relative mt-6 hidden w-full min-[749px]:block"
-        style={{ aspectRatio: `${VIEW_W}/${VIEW_H}` }}
+        style={{ aspectRatio: `${SPREAD_VIEWBOX.width}/${SPREAD_VIEWBOX.height}` }}
       >
         {/* 열 헤더 */}
-        {COLUMN_LABELS.map(({ tier, label }) => (
+        {SPREAD_COLUMN_LABELS.map(({ tier, label }) => (
           <span
             key={label}
             className="absolute -translate-x-1/2 text-xs font-bold"
             style={{
-              left: `${(TIER_X[tier] / VIEW_W) * 100}%`,
+              left: `${(SPREAD_TIER_X[tier] / SPREAD_VIEWBOX.width) * 100}%`,
               top: 0,
-              color: tier === 0 ? 'var(--muted-foreground)' : TIER_COLOR[tier],
+              color: tier === 0 ? 'var(--muted-foreground)' : SPREAD_TIER_COLOR[tier],
             }}
           >
             {label}
@@ -185,10 +177,17 @@ export function SpreadGraph({
         ))}
 
         {/* 연결선 */}
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} className="absolute inset-0 h-full w-full">
-          {edges.map((edge, index) => {
-            const from = getNodePos(byId[edge.from]);
-            const to = getNodePos(byId[edge.to]);
+        <svg
+          viewBox={`0 0 ${SPREAD_VIEWBOX.width} ${SPREAD_VIEWBOX.height}`}
+          className="absolute inset-0 h-full w-full"
+        >
+          {renderableEdges.map((edge, index) => {
+            const fromNode = nodesById.get(edge.from);
+            const toNode = nodesById.get(edge.to);
+            if (!fromNode || !toNode) return null;
+
+            const from = getSpreadNodePosition(fromNode);
+            const to = getSpreadNodePosition(toNode);
             const midX = from.x + (to.x - from.x) / 2;
             const d = `M ${from.x} ${from.y} C ${midX} ${from.y}, ${midX} ${to.y}, ${to.x} ${to.y}`;
             const isActive = hoveredEdge === index;
@@ -218,7 +217,7 @@ export function SpreadGraph({
 
         {/* 노드 — 섹터명 + 영향도 라벨(방향=색·화살표, 강도=문구·채도). 구 데이터(impact 없음)는 이름만 */}
         {nodes.map((node) => {
-          const { x, y } = getNodePos(node);
+          const { x, y } = getSpreadNodePosition(node);
           const isOrigin = node.tier === 0;
           const hasStocks = !isOrigin && !!topStocks[node.name];
           const strength = !isOrigin && node.impact != null ? getImpactStrength(node.impact) : null;
@@ -245,7 +244,10 @@ export function SpreadGraph({
                 'hover:border-primary/50 focus-visible:ring-3 focus-visible:ring-ring/50',
                 isOrigin && 'border-primary/60 bg-primary/10',
               )}
-              style={{ left: `${(x / VIEW_W) * 100}%`, top: `${(y / VIEW_H) * 100}%` }}
+              style={{
+                left: `${(x / SPREAD_VIEWBOX.width) * 100}%`,
+                top: `${(y / SPREAD_VIEWBOX.height) * 100}%`,
+              }}
               aria-label={`${node.name}${
                 strength
                   ? ` — ${isImpactPositive ? '긍정적으로' : '부정적으로'} ${IMPACT_STRENGTH_LABEL[strength]}`
@@ -262,7 +264,7 @@ export function SpreadGraph({
                 <span
                   aria-hidden
                   className={cn('size-1.5 shrink-0 rounded-full', isOrigin && 'mt-1.5')}
-                  style={{ background: TIER_COLOR[node.tier] }}
+                  style={{ background: SPREAD_TIER_COLOR[node.tier] }}
                 />
                 <span className={cn(isOrigin && 'line-clamp-2 break-keep')}>{node.name}</span>
               </span>
@@ -289,22 +291,26 @@ export function SpreadGraph({
         {/* 연결선 근거 툴팁 (F-09) — hover로 뜨고, grace 유예 안에 툴팁으로 들어오면 유지되어 링크 클릭 가능 */}
         {hoveredEdge != null &&
           (() => {
-            const edge = edges[hoveredEdge];
-            const from = getNodePos(byId[edge.from]);
-            const to = getNodePos(byId[edge.to]);
-            const cx = ((from.x + to.x) / 2 / VIEW_W) * 100;
-            const cy = ((from.y + to.y) / 2 / VIEW_H) * 100;
+            const edge = renderableEdges[hoveredEdge];
+            const fromNode = edge ? nodesById.get(edge.from) : undefined;
+            const toNode = edge ? nodesById.get(edge.to) : undefined;
+            if (!edge || !fromNode || !toNode) return null;
+
+            const from = getSpreadNodePosition(fromNode);
+            const to = getSpreadNodePosition(toNode);
+            const cx = ((from.x + to.x) / 2 / SPREAD_VIEWBOX.width) * 100;
+            const cy = ((from.y + to.y) / 2 / SPREAD_VIEWBOX.height) * 100;
             return (
               <div
                 role="tooltip"
-                aria-label={`연결 근거: ${byId[edge.from].name} → ${byId[edge.to].name}`}
+                aria-label={`연결 근거: ${fromNode.name} → ${toNode.name}`}
                 onMouseEnter={clearEdgeHideTimer}
                 onMouseLeave={scheduleHideEdge}
                 className="pointer-events-auto absolute z-10 w-80 -translate-x-1/2 rounded-md border bg-popover p-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
                 style={{ left: `${cx}%`, top: `${cy}%` }}
               >
                 <p className="text-[11px] font-extrabold tracking-wide text-blue-bright">
-                  연결 근거 · {byId[edge.from].name} → {byId[edge.to].name}
+                  연결 근거 · {fromNode.name} → {toNode.name}
                 </p>
                 <p className="mt-1.5 text-[13px] leading-relaxed font-semibold text-foreground">
                   {edge.reason}
@@ -361,11 +367,13 @@ export function SpreadGraph({
 
         {/* 노드 Top5 툴팁 (F-10) — hover로 뜨고, grace 유예 안에 툴팁으로 들어오면 유지되어 링크 클릭 가능 */}
         {activeNode &&
-          byId[activeNode].tier !== 0 &&
-          topStocks[byId[activeNode].name] &&
+          nodesById.get(activeNode)?.tier !== 0 &&
+          topStocks[nodesById.get(activeNode)?.name ?? ''] &&
           (() => {
-            const node = byId[activeNode];
-            const { x, y } = getNodePos(node);
+            const node = nodesById.get(activeNode);
+            if (!node) return null;
+
+            const { x, y } = getSpreadNodePosition(node);
             const shouldFlip = node.tier === 3;
             return (
               <div
@@ -379,8 +387,10 @@ export function SpreadGraph({
                   }
                 }}
                 style={{
-                  left: `${((x + (shouldFlip ? -80 : 80)) / VIEW_W) * 100}%`,
-                  top: `${(y / VIEW_H) * 100}%`,
+                  left: `${
+                    ((x + (shouldFlip ? -80 : 80)) / SPREAD_VIEWBOX.width) * 100
+                  }%`,
+                  top: `${(y / SPREAD_VIEWBOX.height) * 100}%`,
                   transform: `translateY(-50%)${shouldFlip ? ' translateX(-100%)' : ''}`,
                 }}
               >

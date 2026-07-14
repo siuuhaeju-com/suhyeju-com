@@ -2,9 +2,16 @@
 
 import { ChartLine, ChevronDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
+import {
+  buildSpreadNodeMap,
+  buildSpreadTierBlocks,
+  filterRenderableSpreadEdges,
+  formatSpreadParentNames,
+  getIncomingSpreadEdges,
+} from '@/lib/analysis/spread-graph-view-model';
 import { getImpactColor, getImpactStrength, IMPACT_STRENGTH_LABEL } from '@/lib/impact';
 import { cn } from '@/lib/utils';
 import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
@@ -15,12 +22,6 @@ import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
  * 변환하고 hover 툴팁 2종(연결 근거 F-09 · Top5 F-10)을 행 인라인 확장 하나로 통합한다.
  * 연결 관계는 각 행의 "↳ 상위 섹터에서 이어짐" 표기로 보존한다.
  */
-
-const TIER_META: Array<{ tier: 1 | 2 | 3; label: string; color: string }> = [
-  { tier: 1, label: '1차 파급', color: 'var(--tier1)' },
-  { tier: 2, label: '2차 파급', color: 'var(--tier2)' },
-  { tier: 3, label: '3차 파급', color: 'var(--tier3)' },
-];
 
 export function SpreadPathList({
   nodes,
@@ -39,12 +40,13 @@ export function SpreadPathList({
   const router = useRouter();
   const [openId, setOpenId] = useState<string | null>(null);
 
-  const byId = Object.fromEntries(nodes.map((node) => [node.id, node]));
+  const nodesById = useMemo(() => buildSpreadNodeMap(nodes), [nodes]);
+  const renderableEdges = useMemo(
+    () => filterRenderableSpreadEdges(edges, nodesById),
+    [edges, nodesById],
+  );
   const origin = nodes.find((node) => node.tier === 0);
-  const tierBlocks = TIER_META.map((meta) => ({
-    ...meta,
-    nodes: nodes.filter((node) => node.tier === meta.tier),
-  })).filter((block) => block.nodes.length > 0);
+  const tierBlocks = useMemo(() => buildSpreadTierBlocks(nodes), [nodes]);
 
   return (
     <ol className={cn('flex flex-col', className)}>
@@ -70,16 +72,13 @@ export function SpreadPathList({
           <ul className="mt-2 flex flex-col gap-1.5">
             {tierNodes.map((node) => {
               // 이 노드로 들어오는 연결 — 계보 표기와 확장 패널의 근거 블록 재료
-              const incoming = edges.filter((edge) => edge.to === node.id);
+              const incoming = getIncomingSpreadEdges(node.id, renderableEdges);
               const evidences = incoming.filter((edge) => edge.reason || edge.sources.length > 0);
               const stocks = topStocks[node.name];
               const expandable = evidences.length > 0 || !!stocks;
               const isOpen = expandable && openId === node.id;
               const strength = node.impact != null ? getImpactStrength(node.impact) : null;
-              const parentNames = incoming
-                .map((edge) => byId[edge.from]?.name)
-                .filter(Boolean)
-                .join(' · ');
+              const parentNames = formatSpreadParentNames(incoming, nodesById);
 
               const rowContent = (
                 <>
@@ -139,7 +138,7 @@ export function SpreadPathList({
                       {evidences.map((edge, index) => (
                         <div key={edge.from} className={cn(index > 0 && 'mt-3')}>
                           <p className="text-[10.5px] font-extrabold tracking-wide text-blue-bright">
-                            연결 근거 · {byId[edge.from]?.name} → {node.name}
+                            연결 근거 · {nodesById.get(edge.from)?.name} → {node.name}
                           </p>
                           {edge.reason && (
                             <p className="mt-1 text-[12.5px] leading-relaxed font-medium text-ink-sub">
