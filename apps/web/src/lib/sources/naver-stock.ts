@@ -10,15 +10,27 @@
  * 개명·별칭 종목(예: 두산중공업→두산에너빌리티)은 alias로 보정하고,
  * 매칭 실패 시 null을 돌려 호출측이 GPT 초안값을 유지하게 한다(오조인 금지).
  */
+import { z } from 'zod';
+
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36';
 
-interface AcItem {
-  code: string;
-  name: string;
-  typeCode: string; // KOSPI | KOSDAQ | NASDAQ | NYSE | ...
-  nationCode: string; // KOR | USA | ...
-  reutersCode: string; // 시세 조회 키 (미국은 NVDA.O·AFL·APLE.K 등 접미사 가변)
-}
+const AutocompleteItemSchema = z.object({
+  code: z.string(),
+  name: z.string(),
+  typeCode: z.string(), // KOSPI | KOSDAQ | NASDAQ | NYSE | ...
+  nationCode: z.string(), // KOR | USA | ...
+  reutersCode: z.string(), // 시세 조회 키 (미국은 NVDA.O·AFL·APLE.K 등 접미사 가변)
+});
+
+const AutocompleteResponseSchema = z.object({
+  items: z.array(AutocompleteItemSchema).optional(),
+});
+
+const StockBasicResponseSchema = z.object({
+  fluctuationsRatio: z.string().optional(),
+});
+
+type AcItem = z.infer<typeof AutocompleteItemSchema>;
 
 interface ResolvedStock {
   key: string; // 시세 조회 키 (한국=종목코드, 미국=reutersCode)
@@ -55,7 +67,10 @@ async function resolveStock(name: string): Promise<ResolvedStock | null> {
   });
   if (!res.ok) return null;
 
-  const data = (await res.json()) as { items?: AcItem[] };
+  const parsed = AutocompleteResponseSchema.safeParse(await res.json());
+  if (!parsed.success) return null;
+
+  const data = parsed.data;
   const target = normalize(canonical);
   const hit = data.items?.find((i) => {
     if (i.nationCode !== 'KOR' && i.nationCode !== 'USA') return false;
@@ -85,7 +100,10 @@ async function fetchChangePct(stock: ResolvedStock): Promise<number | null> {
   });
   if (!res.ok) return null;
 
-  const data = (await res.json()) as { fluctuationsRatio?: string };
+  const parsed = StockBasicResponseSchema.safeParse(await res.json());
+  if (!parsed.success) return null;
+
+  const data = parsed.data;
   const pct = Number.parseFloat(data.fluctuationsRatio ?? '');
   return Number.isFinite(pct) ? pct : null;
 }

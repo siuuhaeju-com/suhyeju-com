@@ -8,20 +8,24 @@
  * + 뉴스 검색(searchEdgeSources) — 파급 그래프 연결 근거를 실제 언론사 기사에서
  *   찾아 EdgeSource(제목·출처·URL)로 매핑한다(#24). NAVER 검색 API 키 필요.
  */
+import { z } from 'zod';
+
 import type { EdgeSource, NewsItem } from '@/lib/types';
 
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36';
 const RANKNEWS_URL = 'https://api.stock.naver.com/news/ranknews';
 
-interface RankNewsItem {
-  tit: string; // 제목
-  subcontent: string; // 요약
-  ohnm: string; // 언론사명
-  oid: string; // 언론사 id (링크용)
-  aid: string; // 기사 id (링크용)
-  dt: string; // 발행 시각 yyyyMMddHHmmss
-  thumbUrl?: string;
-}
+const RankNewsItemSchema = z.object({
+  tit: z.string(), // 제목
+  subcontent: z.string(), // 요약
+  ohnm: z.string(), // 언론사명
+  oid: z.string(), // 언론사 id (링크용)
+  aid: z.string(), // 기사 id (링크용)
+  dt: z.string(), // 발행 시각 yyyyMMddHHmmss
+  thumbUrl: z.string().optional(),
+});
+
+const RankNewsResponseSchema = z.array(RankNewsItemSchema);
 
 /** 네이버가 제목·요약에 넣는 HTML 태그·엔티티 제거 */
 function stripHtml(value: string): string {
@@ -83,12 +87,16 @@ const PRESS_BY_DOMAIN: Record<string, string> = {
   'thebell.co.kr': '더벨',
 };
 
-interface SearchNewsItem {
-  title: string; // <b> 태그 포함
-  originallink: string; // 언론사 원문 링크
-  link: string; // 네이버 뉴스 링크(제휴 기사) 또는 원문
-  pubDate: string; // RFC822 (예: "Wed, 09 Jul 2026 10:30:00 +0900")
-}
+const SearchNewsItemSchema = z.object({
+  title: z.string(), // <b> 태그 포함
+  originallink: z.string(), // 언론사 원문 링크
+  link: z.string(), // 네이버 뉴스 링크(제휴 기사) 또는 원문
+  pubDate: z.string(), // RFC822 (예: "Wed, 09 Jul 2026 10:30:00 +0900")
+});
+
+const SearchNewsResponseSchema = z.object({
+  items: z.array(SearchNewsItemSchema).optional(),
+});
 
 /** 원문 링크 도메인 → 언론사 표시명 (매핑 없으면 도메인 그대로) */
 function pressLabel(url: string): string {
@@ -128,7 +136,10 @@ export async function searchEdgeSources(query: string, limit = 2): Promise<EdgeS
     });
     if (!res.ok) return [];
 
-    const data = (await res.json()) as { items?: SearchNewsItem[] };
+    const parsed = SearchNewsResponseSchema.safeParse(await res.json());
+    if (!parsed.success) return [];
+
+    const data = parsed.data;
     const seen = new Set<string>();
     const sources: EdgeSource[] = [];
     for (const item of data.items ?? []) {
@@ -160,7 +171,12 @@ export async function fetchRankNews(limit = 5): Promise<RankNewsArticle[]> {
     throw new Error(`네이버 증권 인기 뉴스 응답 오류 (${res.status})`);
   }
 
-  const items = (await res.json()) as RankNewsItem[];
+  const parsed = RankNewsResponseSchema.safeParse(await res.json());
+  if (!parsed.success) {
+    throw new Error('네이버 증권 인기 뉴스 응답 형식이 올바르지 않습니다');
+  }
+
+  const items = parsed.data;
   return items.slice(0, limit).map((item) => ({
     // 언론사 id + 기사 id 조합 — ranknews가 주는 유일한 안정 식별자(배열 순서에 안 흔들림)
     id: `${item.oid}-${item.aid}`,
