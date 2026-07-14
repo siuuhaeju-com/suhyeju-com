@@ -2,7 +2,7 @@
 
 > 뉴스 한 건이 `AnalysisResult`가 되기까지의 단일 기준. **무엇을 GPT가 만들고, 무엇을 서버가 채우고, 무엇을 FE가 그리는지**를 여기서 정한다.
 >
-> 관련 코드: `apps/web/src/lib/extract-article.ts` · `lib/sources/gpt.ts` · `lib/analyze.ts` · `lib/store.ts`
+> 관련 코드: `apps/web/src/lib/extract-article.ts` · `lib/sources/gpt.ts` · `lib/analyze.ts` · `lib/analysis/*` · `lib/store.ts`
 > 계약(타입): `apps/web/src/lib/types.ts` (`AnalysisResult`)
 > 엔드포인트: `POST /api/analyze` → `GET /api/analysis/[id]` · `GET /api/analyses/recent`
 
@@ -46,7 +46,7 @@
 - **스키마 무결성 규칙**(§4)을 프롬프트로 강제한다.
 - base_url 미확보 시 **mock 폴백**으로 동작한다([.env.example](../apps/web/.env.example) 참고). `MOCK_ANALYZE=1`로 강제 가능.
 
-### ③ 시세 join — `analyze.ts`
+### ③ 시세 join — `analysis/quote-join.ts`
 
 GPT가 준 종목·섹터명에 **실시세를 붙여 `changePct`를 교체**하는 단계. 매칭 실패·시세 소스 장애 시에는 GPT 초안값을 폴백으로 유지한다.
 
@@ -56,7 +56,7 @@ GPT가 준 종목·섹터명에 **실시세를 붙여 `changePct`를 교체**하
 - 대상 필드: `relatedSectors[].changePct`, `topStocks[][].changePct`. (spreadNodes는 F-16부터 등락률 대신 GPT `impact`를 쓰므로 join하지 않는다. topStocks join이 채우는 `code`·`market`이 주가 추이 차트의 시세 조회 키가 된다.)
 - 전제: **`lib/sectors.ts`**(섹터 taxonomy)가 있어야 매칭이 안정적이다(§4·§6).
 
-### ④ 표현필드 파생 — `analyze.ts` `assemble()`
+### ④ 표현필드 파생 — `analysis/assemble.ts`
 
 GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 계산**해 응답에 채운다.
 
@@ -76,6 +76,14 @@ GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 �
   - `{ step: 'error', message }` — 실패 시
 - `/api/analyses/recent`는 KV/인메모리 저장소의 **전체 최근 분석 목록**을 반환한다. 로그인/DB가 없으므로 개인 최근 목록은 서버가 아니라 브라우저 `localStorage`에 `id/title/analyzedAt/originUrl/lastOpenedAt`로 따로 저장한다. 이 `originUrl` 덕분에 로컬 목록의 오래된 `id`가 서버 재시작 등으로 404가 되면 같은 원문 링크로 재분석할 수 있고, `lastOpenedAt` 기준으로 마지막에 열어본 분석을 위에 둔다.
 - `/analysis/[id]` 페이지는 `GET /api/analysis/[id]`를 클라이언트에서 다시 호출하지 않는다 — 서버 컴포넌트에서 `store.ts`를 직접 읽는다. `GET /api/analysis/[id]` 라우트 자체는 남아 있고 별도 API 소비처(공유 링크 등)를 위해 존재한다.
+
+### 파이프라인 코드 경계 (#101)
+
+- `lib/analyze.ts`: 본문 확보, GPT 초안 생성, 계약 검증, join 단계 병렬 실행, 최종 assemble 호출만 담당한다.
+- `lib/analysis/contracts.ts`: GPT 초안의 그래프/종목 참조 무결성을 검증한다.
+- `lib/analysis/quote-join.ts`: GPT 초안의 `topStocks`와 `relatedSectors`에 실시세를 비파괴적으로 join한다.
+- `lib/analysis/source-join.ts`: edge와 신호 뉴스 searchQuery를 실제 기사 링크로 join한다.
+- `lib/analysis/assemble.ts`: `AnalysisDraft`를 외부 응답 계약인 `AnalysisResult`로 변환한다.
 
 ---
 
