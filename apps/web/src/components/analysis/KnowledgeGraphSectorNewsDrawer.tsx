@@ -8,6 +8,11 @@ function SourceFavicon({ url, className }: { url: string; className?: string }) 
   const primary = faviconUrlFromLink(url) || googleFaviconFallback(url);
   const fallback = googleFaviconFallback(url);
   const [src, setSrc] = useState(primary);
+  function handleImageError() {
+    if (fallback && src !== fallback) {
+      setSrc(fallback);
+    }
+  }
 
   return (
     // Dynamic favicon proxy URLs are tiny decorative images; next/image optimization is unnecessary here.
@@ -18,9 +23,7 @@ function SourceFavicon({ url, className }: { url: string; className?: string }) 
       width={18}
       height={18}
       className={className ?? 'mt-0.5 block size-[18px] shrink-0 rounded-full object-cover'}
-      onError={() => {
-        if (fallback && src !== fallback) setSrc(fallback);
-      }}
+      onError={handleImageError}
     />
   );
 }
@@ -29,6 +32,9 @@ export function KnowledgeGraphSectorNewsDrawer({ news }: { news: SectorRelatedNe
   const newsKey = useMemo(() => news.map((item) => item.id).join('|'), [news]);
   const [drawerState, setDrawerState] = useState({ newsKey: '', isOpen: false });
   const open = drawerState.newsKey === newsKey ? drawerState.isOpen : false;
+  function handleToggleOpen() {
+    setDrawerState({ newsKey, isOpen: !open });
+  }
 
   if (!news.length) return null;
 
@@ -91,7 +97,7 @@ export function KnowledgeGraphSectorNewsDrawer({ news }: { news: SectorRelatedNe
           className="pointer-events-auto relative inline-flex size-8 cursor-pointer items-center justify-center overflow-visible rounded-full border border-border bg-card shadow-sm hover:border-accent"
           aria-expanded={open}
           aria-label="관련 뉴스 보기"
-          onClick={() => setDrawerState({ newsKey, isOpen: !open })}
+          onClick={handleToggleOpen}
         >
           {firstUrl ? (
             <SourceFavicon url={firstUrl} className="block size-[18px] rounded-full object-cover" />

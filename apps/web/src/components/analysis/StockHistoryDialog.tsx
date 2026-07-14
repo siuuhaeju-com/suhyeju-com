@@ -95,9 +95,9 @@ export function StockHistoryDialog({
 
   // ESC로 닫기
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+    function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') onClose();
-    };
+    }
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
@@ -160,15 +160,23 @@ export function StockHistoryDialog({
 
   const tone = chart == null || chart.changeSincePct >= 0 ? 'positive' : 'negative';
   const hovered = hoverIndex != null && points ? points[hoverIndex] : null;
+  const anchorAxisLabelX = chart
+    ? Math.min(Math.max(chart.x(chart.anchorIndex), 40), chart.innerW - 40)
+    : 0;
+  const shouldShowFirstAxisLabel = chart ? anchorAxisLabelX > 92 : false;
+  const shouldShowLastAxisLabel = chart ? anchorAxisLabelX < chart.innerW - 92 : false;
 
   /** svg 위 포인터 위치 → 가장 가까운 일봉 인덱스 */
-  const handlePointerMove = (event: React.PointerEvent<SVGSVGElement>) => {
+  function handlePointerMove(event: React.PointerEvent<SVGSVGElement>) {
     if (!chart || !points) return;
     const rect = event.currentTarget.getBoundingClientRect();
     const viewX = ((event.clientX - rect.left) / rect.width) * VIEW_W;
     const ratio = Math.min(Math.max(viewX / chart.innerW, 0), 1);
     setHoverIndex(Math.round(ratio * (points.length - 1)));
-  };
+  }
+  function handlePointerLeave() {
+    setHoverIndex(null);
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -244,7 +252,7 @@ export function StockHistoryDialog({
                 role="img"
                 aria-label={`${stock.name} 종가 추이 — ${toAxisLabel(chart.first.date)}부터 ${toAxisLabel(chart.last.date)}까지, 최근 ${formatPrice(chart.last.close, market)}, ${anchorLabel}(${toAxisLabel(chart.anchor.date)}) 종가 대비 이후 최고 ${formatPct(chart.maxRisePct)} 최저 ${formatPct(chart.maxFallPct)}`}
                 onPointerMove={handlePointerMove}
-                onPointerLeave={() => setHoverIndex(null)}
+                onPointerLeave={handlePointerLeave}
               >
                 {/* y축 눈금·가격 라벨 (우측, 단위 포함) */}
                 {chart.yTicks.map((tick, tickIndex) => (
@@ -329,42 +337,32 @@ export function StockHistoryDialog({
                 )}
 
                 {/* x축 라벨 — 시작·기준일·끝. 기준일이 양끝에 붙으면 겹치는 쪽 라벨은 숨긴다 */}
-                {(() => {
-                  const anchorLabelX = Math.min(
-                    Math.max(chart.x(chart.anchorIndex), 40),
-                    chart.innerW - 40,
-                  );
-                  return (
-                    <>
-                      {anchorLabelX > 92 && (
-                        <text x={0} y={VIEW_H - 6} fill="var(--muted-foreground)" fontSize={11}>
-                          {toAxisLabel(chart.first.date)}
-                        </text>
-                      )}
-                      <text
-                        x={anchorLabelX}
-                        y={VIEW_H - 6}
-                        fill="var(--blue-bright)"
-                        fontSize={11}
-                        fontWeight={700}
-                        textAnchor="middle"
-                      >
-                        {toAxisLabel(chart.anchor.date)}
-                      </text>
-                      {anchorLabelX < chart.innerW - 92 && (
-                        <text
-                          x={chart.innerW}
-                          y={VIEW_H - 6}
-                          fill="var(--muted-foreground)"
-                          fontSize={11}
-                          textAnchor="end"
-                        >
-                          {toAxisLabel(chart.last.date)}
-                        </text>
-                      )}
-                    </>
-                  );
-                })()}
+                {shouldShowFirstAxisLabel && (
+                  <text x={0} y={VIEW_H - 6} fill="var(--muted-foreground)" fontSize={11}>
+                    {toAxisLabel(chart.first.date)}
+                  </text>
+                )}
+                <text
+                  x={anchorAxisLabelX}
+                  y={VIEW_H - 6}
+                  fill="var(--blue-bright)"
+                  fontSize={11}
+                  fontWeight={700}
+                  textAnchor="middle"
+                >
+                  {toAxisLabel(chart.anchor.date)}
+                </text>
+                {shouldShowLastAxisLabel && (
+                  <text
+                    x={chart.innerW}
+                    y={VIEW_H - 6}
+                    fill="var(--muted-foreground)"
+                    fontSize={11}
+                    textAnchor="end"
+                  >
+                    {toAxisLabel(chart.last.date)}
+                  </text>
+                )}
               </svg>
 
               {/* hover 상세 — 날짜 + 시/고/저/종 (크로스헤어를 따라다니고, 화면 밖으로 안 나가게 반대편으로 뒤집는다) */}

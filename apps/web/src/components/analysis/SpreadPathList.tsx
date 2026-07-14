@@ -2,7 +2,7 @@
 
 import { ChartLine, ChevronDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { type MouseEvent, useMemo, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -22,6 +22,39 @@ import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
  * 변환하고 hover 툴팁 2종(연결 근거 F-09 · Top5 F-10)을 행 인라인 확장 하나로 통합한다.
  * 연결 관계는 각 행의 "↳ 상위 섹터에서 이어짐" 표기로 보존한다.
  */
+
+function StockChip({
+  stock,
+  onSelectStock,
+}: {
+  stock: TopStock;
+  onSelectStock: (stock: TopStock) => void;
+}) {
+  function handleSelectStock() {
+    onSelectStock(stock);
+  }
+
+  if (!stock.code) {
+    return (
+      <span className="block rounded-[7px] bg-secondary px-2 py-1 text-[11px] font-semibold text-ink-sub">
+        {stock.name}
+      </span>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleSelectStock}
+      aria-label={`${stock.name} — 주가 추이 차트 보기`}
+      className="flex cursor-pointer items-center gap-1 rounded-[7px] bg-secondary px-2 py-1 text-[11px] font-semibold text-ink-sub transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+    >
+      {stock.name}
+      {/* 차트 열림 표식 — 색만으로 구분하지 않게 아이콘 병기 */}
+      <ChartLine aria-hidden className="size-3 text-muted-foreground" />
+    </button>
+  );
+}
 
 export function SpreadPathList({
   nodes,
@@ -47,6 +80,17 @@ export function SpreadPathList({
   );
   const origin = nodes.find((node) => node.tier === 0);
   const tierBlocks = useMemo(() => buildSpreadTierBlocks(nodes), [nodes]);
+  function handleToggleNode(event: MouseEvent<HTMLButtonElement>) {
+    const id = event.currentTarget.dataset.nodeId;
+    if (!id) return;
+    setOpenId((current) => (current === id ? null : id));
+  }
+  function handleAnalyzeSource(event: MouseEvent<HTMLButtonElement>) {
+    const url = event.currentTarget.dataset.url;
+    if (url) {
+      router.push(`/analyzing?url=${encodeURIComponent(url)}`);
+    }
+  }
 
   return (
     <ol className={cn('flex flex-col', className)}>
@@ -115,8 +159,9 @@ export function SpreadPathList({
                   {expandable ? (
                     <button
                       type="button"
+                      data-node-id={node.id}
                       aria-expanded={isOpen}
-                      onClick={() => setOpenId(isOpen ? null : node.id)}
+                      onClick={handleToggleNode}
                       className="flex w-full cursor-pointer items-center gap-2.5 rounded-[10px] px-3 py-2.5 text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
                     >
                       {rowContent}
@@ -163,12 +208,9 @@ export function SpreadPathList({
                                   <Button
                                     size="xs"
                                     variant="secondary"
+                                    data-url={source.url}
                                     className="shrink-0 cursor-pointer border-border"
-                                    onClick={() =>
-                                      router.push(
-                                        `/analyzing?url=${encodeURIComponent(source.url)}`,
-                                      )
-                                    }
+                                    onClick={handleAnalyzeSource}
                                     aria-label={`${source.title} — 이 뉴스로 새 분석 시작`}
                                   >
                                     분석
@@ -188,26 +230,7 @@ export function SpreadPathList({
                           <ul className="mt-1.5 flex flex-wrap gap-1.5">
                             {stocks.map((stock) => (
                               <li key={stock.name}>
-                                {stock.code ? (
-                                  <button
-                                    type="button"
-                                    onClick={() => onSelectStock(stock)}
-                                    aria-label={`${stock.name} — 주가 추이 차트 보기`}
-                                    className="flex cursor-pointer items-center gap-1 rounded-[7px] bg-secondary px-2 py-1 text-[11px] font-semibold text-ink-sub transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
-                                  >
-                                    {stock.name}
-                                    {/* 차트 열림 표식 — 색만으로 구분하지 않게 아이콘 병기 */}
-                                    <ChartLine
-                                      aria-hidden
-                                      className="size-3 text-muted-foreground"
-                                    />
-                                  </button>
-                                ) : (
-                                  // 시세 매칭 실패 종목은 차트를 열 수 없다 — 이름만 (오조인 방지)
-                                  <span className="block rounded-[7px] bg-secondary px-2 py-1 text-[11px] font-semibold text-ink-sub">
-                                    {stock.name}
-                                  </span>
-                                )}
+                                <StockChip stock={stock} onSelectStock={onSelectStock} />
                               </li>
                             ))}
                           </ul>

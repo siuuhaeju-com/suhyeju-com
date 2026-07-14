@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { type FocusEvent, type MouseEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import { SpreadPathList } from '@/components/analysis/SpreadPathList';
 import { StockHistoryDialog } from '@/components/analysis/StockHistoryDialog';
@@ -30,6 +30,69 @@ import type { SpreadEdge, SpreadNode, TopStock } from '@/lib/types';
 
 // 그래프 요소 hover 후 툴팁으로 마우스가 이동할 유예 시간(ms) — 이 안에 툴팁에 들어오면 유지된다
 const TOOLTIP_GRACE_MS = 1000;
+
+type EdgeTooltipModel = {
+  edge: SpreadEdge;
+  fromNode: SpreadNode;
+  toNode: SpreadNode;
+  cx: number;
+  cy: number;
+};
+
+type NodeTooltipModel = {
+  node: SpreadNode;
+  stocks: TopStock[];
+  left: string;
+  top: string;
+  transform: string;
+};
+
+function buildEdgeTooltipModel(
+  hoveredEdge: number | null,
+  renderableEdges: SpreadEdge[],
+  nodesById: Map<string, SpreadNode>,
+): EdgeTooltipModel | null {
+  if (hoveredEdge == null) return null;
+
+  const edge = renderableEdges[hoveredEdge];
+  const fromNode = edge ? nodesById.get(edge.from) : undefined;
+  const toNode = edge ? nodesById.get(edge.to) : undefined;
+  if (!edge || !fromNode || !toNode) return null;
+
+  const from = getSpreadNodePosition(fromNode);
+  const to = getSpreadNodePosition(toNode);
+  return {
+    edge,
+    fromNode,
+    toNode,
+    cx: ((from.x + to.x) / 2 / SPREAD_VIEWBOX.width) * 100,
+    cy: ((from.y + to.y) / 2 / SPREAD_VIEWBOX.height) * 100,
+  };
+}
+
+function buildNodeTooltipModel(
+  activeNode: string | null,
+  nodesById: Map<string, SpreadNode>,
+  topStocks: Record<string, TopStock[]>,
+): NodeTooltipModel | null {
+  if (!activeNode) return null;
+
+  const node = nodesById.get(activeNode);
+  if (!node || node.tier === 0) return null;
+
+  const stocks = topStocks[node.name];
+  if (!stocks) return null;
+
+  const { x, y } = getSpreadNodePosition(node);
+  const shouldFlip = node.tier === 3;
+  return {
+    node,
+    stocks,
+    left: `${((x + (shouldFlip ? -80 : 80)) / SPREAD_VIEWBOX.width) * 100}%`,
+    top: `${(y / SPREAD_VIEWBOX.height) * 100}%`,
+    transform: `translateY(-50%)${shouldFlip ? ' translateX(-100%)' : ''}`,
+  };
+}
 
 export function SpreadGraph({
   nodes,
@@ -64,42 +127,69 @@ export function SpreadGraph({
     () => filterRenderableSpreadEdges(edges, nodesById),
     [edges, nodesById],
   );
+  const edgeTooltip = buildEdgeTooltipModel(hoveredEdge, renderableEdges, nodesById);
+  const nodeTooltip = buildNodeTooltipModel(activeNode, nodesById, topStocks);
 
-  const clearEdgeHideTimer = () => {
+  function clearEdgeHideTimer() {
     if (edgeHideTimer.current) {
       clearTimeout(edgeHideTimer.current);
       edgeHideTimer.current = null;
     }
-  };
+  }
   // 연결선/툴팁에 들어옴 → 즉시 표시(대기 취소)
-  const showEdge = (index: number) => {
+  function showEdge(index: number) {
     clearEdgeHideTimer();
     clearNodeHideTimer();
     setHoveredEdge(index);
     setHoveredNode(null);
-  };
+  }
   // 연결선/툴팁에서 나감 → 바로 닫지 않고 grace 후 닫기(그 사이 툴팁 진입 시 위 showEdge가 취소)
-  const scheduleHideEdge = () => {
+  function scheduleHideEdge() {
     clearEdgeHideTimer();
     edgeHideTimer.current = setTimeout(() => setHoveredEdge(null), TOOLTIP_GRACE_MS);
-  };
+  }
 
-  const clearNodeHideTimer = () => {
+  function clearNodeHideTimer() {
     if (nodeHideTimer.current) {
       clearTimeout(nodeHideTimer.current);
       nodeHideTimer.current = null;
     }
-  };
-  const showNode = (id: string) => {
+  }
+  function showNode(id: string) {
     clearEdgeHideTimer();
     clearNodeHideTimer();
     setHoveredNode(id);
     setHoveredEdge(null);
-  };
-  const scheduleHideNode = () => {
+  }
+  function scheduleHideNode() {
     clearNodeHideTimer();
     nodeHideTimer.current = setTimeout(() => setHoveredNode(null), TOOLTIP_GRACE_MS);
-  };
+  }
+  function handleEdgeMouseEnter(event: MouseEvent<SVGPathElement>) {
+    const index = Number(event.currentTarget.dataset.edgeIndex);
+    if (!Number.isNaN(index)) {
+      showEdge(index);
+    }
+  }
+  function handleNodeShow(event: MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>) {
+    const id = event.currentTarget.dataset.nodeId;
+    if (id) showNode(id);
+  }
+  function handleSourceAnalyzeClick(event: MouseEvent<HTMLButtonElement>) {
+    const url = event.currentTarget.dataset.url;
+    if (url) {
+      router.push(`/analyzing?url=${encodeURIComponent(url)}`);
+    }
+  }
+  function handleNodeTooltipBlur(event: FocusEvent<HTMLDivElement>) {
+    const nextTarget = event.relatedTarget;
+    if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) {
+      scheduleHideNode();
+    }
+  }
+  function handleCloseChart() {
+    setChartStock(null);
+  }
 
   useEffect(() => {
     return () => {
@@ -206,8 +296,9 @@ export function SpreadGraph({
                   fill="none"
                   stroke="transparent"
                   strokeWidth={16}
+                  data-edge-index={index}
                   className="cursor-pointer"
-                  onMouseEnter={() => showEdge(index)}
+                  onMouseEnter={handleEdgeMouseEnter}
                   onMouseLeave={scheduleHideEdge}
                 />
               </g>
@@ -226,18 +317,12 @@ export function SpreadGraph({
             <button
               key={node.id}
               type="button"
-              onMouseEnter={() => {
-                if (hasStocks) showNode(node.id);
-              }}
+              data-node-id={node.id}
+              onMouseEnter={hasStocks ? handleNodeShow : undefined}
               onMouseLeave={hasStocks ? scheduleHideNode : undefined}
-              onFocus={() => {
-                if (hasStocks) showNode(node.id);
-              }}
+              onFocus={hasStocks ? handleNodeShow : undefined}
               onBlur={hasStocks ? scheduleHideNode : undefined}
-              onClick={() => {
-                if (!hasStocks) return;
-                showNode(node.id);
-              }}
+              onClick={hasStocks ? handleNodeShow : undefined}
               className={cn(
                 'absolute -translate-x-1/2 -translate-y-1/2 rounded-md border bg-card px-3.5 py-2 text-left transition-colors outline-none',
                 hasStocks ? 'cursor-pointer' : 'cursor-default',
@@ -289,119 +374,90 @@ export function SpreadGraph({
         })}
 
         {/* 연결선 근거 툴팁 (F-09) — hover로 뜨고, grace 유예 안에 툴팁으로 들어오면 유지되어 링크 클릭 가능 */}
-        {hoveredEdge != null &&
-          (() => {
-            const edge = renderableEdges[hoveredEdge];
-            const fromNode = edge ? nodesById.get(edge.from) : undefined;
-            const toNode = edge ? nodesById.get(edge.to) : undefined;
-            if (!edge || !fromNode || !toNode) return null;
-
-            const from = getSpreadNodePosition(fromNode);
-            const to = getSpreadNodePosition(toNode);
-            const cx = ((from.x + to.x) / 2 / SPREAD_VIEWBOX.width) * 100;
-            const cy = ((from.y + to.y) / 2 / SPREAD_VIEWBOX.height) * 100;
-            return (
-              <div
-                role="tooltip"
-                aria-label={`연결 근거: ${fromNode.name} → ${toNode.name}`}
-                onMouseEnter={clearEdgeHideTimer}
-                onMouseLeave={scheduleHideEdge}
-                className="pointer-events-auto absolute z-10 w-80 -translate-x-1/2 rounded-md border bg-popover p-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
-                style={{ left: `${cx}%`, top: `${cy}%` }}
-              >
-                <p className="text-[11px] font-extrabold tracking-wide text-blue-bright">
-                  연결 근거 · {fromNode.name} → {toNode.name}
+        {edgeTooltip && (
+          <div
+            role="tooltip"
+            aria-label={`연결 근거: ${edgeTooltip.fromNode.name} → ${edgeTooltip.toNode.name}`}
+            onMouseEnter={clearEdgeHideTimer}
+            onMouseLeave={scheduleHideEdge}
+            className="pointer-events-auto absolute z-10 w-80 -translate-x-1/2 rounded-md border bg-popover p-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
+            style={{ left: `${edgeTooltip.cx}%`, top: `${edgeTooltip.cy}%` }}
+          >
+            <p className="text-[11px] font-extrabold tracking-wide text-blue-bright">
+              연결 근거 · {edgeTooltip.fromNode.name} → {edgeTooltip.toNode.name}
+            </p>
+            <p className="mt-1.5 text-[13px] leading-relaxed font-semibold text-foreground">
+              {edgeTooltip.edge.reason}
+            </p>
+            {/* 검색 매핑이 비면(키 미설정·결과 없음) 근거문만 남기고 블록 생략 */}
+            {edgeTooltip.edge.sources.length > 0 && (
+              <div className="mt-2.5 border-t border-border pt-2.5">
+                <p className="text-[10.5px] font-bold tracking-wide text-muted-foreground">
+                  근거 뉴스
                 </p>
-                <p className="mt-1.5 text-[13px] leading-relaxed font-semibold text-foreground">
-                  {edge.reason}
-                </p>
-                {/* 검색 매핑이 비면(키 미설정·결과 없음) 근거문만 남기고 블록 생략 */}
-                {edge.sources.length > 0 && (
-                  <div className="mt-2.5 border-t border-border pt-2.5">
-                    <p className="text-[10.5px] font-bold tracking-wide text-muted-foreground">
-                      근거 뉴스
-                    </p>
-                    <ul className="mt-1.5 flex flex-col gap-1.5">
-                      {edge.sources.map((source) => (
-                        <li key={source.url} className="flex gap-2">
-                          <span aria-hidden className="text-[11px] leading-relaxed text-primary">
-                            ▪
+                <ul className="mt-1.5 flex flex-col gap-1.5">
+                  {edgeTooltip.edge.sources.map((source) => (
+                    <li key={source.url} className="flex gap-2">
+                      <span aria-hidden className="text-[11px] leading-relaxed text-primary">
+                        ▪
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-xs leading-snug font-semibold text-ink-sub transition-colors outline-none hover:text-foreground hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                        >
+                          {source.title}{' '}
+                          {/* 외부 링크 표식 — 제목과 구분되게 무채색(회색) 유지 */}
+                          <span aria-hidden className="text-muted-foreground">
+                            ↗
                           </span>
-                          <span className="min-w-0 flex-1">
-                            <a
-                              href={source.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="block text-xs leading-snug font-semibold text-ink-sub transition-colors outline-none hover:text-foreground hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
-                            >
-                              {source.title}{' '}
-                              {/* 외부 링크 표식 — 제목과 구분되게 무채색(회색) 유지 */}
-                              <span aria-hidden className="text-muted-foreground">
-                                ↗
-                              </span>
-                            </a>
-                            <span className="mt-0.5 block text-[11px] text-muted-foreground">
-                              {source.meta}
-                            </span>
-                          </span>
-                          <Button
-                            size="xs"
-                            variant="secondary"
-                            // 연한 보더로 버튼임을 드러낸다 — DESIGN.md 서피스+1px 보더 규칙(border 토큰)
-                            className="shrink-0 cursor-pointer self-center border-border"
-                            onClick={() =>
-                              router.push(`/analyzing?url=${encodeURIComponent(source.url)}`)
-                            }
-                            aria-label={`${source.title} — 이 뉴스로 새 분석 시작`}
-                          >
-                            분석
-                          </Button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                        </a>
+                        <span className="mt-0.5 block text-[11px] text-muted-foreground">
+                          {source.meta}
+                        </span>
+                      </span>
+                      <Button
+                        size="xs"
+                        variant="secondary"
+                        data-url={source.url}
+                        // 연한 보더로 버튼임을 드러낸다 — DESIGN.md 서피스+1px 보더 규칙(border 토큰)
+                        className="shrink-0 cursor-pointer self-center border-border"
+                        onClick={handleSourceAnalyzeClick}
+                        aria-label={`${source.title} — 이 뉴스로 새 분석 시작`}
+                      >
+                        분석
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            );
-          })()}
+            )}
+          </div>
+        )}
 
         {/* 노드 Top5 툴팁 (F-10) — hover로 뜨고, grace 유예 안에 툴팁으로 들어오면 유지되어 링크 클릭 가능 */}
-        {activeNode &&
-          nodesById.get(activeNode)?.tier !== 0 &&
-          topStocks[nodesById.get(activeNode)?.name ?? ''] &&
-          (() => {
-            const node = nodesById.get(activeNode);
-            if (!node) return null;
-
-            const { x, y } = getSpreadNodePosition(node);
-            const shouldFlip = node.tier === 3;
-            return (
-              <div
-                className="pointer-events-auto absolute z-10"
-                onMouseEnter={clearNodeHideTimer}
-                onMouseLeave={scheduleHideNode}
-                onFocus={clearNodeHideTimer}
-                onBlur={(event) => {
-                  if (!event.currentTarget.contains(event.relatedTarget as Node)) {
-                    scheduleHideNode();
-                  }
-                }}
-                style={{
-                  left: `${
-                    ((x + (shouldFlip ? -80 : 80)) / SPREAD_VIEWBOX.width) * 100
-                  }%`,
-                  top: `${(y / SPREAD_VIEWBOX.height) * 100}%`,
-                  transform: `translateY(-50%)${shouldFlip ? ' translateX(-100%)' : ''}`,
-                }}
-              >
-                <StockTooltip
-                  sector={node.name}
-                  stocks={topStocks[node.name]}
-                  onSelectStock={setChartStock}
-                />
-              </div>
-            );
-          })()}
+        {nodeTooltip && (
+          <div
+            className="pointer-events-auto absolute z-10"
+            onMouseEnter={clearNodeHideTimer}
+            onMouseLeave={scheduleHideNode}
+            onFocus={clearNodeHideTimer}
+            onBlur={handleNodeTooltipBlur}
+            style={{
+              left: nodeTooltip.left,
+              top: nodeTooltip.top,
+              transform: nodeTooltip.transform,
+            }}
+          >
+            <StockTooltip
+              sector={nodeTooltip.node.name}
+              stocks={nodeTooltip.stocks}
+              onSelectStock={setChartStock}
+            />
+          </div>
+        )}
       </div>
 
       {/* 모바일(≤748px) — 파급 경로 리스트 (#98): 티어 섹션 + 행 인라인 확장 */}
@@ -419,7 +475,7 @@ export function SpreadGraph({
           stock={chartStock}
           publishedAt={publishedAt}
           analyzedAt={analyzedAt}
-          onClose={() => setChartStock(null)}
+          onClose={handleCloseChart}
         />
       )}
     </Card>

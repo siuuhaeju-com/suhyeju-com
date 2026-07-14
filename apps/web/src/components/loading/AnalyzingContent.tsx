@@ -21,12 +21,15 @@ export function AnalyzingContent() {
 
   const { completed, errorMessage } = useAnalyzeStream(url);
   const { data: sectors } = useKrMajorSectors();
+  function handleGoHome() {
+    router.replace('/');
+  }
 
   if (errorMessage) {
     return (
       <main className="mx-auto flex w-full max-w-xl flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center">
         <p className="text-sm text-muted-foreground">{errorMessage}</p>
-        <Button onClick={() => router.replace('/')}>메인 화면으로</Button>
+        <Button onClick={handleGoHome}>메인 화면으로</Button>
       </main>
     );
   }
