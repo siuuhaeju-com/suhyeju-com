@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { apiGet } from '@/lib/api';
 import { formatPct, getPctArrow, getPctToneClass } from '@/lib/format';
+import { queryPolicies } from '@/lib/query-policies';
 import { queryKeys } from '@/lib/query-keys';
 import { cn } from '@/lib/utils';
 import type { StockPricePoint, TopStock } from '@/lib/types';
@@ -85,7 +86,7 @@ export function StockHistoryDialog({
         `/api/stocks/${stock.code}/history?market=${market}&start=${rangeStartParam}&end=${todayParam}`,
         { signal },
       ),
-    staleTime: 60 * 60_000, // 일봉 과거 데이터 — BE 캐시(1h)와 동일
+    ...queryPolicies.stockHistory,
     enabled: !!stock.code,
   });
 

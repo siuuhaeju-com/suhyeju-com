@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { apiGet } from '@/lib/api';
+import { queryPolicies } from '@/lib/query-policies';
 import { queryKeys } from '@/lib/query-keys';
 import type { NewsItem, RecentAnalysis, SectorChange } from '@/lib/types';
 
@@ -11,7 +12,7 @@ export function usePopularNews() {
   return useQuery({
     queryKey: queryKeys.news.popular,
     queryFn: ({ signal }) => apiGet<NewsItem[]>('/api/news', { signal }),
-    staleTime: 60_000,
+    ...queryPolicies.popularNews,
   });
 }
 
@@ -23,8 +24,7 @@ export function useKrMajorSectors() {
   return useQuery({
     queryKey: queryKeys.market.krMajorSectors,
     queryFn: ({ signal }) => apiGet<SectorChange[]>('/api/market/kr/major-sectors', { signal }),
-    staleTime: 60_000,
-    refetchInterval: 60_000,
+    ...queryPolicies.krMajorSectors,
   });
 }
 
@@ -36,6 +36,6 @@ export function useRecentAnalyses() {
       apiGet<RecentAnalysis[]>(`/api/analyses/recent?limit=${RECENT_ANALYSES_FETCH_LIMIT}`, {
         signal,
       }),
-    staleTime: 10_000,
+    ...queryPolicies.recentAnalyses,
   });
 }
