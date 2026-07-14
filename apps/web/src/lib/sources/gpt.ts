@@ -347,9 +347,9 @@ function mockAnalysis(articleText: string): AnalysisDraft {
         searchQuery: '파운드리 경쟁 심화',
       },
       {
-        from: 'n1',
+        from: 'n4',
         to: 'n5',
-        reason: '고발열 칩 확산으로 전력·냉각 수요 증가',
+        reason: '후공정 패키징 고도화가 고발열 칩 확산과 전력·냉각 수요 증가로 이어짐',
         searchQuery: 'AI 데이터센터 전력 냉각 수요',
       },
     ],
