@@ -1,6 +1,6 @@
 /**
  * 도메인 타입 — BE API 응답 스키마와 1:1로 맞추는 지점.
- * FE 연동 시 lib/mock-data.ts 를 API 호출로 교체하면 된다. (SETUP-04 스키마 참고)
+ * `AnalysisResult`는 분석 페이지와 저장소가 공유하는 최종 응답 계약이다.
  */
 
 /** 등락 방향: 긍정=up(레드), 부정=down(블루) — 국내 증시 관례 */
@@ -39,7 +39,7 @@ export interface RecentAnalysis {
   originUrl: string;
 }
 
-/** Top5 종목 현황 (노드·히트맵 hover 툴팁 — F-10) */
+/** Top5 종목 현황 (파급 그래프 노드 툴팁 — F-10) */
 export interface TopStock {
   name: string;
   changePct: number;

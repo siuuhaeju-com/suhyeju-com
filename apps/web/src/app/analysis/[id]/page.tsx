@@ -1,11 +1,6 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { KnowledgeGraph } from '@/components/analysis/KnowledgeGraph';
-import { SignalSection } from '@/components/analysis/SignalSection';
-import { SpreadGraph } from '@/components/analysis/SpreadGraph';
-import { SummarySection } from '@/components/analysis/SummarySection';
-import { formatDateTime } from '@/lib/format';
+import { AnalysisView } from '@/components/analysis/AnalysisView';
 import { getAnalysis } from '@/lib/store';
 
 type AnalysisPageProps = {
@@ -25,35 +20,5 @@ export default async function AnalysisPage({ params }: AnalysisPageProps) {
     notFound();
   }
 
-  return (
-    <main className="mx-auto w-full max-w-[1100px] flex-1 px-6 pt-6 pb-24">
-      {/* 상단 바 — 새 분석으로 돌아가기 + 분석 메타 */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 rounded-md text-sm font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
-        >
-          <span aria-hidden>←</span> 새 분석
-        </Link>
-        {/* analyzedAt은 실데이터에서 ISO로 오므로 표시 형식으로 변환 */}
-        <p className="text-xs text-muted-foreground">
-          분석 완료 · {formatDateTime(result.analyzedAt)} · {result.engineVersion}
-        </p>
-      </div>
-
-      <div className="mt-6 flex flex-col gap-12">
-        <SummarySection result={result} />
-        <SpreadGraph
-          nodes={result.spreadNodes}
-          edges={result.spreadEdges}
-          topStocks={result.topStocks}
-          sectionNote={result.sectionNotes?.spread}
-          publishedAt={result.publishedAt}
-          analyzedAt={result.analyzedAt}
-        />
-        <SignalSection result={result} />
-        <KnowledgeGraph centerSector={result.sector} sectionNote={result.sectionNotes?.knowledge} />
-      </div>
-    </main>
-  );
+  return <AnalysisView result={result} />;
 }

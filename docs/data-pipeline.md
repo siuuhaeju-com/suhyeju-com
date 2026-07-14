@@ -2,7 +2,7 @@
 
 > 뉴스 한 건이 `AnalysisResult`가 되기까지의 단일 기준. **무엇을 GPT가 만들고, 무엇을 서버가 채우고, 무엇을 FE가 그리는지**를 여기서 정한다.
 >
-> 관련 코드: `apps/web/src/lib/extract-article.ts` · `lib/sources/gpt.ts` · `lib/analyze.ts` · `lib/analysis/*` · `lib/store.ts`
+> 관련 코드: `apps/web/src/lib/extract-article.ts` · `lib/sources/gpt.ts` · `lib/analysis/usecase.ts` · `lib/analysis/*` · `lib/store.ts`
 > 계약(타입): `apps/web/src/lib/types.ts` (`AnalysisResult`)
 > 엔드포인트: `POST /api/analyze` → `GET /api/analysis/[id]` · `GET /api/analyses/recent`
 
@@ -22,7 +22,7 @@
 | #   | 소스      | 무엇을                                            | 방식                                    |
 | --- | --------- | ------------------------------------------------- | --------------------------------------- |
 | ①   | 뉴스 본문 | GPT 입력                                          | 붙여넣기(1순위) 또는 URL 스크래핑       |
-| ②   | **GPT**   | 요약·키워드·신호·그래프·히트맵 구조 (화면의 ~80%) | OpenAI 호환 게이트웨이, 구조화 출력     |
+| ②   | **GPT**   | 요약·키워드·신호·확산 그래프·지식그래프 구조 (화면의 ~80%) | OpenAI 호환 게이트웨이, 구조화 출력     |
 | ③   | 시세 API  | 종목·섹터 `changePct`, 시총                       | 네이버 금융(한국)/Finnhub(미국) `fetch` |
 | ④   | 뉴스 목록 | 메인 인기 뉴스 (#15/#53, analyze와 별개)          | 네이버 증권 ranknews(비공식)            |
 
@@ -79,8 +79,9 @@ GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 �
 
 ### 파이프라인 코드 경계 (#101)
 
-- `lib/analyze.ts`: 본문 확보, GPT 초안 생성, 계약 검증, join 단계 병렬 실행, 최종 assemble 호출만 담당한다.
+- `lib/analysis/usecase.ts`: 본문 확보, GPT 초안 생성, 계약 검증, join 단계 병렬 실행, 최종 assemble 호출만 담당한다.
 - `lib/analysis/contracts.ts`: GPT 초안의 그래프/종목 참조 무결성을 검증한다.
+- `lib/analysis/errors.ts`: 입력 오류, 본문 추출 실패, 모델 응답 파싱 실패, 계약 위반, 조립 실패를 분석 도메인 에러로 구분한다.
 - `lib/analysis/quote-join.ts`: GPT 초안의 `topStocks`와 `relatedSectors`에 실시세를 비파괴적으로 join한다.
 - `lib/analysis/source-join.ts`: edge와 신호 뉴스 searchQuery를 실제 기사 링크로 join한다.
 - `lib/analysis/assemble.ts`: `AnalysisDraft`를 외부 응답 계약인 `AnalysisResult`로 변환한다.
@@ -98,9 +99,9 @@ GPT 스키마엔 없는(=지어내면 안 되는) 표현 필드를 **서버가 �
 | `originUrl`                                                                                              | 서버(입력)          |                                        |
 | `sector`·`verdict`·`summary`·`keywords`·`reviewedCount`                                                  | **GPT**             |                                        |
 | `goodSignal`·`warnSignal`·`spreadEdges`·`knowledgeEdges`                                                 | **GPT**             |                                        |
-| `spreadNodes`(id·name·tier)·`heatmap`(sector·impact)·`knowledgeNodes`(id·name·group)·`topStocks`(종목명) | **GPT**             | 원시값                                 |
-| `spreadNodes`·`relatedSectors`·`topStocks`의 `changePct`                                                 | **시세 API**(③)     | GPT 초안 → 실시세로 교체 (히트맵 제외) |
-| `spreadNodes.row`·`heatmap.share`·`heatmap.direction`                                                    | 서버 파생(④)        | GPT 스키마 제외(히트맵은 impact→share) |
+| `spreadNodes`(id·name·tier·impact)·`knowledgeNodes`(id·name·group)·`topStocks`(종목명) | **GPT**             | 원시값                                 |
+| `relatedSectors`·`topStocks`의 `changePct`                                             | **시세 API**(③)     | GPT 초안 → 실시세로 교체               |
+| `spreadNodes.row`                                                                       | 서버 파생(④)        | GPT 스키마 제외                        |
 | `knowledgeNodes.x/y`                                                                                     | **FE 계산**         | 서버는 `0`                             |
 | `NewsItem.sectorTone`                                                                                    | **FE**              | 칩 색 변형(analyze 아님)               |
 

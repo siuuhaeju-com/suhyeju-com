@@ -26,7 +26,7 @@
 
 ## 분석 리팩토링 기준선 (#101)
 
-분석 기능은 **Next.js App Router 기반 도메인 중심 레이어드 아키텍처 + 파이프라인/어댑터 패턴**으로 정리한다. 사용자에게 보이는 `AnalysisResult` 응답 계약은 유지하고, 내부 책임만 아래처럼 나눈다.
+분석 기능은 **Next.js App Router 기반 도메인 중심 레이어드 아키텍처 + 파이프라인/어댑터 패턴**으로 정리한다. 사용자에게 보이는 `AnalysisResult` 응답 계약은 유지하고, 내부 책임만 아래처럼 나눈다. 용어 기준은 `docs/domain-glossary.md`를 따른다.
 
 ### 적용한 리팩토링 기준과 스킬
 
@@ -44,25 +44,26 @@
   - `/api/analyze`는 NDJSON 진행 이벤트와 최종 `done/error` 이벤트만 책임진다.
   - 외부 소비가 필요한 조회 API만 Route Handler로 유지한다.
 
-### 2. Application Pipeline Layer
+### 2. Application / Usecase Layer
 
-- 위치: `apps/web/src/lib/analyze.ts`
+- 위치: `apps/web/src/lib/analysis/usecase.ts`
 - 책임: `extract -> analyzeDraft -> validate -> joinQuotes/joinSources -> assemble` 순서 조율.
 - 원칙:
-  - `runAnalysis`는 오케스트레이션만 맡고, 도메인 계산·외부 호출 세부 구현을 직접 갖지 않는다.
+  - `runNewsAnalysis`는 오케스트레이션만 맡고, 도메인 계산·외부 호출 세부 구현을 직접 갖지 않는다.
   - GPT 호출 뒤에는 도메인 계약 검증을 통과한 초안만 join/assemble 단계로 넘긴다.
   - 시세 join, 근거 뉴스 join, 신호 뉴스 링크 join처럼 독립적인 작업은 병렬 실행한다.
 
 ### 3. Domain / Contract Layer
 
-- 위치: `apps/web/src/lib/types.ts`, `apps/web/src/lib/analysis/contracts.ts`
-- 책임: API 응답 타입과 GPT 초안의 구조적 invariant 검증.
+- 위치: `apps/web/src/lib/types.ts`, `apps/web/src/lib/analysis/contracts.ts`, `apps/web/src/lib/analysis/errors.ts`
+- 책임: API 응답 타입, GPT 초안의 구조적 invariant 검증, 분석 도메인 에러 분류.
 - 현재 검증:
   - `spreadNodes` id 중복 금지
   - tier 0 뉴스 원점 정확히 1개
   - `spreadEdges`와 `knowledgeEdges`가 존재하는 노드만 참조
   - tier 1·2·3 노드는 이전 tier에서 들어오는 edge 필요
   - `topStocks[].sector`는 비원점 `spreadNodes[].name`과 일치
+  - `impact`, `row`, Top5 종목 수, 필수 메타 필드 같은 최종 `AnalysisResult` 계약도 검증
 
 ### 4. Adapter / Join Layer
 
@@ -86,6 +87,7 @@
 - 위치: `apps/web/src/components`
 - 책임: 사용자 상호작용과 렌더링.
 - 원칙:
+  - 라우트 `page.tsx`는 데이터 조회와 404 판단을 맡고, 페이지 화면 조립은 `*View` 컴포넌트가 맡는다.
   - 컴포넌트는 props를 받아 그리는 일을 우선한다.
   - 데이터 계약·시세 join·외부 검색·좌표 상수 같은 공유 계산은 `lib/analysis`에 둔다.
   - shadcn/ui primitives는 `components/ui`, 도메인 화면 컴포넌트는 `components/main`, `components/analysis`, `components/knowledge-graph`에 둔다.

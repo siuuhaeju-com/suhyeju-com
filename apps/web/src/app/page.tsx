@@ -27,7 +27,7 @@ export default function HomePage() {
         <p className="max-w-xl text-[15px] leading-7 text-muted-foreground">
           링크를 입력하면 AI가 핵심 키워드와 관련 산업을 추출하고,{' '}
           <br className="hidden md:block" />
-          섹터별 영향도 히트맵과 1·2·3차 파급 경로를 그려드립니다.
+          섹터별 영향도와 1·2·3차 파급 경로를 그래프로 그려드립니다.
         </p>
         <AnalyzeForm />
       </section>
