@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { SectorRelatedNews } from '@/lib/knowledge-graph/sector-info';
 import { faviconUrlFromLink, googleFaviconFallback } from '@/lib/knowledge-graph/sector-favicon';
 
@@ -10,6 +10,8 @@ function SourceFavicon({ url, className }: { url: string; className?: string }) 
   const [src, setSrc] = useState(primary);
 
   return (
+    // Dynamic favicon proxy URLs are tiny decorative images; next/image optimization is unnecessary here.
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt=""
@@ -24,11 +26,9 @@ function SourceFavicon({ url, className }: { url: string; className?: string }) 
 }
 
 export function KnowledgeGraphSectorNewsDrawer({ news }: { news: SectorRelatedNews[] }) {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [news]);
+  const newsKey = useMemo(() => news.map((item) => item.id).join('|'), [news]);
+  const [drawerState, setDrawerState] = useState({ newsKey: '', isOpen: false });
+  const open = drawerState.newsKey === newsKey ? drawerState.isOpen : false;
 
   if (!news.length) return null;
 
@@ -91,7 +91,7 @@ export function KnowledgeGraphSectorNewsDrawer({ news }: { news: SectorRelatedNe
           className="pointer-events-auto relative inline-flex size-8 cursor-pointer items-center justify-center overflow-visible rounded-full border border-border bg-card shadow-sm hover:border-accent"
           aria-expanded={open}
           aria-label="관련 뉴스 보기"
-          onClick={() => setOpen((value) => !value)}
+          onClick={() => setDrawerState({ newsKey, isOpen: !open })}
         >
           {firstUrl ? (
             <SourceFavicon url={firstUrl} className="block size-[18px] rounded-full object-cover" />

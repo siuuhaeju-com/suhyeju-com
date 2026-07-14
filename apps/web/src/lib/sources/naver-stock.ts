@@ -30,8 +30,6 @@ const StockBasicResponseSchema = z.object({
   fluctuationsRatio: z.string().optional(),
 });
 
-type AcItem = z.infer<typeof AutocompleteItemSchema>;
-
 interface ResolvedStock {
   key: string; // 시세 조회 키 (한국=종목코드, 미국=reutersCode)
   market: 'KR' | 'US';

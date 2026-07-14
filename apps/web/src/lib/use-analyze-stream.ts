@@ -24,10 +24,19 @@ type AnalyzeEvent =
   | { step: 'done'; id: string; title: string; analyzedAt: string; originUrl: string }
   | { step: 'error'; message: string };
 
+type AnalyzeStreamState = {
+  url: string | null;
+  completed: number;
+  errorMessage: string | null;
+};
+
 export function useAnalyzeStream(url: string | null) {
   const router = useRouter();
-  const [completed, setCompleted] = useState(0);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [state, setState] = useState<AnalyzeStreamState>({
+    url: null,
+    completed: 0,
+    errorMessage: null,
+  });
   const progressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -36,9 +45,6 @@ export function useAnalyzeStream(url: string | null) {
       router.replace('/');
       return;
     }
-
-    setCompleted(0);
-    setErrorMessage(null);
 
     const analysisUrl = url;
     const controller = new AbortController();
@@ -68,7 +74,7 @@ export function useAnalyzeStream(url: string | null) {
     function scheduleTick() {
       progressTimerRef.current = setTimeout(() => {
         ticks += 1;
-        setCompleted(ticks);
+        setState({ url: analysisUrl, completed: ticks, errorMessage: null });
         if (ticks < TIMER_CAP) {
           scheduleTick();
         }
@@ -87,15 +93,19 @@ export function useAnalyzeStream(url: string | null) {
           if (event.step === 'analyze') {
             clearProgressTimer();
             ticks = 1;
-            setCompleted(1);
+            setState({ url: analysisUrl, completed: 1, errorMessage: null });
             scheduleTick();
           } else if (event.step === 'quote') {
             clearProgressTimer();
             ticks = TIMER_CAP;
-            setCompleted(4);
+            setState({ url: analysisUrl, completed: 4, errorMessage: null });
           } else if (event.step === 'done') {
             clearTimers();
-            setCompleted(ANALYZE_STEP_LABELS.length);
+            setState({
+              url: analysisUrl,
+              completed: ANALYZE_STEP_LABELS.length,
+              errorMessage: null,
+            });
             saveLocalAnalysis({
               id: event.id,
               title: event.title,
@@ -109,22 +119,29 @@ export function useAnalyzeStream(url: string | null) {
             return;
           } else if (event.step === 'error') {
             clearTimers();
-            setErrorMessage(event.message);
+            setState({ url: analysisUrl, completed: 0, errorMessage: event.message });
             return;
           }
         }
 
         clearTimers();
-        setErrorMessage('분석 서버 연결이 끊겼습니다. 처음 화면에서 다시 시작해주세요.');
+        setState({
+          url: analysisUrl,
+          completed: 0,
+          errorMessage: '분석 서버 연결이 끊겼습니다. 처음 화면에서 다시 시작해주세요.',
+        });
       } catch (err) {
         if (controller.signal.aborted) {
           return;
         }
         clearTimers();
         console.error('[analyzing]', err);
-        setErrorMessage(
-          err instanceof ApiError ? err.message : '네트워크 오류로 분석에 실패했습니다',
-        );
+        setState({
+          url: analysisUrl,
+          completed: 0,
+          errorMessage:
+            err instanceof ApiError ? err.message : '네트워크 오류로 분석에 실패했습니다',
+        });
       }
     }
 
@@ -136,5 +153,9 @@ export function useAnalyzeStream(url: string | null) {
     };
   }, [url, router]);
 
-  return { completed, errorMessage };
+  const isCurrentUrlState = state.url === url;
+  return {
+    completed: isCurrentUrlState ? state.completed : 0,
+    errorMessage: isCurrentUrlState ? state.errorMessage : null,
+  };
 }
