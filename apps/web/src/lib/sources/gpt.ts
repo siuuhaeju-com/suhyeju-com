@@ -10,6 +10,8 @@ import OpenAI from 'openai';
 import { zodResponseFormat } from 'openai/helpers/zod';
 import { z } from 'zod';
 
+import { ModelResponseParseError } from '@/lib/analysis/errors';
+
 function getClient(): OpenAI {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
@@ -233,7 +235,7 @@ export async function analyzeNews(article: ArticleInput): Promise<AnalysisDraft>
   const parsedB = b.choices[0]?.message.parsed;
   const parsedC = c.choices[0]?.message.parsed;
   if (!parsedA || !parsedB || !parsedC) {
-    throw new Error('GPT 분석 결과 파싱에 실패했습니다');
+    throw new ModelResponseParseError();
   }
   return { ...parsedA, ...parsedB, ...parsedC };
 }

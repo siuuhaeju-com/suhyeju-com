@@ -1,4 +1,5 @@
-import { runAnalysis } from '@/lib/analyze';
+import { getAnalysisErrorMessage } from '@/lib/analysis/errors';
+import { runNewsAnalysis } from '@/lib/analysis/usecase';
 import { getAnalysisByOriginUrl, saveAnalysis } from '@/lib/store';
 import type { AnalysisResult } from '@/lib/types';
 
@@ -43,13 +44,12 @@ export async function POST(request: Request) {
           }
         }
 
-        const result = await runAnalysis(body, send);
+        const result = await runNewsAnalysis(body, send);
         await saveAnalysis(result);
         send(doneEvent(result));
       } catch (error) {
         console.error('[api/analyze]', error);
-        const message = error instanceof Error ? error.message : '분석에 실패했습니다';
-        send({ step: 'error', message });
+        send({ step: 'error', message: getAnalysisErrorMessage(error) });
       } finally {
         controller.close();
       }
