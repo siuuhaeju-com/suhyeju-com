@@ -1,7 +1,7 @@
 import { nodeColor } from '../graph.js';
 import { DEFAULT_NODE_SIZE, EDGE_NODE_SIZE } from '../graph-settings.mjs';
 import { runLayoutWithFinish } from '../layout-utils.mjs';
-import { buildThemedGraphStyle, getThemeId } from '../themes/index.mjs';
+import { buildThemedGraphStyleFromVars, getThemeId } from '../themes/index.mjs';
 import { applyRingLayout, clearRingLayout, isRingLayoutVersion } from '../layouts/ring-layout.mjs';
 import {
   applyHierarchyLayout,
@@ -208,23 +208,24 @@ export function resolveLayoutOptions(version) {
  * @param {import("cytoscape").Core} cy
  * @param {GraphVersion} version
  * @param {ReturnType<import("../themes/index.mjs").getGraphThemeVars>} themeVars
+ * @param {string} [themeId]
  */
-export function applyVersion(cy, version, themeVars) {
+export function applyVersion(cy, version, themeVars, themeId = getThemeId()) {
   if (isRingLayoutVersion(version)) {
     clearHierarchyLayout(cy);
-    return applyRingLayout(cy, version, themeVars);
+    return applyRingLayout(cy, version, themeVars, themeId);
   }
 
   if (isHierarchyLayoutVersion(version)) {
     clearRingLayout(cy);
-    return applyHierarchyLayout(cy, version);
+    return applyHierarchyLayout(cy, version, themeVars, themeId);
   }
 
   clearRingLayout(cy);
   clearHierarchyLayout(cy);
   setLayoutKind(cy, LAYOUT_KIND.ORGANIC);
 
-  const styles = buildThemedGraphStyle(version.style, getThemeId());
+  const styles = buildThemedGraphStyleFromVars(version.style, themeId, themeVars);
   cy.style(styles);
 
   if (version.positions) {

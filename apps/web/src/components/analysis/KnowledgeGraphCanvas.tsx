@@ -22,6 +22,7 @@ type KnowledgeGraphCanvasProps = {
   className?: string;
   nodeCount?: number;
   highlightSector?: string;
+  mode?: 'full' | 'analysis';
   onSectorInfoChange?: (info: SectorSidebarInfo | null) => void;
 };
 
@@ -32,7 +33,7 @@ export const KnowledgeGraphCanvas = forwardRef<
   KnowledgeGraphCanvasHandle,
   KnowledgeGraphCanvasProps
 >(function KnowledgeGraphCanvas(
-  { className, nodeCount, highlightSector, onSectorInfoChange },
+  { className, nodeCount, highlightSector, mode = 'full', onSectorInfoChange },
   ref,
 ) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -77,6 +78,7 @@ export const KnowledgeGraphCanvas = forwardRef<
         themeId: 'midnight',
         nodeCount,
         highlightSector,
+        mode,
         onSectorFocus: (info) => {
           onSectorInfoChangeRef.current?.(info);
         },
@@ -88,7 +90,7 @@ export const KnowledgeGraphCanvas = forwardRef<
       runtimeRef.current?.destroy();
       runtimeRef.current = null;
     };
-  }, [nodeCount, highlightSector]);
+  }, [nodeCount, highlightSector, mode]);
 
   return (
     <div

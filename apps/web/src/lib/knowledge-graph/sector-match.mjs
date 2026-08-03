@@ -1,4 +1,41 @@
 /**
+ * @param {string} query
+ * @param {string} name
+ */
+function scoreSectorNameMatch(query, name) {
+  if (name === query) return 100;
+  if (name.includes(query) || query.includes(name)) {
+    return 50 + Math.min(name.length, query.length);
+  }
+  return 0;
+}
+
+/**
+ * 풀 JSON 노드 배열에서 Sector 노드 매칭.
+ * @param {Array<{ id: string; label: string; name: string }>} nodes
+ * @param {string} sectorName
+ */
+export function findSectorNodeInPool(nodes, sectorName) {
+  const query = sectorName.trim();
+  if (!query) return null;
+
+  /** @type {{ id: string; label: string; name: string } | null} */
+  let best = null;
+  let bestScore = 0;
+
+  for (const node of nodes) {
+    if (node.label !== 'Sector') continue;
+    const score = scoreSectorNameMatch(query, String(node.name ?? ''));
+    if (score > bestScore) {
+      bestScore = score;
+      best = node;
+    }
+  }
+
+  return bestScore > 0 ? best : null;
+}
+
+/**
  * AnalysisResult.sector(배지 텍스트) → 풀 그래프 Sector 노드 매칭.
  * @param {import("cytoscape").Core} cy
  * @param {string} sectorName
@@ -13,15 +50,7 @@ export function findSectorNode(cy, sectorName) {
   let bestScore = 0;
 
   sectors.forEach((node) => {
-    const name = String(node.data('label') ?? '');
-    let score = 0;
-
-    if (name === query) {
-      score = 100;
-    } else if (name.includes(query) || query.includes(name)) {
-      score = 50 + Math.min(name.length, query.length);
-    }
-
+    const score = scoreSectorNameMatch(query, String(node.data('label') ?? ''));
     if (score > bestScore) {
       bestScore = score;
       best = node;
